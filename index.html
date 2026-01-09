@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأكاديمية الدولية للإبداع | International Creative Academy - ICA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --dark-bg: #151515;
+            --text-color: #ffffff;
+            --gold-color: #d4af37;
+            --accent-color: #2d5a27;
+            --secondary-gold: #b8860b;
+            --section-bg: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(212, 175, 55, 0.1);
+            --font-primary: 'Cairo', sans-serif;
+            --font-arabic: 'Amiri', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            direction: rtl;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: var(--font-arabic);
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            font-size: 10px;
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-color);
+        }
+
+        .cta button {
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            color: var(--bg-color);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 2000px;
+            padding-top: 60px;
+        }
+
+        /* Slider Container */
+        .slider-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+        }
+
+        .slider {
+            position: relative;
+            width: 75%;
+            height: 80vh;
+            transform-style: preserve-3d;
+        }
+
+        /* Individual Slide with Multiple Small Sections */
+        .slide {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            filter: grayscale(100%) brightness(0.2);
+        }
+
+        /* Slide Content Container with Scroll */
+        .slide-content-container {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Multiple Small Sections */
+        .section {
+            background: var(--section-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: var(--border-color);
+            background: rgba(212, 175, 55, 0.02);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .section-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-color);
+            font-size: 14px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gold-color);
+            flex: 1;
+        }
+
+        .section-content {
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Section Types */
+        .title-section {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(45, 90, 39, 0.05));
+            border-color: var(--border-color);
+            padding: 12px 15px;
+        }
+
+        .title-section .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .slide-number {
+            font-size: 11px;
+            color: var(--gold-color);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-family: var(--font-arabic);
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, var(--gold-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .arabic-title {
+            font-family: var(--font-arabic);
+            font-size: 18px;
+            color: var(--gold-color);
+            line-height: 1.3;
+        }
+
+        /* Feature Sections */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .feature-item {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .feature-item i {
+            color: var(--gold-color);
+            font-size: 12px;
+            min-width: 12px;
+        }
+
+        /* Content Grid */
+        .content-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .column {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .column h5 {
+            color: var(--gold-color);
+            font-size: 12px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .column ul {
+            list-style: none;
+            padding-right: 12px;
+        }
+
+        .column li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-right: 12px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        .column li:before {
+            content: "•";
+            color: var(--gold-color);
+            position: absolute;
+            right: 0;
+            font-size: 12px;
+        }
+
+        /* Highlight Section */
+        .highlight-section {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(45, 90, 39, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 12px;
+        }
+
+        .highlight-section .section-content p {
+            font-size: 11px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Form Sections */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--gold-color);
+            font-weight: 600;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group label i {
+            font-size: 10px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            font-family: var(--font-primary);
+            font-size: 11px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-color);
+            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Slide Footer */
+        .slide-footer {
+            padding: 12px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .slide-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .indicator-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .indicator-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: var(--gold-color);
+            transform: scale(1.3);
+        }
+
+        .slide-cta {
+            display: flex;
+            gap: 8px;
+        }
+
+        .slide-cta button {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        .slide-cta .primary {
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            border: none;
+            color: var(--bg-color);
+            font-weight: 600;
+        }
+
+        .slide-cta button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-left {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold-color);
+        }
+
+        .scroll-hint {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .scroll-hint i {
+            animation: bounce 2s infinite;
+            font-size: 12px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-3px);
+            }
+            60% {
+                transform: translateY(-1px);
+            }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.1);
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-color), var(--secondary-gold));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Scrollbar Styling */
+        .slide-content-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .slide-content-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+        }
+
+        .slide-content-container::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 2px;
+        }
+
+        .slide-content-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slider {
+                width: 92%;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .arabic-title {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .slider {
+                width: 96%;
+                height: 78vh;
+            }
+            
+            .slide-content-container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 12px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .arabic-title {
+                font-size: 14px;
+            }
+            
+            .feature-list,
+            .content-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide-footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 16px;
+            }
+            
+            .arabic-title {
+                font-size: 13px;
+            }
+            
+            .section {
+                padding: 10px;
+            }
+            
+            .slide-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .slide-cta button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            ICA
+            <span>من التعلم إلى الاحتراف</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" data-index="0">نبذة</a>
+            <a href="#" data-index="1">رؤية</a>
+            <a href="#" data-index="2">تكنولوجيا</a>
+            <a href="#" data-index="3">مسار</a>
+            <a href="#" data-index="4">اتصال</a>
+        </div>
+        <div class="cta">
+            <button id="navRegisterBtn">سجل الآن</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <!-- Slides will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-left">© 2024 الأكاديمية الدولية للإبداع</div>
+        <div class="footer-right">
+            <div class="scroll-hint">
+                <span>تمرير للاستكشاف</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <script>
+        // Slide Data with Multiple Small Sections
+        const slidesData = [
+            {
+                id: 0,
+                number: "01",
+                category: "نبذة عن الأكاديمية",
+                title: "INTERNATIONAL CREATIVE ACADEMY",
+                arabicTitle: "الأكاديمية الدولية للإبداع",
+                sections: [
+                    {
+                        type: "title",
+                        content: `
+                            <div class="slide-number">01 | نبذة عن الأكاديمية</div>
+                            <div class="main-title">INTERNATIONAL CREATIVE ACADEMY</div>
+                            <div class="arabic-title">الأكاديمية الدولية للإبداع - ICA</div>
+                        `
+                    },
+                    {
+                        title: "ما هي الأكاديمية؟",
+                        icon: "fas fa-info-circle",
+                        content: "منصة تدريبية وتطويرية متخصصة أُسست لسد الفجوة بين التعليم الأكاديمي التقليدي ومتطلبات سوق الصناعات الإبداعية الحديثة."
+                    },
+                    {
+                        title: "المنهجية",
+                        icon: "fas fa-chalkboard-teacher",
+                        content: "تعتمد على التدريب العملي التطبيقي، وربط المتدربين بمشروعات حقيقية وأسواق فعلية، من خلال منظومة متكاملة تقود المبدع من مرحلة التعلم إلى مرحلة الإنتاج ثم الاعتماد والتسويق والتصدير."
+                    },
+                    {
+                        title: "الاندماج مع CIDCO",
+                        icon: "fas fa-network-wired",
+                        content: "تعمل الأكاديمية ضمن منظومة CIDCO، وترتبط مباشرة بمشروعات تطبيقية مثل 50C CIDCO ومنصة Egypt Souvenir، بما يضمن مخرجات تدريبية قابلة للتنفيذ التجاري والتصدير."
+                    },
+                    {
+                        title: "المميزات الرئيسية",
+                        icon: "fas fa-star",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-hands-helping"></i> تدريب تطبيقي عملي مباشر</div>
+                                <div class="feature-item"><i class="fas fa-industry"></i> اندماج كامل مع منظومة CIDCO</div>
+                                <div class="feature-item"><i class="fas fa-globe"></i> برامج مشتركة مع مؤسسات أوروبية</div>
+                                <div class="feature-item"><i class="fas fa-graduation-cap"></i> منصة إطلاق للمبدعين</div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "الشراكات الدولية",
+                        icon: "fas fa-handshake",
+                        content: `
+                            <div class="content-columns">
+                                <div class="column">
+                                    <h5>أوروبا</h5>
+                                    <ul>
+                                        <li>مؤسسات تصميم في إيطاليا</li>
+                                        <li>معاهد في إسبانيا واليونان</li>
+                                        <li>جامعات في المملكة المتحدة</li>
+                                    </ul>
+                                </div>
+                                <div class="column">
+                                    <h5>البرامج</h5>
+                                    <ul>
+                                        <li>برامج تبادل أكاديمية</li>
+                                        <li>إقامات فنية دولية</li>
+                                        <li>ورش عمل مشتركة</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        type: "highlight",
+                        title: "شعار الأكاديمية",
+                        icon: "fas fa-bullhorn",
+                        content: `
+                            <p style="font-size: 14px; font-weight: bold; color: var(--gold-color); text-align: center; margin: 5px 0;">
+                                From Learning to Earning
+                            </p>
+                            <p style="font-size: 12px; color: rgba(255,255,255,0.8); text-align: center;">
+                                من التعلم إلى الاحتراف
+                            </p>
+                            <p style="font-size: 11px; margin-top: 8px;">
+                                نسعى لتحويل الموهبة إلى منتج تجاري ناجح قادر على المنافسة في الأسواق المحلية والدولية.
+                            </p>
+                        `
+                    }
+                ],
+                bgGradient: "linear-gradient(135deg, #0d1b2a 0%, #1a365d 100%)"
+            },
+            {
+                id: 1,
+                number: "02",
+                category: "الرؤية والأهداف",
+                title: "VISION & MISSION",
+                arabicTitle: "رؤية ورسالة الأكاديمية",
+                sections: [
+                    {
+                        type: "title",
+                        content: `
+                            <div class="slide-number">02 | الرؤية والأهداف</div>
+                            <div class="main-title">VISION & MISSION</div>
+                            <div class="arabic-title">رؤية ورسالة الأكاديمية</div>
+                        `
+                    },
+                    {
+                        title: "الرؤية",
+                        icon: "fas fa-eye",
+                        content: "تمكين المبدعين المصريين ليصبحوا رُّوادًا عالميين في الصناعات الإبداعية، من خلال تعليم عملي متطور، وتقنيات حديثة، وربط مباشر بالأسواق الدولية."
+                    },
+                    {
+                        title: "الرسالة",
+                        icon: "fas fa-bullseye",
+                        content: "دعم ورفع مستوى المبدعين من خلال تقديم خدمات تطوير شاملة، وضمان أعلى معايير الجودة، وتقديم حلول تسويقية مستهدفة تفتح الأبواب أمام الأسواق المحلية والدولية."
+                    },
+                    {
+                        title: "الأهداف الاستراتيجية",
+                        icon: "fas fa-flag",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-user-graduate"></i> إعداد مبدعين جاهزين للسوق الدولي</div>
+                                <div class="feature-item"><i class="fas fa-chalkboard-teacher"></i> تعليم تطبيقي بقيادة خبراء الصناعة</div>
+                                <div class="feature-item"><i class="fas fa-microchip"></i> دمج التكنولوجيا والابتكار</div>
+                                <div class="feature-item"><i class="fas fa-leaf"></i> دعم الاستدامة والاقتصاد الأخضر</div>
+                                <div class="feature-item"><i class="fas fa-chart-line"></i> تأهيل المبدعين للتسويق والتصدير</div>
+                                <div class="feature-item"><i class="fas fa-globe"></i> بناء جسور تعاون دولي</div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "مخرجات التعلم",
+                        icon: "fas fa-graduation-cap",
+                        content: `
+                            <div class="content-columns">
+                                <div class="column">
+                                    <h5>المهارات</h5>
+                                    <ul>
+                                        <li>مهارات تصميم متقدمة</li>
+                                        <li>فهم أسواق الصناعات الإبداعية</li>
+                                        <li>بناء علامة تجارية شخصية</li>
+                                    </ul>
+                                </div>
+                                <div class="column">
+                                    <h5>المعارف</h5>
+                                    <ul>
+                                        <li>مهارات تسويقية ورقمية</li>
+                                        <li>متطلبات التصدير العالمية</li>
+                                        <li>معايير الجودة الدولية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "تحقيق الرؤية",
+                        icon: "fas fa-rocket",
+                        content: "نسعى لتحويل الموهبة إلى منتج احترافي جاهز للسوق، وربط التراث المصري الأصيل بالابتكار والتكنولوجيا، وتعزيز مكانة مصر كمركز إقليمي للصناعات الإبداعية المستدامة."
+                    },
+                    {
+                        type: "highlight",
+                        title: "الاستدامة",
+                        icon: "fas fa-leaf",
+                        content: "تركز الأكاديمية على الخامات الصديقة للبيئة، والإنتاج الأخلاقي، والموضة المستدامة، لتعزيز الاقتصاد الأخضر والمسؤولية المجتمعية في الصناعات الإبداعية."
+                    }
+                ],
+                bgGradient: "linear-gradient(135deg, #2d5a27 0%, #4a7c3e 100%)"
+            },
+            {
+                id: 2,
+                number: "03",
+                category: "التكنولوجيا والابتكار",
+                title: "TECHNOLOGY & INNOVATION",
+                arabicTitle: "أدوات التكنولوجيا الحديثة",
+                sections: [
+                    {
+                        type: "title",
+                        content: `
+                            <div class="slide-number">03 | التكنولوجيا والابتكار</div>
+                            <div class="main-title">TECHNOLOGY & INNOVATION</div>
+                            <div class="arabic-title">أدوات التكنولوجيا الحديثة والابتكار</div>
+                        `
+                    },
+                    {
+                        title: "نهج التكنولوجيا",
+                        icon: "fas fa-laptop-code",
+                        content: "تدمج الأكاديمية أحدث التقنيات العالمية في عملية التعليم لضمان مواكبة المتدربين للتطورات التكنولوجية في الصناعات الإبداعية العالمية."
+                    },
+                    {
+                        title: "أدوات التصميم الرقمي",
+                        icon: "fas fa-paint-brush",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-print"></i> الطباعة ثلاثية الأبعاد والمحاكاة</div>
+                                <div class="feature-item"><i class="fas fa-vector-square"></i> برامج CLO3D للتصميم ثلاثي الأبعاد</div>
+                                <div class="feature-item"><i class="fas fa-tshirt"></i> Browzwear لتصميم الأزياء الرقمي</div>
+                                <div class="feature-item"><i class="fas fa-gem"></i> RhinoGold لتصميم المجوهرات</div>
+                                <div class="feature-item"><i class="fas fa-cube"></i> KeyShot للعرض والتصيير</div>
+                                <div class="feature-item"><i class="fab fa-adobe"></i> Adobe Creative Suite</div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "تقنيات التصنيع",
+                        icon: "fas fa-industry",
+                        content: `
+                            <div class="content-columns">
+                                <div class="column">
+                                    <h5>المعدات</h5>
+                                    <ul>
+                                        <li>أنظمة القطع بالليزر الدقيقة</li>
+                                        <li>ماكينات الحفر الرقمي CNC</li>
+                                        <li>طابعات ثلاثية الأبعاد متعددة المواد</li>
+                                    </ul>
+                                </div>
+                                <div class="column">
+                                    <h5>المختبرات</h5>
+                                    <ul>
+                                        <li>معدات الخياطة والتطريز الرقمي</li>
+                                        <li>مختبرات الجودة والاختبار</li>
+                                        <li>استوديوهات التصوير والمحاكاة</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "التقنيات المتقدمة",
+                        icon: "fas fa-robot",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-vr-cardboard"></i> الواقع الافتراضي والمعزز</div>
+                                <div class="feature-item"><i class="fas fa-brain"></i> الذكاء الاصطناعي في التصميم</div>
+                                <div class="feature-item"><i class="fas fa-satellite"></i> إنترنت الأشياء للمنتجات الذكية</div>
+                                <div class="feature-item"><i class="fas fa-chart-bar"></i> تحليل البيانات والاتجاهات</div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "الابتكار في التعليم",
+                        icon: "fas fa-lightbulb",
+                        content: "نستخدم منهجية التعلم القائم على المشاريع، حيث يعمل المتدربون على مشاريع حقيقية باستخدام التقنيات الحديثة، تحت إشراف خبراء الصناعة."
+                    },
+                    {
+                        type: "highlight",
+                        title: "التميز التكنولوجي",
+                        icon: "fas fa-trophy",
+                        content: "نسعى لتمكين المبدعين المصريين من المنافسة دولياً من خلال إتقانهم لأحدث الأدوات التكنولوجية المستخدمة في الصناعات الإبداعية العالمية."
+                    }
+                ],
+                bgGradient: "linear-gradient(135deg, #5a189a 0%, #7b2cbf 100%)"
+            },
+            {
+                id: 3,
+                number: "04",
+                category: "مسار التعلم",
+                title: "LEARNING PATHWAY",
+                arabicTitle: "من التعلم إلى الاحتراف",
+                sections: [
+                    {
+                        type: "title",
+                        content: `
+                            <div class="slide-number">04 | مسار التعلم</div>
+                            <div class="main-title">LEARNING PATHWAY</div>
+                            <div class="arabic-title">مسار الأكاديمية: من التعلم إلى الاحتراف</div>
+                        `
+                    },
+                    {
+                        title: "المنهجية المتكاملة",
+                        icon: "fas fa-road",
+                        content: "مسار متكامل يبدأ من التدريب وصولاً إلى التصدير، مع توفير متابعة مستمرة وفرص سوق حقيقية داخل منظومة CIDCO."
+                    },
+                    {
+                        title: "البرامج الرئيسية",
+                        icon: "fas fa-book-open",
+                        content: `
+                            <div class="content-columns">
+                                <div class="column">
+                                    <h5>التخصصات</h5>
+                                    <ul>
+                                        <li>التصميم والأزياء</li>
+                                        <li>إدارة الإنتاج والجودة</li>
+                                        <li>التسويق والتصدير</li>
+                                        <li>ريادة الأعمال</li>
+                                        <li>التصميم المستدام</li>
+                                    </ul>
+                                </div>
+                                <div class="column">
+                                    <h5>المهارات</h5>
+                                    <ul>
+                                        <li>التصميم والباترون</li>
+                                        <li>الستايلينج والتنسيق</li>
+                                        <li>إدارة الكميات</li>
+                                        <li>مراقبة الجودة</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "المراحل التعليمية",
+                        icon: "fas fa-stairs",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-graduation-cap"></i> المرحلة 1: تدريب مكثف على الأساسيات</div>
+                                <div class="feature-item"><i class="fas fa-project-diagram"></i> المرحلة 2: مشروع تخرج عملي</div>
+                                <div class="feature-item"><i class="fas fa-award"></i> المرحلة 3: اعتماد الجودة الدولية</div>
+                                <div class="feature-item"><i class="fas fa-chart-line"></i> المرحلة 4: التسويق وبناء العلامة</div>
+                                <div class="feature-item"><i class="fas fa-plane"></i> المرحلة 5: التصدير والتوسع الدولي</div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "الجودة والاعتماد",
+                        icon: "fas fa-certificate",
+                        content: "بالتعاون مع Quality EGESCO نضمن تطبيق معايير الجودة العالمية في جميع مراحل الإنتاج، مما يسهل عملية التصدير للأسواق الدولية."
+                    },
+                    {
+                        title: "المخرجات المهنية",
+                        icon: "fas fa-briefcase",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-user-tie"></i> مصمم أزياء محترف</div>
+                                <div class="feature-item"><i class="fas fa-chart-pie"></i> مدير إنتاج وجودة</div>
+                                <div class="feature-item"><i class="fas fa-shopping-cart"></i> مسوق دولي متخصص</div>
+                                <div class="feature-item"><i class="fas fa-store"></i> رائد أعمال إبداعي</div>
+                            </div>
+                        `
+                    },
+                    {
+                        type: "highlight",
+                        title: "شبكة الدعم",
+                        icon: "fas fa-hands-helping",
+                        content: "نوفر للمتخرجين شبكة دعم تشمل التمويل، التسويق، التصدير، والمتابعة المهنية لضمان نجاحهم في سوق العمل المحلي والدولي."
+                    }
+                ],
+                bgGradient: "linear-gradient(135deg, #b8860b 0%, #d4af37 100%)"
+            },
+            {
+                id: 4,
+                number: "05",
+                category: "التسجيل والاتصال",
+                title: "REGISTRATION & CONTACT",
+                arabicTitle: "التسجيل في الأكاديمية",
+                sections: [
+                    {
+                        type: "title",
+                        content: `
+                            <div class="slide-number">05 | التسجيل والاتصال</div>
+                            <div class="main-title">REGISTRATION & CONTACT</div>
+                            <div class="arabic-title">التسجيل في الأكاديمية والاتصال بنا</div>
+                        `
+                    },
+                    {
+                        title: "ابدأ رحلتك الإبداعية",
+                        icon: "fas fa-rocket",
+                        content: "انضم إلى الأكاديمية الدولية للإبداع وكن جزءًا من مستقبل الصناعات الإبداعية في مصر والعالم."
+                    },
+                    {
+                        title: "معلومات الاتصال",
+                        icon: "fas fa-address-card",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-envelope"></i> البريد: info@icacademy.tech</div>
+                                <div class="feature-item"><i class="fas fa-globe"></i> الموقع: www.icacademy.tech</div>
+                                <div class="feature-item"><i class="fas fa-phone"></i> الهاتف: +20 123 456 7890</div>
+                                <div class="feature-item"><i class="fas fa-map-marker-alt"></i> المقر: منظومة CIDCO</div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "نموذج التسجيل",
+                        icon: "fas fa-file-signature",
+                        content: `
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-user"></i> الاسم الكامل *</label>
+                                    <input type="text" placeholder="أدخل اسمك الكامل" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-envelope"></i> البريد الإلكتروني *</label>
+                                    <input type="email" placeholder="example@email.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-phone"></i> رقم الهاتف *</label>
+                                    <input type="tel" placeholder="+20 123 456 7890" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-graduation-cap"></i> البرنامج المطلوب *</label>
+                                    <select required>
+                                        <option value="">اختر البرنامج</option>
+                                        <option>التصميم والأزياء</option>
+                                        <option>إدارة الإنتاج والجودة</option>
+                                        <option>التسويق والتصدير</option>
+                                        <option>التصميم المستدام</option>
+                                        <option>ريادة الأعمال</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-comment"></i> رسالة إضافية</label>
+                                <textarea rows="2" placeholder="اكتب رسالتك هنا..."></textarea>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "معلومات البرامج",
+                        icon: "fas fa-info-circle",
+                        content: `
+                            <div class="content-columns">
+                                <div class="column">
+                                    <h5>التواريخ</h5>
+                                    <ul>
+                                        <li>بداية البرامج: كل 3 أشهر</li>
+                                        <li>المدة: 3-6 أشهر</li>
+                                        <li>اللغة: عربي/إنجليزي</li>
+                                    </ul>
+                                </div>
+                                <div class="column">
+                                    <h5>الشهادات</h5>
+                                    <ul>
+                                        <li>شهادة معتمدة من ICA</li>
+                                        <li>اعتماد من منظومة CIDCO</li>
+                                        <li>وثيقة إنجاز المشروع</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "خطوات التسجيل",
+                        icon: "fas fa-list-ol",
+                        content: `
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-edit"></i> 1. تعبئة النموذج</div>
+                                <div class="feature-item"><i class="fas fa-phone-volume"></i> 2. الاتصال للتأكيد</div>
+                                <div class="feature-item"><i class="fas fa-file-invoice"></i> 3. إتمام الإجراءات</div>
+                                <div class="feature-item"><i class="fas fa-calendar-check"></i> 4. بدء البرنامج</div>
+                            </div>
+                        `
+                    },
+                    {
+                        type: "highlight",
+                        title: "جاهز للبدء؟",
+                        icon: "fas fa-play-circle",
+                        content: "لا تنتظر! ابدأ رحلتك الإبداعية اليوم وتمتع بفرصة التعلم من خبراء الصناعة، والوصول إلى الأسواق الدولية، وبناء مستقبل مهني ناجح."
+                    }
+                ],
+                bgGradient: "linear-gradient(135deg, #003049 0%, #669bbc 100%)"
+            }
+        ];
+
+        // Initialize
+        let currentSlide = 0;
+        let isAnimating = false;
+        const slider = document.getElementById('slider');
+        const progressBar = document.getElementById('progressBar');
+        const totalSlides = slidesData.length;
+
+        // Initialize slider with multiple small sections
+        function initSlider() {
+            slider.innerHTML = '';
+            
+            slidesData.forEach((data, index) => {
+                createSlide(data, index);
+            });
+            
+            updateSlidesPosition();
+            setupEventListeners();
+            updateProgress();
+            addSectionAnimations();
+        }
+
+        // Create slide with multiple small sections
+        function createSlide(data, index) {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.dataset.index = index;
+            slide.dataset.id = data.id;
+            
+            slide.innerHTML = `
+                <div class="slide-bg" style="background: ${data.bgGradient}"></div>
+                
+                <div class="slide-content-container" data-slide="${data.id}">
+                    <!-- Sections will be added here -->
+                </div>
+                
+                <div class="slide-footer">
+                    <div class="slide-indicator">
+                        <span>${data.number}/${totalSlides}</span>
+                        <div class="indicator-dots">
+                            ${slidesData.map((_, i) => `
+                                <div class="indicator-dot ${i === index ? 'active' : ''}"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="slide-cta">
+                        ${index === 4 ? `
+                            <button class="primary submit-form-btn" data-slide="${data.id}">
+                                <i class="fas fa-paper-plane" style="margin-left: 5px;"></i>
+                                إرسال الطلب
+                            </button>
+                        ` : `
+                            <button class="info-btn" data-index="${index}">
+                                <i class="fas fa-info-circle" style="margin-left: 5px;"></i>
+                                معلومات
+                            </button>
+                            <button class="primary register-btn" data-index="${index}">
+                                <i class="fas fa-user-plus" style="margin-left: 5px;"></i>
+                                سجل الآن
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+            
+            const contentContainer = slide.querySelector('.slide-content-container');
+            
+            // Add all sections
+            data.sections.forEach((section, sectionIndex) => {
+                let sectionHTML = '';
+                
+                if (section.type === 'title') {
+                    sectionHTML = `
+                        <div class="section title-section" data-section="${sectionIndex}">
+                            <div class="section-content">
+                                ${section.content}
+                            </div>
+                        </div>
+                    `;
+                } else if (section.type === 'highlight') {
+                    sectionHTML = `
+                        <div class="section highlight-section" data-section="${sectionIndex}">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="${section.icon}"></i>
+                                </div>
+                                <div class="section-title">${section.title}</div>
+                            </div>
+                            <div class="section-content">
+                                ${section.content}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    sectionHTML = `
+                        <div class="section" data-section="${sectionIndex}">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="${section.icon}"></i>
+                                </div>
+                                <div class="section-title">${section.title}</div>
+                            </div>
+                            <div class="section-content">
+                                ${section.content}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                contentContainer.innerHTML += sectionHTML;
+            });
+            
+            slider.appendChild(slide);
+            return slide;
+        }
+
+        // Add animations to sections
+        function addSectionAnimations() {
+            const slides = document.querySelectorAll('.slide');
+            
+            slides.forEach((slide, slideIndex) => {
+                const sections = slide.querySelectorAll('.section');
+                
+                sections.forEach((section, sectionIndex) => {
+                    // Set initial state
+                    gsap.set(section, {
+                        opacity: 0,
+                        y: 20,
+                        scale: 0.95
+                    });
+                    
+                    // Create animation for when slide becomes active
+                    if (slideIndex === currentSlide) {
+                        gsap.to(section, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            duration: 0.5,
+                            delay: sectionIndex * 0.1,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+            });
+        }
+
+        // Update slides position
+        function updateSlidesPosition() {
+            const slides = Array.from(slider.querySelectorAll('.slide'));
+            
+            slides.forEach((slide, index) => {
+                const slideIndex = parseInt(slide.dataset.index);
+                const distance = Math.abs(slideIndex - currentSlide);
+                
+                let z = -distance * 800;
+                let scale = 1 - (distance * 0.2);
+                let opacity = 1 - (distance * 0.3);
+                let filter = `brightness(${1 - (distance * 0.4)})`;
+                
+                if (slideIndex < currentSlide) {
+                    z -= 200;
+                    opacity *= 0.5;
+                }
+                
+                gsap.to(slide, {
+                    duration: 1.2,
+                    z: z,
+                    scale: scale,
+                    opacity: opacity,
+                    filter: filter,
+                    rotationY: (slideIndex - currentSlide) * 10,
+                    ease: "power3.inOut",
+                    overwrite: true,
+                    onComplete: () => {
+                        // Animate sections in active slide
+                        if (slideIndex === currentSlide) {
+                            const sections = slide.querySelectorAll('.section');
+                            sections.forEach((section, i) => {
+                                gsap.to(section, {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    duration: 0.5,
+                                    delay: i * 0.1,
+                                    ease: "power2.out"
+                                });
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mouse wheel
+            let wheelTimeout;
+            window.addEventListener('wheel', (e) => {
+                const isContentScroll = e.target.closest('.slide-content-container');
+                if (isContentScroll) return;
+                
+                clearTimeout(wheelTimeout);
+                wheelTimeout = setTimeout(() => {
+                    handleScroll(e);
+                }, 30);
+            }, { passive: false });
+
+            // Touch events
+            let touchStartY = 0;
+            window.addEventListener('touchstart', (e) => {
+                const isContentTouch = e.target.closest('.slide-content-container');
+                if (isContentTouch) return;
+                touchStartY = e.touches[0].clientY;
+            });
+
+            window.addEventListener('touchend', (e) => {
+                const isContentTouch = e.target.closest('.slide-content-container');
+                if (isContentTouch) return;
+                
+                const touchEndY = e.changedTouches[0].clientY;
+                const deltaY = touchStartY - touchEndY;
+                
+                if (Math.abs(deltaY) > 40) {
+                    if (deltaY > 0) {
+                        goToSlide(currentSlide + 1);
+                    } else {
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+            });
+
+            // Navigation links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const index = parseInt(link.dataset.index);
+                    goToSlide(index);
+                });
+            });
+
+            // Buttons
+            document.getElementById('navRegisterBtn').addEventListener('click', () => {
+                goToSlide(4);
+            });
+
+            document.addEventListener('click', (e) => {
+                // Register button
+                if (e.target.classList.contains('register-btn') || e.target.closest('.register-btn')) {
+                    e.preventDefault();
+                    const btn = e.target.closest('.register-btn');
+                    const index = parseInt(btn.dataset.index);
+                    goToSlide(4); // Go to registration slide
+                }
+                
+                // Info button
+                if (e.target.classList.contains('info-btn') || e.target.closest('.info-btn')) {
+                    e.preventDefault();
+                    const btn = e.target.closest('.info-btn');
+                    const index = parseInt(btn.dataset.index);
+                    // Scroll to top of current slide content
+                    const slide = document.querySelector(`.slide[data-index="${currentSlide}"]`);
+                    if (slide) {
+                        const container = slide.querySelector('.slide-content-container');
+                        container.scrollTop = 0;
+                    }
+                }
+                
+                // Submit form button
+                if (e.target.classList.contains('submit-form-btn') || e.target.closest('.submit-form-btn')) {
+                    e.preventDefault();
+                    submitRegistrationForm();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                const isFormField = e.target.matches('input, select, textarea');
+                if (isFormField) return;
+                
+                if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+                    goToSlide(currentSlide + 1);
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    goToSlide(currentSlide - 1);
+                    e.preventDefault();
+                }
+            });
+        }
+
+        // Handle scroll
+        let scrollAccumulator = 0;
+        function handleScroll(e) {
+            if (isAnimating) return;
+            
+            scrollAccumulator += Math.abs(e.deltaY);
+            
+            if (scrollAccumulator > 60) {
+                if (e.deltaY > 0) {
+                    goToSlide(currentSlide + 1);
+                } else {
+                    goToSlide(currentSlide - 1);
+                }
+                scrollAccumulator = 0;
+            }
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            if (isAnimating) return;
+            
+            index = Math.max(0, Math.min(index, totalSlides - 1));
+            
+            if (index === currentSlide) return;
+            
+            isAnimating = true;
+            const prevSlide = currentSlide;
+            currentSlide = index;
+            
+            // Animate out sections of previous slide
+            const prevSlideElement = document.querySelector(`.slide[data-index="${prevSlide}"]`);
+            if (prevSlideElement) {
+                const sections = prevSlideElement.querySelectorAll('.section');
+                sections.forEach((section, i) => {
+                    gsap.to(section, {
+                        opacity: 0,
+                        y: -20,
+                        scale: 0.95,
+                        duration: 0.3,
+                        delay: (sections.length - i - 1) * 0.05,
+                        ease: "power2.in"
+                    });
+                });
+            }
+            
+            // Animate slide transition
+            updateSlidesPosition();
+            updateProgress();
+            updateIndicators();
+            
+            setTimeout(() => {
+                isAnimating = false;
+            }, 1200);
+        }
+
+        // Submit registration form
+        function submitRegistrationForm() {
+            const currentSlideElement = document.querySelector(`.slide[data-index="${currentSlide}"]`);
+            if (!currentSlideElement) return;
+            
+            const inputs = currentSlideElement.querySelectorAll('input, select, textarea');
+            let isValid = true;
+            let formData = {};
+            
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ff4757';
+                    setTimeout(() => {
+                        input.style.borderColor = '';
+                    }, 2000);
+                } else {
+                    formData[input.type || input.tagName.toLowerCase()] = input.value;
+                }
+            });
+            
+            if (!isValid) {
+                alert('❗ يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // Success animation
+            const submitBtn = currentSlideElement.querySelector('.submit-form-btn');
+            if (submitBtn) {
+                gsap.to(submitBtn, {
+                    scale: 0.9,
+                    duration: 0.1,
+                    yoyo: true,
+                    repeat: 1,
+                    onComplete: () => {
+                        alert('🎉 تم إرسال طلب التسجيل بنجاح!\n\nسيتم التواصل معك خلال 48 ساعة.');
+                        
+                        // Reset form
+                        inputs.forEach(input => {
+                            if (input.type !== 'submit') {
+                                input.value = '';
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = (currentSlide / (totalSlides - 1)) * 100;
+            gsap.to(progressBar, {
+                width: `${progress}%`,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        }
+
+        // Update indicators
+        function updateIndicators() {
+            const dots = document.querySelectorAll('.indicator-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // Update navigation
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const index = parseInt(link.dataset.index);
+                if (index === currentSlide) {
+                    link.style.background = 'rgba(212, 175, 55, 0.2)';
+                    link.style.color = 'var(--gold-color)';
+                } else {
+                    link.style.background = '';
+                    link.style.color = 'rgba(255, 255, 255, 0.7)';
+                }
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initSlider();
+            
+            // Animate first slide sections
+            setTimeout(() => {
+                const firstSlide = document.querySelector('.slide[data-index="0"]');
+                if (firstSlide) {
+                    const sections = firstSlide.querySelectorAll('.section');
+                    sections.forEach((section, i) => {
+                        gsap.to(section, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            duration: 0.6,
+                            delay: i * 0.15,
+                            ease: "back.out(1.2)"
+                        });
+                    });
+                }
+                
+                console.log('%c🎨 الأكاديمية الدولية للإبداع 🎨', 'color: #d4af37; font-size: 18px; font-weight: bold;');
+                console.log('%c📚 المحتوى مقسم إلى أقسام صغيرة متعددة', 'color: #b8860b; font-size: 12px;');
+            }, 300);
+        });
+    </script>
+</body>
+</html>

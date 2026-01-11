@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الأكاديمية الدولية للإبداع | International Creative Academy - ICA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg-color: #0a0a0a;
@@ -20,6 +18,7 @@
             --secondary-gold: #b8860b;
             --section-bg: rgba(255, 255, 255, 0.02);
             --border-color: rgba(212, 175, 55, 0.1);
+            --card-bg: rgba(21, 21, 21, 0.8);
             --font-primary: 'Cairo', sans-serif;
             --font-arabic: 'Amiri', serif;
             --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
@@ -31,214 +30,16 @@
             box-sizing: border-box;
         }
 
-        html,
-        body {
+        html, body {
             width: 100%;
-            height: 100%;
-            overflow: hidden;
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-primary);
             direction: rtl;
+            scroll-behavior: smooth;
         }
 
-        body.loaded {
-            overflow: auto;
-        }
-
-        /* ===== ANIMATION STYLES ===== */
-        /* حاوية أنيميشن الصورة */
-        .logo-animation-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100vw;
-            height: 100vh;
-            z-index: 9998;
-            pointer-events: none;
-            opacity: 0;
-            overflow: hidden;
-        }
-        
-        .logo-animation-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* خلفية متدرجة للأنيميشن */
-        .animation-gradient-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                var(--gold-color) 0%, 
-                var(--secondary-gold) 25%, 
-                var(--accent-color) 50%, 
-                #151515 100%);
-            opacity: 0;
-            z-index: 1;
-        }
-        
-        /* حاوية الصورة مع تأثير الماسك */
-        .logo-image-mask {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 400px;
-            z-index: 3;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 80px rgba(212, 175, 55, 0.5);
-        }
-        
-        /* الصورة الرئيسية */
-        .logo-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: saturate(1.2) contrast(1.1);
-            transform: scale(1.1);
-        }
-        
-        /* ماسك SVG */
-        .logo-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 4;
-        }
-        
-        .mask-shape {
-            fill: white;
-        }
-        
-        /* الخطوط المتحركة */
-        .animation-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-        
-        .line {
-            position: absolute;
-            background: var(--gold-color);
-            transform-origin: center;
-            opacity: 0;
-        }
-        
-        /* جزيئات متحركة */
-        .animation-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            background: var(--gold-color);
-            border-radius: 50%;
-            opacity: 0;
-        }
-        
-        /* النص المضيء */
-        .glowing-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: var(--font-arabic);
-            font-size: 72px;
-            font-weight: 900;
-            color: transparent;
-            background: linear-gradient(90deg, 
-                var(--gold-color), 
-                var(--secondary-gold), 
-                #ffffff, 
-                var(--gold-color));
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            z-index: 5;
-            opacity: 0;
-            text-align: center;
-            line-height: 1.2;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-            white-space: nowrap;
-        }
-        
-        .glowing-text-subtitle {
-            position: absolute;
-            top: calc(50% + 50px);
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: var(--font-primary);
-            font-size: 24px;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.9);
-            z-index: 5;
-            opacity: 0;
-            text-align: center;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        /* إطارات ذهبية */
-        .golden-frame {
-            position: absolute;
-            border: 2px solid transparent;
-            border-radius: 20px;
-            z-index: 4;
-            opacity: 0;
-        }
-        
-        .frame-1 {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 650px;
-            height: 450px;
-            border-image: linear-gradient(45deg, var(--gold-color), transparent, var(--secondary-gold), transparent) 1;
-        }
-        
-        .frame-2 {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 700px;
-            height: 500px;
-            border-image: linear-gradient(135deg, transparent, var(--gold-color), transparent, var(--secondary-gold)) 1;
-        }
-        
-        /* تأثيرات الضوء */
-        .light-beam {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, 
-                rgba(212, 175, 55, 0.2) 0%, 
-                rgba(212, 175, 55, 0.1) 30%, 
-                transparent 70%);
-            z-index: 0;
-            opacity: 0;
-            top: -50%;
-            left: -50%;
-        }
-        
-        /* Loading Screen */
+        /* ===== LOADING SCREEN & ANIMATION STYLES ===== */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -290,22 +91,19 @@
                 transform: scaleX(0);
                 transform-origin: right;
             }
-
             50% {
                 transform: scaleX(1);
                 transform-origin: right;
             }
-
             51% {
                 transform-origin: left;
             }
-
             100% {
                 transform: scaleX(0);
                 transform-origin: left;
             }
         }
-        
+
         .loading-progress {
             width: 200px;
             height: 2px;
@@ -314,7 +112,7 @@
             overflow: hidden;
             margin-top: 20px;
         }
-        
+
         .loading-progress-bar {
             width: 0%;
             height: 100%;
@@ -323,316 +121,298 @@
             transition: width 0.3s ease;
         }
 
-        /* Side Navigation Buttons */
-        .side-nav-buttons {
+        /* حاوية أنيميشن الصورة */
+        .logo-animation-container {
             position: fixed;
-            left: 30px;
             top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 998;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            z-index: 9998;
+            pointer-events: none;
             opacity: 0;
-            transition: opacity 0.8s var(--transition-smooth);
-        }
-
-        .side-nav-buttons.visible {
-            opacity: 1;
-        }
-
-        .side-nav-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid var(--border-color);
-            color: var(--gold-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.4s var(--transition-smooth);
-            backdrop-filter: blur(10px);
-            position: relative;
             overflow: hidden;
-            transform: rotateZ(270deg);
         }
 
-        .side-nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
+        .logo-animation-inner {
+            position: relative;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
         }
 
-        .side-nav-btn:hover::before {
-            opacity: 0.2;
-        }
-
-        .side-nav-btn:hover {
-            transform: translateX(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-            border-color: var(--gold-color);
-        }
-
-        .side-nav-btn:active {
-            transform: translateX(-2px) scale(1.05);
-        }
-
-        .side-nav-btn.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .side-nav-btn.disabled:hover {
-            transform: none;
-            box-shadow: none;
-            border-color: var(--border-color);
-        }
-
-        .side-nav-btn.disabled::before {
-            display: none;
-        }
-
-        /* Navigation Labels */
-        .nav-label {
+        /* خلفية متدرجة للأنيميشن */
+        .animation-gradient-bg {
             position: absolute;
-            right: 60px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(10, 10, 10, 0.9);
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: var(--gold-color);
-            white-space: nowrap;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                var(--gold-color) 0%, 
+                var(--secondary-gold) 25%, 
+                var(--accent-color) 50%, 
+                #151515 100%);
             opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1;
         }
 
-        .side-nav-btn:hover .nav-label {
-            opacity: 1;
-            transform: translateY(-50%) translateX(-5px);
-        }
-
-        /* Side Navigation for RTL */
-        .side-nav-buttons.rtl {
-            right: auto;
-        }
-
-        .side-nav-buttons.rtl .side-nav-btn:hover {
-            transform: translateX(5px) scale(1.1);
-        }
-
-        .side-nav-buttons.rtl .nav-label {
-            right: auto;
-            left: 60px;
-        }
-
-        .side-nav-buttons.rtl .side-nav-btn:hover .nav-label {
-            transform: translateY(-50%) translateX(5px);
-        }
-
-        /* Titles Navigation - مع أنيميشنات GSAP */
-        .titles-container {
-            position: fixed;
-            left: 100px;
+        /* حاوية الصورة مع تأثير الماسك */
+        .logo-image-mask {
+            position: absolute;
             top: 50%;
-            transform: translateY(-50%);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .titles-container.visible {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .titles-container.hidden {
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-
-        .title-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            padding: 8px 15px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            z-index: 3;
             border-radius: 20px;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            transition: all 0.4s var(--transition-smooth);
-            transform: translateX(-30px);
-            opacity: 0;
-            position: relative;
             overflow: hidden;
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.5);
         }
 
-        .title-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
+        /* الصورة الرئيسية */
+        .logo-image {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
+            object-fit: cover;
+            filter: saturate(1.2) contrast(1.1);
+            transform: scale(1.1);
         }
 
-        .title-item:hover::before {
-            opacity: 0.1;
+        /* ماسك SVG */
+        .logo-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
         }
 
-        .title-item.active {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold-color);
-            transform: translateX(0);
-            opacity: 1;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        .mask-shape {
+            fill: white;
         }
 
-        .title-item:hover:not(.active) {
-            background: rgba(212, 175, 55, 0.1);
-            transform: translateX(-5px);
-            opacity: 0.9;
-        }
-
-        .title-number {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--gold-color);
-            min-width: 25px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
+        /* الخطوط المتحركة */
+        .animation-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 2;
         }
 
-        .title-item.active .title-number {
-            transform: scale(1.2);
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-
-        .title-text {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            transition: all 0.4s ease;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 180px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .title-item.active .title-text {
-            color: var(--gold-color);
-            font-weight: 600;
-            text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
-        }
-
-        .title-connector {
-            width: 1px;
-            height: 20px;
-            background: linear-gradient(to bottom, transparent, var(--gold-color), transparent);
-            margin: 2px 0;
+        .line {
+            position: absolute;
+            background: var(--gold-color);
+            transform-origin: center;
             opacity: 0;
-            transition: opacity 0.4s ease;
         }
 
-        .title-item.active+.title-connector,
-        .title-item:hover+.title-connector {
-            opacity: 0.5;
+        /* جزيئات متحركة */
+        .animation-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
-        /* تأثير الذبذبة للعنصر النشط */
-        .title-item.active {
-            animation: pulseTitle 3s ease-in-out infinite;
-        }
-
-        @keyframes pulseTitle {
-            0%, 100% {
-                box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
-            }
-            50% {
-                box-shadow: 0 5px 25px rgba(212, 175, 55, 0.4);
-            }
-        }
-
-        /* Title Toggle Button */
-        .title-toggle-btn {
-            position: fixed;
-            left: 100px;
-            top: 23%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid var(--border-color);
+        .particle {
+            position: absolute;
+            background: var(--gold-color);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            color: var(--gold-color);
-            font-size: 14px;
-            transition: all 0.4s var(--transition-smooth);
-            backdrop-filter: blur(5px);
             opacity: 0;
-            pointer-events: none;
         }
 
-        .title-toggle-btn.visible {
-            opacity: 1;
-            pointer-events: all;
+        /* النص المضيء */
+        .glowing-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-arabic);
+            font-size: 72px;
+            font-weight: 900;
+            color: transparent;
+            background: linear-gradient(90deg, 
+                var(--gold-color), 
+                var(--secondary-gold), 
+                #ffffff, 
+                var(--gold-color));
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            z-index: 5;
+            opacity: 0;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            white-space: nowrap;
         }
 
-        .title-toggle-btn:hover {
-            background: rgba(212, 175, 55, 0.15);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        .glowing-text-subtitle {
+            position: absolute;
+            top: calc(50% + 50px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 5;
+            opacity: 0;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* Titles for RTL */
-        .titles-container.rtl {
-            left: auto;
-            right: 30px;
-            direction: rtl;
+        /* إطارات ذهبية */
+        .golden-frame {
+            position: absolute;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            z-index: 4;
+            opacity: 0;
         }
 
-        .titles-container.rtl .title-item {
-            transform: translateX(30px);
+        .frame-1 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 650px;
+            height: 450px;
+            border-image: linear-gradient(45deg, var(--gold-color), transparent, var(--secondary-gold), transparent) 1;
         }
 
-        .titles-container.rtl .title-item:hover:not(.active) {
-            transform: translateX(5px);
+        .frame-2 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 500px;
+            border-image: linear-gradient(135deg, transparent, var(--gold-color), transparent, var(--secondary-gold)) 1;
         }
 
-        .title-toggle-btn.rtl {
-            left: auto;
-            right: 10px;
+        /* تأثيرات الضوء */
+        .light-beam {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, 
+                rgba(212, 175, 55, 0.2) 0%, 
+                rgba(212, 175, 55, 0.1) 30%, 
+                transparent 70%);
+            z-index: 0;
+            opacity: 0;
+            top: -50%;
+            left: -50%;
+        }
+
+        /* Responsive styles for animation */
+        @media (max-width: 1200px) {
+            .logo-image-mask {
+                width: 500px;
+                height: 333px;
+            }
+            
+            .frame-1 {
+                width: 550px;
+                height: 383px;
+            }
+            
+            .frame-2 {
+                width: 600px;
+                height: 433px;
+            }
+            
+            .glowing-text {
+                font-size: 60px;
+            }
+            
+            .glowing-text-subtitle {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .logo-image-mask {
+                width: 450px;
+                height: 300px;
+            }
+            
+            .frame-1 {
+                width: 500px;
+                height: 350px;
+            }
+            
+            .frame-2 {
+                width: 550px;
+                height: 400px;
+            }
+            
+            .glowing-text {
+                font-size: 50px;
+            }
+            
+            .glowing-text-subtitle {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-image-mask {
+                width: 350px;
+                height: 233px;
+            }
+            
+            .frame-1 {
+                width: 400px;
+                height: 283px;
+            }
+            
+            .frame-2 {
+                width: 450px;
+                height: 333px;
+            }
+            
+            .glowing-text {
+                font-size: 40px;
+            }
+            
+            .glowing-text-subtitle {
+                font-size: 16px;
+                top: calc(50% + 40px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-image-mask {
+                width: 280px;
+                height: 187px;
+            }
+            
+            .frame-1 {
+                width: 330px;
+                height: 237px;
+            }
+            
+            .frame-2 {
+                width: 380px;
+                height: 287px;
+            }
+            
+            .glowing-text {
+                font-size: 32px;
+            }
+            
+            .glowing-text-subtitle {
+                font-size: 14px;
+                top: calc(50% + 35px);
+            }
         }
 
         /* Navigation */
@@ -650,10 +430,12 @@
             border-bottom: 1px solid var(--border-color);
             transform: translateY(-100%);
             transition: transform 0.8s var(--transition-smooth);
+            opacity: 0;
         }
 
         nav.visible {
             transform: translateY(0);
+            opacity: 1;
         }
 
         .logo {
@@ -665,30 +447,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             position: relative;
-            overflow: hidden;
+            /* overflow: hidden; */
+            height: 100px;
+            width: 50px;
         }
 
-        .logo::after {
-            content: '';
+        .logo img {
             position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
-            transform: scaleX(0);
-            transition: transform 0.6s var(--transition-smooth);
-        }
-
-        .logo:hover::after {
-            transform: scaleX(1);
-        }
-
-        .logo span {
-            font-size: 10px;
-            display: block;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 2px;
+            top: 0px;
+            right: 0px;
+            height: 100px;
         }
 
         .nav-links {
@@ -773,900 +541,812 @@
             box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
 
-        /* Parallax Background */
-        .parallax-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(45, 90, 39, 0.1) 0%, transparent 50%);
-        }
-
-        /* Main Container */
-        .main-container {
-            position: relative;
-            width: 100%;
-            max-height: 100vh;
-            padding-top: 25px;
-            perspective: 2000px;
-            overflow: hidden;
-        }
-
-        /* Slider Container */
-        .slider-container {
-            position: relative;
-            width: 100%;
+        /* Hero Section */
+        .hero-section {
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .slider {
+            justify-content: center;
+            padding: 80px 20px 40px;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(45, 90, 39, 0.1) 0%, transparent 50%);
             position: relative;
-            width: 75%;
-            height: 80vh;
-            transform-style: preserve-3d;
-            transform-origin: center center;
-        }
-
-        /* Individual Slide */
-        .slide {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border-color);
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
-            will-change: transform, opacity;
-            display: flex;
-            flex-direction: column;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            transform: translateY(50px);
             opacity: 0;
+            transition: all 1s var(--transition-smooth);
         }
 
-        .slide.active {
-            opacity: 1;
-        }
-
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            filter: grayscale(100%) brightness(0.2);
-            transition: transform 0.8s var(--transition-smooth);
-        }
-
-        .slide:hover .slide-bg {
-            transform: scale(1.05);
-        }
-
-        /* Animated Border */
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
-            background: linear-gradient(45deg, transparent, var(--gold-color), transparent);
-            border-radius: 14px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .slide.active::before {
-            animation: borderGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes borderGlow {
-
-            0%,
-            100% {
-                opacity: 0;
-            }
-
-            50% {
-                opacity: .2;
-            }
-        }
-
-        /* Slide Content */
-        .slide-content-container {
-            padding: 20px;
-            flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.8s var(--transition-smooth), opacity 0.8s ease;
-        }
-
-        .slide.active .slide-content-container {
+        .hero-content.visible {
             transform: translateY(0);
             opacity: 1;
         }
 
-        /* Section Animations */
-        .section {
-            background: var(--section-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 15px;
-            transition: all 0.4s var(--transition-smooth);
-            transform-origin: center;
-            position: relative;
-        }
-
-        .section:hover::before {
-            transform: translateX(100%);
-        }
-
-        .section:hover {
-            border-color: var(--border-color);
-            background: rgba(212, 175, 55, 0.02);
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .section-icon {
-            width: 28px;
-            height: 28px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-color);
-            font-size: 14px;
-            transition: all 0.4s var(--transition-smooth);
-        }
-
-        .section:hover .section-icon {
-            transform: rotateY(360deg);
-            background: rgba(212, 175, 55, 0.2);
-        }
-
-        .section-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--gold-color);
-            flex: 1;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold-color);
-            transition: width 0.6s var(--transition-smooth);
-        }
-
-        .section:hover .section-title::after {
-            width: 100%;
-        }
-
-        .section-content {
-            font-size: 12px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-            transition: color 0.4s ease;
-        }
-
-        .section:hover .section-content {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Section Types */
-        .title-section {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(45, 90, 39, 0.05));
-            border-color: var(--border-color);
-            padding: 12px 15px;
-        }
-
-        .title-section .section-content {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .slide-number {
-            font-size: 11px;
-            color: var(--gold-color);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.6s var(--transition-smooth) 0.2s;
-        }
-
-        .slide.active .slide-number {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .main-title {
+        .hero-logo {
             font-family: var(--font-arabic);
-            font-size: 24px;
+            font-size: 48px;
             font-weight: 800;
-            line-height: 1.2;
-            background: linear-gradient(135deg, #ffffff 0%, var(--gold-color) 100%);
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s var(--transition-smooth) 0.4s;
+            margin-bottom: 20px;
+            /* line-height: 1.2; */
         }
 
-        .slide.active .main-title {
-            opacity: 1;
-            transform: translateY(0);
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
-        .arabic-title {
-            font-family: var(--font-arabic);
-            font-size: 18px;
+        .hero-tagline {
+            font-size: 16px;
             color: var(--gold-color);
-            line-height: 1.3;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s var(--transition-smooth) 0.6s;
+            margin-bottom: 40px;
+            font-style: italic;
         }
 
-        .slide.active .arabic-title {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Feature Items */
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .feature-item {
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 8px 10px;
-            border-radius: 6px;
-            font-size: 11px;
+        .hero-buttons {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.4s var(--transition-smooth);
-            transform-origin: left;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .feature-item:hover {
-            transform: translateY(-2px) scale(1.02);
-            background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
-        }
-
-        .feature-item i {
-            color: var(--gold-color);
-            font-size: 12px;
-            min-width: 12px;
-            transition: transform 0.4s var(--transition-smooth);
-        }
-
-        .feature-item:hover i {
-            transform: scale(1.2);
-        }
-
-        /* Content Columns */
-        .content-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .column {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.4s var(--transition-smooth);
-        }
-
-        .column:hover {
-            transform: translateY(-3px);
-            border-color: var(--border-color);
-            background: rgba(212, 175, 55, 0.03);
-        }
-
-        .column h5 {
-            color: var(--gold-color);
-            font-size: 12px;
-            margin-bottom: 6px;
+        .hero-btn {
+            padding: 12px 30px;
+            border-radius: 25px;
             font-weight: 600;
-        }
-
-        .column ul {
-            list-style: none;
-            padding-right: 12px;
-        }
-
-        .column li {
-            margin-bottom: 5px;
-            position: relative;
-            padding-right: 12px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.5;
-            transition: color 0.3s ease;
-        }
-
-        .column:hover li {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .column li:before {
-            content: "•";
-            color: var(--gold-color);
-            position: absolute;
-            right: 0;
-            font-size: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .column:hover li:before {
-            transform: scale(1.5);
-        }
-
-        /* Highlight Section */
-        .highlight-section {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(45, 90, 39, 0.05));
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 12px;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                border-color: rgba(212, 175, 55, 0.15);
-            }
-
-            50% {
-                border-color: rgba(212, 175, 55, 0.3);
-            }
-        }
-
-        /* Form Styling */
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 8px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 4px;
-            color: var(--gold-color);
-            font-weight: 600;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px 10px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            color: white;
-            font-family: var(--font-primary);
-            font-size: 11px;
+            text-decoration: none;
             transition: all 0.4s var(--transition-smooth);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold-color);
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
-            transform: translateY(-1px);
-        }
-
-        /* Slide Footer */
-        .slide-footer {
-            padding: 12px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
+            display: inline-flex;
             align-items: center;
-            flex-shrink: 0;
-            transform: translateY(20px);
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            color: var(--bg-color);
+            border: none;
+        }
+
+        .hero-btn.secondary {
+            background: transparent;
+            color: var(--gold-color);
+            border: 2px solid var(--gold-color);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transform: translateY(50px);
             opacity: 0;
             transition: all 0.8s var(--transition-smooth);
         }
 
-        .slide.active .slide-footer {
+        .section.visible {
             transform: translateY(0);
             opacity: 1;
         }
 
-        .slide-indicator {
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: var(--font-arabic);
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold-color);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--gold-color);
+            font-size: 24px;
         }
 
-        .indicator-dots {
-            display: flex;
-            gap: 5px;
-        }
-
-        .indicator-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            transition: all 0.4s var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .indicator-dot::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gold-color);
-            border-radius: 50%;
-            transform: scale(0);
-            transition: transform 0.4s var(--transition-smooth);
-        }
-
-        .indicator-dot.active::before {
-            transform: scale(1);
-        }
-
-        .slide-cta {
-            display: flex;
-            gap: 8px;
-        }
-
-        .slide-cta button {
-            background: transparent;
-            color: var(--text-color);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-family: var(--font-primary);
-            font-size: 11px;
-            transition: all 0.4s var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slide-cta button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
-            border-radius: 15px;
-        }
-
-        .slide-cta .primary::before {
-            opacity: 1;
-        }
-
-        .slide-cta .primary {
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--bg-color);
+        .feature-title {
+            font-size: 18px;
+            color: var(--gold-color);
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
-        .slide-cta button:hover::before {
-            opacity: 1;
+        .feature-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
         }
 
-        .slide-cta button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        /* Vision & Objectives Section */
+        .vision-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .vision-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .vision-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .objective-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-color);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .objective-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: rgba(212, 175, 55, 0.1);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        .objective-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .objective-title {
+            font-size: 16px;
+            color: var(--gold-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .objective-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Technology Section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tech-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--gold-color);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(45, 90, 39, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--gold-color);
+            font-size: 28px;
+        }
+
+        .tech-title {
+            font-size: 18px;
+            color: var(--gold-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .tech-list {
+            list-style: none;
+            text-align: right;
+        }
+
+        .tech-list li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .tech-list li:before {
+            content: "•";
+            color: var(--gold-color);
+            position: absolute;
+            right: 0;
+        }
+
+        /* Pathway Section */
+        .pathway-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-color);
+            background: linear-gradient(135deg, var(--card-bg), rgba(212, 175, 55, 0.05));
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--bg-color);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            color: var(--gold-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Programs Section */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .program-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-color);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        .program-header {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(45, 90, 39, 0.1));
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .program-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--gold-color);
+            font-size: 22px;
+        }
+
+        .program-title {
+            font-size: 18px;
+            color: var(--gold-color);
+            font-weight: 600;
+        }
+
+        .program-body {
+            padding: 25px;
+        }
+
+        .program-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .program-features li {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .program-features li:before {
+            content: "✓";
+            color: var(--gold-color);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+
+        .program-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            color: var(--bg-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .program-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info {
+            padding: 20px;
+        }
+
+        .contact-title {
+            font-size: 24px;
+            color: var(--gold-color);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-color);
+            font-size: 18px;
+        }
+
+        .contact-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-text strong {
+            color: var(--gold-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Form Styles */
+        .contact-form {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            color: var(--bg-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
         }
 
         /* Footer */
         footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
             backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateY(100%);
-            transition: transform 0.8s var(--transition-smooth);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s var(--transition-smooth);
         }
 
         footer.visible {
             transform: translateY(0);
+            opacity: 1;
         }
 
-        .scroll-hint {
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-arabic);
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-color), var(--secondary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
             color: var(--gold-color);
-            cursor: pointer;
-            transition: all 0.4s ease;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .scroll-hint:hover {
-            color: var(--secondary-gold);
+        .social-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px);
         }
 
-        .scroll-hint i {
-            animation: bounce 2s infinite;
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
             font-size: 12px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-3px);
-            }
-
-            60% {
-                transform: translateY(-1px);
-            }
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(212, 175, 55, 0.1);
-            z-index: 1001;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold-color), var(--secondary-gold));
-            width: 0%;
-            transition: width 0.6s var(--transition-smooth);
-            position: relative;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        /* Floating Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--gold-color);
-            border-radius: 50%;
-            opacity: 0.1;
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .slider {
-                width: 92%;
-            }
-
-            .main-title {
-                font-size: 20px;
-            }
-
-            .arabic-title {
-                font-size: 16px;
-            }
-            
-            .logo-image-mask {
-                width: 500px;
-                height: 333px;
-            }
-            
-            .frame-1 {
-                width: 550px;
-                height: 383px;
-            }
-            
-            .frame-2 {
-                width: 600px;
-                height: 433px;
-            }
-            
-            .glowing-text {
-                font-size: 60px;
-            }
-            
-            .glowing-text-subtitle {
-                font-size: 20px;
-            }
-        }
-
+        /* Responsive Design */
         @media (max-width: 1024px) {
-            .titles-container {
-                display: none;
-            }
-
-            .title-toggle-btn {
-                display: none;
-            }
-
-            .side-nav-buttons {
-                left: 20px;
-            }
-
-            .side-nav-buttons.rtl {
-                right: 20px;
+            .hero-logo {
+                font-size: 36px;
             }
             
-            .logo-image-mask {
-                width: 450px;
-                height: 300px;
-            }
-            
-            .frame-1 {
-                width: 500px;
-                height: 350px;
-            }
-            
-            .frame-2 {
-                width: 550px;
-                height: 400px;
-            }
-            
-            .glowing-text {
-                font-size: 50px;
-            }
-            
-            .glowing-text-subtitle {
+            .hero-subtitle {
                 font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
             }
         }
 
         @media (max-width: 768px) {
             nav {
-                padding: 12px 20px;
+                padding: 12px 15px;
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
-
+            
             .nav-links {
                 display: none;
             }
-
-            .slider {
-                width: 96%;
-                height: 78vh;
-            }
-
-            .slide-content-container {
-                padding: 15px;
-            }
-
-            .section {
-                padding: 12px;
-            }
-
-            .main-title {
-                font-size: 18px;
-            }
-
-            .arabic-title {
-                font-size: 14px;
-            }
-
-            .feature-list,
-            .content-columns {
-                grid-template-columns: 1fr;
-            }
-
-            .slide-footer {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-                padding: 12px 20px;
-            }
-
-            .side-nav-buttons {
-                display: none;
+            
+            .hero-section {
+                padding: 120px 15px 60px;
             }
             
-            .logo-image-mask {
-                width: 350px;
-                height: 233px;
+            .hero-logo {
+                font-size: 28px;
             }
             
-            .frame-1 {
-                width: 400px;
-                height: 283px;
-            }
-            
-            .frame-2 {
-                width: 450px;
-                height: 333px;
-            }
-            
-            .glowing-text {
-                font-size: 40px;
-            }
-            
-            .glowing-text-subtitle {
+            .hero-subtitle {
                 font-size: 16px;
-                top: calc(50% + 40px);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 60px 15px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .about-content,
+            .contact-content {
+                padding: 25px;
+            }
+            
+            .feature-card,
+            .objective-card,
+            .tech-card,
+            .step-card,
+            .program-card {
+                padding: 20px;
             }
         }
 
         @media (max-width: 480px) {
-            .main-title {
-                font-size: 16px;
-            }
-
-            .arabic-title {
-                font-size: 13px;
-            }
-
-            .section {
-                padding: 10px;
-            }
-
-            .slide-cta {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .slide-cta button {
-                width: 100%;
+            .hero-logo {
+                font-size: 24px;
             }
             
-            .logo-image-mask {
-                width: 280px;
-                height: 187px;
+            .section-title {
+                font-size: 20px;
             }
             
-            .frame-1 {
-                width: 330px;
-                height: 237px;
-            }
-            
-            .frame-2 {
-                width: 380px;
-                height: 287px;
-            }
-            
-            .glowing-text {
-                font-size: 32px;
-            }
-            
-            .glowing-text-subtitle {
-                font-size: 14px;
-                top: calc(50% + 35px);
+            .about-features,
+            .objectives-grid,
+            .tech-grid,
+            .pathway-steps,
+            .programs-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Scrollbar Styling */
-        .slide-content-container::-webkit-scrollbar {
-            width: 4px;
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-color);
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
-        .slide-content-container::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .slide-content-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--gold-color), var(--secondary-gold));
-            border-radius: 2px;
-        }
-
-        .slide-content-container::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(var(--secondary-gold), var(--gold-color));
+        .scroll-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
     </style>
 </head>
@@ -1694,7 +1374,6 @@
         <div class="golden-frame frame-2"></div>
         
         <div class="logo-image-mask">
-            <!-- سيتم إضافة الصورة ديناميكياً عبر JavaScript -->
             <svg class="logo-mask" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <mask id="imageMask">
@@ -1707,76 +1386,578 @@
         </div>
     </div>
 
-    <!-- Side Navigation Buttons -->
-    <div class="side-nav-buttons rtl" id="sideNavButtons">
-        <button class="side-nav-btn" id="prevBtn">
-            <i class="fas fa-chevron-right"></i>
-            <span class="nav-label">السابق</span>
-        </button>
-        <button class="side-nav-btn" id="nextBtn">
-            <i class="fas fa-chevron-left"></i>
-            <span class="nav-label">التالي</span>
-        </button>
-    </div>
-
-    <!-- Titles Navigation -->
-    <div class="titles-container rtl" id="titlesContainer"></div>
-    <button class="title-toggle-btn rtl" id="titleToggleBtn">
-        <i class="fas fa-list"></i>
-    </button>
-
-    <!-- Parallax Background -->
-    <div class="parallax-bg"></div>
-
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-
     <!-- Navigation -->
     <nav id="mainNav">
         <div class="logo">
-            ICA
-            <span>من التعلم إلى الاحتراف</span>
+            <img src="./img/logo.jpeg" alt="logo ICA">
         </div>
         <div class="nav-links">
-            <a href="#" data-index="0">نبذة</a>
-            <a href="#" data-index="1">رؤية</a>
-            <a href="#" data-index="2">تكنولوجيا</a>
-            <a href="#" data-index="3">مسار</a>
-            <a href="#" data-index="4">اتصال</a>
+            <a href="#home">الرئيسية</a>
+            <a href="#about">نبذة</a>
+            <a href="#vision">رؤية وأهداف</a>
+            <a href="#technology">التكنولوجيا</a>
+            <a href="#pathway">مسار التعلم</a>
+            <a href="#programs">البرامج</a>
+            <a href="#contact">اتصل بنا</a>
         </div>
         <div class="cta">
-            <button id="navRegisterBtn">سجل الآن</button>
+            <button id="navRegisterBtn" onclick="scrollToContact()">سجل الآن</button>
         </div>
     </nav>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <div class="slider-container">
-            <div class="slider" id="slider">
-                <!-- Slides will be generated by JavaScript -->
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content" id="heroContent">
+            <h1 class="hero-logo">الأكاديمية الدولية للإبداع</h1>
+            <p class="hero-subtitle">International Creative Academy - ICA</p>
+            <p class="hero-tagline">From Learning to Earning | من التعلم إلى الاحتراف</p>
+            <div class="hero-buttons">
+                <a href="#about" class="hero-btn primary">
+                    <i class="fas fa-info-circle"></i>
+                    تعرف علينا
+                </a>
+                <a href="#programs" class="hero-btn secondary">
+                    <i class="fas fa-graduation-cap"></i>
+                    استكشاف البرامج
+                </a>
+                <a href="#contact" class="hero-btn primary" onclick="scrollToContact()">
+                    <i class="fas fa-user-plus"></i>
+                    سجل الآن
+                </a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-header">
+            <h2 class="section-title">نبذة عن الأكاديمية</h2>
+            <p class="section-subtitle">منصة تدريبية وتطويرية متخصصة لتطوير مهارات الصناعات الإبداعية</p>
+        </div>
+        <div class="about-content">
+            <p class="about-text">
+                الأكاديمية الدولية للإبداع (ICA) نشئت لسد الفجوة بين التعليم الأكاديمي التقليدي ومتطلبات سوق الصناعات الإبداعية الحديثة. 
+                نحن منصة تدريبية وتطويرية متخصصة تعتمد على التدريب العملي التطبيقي، وربط المتدربين بمشروعات حقيقية وأسواق فعلية، 
+                من خلال منظومة متكاملة تقود المبدع من مرحلة التعلم إلى مرحلة الإنتاج ثم الاعتماد والتسويق والتصدير.
+            </p>
+            
+            <div class="about-features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="feature-title">اندماج مع منظومة CIDCO</h3>
+                    <p class="feature-desc">
+                        تعمل الأكاديمية ضمن منظومة CIDCO، وترتبط مباشرة بمشروعات تطبيقية مثل 50C CIDCO ومنصة Egypt Souvenir، 
+                        مما يضمن مخرجات تدريبية قابلة للتنفيذ التجاري والتصدير.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-title">تدريب عملي تطبيقي</h3>
+                    <p class="feature-desc">
+                        نركز على التدريب العملي المباشر والمشاريع الواقعية بدلاً من الدراسة النظرية فقط، 
+                        لضمان جاهزية الخريجين لسوق العمل المحلي والدولي.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="feature-title">شراكات دولية</h3>
+                    <p class="feature-desc">
+                        برامج مشتركة مع مؤسسات تصميم أوروبية في إيطاليا وإسبانيا واليونان والمملكة المتحدة، 
+                        وبرامج تبادل وإقامات فنية.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Objectives Section -->
+    <section id="vision" class="section">
+        <div class="section-header">
+            <h2 class="section-title">الرؤية والأهداف</h2>
+            <p class="section-subtitle">تمكين المبدعين المصريين ليصبحوا روادًا عالميين في الصناعات الإبداعية</p>
+        </div>
+        
+        <div class="vision-content">
+            <div class="vision-text">
+                <p>
+                    نسعى لتمكين المبدعين المصريين ليصبحوا رُّوادًا عالميين في الصناعات الإبداعية، 
+                    من خلال تعليم عملي متطور، وتقنيات حديثة، وربط مباشر بالأسواق الدولية.
+                </p>
+                <p>
+                    تسعى الأكاديمية إلى تحويل الموهبة إلى منتج احترافي جاهز للسوق، وربط التراث المصري الأصيل بالابتكار والتكنولوجيا، 
+                    وتعزيز مكانة مصر كمركز إقليمي للصناعات الإبداعية المستدامة.
+                </p>
+            </div>
+            
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-number">01</div>
+                    <div class="objective-content">
+                        <h3 class="objective-title">
+                            <i class="fas fa-user-graduate"></i>
+                            إعداد مبدعين جاهزين للسوق الدولي
+                        </h3>
+                        <p class="objective-desc">
+                            من خلال برامج قصيرة مكثفة تعتمد على المشاريع الواقعية وليس الدراسة النظرية فقط.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-number">02</div>
+                    <div class="objective-content">
+                        <h3 class="objective-title">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            تعليم تطبيقي بقيادة خبراء الصناعة
+                        </h3>
+                        <p class="objective-desc">
+                            عبر مدربين محترفين، ومستشارين دوليين، وخبراء سوق فعليين بدلاً من الأسلوب الأكاديمي التقليدي.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-number">03</div>
+                    <div class="objective-content">
+                        <h3 class="objective-title">
+                            <i class="fas fa-microchip"></i>
+                            دمج التكنولوجيا والابتكار
+                        </h3>
+                        <p class="objective-desc">
+                            باستخدام أدوات التصميم الرقمي والتصنيع الحديث مثل CLO3D، Browzwear، RhinoGold، KeyShot.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-number">04</div>
+                    <div class="objective-content">
+                        <h3 class="objective-title">
+                            <i class="fas fa-leaf"></i>
+                            دعم الاستدامة والاقتصاد الأخضر
+                        </h3>
+                        <p class="objective-desc">
+                            عبر التركيز على الخامات الصديقة للبيئة، والإنتاج الأخلاقي، والموضة المستدامة.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-number">05</div>
+                    <div class="objective-content">
+                        <h3 class="objective-title">
+                            <i class="fas fa-chart-line"></i>
+                            تأهيل المبدعين للتسويق والتصدير
+                        </h3>
+                        <p class="objective-desc">
+                            من خلال التدريب على بناء العلامات التجارية، التسويق الرقمي، إدارة التصدير، متطلبات الجودة.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-number">06</div>
+                    <div class="objective-content">
+                        <h3 class="objective-title">
+                            <i class="fas fa-globe"></i>
+                            بناء جسور تعاون دولي
+                        </h3>
+                        <p class="objective-desc">
+                            عبر برامج مشتركة مع مؤسسات تصميم أوروبية وبرامج تبادل وإقامات فنية.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="section">
+        <div class="section-header">
+            <h2 class="section-title">التكنولوجيا والابتكار</h2>
+            <p class="section-subtitle">أحدث أدوات التصميم الرقمي والتصنيع الحديث</p>
+        </div>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-print"></i>
+                </div>
+                <h3 class="tech-title">التصنيع الحديث</h3>
+                <ul class="tech-list">
+                    <li>الليزر والنقش الدقيق</li>
+                    <li>الطباعة ثلاثية الأبعاد</li>
+                    <li>القطع الرقمي CNC</li>
+                    <li>أنظمة التصنيع المتقدمة</li>
+                </ul>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <h3 class="tech-title">تصميم الأزياء الرقمي</h3>
+                <ul class="tech-list">
+                    <li>CLO3D للتصميم ثلاثي الأبعاد</li>
+                    <li>Browzwear لتصميم الأزياء</li>
+                    <li>نمذجة وتجسيد الملابس</li>
+                    <li>المحاكاة الرقمية</li>
+                </ul>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3 class="tech-title">تصميم المجوهرات</h3>
+                <ul class="tech-list">
+                    <li>RhinoGold للتصميم</li>
+                    <li>KeyShot للعرض والتصيير</li>
+                    <li>نمذجة ثلاثية الأبعاد</li>
+                    <li>تصميم القوالب الرقمية</li>
+                </ul>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3 class="tech-title">التقنيات المتقدمة</h3>
+                <ul class="tech-list">
+                    <li>الواقع الافتراضي والمعزز</li>
+                    <li>الذكاء الاصطناعي في التصميم</li>
+                    <li>إنترنت الأشياء للمنتجات الذكية</li>
+                    <li>تحليل البيانات والاتجاهات</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pathway Section -->
+    <section id="pathway" class="section">
+        <div class="section-header">
+            <h2 class="section-title">مسار التعلم</h2>
+            <p class="section-subtitle">من التعلم إلى الاحتراف - رحلة شاملة نحو التميز</p>
+        </div>
+        
+        <div class="pathway-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">التدريب والتعلم</h3>
+                <p class="step-desc">
+                    برامج تدريبية مكثفة تعتمد على المشاريع الواقعية تحت إشراف خبراء الصناعة.
+                </p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">الإنتاج والتصنيع</h3>
+                <p class="step-desc">
+                    تحويل الأفكار إلى منتجات فعلية باستخدام أحدث المعدات والتقنيات.
+                </p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">اعتماد الجودة</h3>
+                <p class="step-desc">
+                    بالتزامن مع Quality EGESCO نضمن تطبيق معايير الجودة الدولية.
+                </p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">التسويق والعلامة التجارية</h3>
+                <p class="step-desc">
+                    بناء العلامات التجارية والتسويق الرقمي للوصول للأسواق المستهدفة.
+                </p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h3 class="step-title">التصدير والتوسع</h3>
+                <p class="step-desc">
+                    تأهيل المنتجات للتصدير والوصول للأسواق الإقليمية والدولية.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="section">
+        <div class="section-header">
+            <h2 class="section-title">البرامج المتاحة</h2>
+            <p class="section-subtitle">اختر البرنامج الذي يناسب طموحك الإبداعي</p>
+        </div>
+        
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="program-title">التصميم والأزياء</h3>
+                </div>
+                <div class="program-body">
+                    <ul class="program-features">
+                        <li>تصميم الأزياء الرقمي</li>
+                        <li>باترون وخياطة متقدمة</li>
+                        <li>التنسيق والستايلينج</li>
+                        <li>إدارة مجموعات الأزياء</li>
+                        <li>الموضة المستدامة</li>
+                    </ul>
+                    <button class="program-btn" onclick="scrollToContact()">
+                        <i class="fas fa-user-plus"></i>
+                        سجل الآن
+                    </button>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="program-title">إدارة الإنتاج والجودة</h3>
+                </div>
+                <div class="program-body">
+                    <ul class="program-features">
+                        <li>إدارة سلسلة الإنتاج</li>
+                        <li>مراقبة الجودة الشاملة</li>
+                        <li>إدارة الكميات والمخزون</li>
+                        <li>التخطيط للإنتاج</li>
+                        <li>التحسين المستمر</li>
+                    </ul>
+                    <button class="program-btn" onclick="scrollToContact()">
+                        <i class="fas fa-user-plus"></i>
+                        سجل الآن
+                    </button>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="program-title">التسويق والتصدير</h3>
+                </div>
+                <div class="program-body">
+                    <ul class="program-features">
+                        <li>بناء العلامات التجارية</li>
+                        <li>التسويق الرقمي والإلكتروني</li>
+                        <li>إدارة التصدير والشحن</li>
+                        <li>متطلبات الجودة الدولية</li>
+                        <li>التسويق عبر المنصات</li>
+                    </ul>
+                    <button class="program-btn" onclick="scrollToContact()">
+                        <i class="fas fa-user-plus"></i>
+                        سجل الآن
+                    </button>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="program-title">ريادة الأعمال الإبداعية</h3>
+                </div>
+                <div class="program-body">
+                    <ul class="program-features">
+                        <li>تطوير نماذج الأعمال</li>
+                        <li>التخطيط المالي والميزانية</li>
+                        <li>إدارة المشاريع الإبداعية</li>
+                        <li>تطوير المنتجات الإبداعية</li>
+                        <li>التوسع والنمو</li>
+                    </ul>
+                    <button class="program-btn" onclick="scrollToContact()">
+                        <i class="fas fa-user-plus"></i>
+                        سجل الآن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-header">
+            <h2 class="section-title">اتصل بنا</h2>
+            <p class="section-subtitle">ابدأ رحلتك الإبداعية معنا اليوم</p>
+        </div>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3 class="contact-title">معلومات التواصل</h3>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <strong>البريد الإلكتروني</strong>
+                            info@icacademy.tech
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-text">
+                            <strong>الموقع الإلكتروني</strong>
+                            www.icacademy.tech
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <strong>الهاتف</strong>
+                            +20 123 456 7890
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <strong>المقر الرئيسي</strong>
+                            منظومة CIDCO
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>مدة البرامج</strong>
+                        3-6 أشهر | بداية البرامج: كل 3 أشهر
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="registrationForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">
+                            <i class="fas fa-user"></i>
+                            الاسم الكامل *
+                        </label>
+                        <input type="text" id="fullName" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">
+                            <i class="fas fa-envelope"></i>
+                            البريد الإلكتروني *
+                        </label>
+                        <input type="email" id="email" class="form-control" placeholder="example@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">
+                            <i class="fas fa-phone"></i>
+                            رقم الهاتف *
+                        </label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+20 123 456 7890" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="program">
+                            <i class="fas fa-graduation-cap"></i>
+                            البرنامج المطلوب *
+                        </label>
+                        <select id="program" class="form-control" required>
+                            <option value="">اختر البرنامج</option>
+                            <option>التصميم والأزياء</option>
+                            <option>إدارة الإنتاج والجودة</option>
+                            <option>التسويق والتصدير</option>
+                            <option>ريادة الأعمال الإبداعية</option>
+                            <option>التصميم المستدام</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">
+                            <i class="fas fa-comment"></i>
+                            رسالة إضافية (اختياري)
+                        </label>
+                        <textarea id="message" class="form-control" placeholder="اكتب رسالتك هنا..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال طلب التسجيل
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer id="mainFooter">
-        <div class="footer-left">© 2024 الأكاديمية الدولية للإبداع</div>
-        <div class="footer-right">
-            <div class="scroll-hint" id="scrollHint">
-                <span>تمرير للاستكشاف</span>
-                <i class="fas fa-chevron-down"></i>
+        <div class="footer-content">
+            <div class="footer-logo">ICA</div>
+            <p class="footer-tagline">من التعلم إلى الاحتراف | From Learning to Earning</p>
+            
+            <div class="footer-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#about">نبذة</a>
+                <a href="#vision">رؤية وأهداف</a>
+                <a href="#technology">التكنولوجيا</a>
+                <a href="#pathway">مسار التعلم</a>
+                <a href="#programs">البرامج</a>
+                <a href="#contact">اتصل بنا</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <div class="copyright">
+                © 2024 الأكاديمية الدولية للإبداع - ICA. جميع الحقوق محفوظة.
             </div>
         </div>
     </footer>
 
-    <!-- GSAP -->
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- GSAP Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
         // ===== ANIMATION FUNCTIONS =====
@@ -1792,8 +1973,8 @@
             const img = document.createElement('img');
             // img.src = 'img/logo.jpeg';
             // img.alt = 'International Creative Academy Logo';
-            // img.className = 'logo-image';
-            // img.id = 'logoImage';
+            img.className = 'logo-image';
+            img.id = 'logoImage';
             
             // إدراج الصورة في البداية
             logoImageMask.insertBefore(img, logoImageMask.firstChild);
@@ -2001,18 +2182,6 @@
                     ease: "power1.inOut"
                 },
                 2.5
-              )
-              
-              // تموج في الصورة
-              .to('.logo-image',
-                {
-                    scale: 1.15,
-                    duration: 4,
-                    ease: "sine.inOut",
-                    yoyo: true,
-                    repeat: -1
-                },
-                2.8
               );
             
             return tl;
@@ -2122,113 +2291,6 @@
             return tl;
         }
         
-        // دالة أنيميشن عناوين التنقل
-        function animateTitlesNavigation() {
-            const tl = gsap.timeline();
-            const titleItems = document.querySelectorAll('.title-item');
-            const titleConnectors = document.querySelectorAll('.title-connector');
-            
-            // إظهار الحاوية
-            tl.to('#titlesContainer',
-                {
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        document.getElementById('titlesContainer').classList.add('visible');
-                    }
-                },
-                0
-            )
-            
-            // أنيميشن دخول العناصر بالتسلسل
-            .to(titleItems,
-                {
-                    opacity: 0.6,
-                    x: 0,
-                    duration: 0.6,
-                    stagger: {
-                        amount: 0.8,
-                        from: "start",
-                        ease: "back.out(1.2)"
-                    },
-                    ease: "back.out(1.2)"
-                },
-                0.2
-            )
-            
-            // إضافة تأثير اهتزاز خفيف للعناصر
-            .to(titleItems,
-                {
-                    y: () => Math.random() * 10 - 5,
-                    duration: 0.3,
-                    stagger: {
-                        amount: 0.5,
-                        from: "random"
-                    },
-                    repeat: 1,
-                    yoyo: true,
-                    ease: "sine.inOut"
-                },
-                0.8
-            )
-            
-            // إظهار الموصلات بين العناصر
-            .to(titleConnectors,
-                {
-                    opacity: 0.3,
-                    duration: 0.4,
-                    stagger: 0.1,
-                    ease: "power2.out"
-                },
-                1
-            );
-            
-            return tl;
-        }
-        
-        // دالة أنيميشن زر التبديل
-        function animateTitleToggleButton() {
-            const tl = gsap.timeline();
-            
-            // إظهار زر التبديل
-            tl.to('#titleToggleBtn',
-                {
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        document.getElementById('titleToggleBtn').classList.add('visible');
-                    }
-                },
-                0
-            )
-            
-            // تأثير دوران خفيف
-            .to('#titleToggleBtn i',
-                {
-                    rotation: 360,
-                    duration: 1,
-                    ease: "power2.out"
-                },
-                0.2
-            )
-            
-            // تأثير تموج
-            .to('#titleToggleBtn',
-                {
-                    scale: 1.1,
-                    duration: 0.3,
-                    yoyo: true,
-                    repeat: 1,
-                    ease: "power1.inOut"
-                },
-                0.5
-            );
-            
-            return tl;
-        }
-        
         // بداية الأنيميشن الرئيسي
         function startMainAnimation() {
             // إنشاء عناصر الأنيميشن
@@ -2242,1255 +2304,158 @@
                 const hideTL = hideLogoAnimation();
                 
                 hideTL.then(() => {
-                    // بدء التطبيق الرئيسي
-                    document.body.classList.add('loaded');
-                    
                     // إظهار العناصر الرئيسية
                     setTimeout(() => {
                         document.getElementById('mainNav').classList.add('visible');
                         document.getElementById('mainFooter').classList.add('visible');
-                        document.getElementById('sideNavButtons').classList.add('visible');
+                        document.getElementById('heroContent').classList.add('visible');
                         
-                        // بدء التطبيق الرئيسي
+                        // إظهار جميع الأقسام
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.add('visible');
+                        });
+                        
+                        // تهيئة التطبيق الرئيسي
                         initializeMainApplication();
-                        
-                        // تشغيل أنيميشنات عناوين التنقل
-                        setTimeout(() => {
-                            animateTitlesNavigation();
-                            animateTitleToggleButton();
-                        }, 500);
                     }, 500);
                 });
             }, 4000);
         }
-        
-        // ===== MAIN APPLICATION CODE =====
-        
-        // Enhanced Slide Data
-        const slidesData = [
-            {
-                id: 0,
-                number: "01",
-                category: "نبذة عن الأكاديمية",
-                title: "INTERNATIONAL CREATIVE ACADEMY",
-                arabicTitle: "الأكاديمية الدولية للإبداع",
-                sections: [
-                    {
-                        type: "title",
-                        content: `
-                            <div class="slide-number">01 | نبذة عن الأكاديمية</div>
-                            <div class="main-title">INTERNATIONAL CREATIVE ACADEMY</div>
-                            <div class="arabic-title">الأكاديمية الدولية للإبداع - ICA</div>
-                        `
-                    },
-                    {
-                        title: "ما هي الأكاديمية؟",
-                        icon: "fas fa-info-circle",
-                        content: "منصة تدريبية وتطويرية متخصصة أُسست لسد الفجوة بين التعليم الأكاديمي التقليدي ومتطلبات سوق الصناعات الإبداعية الحديثة."
-                    },
-                    {
-                        title: "المنهجية",
-                        icon: "fas fa-chalkboard-teacher",
-                        content: "تعتمد على التدريب العملي التطبيقي، وربط المتدربين بمشروعات حقيقية وأسواق فعلية، من خلال منظومة متكاملة تقود المبدع من مرحلة التعلم إلى مرحلة الإنتاج ثم الاعتماد والتسويق والتصدير."
-                    },
-                    {
-                        title: "الاندماج مع CIDCO",
-                        icon: "fas fa-network-wired",
-                        content: "تعمل الأكاديمية ضمن منظومة CIDCO، وترتبط مباشرة بمشروعات تطبيقية مثل 50C CIDCO ومنصة Egypt Souvenir، بما يضمن مخرجات تدريبية قابلة للتنفيذ التجاري والتصدير."
-                    },
-                    {
-                        title: "المميزات الرئيسية",
-                        icon: "fas fa-star",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-hands-helping"></i> تدريب تطبيقي عملي مباشر</div>
-                                <div class="feature-item"><i class="fas fa-industry"></i> اندماج كامل مع منظومة CIDCO</div>
-                                <div class="feature-item"><i class="fas fa-globe"></i> برامج مشتركة مع مؤسسات أوروبية</div>
-                                <div class="feature-item"><i class="fas fa-graduation-cap"></i> منصة إطلاق للمبدعين</div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "الشراكات الدولية",
-                        icon: "fas fa-handshake",
-                        content: `
-                            <div class="content-columns">
-                                <div class="column">
-                                    <h5>أوروبا</h5>
-                                    <ul>
-                                        <li>مؤسسات تصميم في إيطاليا</li>
-                                        <li>معاهد في إسبانيا واليونان</li>
-                                        <li>جامعات في المملكة المتحدة</li>
-                                    </ul>
-                                </div>
-                                <div class="column">
-                                    <h5>البرامج</h5>
-                                    <ul>
-                                        <li>برامج تبادل أكاديمية</li>
-                                        <li>إقامات فنية دولية</li>
-                                        <li>ورش عمل مشتركة</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    {
-                        type: "highlight",
-                        title: "شعار الأكاديمية",
-                        icon: "fas fa-bullhorn",
-                        content: `
-                            <p style="font-size: 14px; font-weight: bold; color: var(--gold-color); text-align: center; margin: 5px 0;">
-                                From Learning to Earning
-                            </p>
-                            <p style="font-size: 12px; color: rgba(255,255,255,0.8); text-align: center;">
-                                من التعلم إلى الاحتراف
-                            </p>
-                            <p style="font-size: 11px; margin-top: 8px;">
-                                نسعى لتحويل الموهبة إلى منتج تجاري ناجح قادر على المنافسة في الأسواق المحلية والدولية.
-                            </p>
-                        `
-                    }
-                ],
-                bgGradient: "linear-gradient(135deg, #0d1b2a 0%, #1a365d 100%)"
-            },
-            {
-                id: 1,
-                number: "02",
-                category: "الرؤية والأهداف",
-                title: "VISION & MISSION",
-                arabicTitle: "رؤية ورسالة الأكاديمية",
-                sections: [
-                    {
-                        type: "title",
-                        content: `
-                            <div class="slide-number">02 | الرؤية والأهداف</div>
-                            <div class="main-title">VISION & MISSION</div>
-                            <div class="arabic-title">رؤية ورسالة الأكاديمية</div>
-                        `
-                    },
-                    {
-                        title: "الرؤية",
-                        icon: "fas fa-eye",
-                        content: "تمكين المبدعين المصريين ليصبحوا رُّوادًا عالميين في الصناعات الإبداعية، من خلال تعليم عملي متطور، وتقنيات حديثة، وربط مباشر بالأسواق الدولية."
-                    },
-                    {
-                        title: "الرسالة",
-                        icon: "fas fa-bullseye",
-                        content: "دعم ورفع مستوى المبدعين من خلال تقديم خدمات تطوير شاملة، وضمان أعلى معايير الجودة، وتقديم حلول تسويقية مستهدفة تفتح الأبواب أمام الأسواق المحلية والدولية."
-                    },
-                    {
-                        title: "الأهداف الاستراتيجية",
-                        icon: "fas fa-flag",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-user-graduate"></i> إعداد مبدعين جاهزين للسوق الدولي</div>
-                                <div class="feature-item"><i class="fas fa-chalkboard-teacher"></i> تعليم تطبيقي بقيادة خبراء الصناعة</div>
-                                <div class="feature-item"><i class="fas fa-microchip"></i> دمج التكنولوجيا والابتكار</div>
-                                <div class="feature-item"><i class="fas fa-leaf"></i> دعم الاستدامة والاقتصاد الأخضر</div>
-                                <div class="feature-item"><i class="fas fa-chart-line"></i> تأهيل المبدعين للتسويق والتصدير</div>
-                                <div class="feature-item"><i class="fas fa-globe"></i> بناء جسور تعاون دولي</div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "مخرجات التعلم",
-                        icon: "fas fa-graduation-cap",
-                        content: `
-                            <div class="content-columns">
-                                <div class="column">
-                                    <h5>المهارات</h5>
-                                    <ul>
-                                        <li>مهارات تصميم متقدمة</li>
-                                        <li>فهم أسواق الصناعات الإبداعية</li>
-                                        <li>بناء علامة تجارية شخصية</li>
-                                    </ul>
-                                </div>
-                                <div class="column">
-                                    <h5>المعارف</h5>
-                                    <ul>
-                                        <li>مهارات تسويقية ورقمية</li>
-                                        <li>متطلبات التصدير العالمية</li>
-                                        <li>معايير الجودة الدولية</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "تحقيق الرؤية",
-                        icon: "fas fa-rocket",
-                        content: "نسعى لتحويل الموهبة إلى منتج احترافي جاهز للسوق، وربط التراث المصري الأصيل بالابتكار والتكنولوجيا، وتعزيز مكانة مصر كمركز إقليمي للصناعات الإبداعية المستدامة."
-                    },
-                    {
-                        type: "highlight",
-                        title: "الاستدامة",
-                        icon: "fas fa-leaf",
-                        content: "تركز الأكاديمية على الخامات الصديقة للبيئة، والإنتاج الأخلاقي، والموضة المستدامة، لتعزيز الاقتصاد الأخضر والمسؤولية المجتمعية في الصناعات الإبداعية."
-                    }
-                ],
-                bgGradient: "linear-gradient(135deg, #2d5a27 0%, #4a7c3e 100%)"
-            },
-            {
-                id: 2,
-                number: "03",
-                category: "التكنولوجيا والابتكار",
-                title: "TECHNOLOGY & INNOVATION",
-                arabicTitle: "أدوات التكنولوجيا الحديثة",
-                sections: [
-                    {
-                        type: "title",
-                        content: `
-                            <div class="slide-number">03 | التكنولوجيا والابتكار</div>
-                            <div class="main-title">TECHNOLOGY & INNOVATION</div>
-                            <div class="arabic-title">أدوات التكنولوجيا الحديثة والابتكار</div>
-                        `
-                    },
-                    {
-                        title: "نهج التكنولوجيا",
-                        icon: "fas fa-laptop-code",
-                        content: "تدمج الأكاديمية أحدث التقنيات العالمية في عملية التعليم لضمان مواكبة المتدربين للتطورات التكنولوجية في الصناعات الإبداعية العالمية."
-                    },
-                    {
-                        title: "أدوات التصميم الرقمي",
-                        icon: "fas fa-paint-brush",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-print"></i> الطباعة ثلاثية الأبعاد والمحاكاة</div>
-                                <div class="feature-item"><i class="fas fa-vector-square"></i> برامج CLO3D للتصميم ثلاثي الأبعاد</div>
-                                <div class="feature-item"><i class="fas fa-tshirt"></i> Browzwear لتصميم الأزياء الرقمي</div>
-                                <div class="feature-item"><i class="fas fa-gem"></i> RhinoGold لتصميم المجوهرات</div>
-                                <div class="feature-item"><i class="fas fa-cube"></i> KeyShot للعرض والتصيير</div>
-                                <div class="feature-item"><i class="fab fa-adobe"></i> Adobe Creative Suite</div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "تقنيات التصنيع",
-                        icon: "fas fa-industry",
-                        content: `
-                            <div class="content-columns">
-                                <div class="column">
-                                    <h5>المعدات</h5>
-                                    <ul>
-                                        <li>أنظمة القطع بالليزر الدقيقة</li>
-                                        <li>ماكينات الحفر الرقمي CNC</li>
-                                        <li>طابعات ثلاثية الأبعاد متعددة المواد</li>
-                                    </ul>
-                                </div>
-                                <div class="column">
-                                    <h5>المختبرات</h5>
-                                    <ul>
-                                        <li>معدات الخياطة والتطريز الرقمي</li>
-                                        <li>مختبرات الجودة والاختبار</li>
-                                        <li>استوديوهات التصوير والمحاكاة</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "التقنيات المتقدمة",
-                        icon: "fas fa-robot",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-vr-cardboard"></i> الواقع الافتراضي والمعزز</div>
-                                <div class="feature-item"><i class="fas fa-brain"></i> الذكاء الاصطناعي في التصميم</div>
-                                <div class="feature-item"><i class="fas fa-satellite"></i> إنترنت الأشياء للمنتجات الذكية</div>
-                                <div class="feature-item"><i class="fas fa-chart-bar"></i> تحليل البيانات والاتجاهات</div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "الابتكار في التعليم",
-                        icon: "fas fa-lightbulb",
-                        content: "نستخدم منهجية التعلم القائم على المشاريع، حيث يعمل المتدربون على مشاريع حقيقية باستخدام التقنيات الحديثة، تحت إشراف خبراء الصناعة."
-                    },
-                    {
-                        type: "highlight",
-                        title: "التميز التكنولوجي",
-                        icon: "fas fa-trophy",
-                        content: "نسعى لتمكين المبدعين المصريين من المنافسة دولياً من خلال إتقانهم لأحدث الأدوات التكنولوجية المستخدمة في الصناعات الإبداعية العالمية."
-                    }
-                ],
-                bgGradient: "linear-gradient(135deg, #5a189a 0%, #7b2cbf 100%)"
-            },
-            {
-                id: 3,
-                number: "04",
-                category: "مسار التعلم",
-                title: "LEARNING PATHWAY",
-                arabicTitle: "من التعلم إلى الاحتراف",
-                sections: [
-                    {
-                        type: "title",
-                        content: `
-                            <div class="slide-number">04 | مسار التعلم</div>
-                            <div class="main-title">LEARNING PATHWAY</div>
-                            <div class="arabic-title">مسار الأكاديمية: من التعلم إلى الاحتراف</div>
-                        `
-                    },
-                    {
-                        title: "المنهجية المتكاملة",
-                        icon: "fas fa-road",
-                        content: "مسار متكامل يبدأ من التدريب وصولاً إلى التصدير، مع توفير متابعة مستمرة وفرص سوق حقيقية داخل منظومة CIDCO."
-                    },
-                    {
-                        title: "البرامج الرئيسية",
-                        icon: "fas fa-book-open",
-                        content: `
-                            <div class="content-columns">
-                                <div class="column">
-                                    <h5>التخصصات</h5>
-                                    <ul>
-                                        <li>التصميم والأزياء</li>
-                                        <li>إدارة الإنتاج والجودة</li>
-                                        <li>التسويق والتصدير</li>
-                                        <li>ريادة الأعمال</li>
-                                        <li>التصميم المستدام</li>
-                                    </ul>
-                                </div>
-                                <div class="column">
-                                    <h5>المهارات</h5>
-                                    <ul>
-                                        <li>التصميم والباترون</li>
-                                        <li>الستايلينج والتنسيق</li>
-                                        <li>إدارة الكميات</li>
-                                        <li>مراقبة الجودة</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "المراحل التعليمية",
-                        icon: "fas fa-stairs",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-graduation-cap"></i> المرحلة 1: تدريب مكثف على الأساسيات</div>
-                                <div class="feature-item"><i class="fas fa-project-diagram"></i> المرحلة 2: مشروع تخرج عملي</div>
-                                <div class="feature-item"><i class="fas fa-award"></i> المرحلة 3: اعتماد الجودة الدولية</div>
-                                <div class="feature-item"><i class="fas fa-chart-line"></i> المرحلة 4: التسويق وبناء العلامة</div>
-                                <div class="feature-item"><i class="fas fa-plane"></i> المرحلة 5: التصدير والتوسع الدولي</div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "الجودة والاعتماد",
-                        icon: "fas fa-certificate",
-                        content: "بالتعاون مع Quality EGESCO نضمن تطبيق معايير الجودة العالمية في جميع مراحل الإنتاج، مما يسهل عملية التصدير للأسواق الدولية."
-                    },
-                    {
-                        title: "المخرجات المهنية",
-                        icon: "fas fa-briefcase",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-user-tie"></i> مصمم أزياء محترف</div>
-                                <div class="feature-item"><i class="fas fa-chart-pie"></i> مدير إنتاج وجودة</div>
-                                <div class="feature-item"><i class="fas fa-shopping-cart"></i> مسوق دولي متخصص</div>
-                                <div class="feature-item"><i class="fas fa-store"></i> رائد أعمال إبداعي</div>
-                            </div>
-                        `
-                    },
-                    {
-                        type: "highlight",
-                        title: "شبكة الدعم",
-                        icon: "fas fa-hands-helping",
-                        content: "نوفر للمتخرجين شبكة دعم تشمل التمويل، التسويق، التصدير، والمتابعة المهنية لضمان نجاحهم في سوق العمل المحلي والدولي."
-                    }
-                ],
-                bgGradient: "linear-gradient(135deg, #b8860b 0%, #d4af37 100%)"
-            },
-            {
-                id: 4,
-                number: "05",
-                category: "التسجيل والاتصال",
-                title: "REGISTRATION & CONTACT",
-                arabicTitle: "التسجيل في الأكاديمية",
-                sections: [
-                    {
-                        type: "title",
-                        content: `
-                            <div class="slide-number">05 | التسجيل والاتصال</div>
-                            <div class="main-title">REGISTRATION & CONTACT</div>
-                            <div class="arabic-title">التسجيل في الأكاديمية والاتصال بنا</div>
-                        `
-                    },
-                    {
-                        title: "ابدأ رحلتك الإبداعية",
-                        icon: "fas fa-rocket",
-                        content: "انضم إلى الأكاديمية الدولية للإبداع وكن جزءًا من مستقبل الصناعات الإبداعية في مصر والعالم."
-                    },
-                    {
-                        title: "معلومات الاتصال",
-                        icon: "fas fa-address-card",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-envelope"></i> البريد: info@icacademy.tech</div>
-                                <div class="feature-item"><i class="fas fa-globe"></i> الموقع: www.icacademy.tech</div>
-                                <div class="feature-item"><i class="fas fa-phone"></i> الهاتف: +20 123 456 7890</div>
-                                <div class="feature-item"><i class="fas fa-map-marker-alt"></i> المقر: منظومة CIDCO</div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "نموذج التسجيل",
-                        icon: "fas fa-file-signature",
-                        content: `
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label><i class="fas fa-user"></i> الاسم الكامل *</label>
-                                    <input type="text" placeholder="أدخل اسمك الكامل" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><i class="fas fa-envelope"></i> البريد الإلكتروني *</label>
-                                    <input type="email" placeholder="example@email.com" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label><i class="fas fa-phone"></i> رقم الهاتف *</label>
-                                    <input type="tel" placeholder="+20 123 456 7890" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><i class="fas fa-graduation-cap"></i> البرنامج المطلوب *</label>
-                                    <select required>
-                                        <option value="">اختر البرنامج</option>
-                                        <option>التصميم والأزياء</option>
-                                        <option>إدارة الإنتاج والجودة</option>
-                                        <option>التسويق والتصدير</option>
-                                        <option>التصميم المستدام</option>
-                                        <option>ريادة الأعمال</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-comment"></i> رسالة إضافية</label>
-                                <textarea rows="2" placeholder="اكتب رسالتك هنا..."></textarea>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "معلومات البرامج",
-                        icon: "fas fa-info-circle",
-                        content: `
-                            <div class="content-columns">
-                                <div class="column">
-                                    <h5>التواريخ</h5>
-                                    <ul>
-                                        <li>بداية البرامج: كل 3 أشهر</li>
-                                        <li>المدة: 3-6 أشهر</li>
-                                        <li>اللغة: عربي/إنجليزي</li>
-                                    </ul>
-                                </div>
-                                <div class="column">
-                                    <h5>الشهادات</h5>
-                                    <ul>
-                                        <li>شهادة معتمدة من ICA</li>
-                                        <li>اعتماد من منظومة CIDCO</li>
-                                        <li>وثيقة إنجاز المشروع</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        `
-                    },
-                    {
-                        title: "خطوات التسجيل",
-                        icon: "fas fa-list-ol",
-                        content: `
-                            <div class="feature-list">
-                                <div class="feature-item"><i class="fas fa-edit"></i> 1. تعبئة النموذج</div>
-                                <div class="feature-item"><i class="fas fa-phone-volume"></i> 2. الاتصال للتأكيد</div>
-                                <div class="feature-item"><i class="fas fa-file-invoice"></i> 3. إتمام الإجراءات</div>
-                                <div class="feature-item"><i class="fas fa-calendar-check"></i> 4. بدء البرنامج</div>
-                            </div>
-                        `
-                    },
-                    {
-                        type: "highlight",
-                        title: "جاهز للبدء؟",
-                        icon: "fas fa-play-circle",
-                        content: "لا تنتظر! ابدأ رحلتك الإبداعية اليوم وتمتع بفرصة التعلم من خبراء الصناعة، والوصول إلى الأسواق الدولية، وبناء مستقبل مهني ناجح."
-                    }
-                ],
-                bgGradient: "linear-gradient(135deg, #003049 0%, #669bbc 100%)"
-            }
-        ];
 
-        // Initialize Application
-        class AcademySlider {
-            constructor() {
-                this.currentSlide = 0;
-                this.isAnimating = false;
-                this.totalSlides = slidesData.length;
-                this.slider = document.getElementById('slider');
-                this.progressBar = document.getElementById('progressBar');
-                this.loadingScreen = document.getElementById('loadingScreen');
-                this.titlesContainer = document.getElementById('titlesContainer');
-                this.titleToggleBtn = document.getElementById('titleToggleBtn');
-                this.sideNavButtons = document.getElementById('sideNavButtons');
-                this.prevBtn = document.getElementById('prevBtn');
-                this.nextBtn = document.getElementById('nextBtn');
-                this.isTitlesVisible = true;
+        // ===== MAIN APPLICATION FUNCTIONS =====
 
-                this.init();
-            }
-
-            init() {
-                this.createParticles();
-                this.initSlider();
-                this.createTitlesNavigation();
-                this.setupEventListeners();
-                this.updateNavigationButtons();
-
-                // Initialize animations
-                gsap.registerPlugin(ScrollTrigger);
-            }
-
-            createParticles() {
-                const particlesContainer = document.getElementById('particles');
-                const particleCount = 30;
-
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-
-                    const size = Math.random() * 3 + 1;
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    const duration = Math.random() * 10 + 10;
-                    const delay = Math.random() * 5;
-
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.left = `${posX}%`;
-                    particle.style.top = `${posY}%`;
-                    particle.style.opacity = Math.random() * 0.2;
-
-                    gsap.to(particle, {
-                        x: () => Math.random() * 100 - 50,
-                        y: () => Math.random() * 100 - 50,
-                        duration: duration,
-                        delay: delay,
-                        repeat: -1,
-                        yoyo: true,
-                        ease: "sine.inOut"
-                    });
-
-                    particlesContainer.appendChild(particle);
-                }
-            }
-
-            initSlider() {
-                this.slider.innerHTML = '';
-
-                slidesData.forEach((data, index) => {
-                    this.createSlide(data, index);
-                });
-
-                this.updateSlidesPosition();
-                this.updateProgress();
-            }
-
-            createSlide(data, index) {
-                const slide = document.createElement('div');
-                slide.className = 'slide';
-                slide.dataset.index = index;
-                slide.dataset.id = data.id;
-
-                slide.innerHTML = `
-                    <div class="slide-bg" style="background: ${data.bgGradient}"></div>
-                    
-                    <div class="slide-content-container" data-slide="${data.id}">
-                        ${data.sections.map((section, sectionIndex) => {
-                            if (section.type === 'title') {
-                                return `
-                                    <div class="section title-section" data-section="${sectionIndex}">
-                                        <div class="section-content">
-                                            ${section.content}
-                                        </div>
-                                    </div>
-                                `;
-                            } else if (section.type === 'highlight') {
-                                return `
-                                    <div class="section highlight-section" data-section="${sectionIndex}">
-                                        <div class="section-header">
-                                            <div class="section-icon">
-                                                <i class="${section.icon}"></i>
-                                            </div>
-                                            <div class="section-title">${section.title}</div>
-                                        </div>
-                                        <div class="section-content">
-                                            ${section.content}
-                                        </div>
-                                    </div>
-                                `;
-                            } else {
-                                return `
-                                    <div class="section" data-section="${sectionIndex}">
-                                        <div class="section-header">
-                                            <div class="section-icon">
-                                                <i class="${section.icon}"></i>
-                                            </div>
-                                            <div class="section-title">${section.title}</div>
-                                        </div>
-                                        <div class="section-content">
-                                            ${section.content}
-                                        </div>
-                                    </div>
-                                `;
-                            }
-                        }).join('')}
-                    </div>
-                    
-                    <div class="slide-footer">
-                        <div class="slide-indicator">
-                            <span>${data.number}/${this.totalSlides}</span>
-                            <div class="indicator-dots">
-                                ${slidesData.map((_, i) => `
-                                    <div class="indicator-dot ${i === index ? 'active' : ''}"></div>
-                                `).join('')}
-                            </div>
-                        </div>
-                        
-                        <div class="slide-cta">
-                            ${index === 4 ? `
-                                <button class="primary submit-form-btn" data-slide="${data.id}">
-                                    <i class="fas fa-paper-plane" style="margin-left: 5px;"></i>
-                                    إرسال الطلب
-                                </button>
-                            ` : `
-                                <button class="info-btn" data-index="${index}">
-                                    <i class="fas fa-info-circle" style="margin-left: 5px;"></i>
-                                    معلومات
-                                </button>
-                                <button class="primary register-btn" data-index="${index}">
-                                    <i class="fas fa-user-plus" style="margin-left: 5px;"></i>
-                                    سجل الآن
-                                </button>
-                            `}
-                        </div>
-                    </div>
-                `;
-
-                this.slider.appendChild(slide);
-                return slide;
-            }
-
-            createTitlesNavigation() {
-                this.titlesContainer.innerHTML = '';
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
                 
-                slidesData.forEach((slide, index) => {
-                    const titleItem = document.createElement('div');
-                    titleItem.className = `title-item ${index === 0 ? 'active' : ''}`;
-                    titleItem.dataset.index = index;
-                    
-                    titleItem.innerHTML = `
-                        <span class="title-number">${slide.number}</span>
-                        <span class="title-text">${slide.arabicTitle}</span>
-                    `;
-                    
-                    // Add click event
-                    titleItem.addEventListener('click', () => {
-                        this.animateTitleItemClick(index);
-                        this.goToSlide(index);
-                    });
-                    
-                    this.titlesContainer.appendChild(titleItem);
-                    
-                    // Add connector except for last item
-                    if (index < slidesData.length - 1) {
-                        const connector = document.createElement('div');
-                        connector.className = 'title-connector';
-                        this.titlesContainer.appendChild(connector);
-                    }
-                });
-            }
-
-            // دالة أنيميشن النقر على عنصر العنوان
-            animateTitleItemClick(index) {
-                const titleItem = document.querySelector(`.title-item[data-index="${index}"]`);
-                if (!titleItem) return;
-
-                // تأثير اهتزاز عند النقر
-                gsap.to(titleItem, {
-                    scale: 0.95,
-                    duration: 0.1,
-                    yoyo: true,
-                    repeat: 1,
-                    ease: "power1.inOut"
-                });
-
-                // تأثير وميض للرقم
-                const titleNumber = titleItem.querySelector('.title-number');
-                gsap.to(titleNumber, {
-                    color: '#ffffff',
-                    duration: 0.2,
-                    yoyo: true,
-                    repeat: 1,
-                    ease: "power1.inOut"
-                });
-            }
-
-            updateTitlesNavigation() {
-                const titleItems = document.querySelectorAll('.title-item');
-                const titleConnectors = document.querySelectorAll('.title-connector');
-                
-                titleItems.forEach((item, index) => {
-                    if (index === this.currentSlide) {
-                        item.classList.add('active');
-                        
-                        // أنيميشن العنصر النشط
-                        gsap.fromTo(item,
-                            {
-                                scale: 0.9,
-                                x: 10,
-                                boxShadow: '0 5px 15px rgba(212, 175, 55, 0.2)'
-                            },
-                            {
-                                scale: 1,
-                                x: 0,
-                                boxShadow: '0 5px 25px rgba(212, 175, 55, 0.4)',
-                                duration: 0.6,
-                                ease: "elastic.out(1, 0.5)"
-                            }
-                        );
-                        
-                        // أنيميشن الرقم
-                        const titleNumber = item.querySelector('.title-number');
-                        gsap.fromTo(titleNumber,
-                            {
-                                scale: 1,
-                                color: '#d4af37'
-                            },
-                            {
-                                scale: 1.2,
-                                color: '#ffffff',
-                                duration: 0.4,
-                                ease: "back.out(1.2)",
-                                onComplete: () => {
-                                    gsap.to(titleNumber, {
-                                        scale: 1.2,
-                                        duration: 0.3,
-                                        ease: "power1.out"
-                                    });
-                                }
-                            }
-                        );
-                        
-                        // إظهار الموصلات
-                        if (index > 0) {
-                            gsap.to(titleConnectors[index - 1], {
-                                opacity: 0.5,
-                                duration: 0.4,
-                                ease: "power2.out"
-                            });
-                        }
-                    } else {
-                        item.classList.remove('active');
-                        
-                        // إخفاء الموصلات للعناصر غير النشطة
-                        if (index > 0) {
-                            gsap.to(titleConnectors[index - 1], {
-                                opacity: 0.3,
-                                duration: 0.4,
-                                ease: "power2.out"
-                            });
-                        }
-                    }
-                });
-            }
-
-            updateNavigationButtons() {
-                // Update previous button
-                if (this.currentSlide === 0) {
-                    this.prevBtn.classList.add('disabled');
-                    this.prevBtn.style.cursor = 'not-allowed';
-                } else {
-                    this.prevBtn.classList.remove('disabled');
-                    this.prevBtn.style.cursor = 'pointer';
-                }
-
-                // Update next button
-                if (this.currentSlide === this.totalSlides - 1) {
-                    this.nextBtn.classList.add('disabled');
-                    this.nextBtn.style.cursor = 'not-allowed';
-                } else {
-                    this.nextBtn.classList.remove('disabled');
-                    this.nextBtn.style.cursor = 'pointer';
-                }
-
-                // Animate button hover effect
-                if (!this.prevBtn.classList.contains('disabled')) {
-                    gsap.to(this.prevBtn, {
-                        scale: 1,
-                        duration: 0.3,
-                        ease: "back.out(1.2)"
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
                     });
                 }
+            });
+        });
 
-                if (!this.nextBtn.classList.contains('disabled')) {
-                    gsap.to(this.nextBtn, {
-                        scale: 1,
-                        duration: 0.3,
-                        ease: "back.out(1.2)"
-                    });
-                }
-            }
-
-            toggleTitlesNavigation() {
-                this.isTitlesVisible = !this.isTitlesVisible;
-                
-                if (this.isTitlesVisible) {
-                    this.titlesContainer.classList.remove('hidden');
-                    this.titlesContainer.classList.add('visible');
-                    this.titleToggleBtn.innerHTML = '<i class="fas fa-list"></i>';
-                    
-                    // Animate in
-                    gsap.fromTo(this.titlesContainer,
-                        {
-                            opacity: 0,
-                            x: 20
-                        },
-                        {
-                            opacity: 1,
-                            x: 0,
-                            duration: 0.6,
-                            ease: "power2.out"
-                        }
-                    );
-                    
-                    // أنيميشن زر التبديل
-                    gsap.to(this.titleToggleBtn, {
-                        rotation: 180,
-                        duration: 0.4,
-                        ease: "back.out(1.2)"
-                    });
-                } else {
-                    this.titlesContainer.classList.remove('visible');
-                    this.titlesContainer.classList.add('hidden');
-                    this.titleToggleBtn.innerHTML = '<i class="fas fa-eye"></i>';
-                    
-                    // أنيميشن زر التبديل
-                    gsap.to(this.titleToggleBtn, {
-                        rotation: 0,
-                        duration: 0.4,
-                        ease: "back.out(1.2)"
-                    });
-                }
-            }
-
-            animateInSlide(slideIndex) {
-                const slide = document.querySelector(`.slide[data-index="${slideIndex}"]`);
-                if (!slide) return;
-
-                slide.classList.add('active');
-
-                const sections = slide.querySelectorAll('.section');
-                sections.forEach((section, i) => {
-                    gsap.fromTo(section,
-                        {
-                            opacity: 0,
-                            y: 20,
-                            scale: 0.95,
-                            rotationY: -10
-                        },
-                        {
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                            rotationY: 0,
-                            duration: 0.6,
-                            delay: i * 0.1,
-                            ease: "back.out(1.2)"
-                        }
-                    );
+        // Scroll to contact function
+        function scrollToContact() {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                window.scrollTo({
+                    top: contactSection.offsetTop - 80,
+                    behavior: 'smooth'
                 });
-            }
-
-            animateOutSlide(slideIndex) {
-                const slide = document.querySelector(`.slide[data-index="${slideIndex}"]`);
-                if (!slide) return;
-
-                slide.classList.remove('active');
-
-                const sections = slide.querySelectorAll('.section');
-                sections.forEach((section, i) => {
-                    gsap.to(section, {
-                        opacity: 0,
-                        y: -20,
-                        scale: 0.95,
-                        rotationY: 10,
-                        duration: 0.4,
-                        delay: (sections.length - i - 1) * 0.05,
-                        ease: "power2.in"
-                    });
-                });
-            }
-
-            updateSlidesPosition() {
-                const slides = Array.from(this.slider.querySelectorAll('.slide'));
-
-                slides.forEach((slide, index) => {
-                    const slideIndex = parseInt(slide.dataset.index);
-                    const distance = Math.abs(slideIndex - this.currentSlide);
-
-                    let z = -distance * 800;
-                    let scale = 1 - (distance * 0.2);
-                    let opacity = distance === 0 ? 1 : 0.3 - (distance * 0.15);
-                    let filter = `brightness(${1 - (distance * 0.4)})`;
-
-                    if (slideIndex < this.currentSlide) {
-                        z -= 200;
-                        opacity *= 0.5;
-                    }
-
-                    gsap.to(slide, {
-                        duration: 1.2,
-                        z: z,
-                        scale: scale,
-                        opacity: opacity,
-                        filter: filter,
-                        rotationY: (slideIndex - this.currentSlide) * 10,
-                        ease: "power3.inOut",
-                        overwrite: true,
-                        onComplete: () => {
-                            if (slideIndex === this.currentSlide) {
-                                this.animateInSlide(slideIndex);
-                            }
-                        }
-                    });
-                });
-            }
-
-            setupEventListeners() {
-                // Previous button
-                this.prevBtn.addEventListener('click', (e) => {
-                    if (this.isAnimating || this.currentSlide === 0) return;
-                    this.goToSlide(this.currentSlide - 1);
-                    
-                    // Button animation
-                    gsap.to(e.target.closest('.side-nav-btn'), {
-                        scale: 0.9,
-                        duration: 0.1,
-                        yoyo: true,
-                        repeat: 1
-                    });
-                });
-
-                // Next button
-                this.nextBtn.addEventListener('click', (e) => {
-                    if (this.isAnimating || this.currentSlide === this.totalSlides - 1) return;
-                    this.goToSlide(this.currentSlide + 1);
-                    
-                    // Button animation
-                    gsap.to(e.target.closest('.side-nav-btn'), {
-                        scale: 0.9,
-                        duration: 0.1,
-                        yoyo: true,
-                        repeat: 1
-                    });
-                });
-
-                // Wheel navigation
-                let wheelTimeout;
-                window.addEventListener('wheel', (e) => {
-                    const isContentScroll = e.target.closest('.slide-content-container');
-                    if (isContentScroll) return;
-
-                    clearTimeout(wheelTimeout);
-                    wheelTimeout = setTimeout(() => {
-                        if (e.deltaY > 0) {
-                            this.goToSlide(this.currentSlide + 1);
-                        } else {
-                            this.goToSlide(this.currentSlide - 1);
-                        }
-                    }, 100);
-                }, { passive: false });
-
-                // Touch navigation
-                let touchStartY = 0;
-                window.addEventListener('touchstart', (e) => {
-                    const isContentTouch = e.target.closest('.slide-content-container');
-                    if (isContentTouch) return;
-                    touchStartY = e.touches[0].clientY;
-                });
-
-                window.addEventListener('touchend', (e) => {
-                    const isContentTouch = e.target.closest('.slide-content-container');
-                    if (isContentTouch) return;
-
-                    const touchEndY = e.changedTouches[0].clientY;
-                    const deltaY = touchStartY - touchEndY;
-
-                    if (Math.abs(deltaY) > 40) {
-                        if (deltaY > 0) {
-                            this.goToSlide(this.currentSlide + 1);
-                        } else {
-                            this.goToSlide(this.currentSlide - 1);
-                        }
-                    }
-                });
-
-                // Navigation links
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const index = parseInt(link.dataset.index);
-                        this.goToSlide(index);
-                    });
-                });
-
-                // Titles toggle button
-                this.titleToggleBtn.addEventListener('click', () => {
-                    this.toggleTitlesNavigation();
-                });
-
-                // Buttons
-                document.getElementById('navRegisterBtn').addEventListener('click', () => {
-                    this.goToSlide(4);
-                });
-
-                document.getElementById('scrollHint').addEventListener('click', () => {
-                    this.goToSlide(this.currentSlide + 1);
-                });
-
-                document.addEventListener('click', (e) => {
-                    // Register button
-                    if (e.target.closest('.register-btn')) {
-                        e.preventDefault();
-                        this.goToSlide(4);
-                    }
-
-                    // Info button
-                    if (e.target.closest('.info-btn')) {
-                        e.preventDefault();
-                        const slide = document.querySelector(`.slide[data-index="${this.currentSlide}"]`);
-                        if (slide) {
-                            const container = slide.querySelector('.slide-content-container');
-                            gsap.to(container, {
-                                scrollTop: 0,
-                                duration: 0.8,
-                                ease: "power2.inOut"
-                            });
-                        }
-                    }
-
-                    // Submit form button
-                    if (e.target.closest('.submit-form-btn')) {
-                        e.preventDefault();
-                        this.submitRegistrationForm();
-                    }
-                });
-
-                // Keyboard navigation
-                document.addEventListener('keydown', (e) => {
-                    const isFormField = e.target.matches('input, select, textarea');
-                    if (isFormField) return;
-
-                    switch (e.key) {
-                        case 'ArrowLeft':
-                            this.goToSlide(this.currentSlide - 1);
-                            e.preventDefault();
-                            break;
-                        case 'ArrowRight':
-                            this.goToSlide(this.currentSlide + 1);
-                            e.preventDefault();
-                            break;
-                        case 'ArrowDown':
-                        case ' ':
-                        case 'PageDown':
-                            this.goToSlide(this.currentSlide + 1);
-                            e.preventDefault();
-                            break;
-                        case 'ArrowUp':
-                        case 'PageUp':
-                            this.goToSlide(this.currentSlide - 1);
-                            e.preventDefault();
-                            break;
-                        case 'Home':
-                            this.goToSlide(0);
-                            e.preventDefault();
-                            break;
-                        case 'End':
-                            this.goToSlide(this.totalSlides - 1);
-                            e.preventDefault();
-                            break;
-                        case 't':
-                        case 'T':
-                            // Toggle titles with T key
-                            this.toggleTitlesNavigation();
-                            e.preventDefault();
-                            break;
-                    }
-                });
-
-                // Parallax effect
-                window.addEventListener('mousemove', (e) => {
-                    const x = (e.clientX / window.innerWidth) * 20 - 10;
-                    const y = (e.clientY / window.innerHeight) * 20 - 10;
-
-                    gsap.to('.parallax-bg', {
-                        x: x,
-                        y: y,
-                        duration: 1,
-                        ease: "power2.out"
-                    });
-                });
-            }
-
-            goToSlide(index) {
-                if (this.isAnimating) return;
-
-                index = Math.max(0, Math.min(index, this.totalSlides - 1));
-
-                if (index === this.currentSlide) return;
-
-                this.isAnimating = true;
-                const prevSlide = this.currentSlide;
-                this.currentSlide = index;
-
-                // Animate out previous slide
-                this.animateOutSlide(prevSlide);
-
-                // Update UI
-                this.updateSlidesPosition();
-                this.updateProgress();
-                this.updateIndicators();
-                this.updateTitlesNavigation();
-                this.updateNavigationButtons();
-
-                // Reset animation flag
-                setTimeout(() => {
-                    this.isAnimating = false;
-                }, 1200);
-            }
-
-            updateProgress() {
-                const progress = (this.currentSlide / (this.totalSlides - 1)) * 100;
-                gsap.to(this.progressBar, {
-                    width: `${progress}%`,
-                    duration: 0.8,
-                    ease: "power2.out"
-                });
-            }
-
-            updateIndicators() {
-                const dots = document.querySelectorAll('.indicator-dot');
-                dots.forEach((dot, index) => {
-                    if (index === this.currentSlide) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-
-                // Update navigation
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    const index = parseInt(link.dataset.index);
-                    if (index === this.currentSlide) {
-                        link.style.background = 'rgba(212, 175, 55, 0.2)';
-                        link.style.color = 'var(--gold-color)';
-                    } else {
-                        link.style.background = '';
-                        link.style.color = 'rgba(255, 255, 255, 0.7)';
-                    }
-                });
-            }
-
-            submitRegistrationForm() {
-                const currentSlideElement = document.querySelector(`.slide[data-index="${this.currentSlide}"]`);
-                if (!currentSlideElement) return;
-
-                const inputs = currentSlideElement.querySelectorAll('input, select, textarea');
-                let isValid = true;
-                let formData = {};
-
-                inputs.forEach(input => {
-                    if (input.hasAttribute('required') && !input.value.trim()) {
-                        isValid = false;
-                        gsap.to(input, {
-                            borderColor: '#ff4757',
-                            duration: 0.3,
-                            yoyo: true,
-                            repeat: 1,
-                            onComplete: () => {
-                                gsap.to(input, {
-                                    borderColor: 'rgba(255, 255, 255, 0.1)',
-                                    duration: 0.3
-                                });
-                            }
-                        });
-                    } else {
-                        formData[input.name || input.placeholder] = input.value;
-                    }
-                });
-
-                if (!isValid) {
-                    // Show error animation
-                    const submitBtn = currentSlideElement.querySelector('.submit-form-btn');
-                    gsap.to(submitBtn, {
-                        x: 10,
-                        duration: 0.1,
-                        yoyo: true,
-                        repeat: 5,
-                        ease: "power1.inOut",
-                        onComplete: () => {
-                            gsap.to(submitBtn, {
-                                x: 0,
-                                duration: 0.2
-                            });
-                        }
-                    });
-
-                    return;
-                }
-
-                // Success animation
-                const submitBtn = currentSlideElement.querySelector('.submit-form-btn');
-                if (submitBtn) {
-                    gsap.to(submitBtn, {
-                        scale: 0.9,
-                        duration: 0.1,
-                        yoyo: true,
-                        repeat: 1,
-                        onComplete: () => {
-                            // Show success message
-                            const successMsg = document.createElement('div');
-                            successMsg.innerHTML = `
-                                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                                         background: rgba(10, 10, 10, 0.95); padding: 30px; border-radius: 12px; 
-                                         border: 1px solid var(--gold-color); z-index: 9999; text-align: center; 
-                                         max-width: 400px; backdrop-filter: blur(10px);">
-                                    <i class="fas fa-check-circle" style="font-size: 48px; color: var(--gold-color); margin-bottom: 20px;"></i>
-                                    <h3 style="color: var(--gold-color); margin-bottom: 10px;">تم إرسال طلب التسجيل بنجاح!</h3>
-                                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">سيتم التواصل معك خلال 48 ساعة.</p>
-                                    <button onclick="this.parentElement.remove()" style="
-                                        background: var(--gold-color); color: var(--bg-color); border: none; 
-                                        padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;">
-                                        موافق
-                                    </button>
-                                </div>
-                            `;
-                            document.body.appendChild(successMsg);
-
-                            // Reset form
-                            inputs.forEach(input => {
-                                if (input.type !== 'submit') {
-                                    input.value = '';
-                                }
-                            });
-                        }
-                    });
-                }
             }
         }
 
-        // تهيئة التطبيق الرئيسي
-        function initializeMainApplication() {
-            const academySlider = new AcademySlider();
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
-            // Make it globally accessible for debugging
-            window.academySlider = academySlider;
+        // Show/Hide scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Form submission handler
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                program: document.getElementById('program').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Basic validation
+            if (!formData.fullName || !formData.email || !formData.phone || !formData.program) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // Show success message
+            const successMessage = `
+                <div style="
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(10, 10, 10, 0.95);
+                    padding: 30px;
+                    border-radius: 12px;
+                    border: 1px solid var(--gold-color);
+                    z-index: 9999;
+                    text-align: center;
+                    max-width: 400px;
+                    backdrop-filter: blur(10px);
+                ">
+                    <i class="fas fa-check-circle" style="font-size: 48px; color: var(--gold-color); margin-bottom: 20px;"></i>
+                    <h3 style="color: var(--gold-color); margin-bottom: 10px;">تم إرسال طلب التسجيل بنجاح!</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">سيتم التواصل معك خلال 48 ساعة.</p>
+                    <button onclick="this.parentElement.remove()" style="
+                        background: var(--gold-color);
+                        color: var(--bg-color);
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    ">
+                        موافق
+                    </button>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', successMessage);
+            
+            // Reset form
+            document.getElementById('registrationForm').reset();
+            
+            // In a real application, you would send the data to a server here
+            console.log('Form submitted:', formData);
+        }
+
+        // Initialize main application
+        function initializeMainApplication() {
+            // Add active class to current nav link on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
 
             console.log('%c🎨 الأكاديمية الدولية للإبداع 🎨', 'color: #d4af37; font-size: 18px; font-weight: bold;');
             console.log('%c✨ تم تحميل أنيميشن الصورة والتطبيق بنجاح ✨', 'color: #b8860b; font-size: 12px;');
@@ -3503,5 +2468,4 @@
         });
     </script>
 </body>
-
 </html>

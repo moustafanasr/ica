@@ -3,28 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأكاديمية الدولية للإبداع (ICA)</title>
+    <meta name="description" content="الأكاديمية الدولية للإبداع - منصة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة للمنافسة العالمية">
+    <title>الأكاديمية الدولية للإبداع (ICA) - حيث يلتقي الإبداع بالمعايير العالمية</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
       :root {
         --bg: #F3E8DD;
         --ink: #2B2320;
         --muted: #6A5B52;
         --gold: #B9924A;
-        --gold2: #8B6A2B;
+        --gold-light: #E7D2A3;
+        --gold-dark: #8B6A2B;
         --stroke: rgba(120, 90, 60, .25);
-        --card: rgba(255, 255, 255, .55);
+        --card: rgba(255, 255, 255, .75);
         --shadow: 0 18px 40px rgba(0, 0, 0, .12);
+        --shadow-hover: 0 24px 50px rgba(0, 0, 0, .18);
         --r: 18px;
-        --max: 1120px;
+        --max: 1200px;
+        --transition: all 0.3s ease;
       }
 
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
@@ -36,6 +45,7 @@
         padding: 0;
         width: 100%;
         min-height: 100vh;
+        line-height: 1.6;
       }
 
       .ica-container {
@@ -45,7 +55,7 @@
       .ica-wrap {
         max-width: var(--max);
         margin: auto;
-        padding: 28px 16px 60px;
+        padding: 28px 16px 80px;
       }
 
       .ica-center {
@@ -64,220 +74,513 @@
         border: 1px solid var(--stroke);
         border-radius: var(--r);
         box-shadow: var(--shadow);
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(8px);
+        transition: var(--transition);
+      }
+
+      .ica-glass:hover {
+        box-shadow: var(--shadow-hover);
       }
 
       .ica-header {
-        padding: 14px 0 6px;
+        padding: 20px 0 10px;
+        position: relative;
+      }
+
+      .ica-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 50%;
+        transform: translateX(50%);
+        width: 120px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        border-radius: 3px;
       }
 
       .ica-logo {
-        width: 125px;
+        width: 140px;
         height: auto;
-        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .18));
+        filter: drop-shadow(0 12px 20px rgba(0, 0, 0, .2));
+        transition: var(--transition);
+      }
+
+      .ica-logo:hover {
+        transform: translateY(-3px);
       }
 
       .ica-brand-en {
         letter-spacing: .18em;
-        font-size: 13px;
+        font-size: 14px;
         color: var(--muted);
-        margin: 10px 0 2px;
+        margin: 12px 0 4px;
+        font-weight: 600;
       }
 
       .ica-brand-ar {
-        font-size: 30px;
-        font-weight: 800;
-        margin: 6px 0 6px;
+        font-size: 34px;
+        font-weight: 900;
+        margin: 8px 0 8px;
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, .05);
       }
 
       .ica-tagline {
-        font-size: 22px;
-        font-weight: 700;
-        margin: 0 0 10px;
+        font-size: 24px;
+        font-weight: 800;
+        margin: 0 0 12px;
+        color: var(--ink);
+        position: relative;
+        display: inline-block;
+        padding: 0 10px;
+      }
+
+      .ica-tagline::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 60%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
       }
 
       .ica-section-title {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 14px;
-        margin: 28px 0 14px;
-        font-size: 22px;
-        font-weight: 800;
+        gap: 16px;
+        margin: 40px 0 24px;
+        font-size: 26px;
+        font-weight: 900;
+        position: relative;
+        color: var(--ink);
       }
 
       .ica-section-title:before,
       .ica-section-title:after {
         content: "";
-        width: 120px;
-        height: 1px;
+        width: 140px;
+        height: 2px;
         background: linear-gradient(90deg, transparent, rgba(185, 146, 74, .85), transparent);
       }
 
+      .ica-section-title i {
+        color: var(--gold);
+      }
+
       .ica-about {
-        padding: 22px;
+        padding: 28px 24px;
         text-align: center;
-        margin-top: 16px;
+        margin-top: 24px;
       }
 
       .ica-about h2 {
-        margin: 0 0 8px;
-        font-size: 22px;
-        font-weight: 800;
+        margin: 0 0 12px;
+        font-size: 24px;
+        font-weight: 900;
+        color: var(--gold-dark);
       }
 
       .ica-about p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.9;
+        line-height: 2;
         font-size: 18px;
       }
 
       .ica-grid {
         display: grid;
-        gap: 14px;
+        gap: 20px;
       }
 
       .ica-features {
         grid-template-columns: repeat(4, 1fr);
-        margin-top: 10px;
+        margin-top: 16px;
       }
 
       .ica-feature {
-        background: rgba(255, 255, 255, .60);
+        background: rgba(255, 255, 255, .70);
         border: 1px solid var(--stroke);
-        border-radius: 16px;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, .10);
-        padding: 16px 14px;
-        min-height: 130px;
+        border-radius: 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+        padding: 22px 18px;
+        min-height: 160px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 10px;
+        gap: 14px;
         text-align: center;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ica-feature::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      }
+
+      .ica-feature:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
       }
 
       .ica-feature img {
-        width: 38px;
-        height: 38px;
+        width: 48px;
+        height: 48px;
         object-fit: contain;
         margin: 0 auto;
-        opacity: .95;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .1));
       }
 
       .ica-feature h3 {
         margin: 0;
-        font-size: 16px;
-        line-height: 1.6;
-        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.7;
+        font-weight: 800;
+        color: var(--ink);
       }
 
       .ica-fields {
         grid-template-columns: repeat(3, 1fr);
-        margin-top: 10px;
+        margin-top: 16px;
       }
 
       .ica-field {
         overflow: hidden;
-        background: rgba(255, 255, 255, .60);
+        background: rgba(255, 255, 255, .70);
         border: 1px solid var(--stroke);
-        border-radius: 18px;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+        border-radius: 20px;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, .12);
+        transition: var(--transition);
+      }
+
+      .ica-field:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, .18);
       }
 
       .ica-field .ica-img {
-        height: 170px;
+        height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(233, 223, 212, .7);
+        background: linear-gradient(135deg, rgba(233, 223, 212, .9), rgba(255, 255, 255, .9));
+        padding: 20px;
+        transition: var(--transition);
+      }
+
+      .ica-field:hover .ica-img {
+        background: linear-gradient(135deg, rgba(185, 146, 74, .1), rgba(233, 223, 212, .9));
       }
 
       .ica-field .ica-img img {
-        max-width: 88%;
-        max-height: 88%;
+        max-width: 90%;
+        max-height: 90%;
         object-fit: contain;
+        transition: var(--transition);
+      }
+
+      .ica-field:hover .ica-img img {
+        transform: scale(1.05);
       }
 
       .ica-field .ica-label {
-        padding: 14px 12px 16px;
+        padding: 20px 15px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--ink);
+        background: rgba(255, 255, 255, .9);
+        border-top: 1px solid var(--stroke);
+      }
+
+      .ica-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 16px;
+      }
+
+      .ica-gallery-item {
+        overflow: hidden;
+        background: rgba(255, 255, 255, .80);
+        border: 1px solid var(--stroke);
+        border-radius: 20px;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, .12);
+        transition: var(--transition);
+      }
+
+      .ica-gallery-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, .18);
+      }
+
+      .ica-gallery-item .ica-img {
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(233, 223, 212, .6);
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      .ica-gallery-item .ica-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: var(--transition);
+      }
+
+      .ica-gallery-item:hover .ica-img img {
+        transform: scale(1.05);
+      }
+
+      .ica-gallery-item .ica-label {
+        padding: 20px 15px;
         text-align: center;
         font-size: 18px;
         font-weight: 800;
+        color: var(--muted);
+        background: rgba(255, 255, 255, .95);
+        border-top: 1px solid var(--stroke);
+      }
+
+      .ica-categories {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 16px;
+      }
+
+      .ica-category {
+        overflow: hidden;
+        background: rgba(255, 255, 255, .85);
+        border: 1px solid var(--stroke);
+        border-radius: 22px;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, .12);
+        transition: var(--transition);
+      }
+
+      .ica-category:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, .2);
+      }
+
+      .ica-category .ica-img {
+        height: 240px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(185, 146, 74, .15), rgba(233, 223, 212, .8));
+        padding: 20px;
+        transition: var(--transition);
+      }
+
+      .ica-category:hover .ica-img {
+        background: linear-gradient(135deg, rgba(185, 146, 74, .25), rgba(233, 223, 212, .9));
+      }
+
+      .ica-category .ica-img img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        transition: var(--transition);
+      }
+
+      .ica-category:hover .ica-img img {
+        transform: scale(1.08);
+      }
+
+      .ica-category .ica-label {
+        padding: 24px 20px;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--ink);
+        background: rgba(255, 255, 255, .95);
+        border-top: 1px solid var(--stroke);
       }
 
       .ica-band {
-        padding: 18px 16px;
+        padding: 28px 24px;
         text-align: center;
-        margin-top: 18px;
+        margin-top: 28px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ica-band::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(185, 146, 74, .05), rgba(233, 223, 212, .2));
+        z-index: -1;
       }
 
       .ica-band h3 {
-        margin: 0 0 6px;
-        font-size: 20px;
+        margin: 0 0 12px;
+        font-size: 24px;
         font-weight: 900;
+        color: var(--gold-dark);
       }
 
       .ica-band p {
-        margin: 0;
+        margin: 0 auto 20px;
         color: var(--muted);
-        line-height: 1.8;
-        font-size: 16px;
+        line-height: 1.9;
+        font-size: 18px;
+        max-width: 800px;
       }
 
       .ica-logos {
-        margin-top: 12px;
+        margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
+        gap: 20px;
         opacity: .95;
       }
 
       .ica-logos img {
-        height: 28px;
+        height: 36px;
         width: auto;
+        filter: grayscale(0.3);
+        transition: var(--transition);
+      }
+
+      .ica-logos img:hover {
+        filter: grayscale(0);
+        transform: translateY(-3px);
       }
 
       .ica-cta {
-        margin-top: 18px;
+        margin-top: 32px;
         text-align: center;
+        position: relative;
       }
 
       .ica-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 14px 34px;
-        border-radius: 14px;
+        padding: 18px 48px;
+        border-radius: 16px;
         border: 1px solid rgba(139, 106, 43, .35);
-        background: linear-gradient(180deg, #E7D2A3 0%, #C59A4F 45%, #8B6A2B 100%);
+        background: linear-gradient(135deg, #E7D2A3 0%, #C59A4F 45%, #8B6A2B 100%);
         color: #1d140e;
         font-weight: 900;
-        font-size: 22px;
+        font-size: 24px;
         text-decoration: none;
-        box-shadow: 0 14px 30px rgba(0, 0, 0, .16);
-        transition: transform .12s ease, filter .12s ease;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, .2);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .ica-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #8B6A2B 0%, #C59A4F 45%, #E7D2A3 100%);
+        z-index: -1;
+        opacity: 0;
+        transition: var(--transition);
       }
 
       .ica-btn:hover {
-        transform: translateY(-2px);
-        filter: brightness(1.02);
+        transform: translateY(-5px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, .25);
+      }
+
+      .ica-btn:hover::before {
+        opacity: 1;
+      }
+
+      .ica-btn i {
+        margin-left: 10px;
+        font-size: 22px;
       }
 
       .ica-footer {
-        margin-top: 22px;
+        margin-top: 40px;
         text-align: center;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 15px;
+        padding: 20px 0;
+        border-top: 1px solid rgba(120, 90, 60, .15);
       }
 
-      @media (max-width: 980px) {
+      .ica-social {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .ica-social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(185, 146, 74, .1);
+        color: var(--gold-dark);
+        font-size: 20px;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .ica-social a:hover {
+        background: var(--gold);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      @media (max-width: 1024px) {
         .ica-features {
           grid-template-columns: repeat(2, 1fr);
         }
 
-        .ica-fields {
+        .ica-fields, .ica-gallery, .ica-categories {
+          grid-template-columns: 1fr;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .ica-brand-ar {
+          font-size: 30px;
+        }
+
+        .ica-tagline {
+          font-size: 22px;
+        }
+
+        .ica-section-title {
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .ica-features {
           grid-template-columns: 1fr;
         }
 
@@ -292,6 +595,81 @@
         .ica-about p {
           font-size: 17px;
         }
+
+        .ica-section-title:before,
+        .ica-section-title:after {
+          width: 60px;
+        }
+
+        .ica-btn {
+          padding: 16px 36px;
+          font-size: 20px;
+        }
+
+        .ica-wrap {
+          padding: 20px 16px 60px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .ica-brand-ar {
+          font-size: 22px;
+        }
+
+        .ica-tagline {
+          font-size: 18px;
+        }
+
+        .ica-section-title {
+          font-size: 22px;
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+        }
+
+        .ica-section-title:before,
+        .ica-section-title:after {
+          width: 100px;
+        }
+
+        .ica-feature h3 {
+          font-size: 16px;
+        }
+
+        .ica-btn {
+          padding: 14px 28px;
+          font-size: 18px;
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      /* Animation for scroll reveal */
+      .ica-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .ica-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Loading animation */
+      .ica-loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(185, 146, 74, .3);
+        border-radius: 50%;
+        border-top-color: var(--gold);
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
     </style>
 </head>
@@ -299,8 +677,7 @@
     <div class="ica-container">
         <div class="ica-wrap">
           <!-- HERO -->
-          <header class="ica-header ica-center">
-            <!-- ضع شعارك هنا -->
+          <header class="ica-header ica-center ica-reveal">
             <img class="ica-logo" src="./img/logo.jpeg" alt="شعار الأكاديمية الدولية للإبداع">
             <div class="ica-brand-en">INTERNATIONAL CREATIVE ACADEMY</div>
             <div class="ica-brand-ar">الأكاديمية الدولية للإبداع</div>
@@ -309,76 +686,188 @@
           </header>
 
           <!-- ABOUT -->
-          <section class="ica-glass ica-about">
-            <h2>عن الأكاديمية</h2>
+          <section class="ica-glass ica-about ica-reveal">
+            <h2><i class="fas fa-graduation-cap"></i> عن الأكاديمية</h2>
             <p>
-              الأكاديمية الدولية للإبداع منصة تهدف إلى تمكين المبدعين من تطوير مهاراتهم
+              الأكاديمية الدولية للإبداع منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم
               وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق العالمية،
               من خلال التدريب العملي ومتطلبات الجودة والتصدير والشراكات الدولية.
+              نحن نؤمن بأن كل مبدع يستحق فرصة لإظهار إبداعه للعالم.
             </p>
           </section>
 
           <!-- FEATURES -->
-          <div class="ica-section-title">ماذا ستتعلم معنا</div>
+          <div class="ica-section-title ica-reveal"><i class="fas fa-bullseye"></i> ماذا ستتعلم معنا</div>
           <section class="ica-grid ica-features">
-            <div class="ica-feature">
-              <img src="https://via.placeholder.com/38x38/8B6A2B/FFFFFF?text=✏️" alt="تصميم">
+            <div class="ica-feature ica-reveal">
+              <img src="https://cdn-icons-png.flaticon.com/512/3248/3248221.png" alt="تصميم">
               <h3>تطوير مهارات التصميم المتقدمة</h3>
             </div>
-            <div class="ica-feature">
-              <img src="https://via.placeholder.com/38x38/8B6A2B/FFFFFF?text=⭐" alt="جودة">
+            <div class="ica-feature ica-reveal">
+              <img src="https://cdn-icons-png.flaticon.com/512/3067/3067256.png" alt="جودة">
               <h3>تعلم متطلبات الجودة ومتطلبات التصدير</h3>
             </div>
-            <div class="ica-feature">
-              <img src="https://via.placeholder.com/38x38/8B6A2B/FFFFFF?text=💡" alt="أفكار">
+            <div class="ica-feature ica-reveal">
+              <img src="https://cdn-icons-png.flaticon.com/512/1055/1055666.png" alt="أفكار">
               <h3>تحويل أفكارك إلى منتج جاهز للسوق</h3>
             </div>
-            <div class="ica-feature">
-              <img src="https://via.placeholder.com/38x38/8B6A2B/FFFFFF?text=🌐" alt="شبكة">
+            <div class="ica-feature ica-reveal">
+              <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="شبكة">
               <h3>التواصل مع الخبراء وبناء العلاقات التجارية الفعّالة</h3>
             </div>
           </section>
 
           <!-- FIELDS -->
-          <div class="ica-section-title">مجالاتنا المستهدفة</div>
+          <div class="ica-section-title ica-reveal"><i class="fas fa-palette"></i> مجالاتنا المستهدفة</div>
           <section class="ica-grid ica-fields">
-            <div class="ica-field">
-              <div class="ica-img"><img src="https://via.placeholder.com/300x170/E9DFD4/8B6A2B?text=👗+الأزياء" alt="أزياء"></div>
-              <div class="ica-label">الأزياء والمنسوجات</div>
+            <div class="ica-field ica-reveal">
+              <div class="ica-img"><img src="./img/Kilimandcarpet.png" alt="كليم وسجاد"></div>
+              <div class="ica-label">كليم وسجاد</div>
             </div>
-            <div class="ica-field">
-              <div class="ica-img"><img src="https://via.placeholder.com/300x170/E9DFD4/8B6A2B?text=👜+جلديات" alt="جلديات"></div>
+            <div class="ica-field ica-reveal">
+              <div class="ica-img"><img src="./img/leather.png" alt="منتجات جلدية"></div>
               <div class="ica-label">المنتجات الجلدية الفاخرة والإكسسوارات</div>
             </div>
-            <div class="ica-field">
-              <div class="ica-img"><img src="https://via.placeholder.com/300x170/E9DFD4/8B6A2B?text=💎+حلي" alt="حلي"></div>
-              <div class="ica-label">الحُلي</div>
+            <div class="ica-field ica-reveal">
+              <div class="ica-img"><img src="./img/jewelry.jpeg" alt="حلي ومجوهرات"></div>
+              <div class="ica-label">الحُلي والمجوهرات</div>
+            </div>
+          </section>
+
+          <!-- GALLERY SECTION -->
+          <div class="ica-section-title ica-reveal"><i class="fas fa-images"></i> معرض أعمالنا</div>
+          <section class="ica-grid ica-gallery">
+            <div class="ica-gallery-item ica-reveal">
+              <div class="ica-img">
+                <img src="./img/jewelry.jpeg" alt="مجوهرات يدوية">
+              </div>
+              <div class="ica-label">مجوهرات يدوية الصنع</div>
+            </div>
+            <div class="ica-gallery-item ica-reveal">
+              <div class="ica-img">
+                <img src="./img/leather.png" alt="منتجات جلدية">
+              </div>
+              <div class="ica-label">منتجات جلدية عالية الجودة</div>
+            </div>
+            <div class="ica-gallery-item ica-reveal">
+              <div class="ica-img">
+                <img src="./img/Kilimandcarpet.png" alt="كليم تقليدي">
+              </div>
+              <div class="ica-label">كليم تقليدي بألوان زاهية</div>
+            </div>
+          </section>
+
+          <!-- CATEGORIES SECTION -->
+          <div class="ica-section-title ica-reveal"><i class="fas fa-th-large"></i> فئات المنتجات</div>
+          <section class="ica-grid ica-categories">
+            <div class="ica-category ica-reveal">
+              <div class="ica-img">
+                <img src="./img/pottery.png" alt="فخار وسيراميك">
+              </div>
+              <div class="ica-label">الفخار والسيراميك</div>
+            </div>
+            <div class="ica-category ica-reveal">
+              <div class="ica-img">
+                <img src="./img/jewelry.jpeg" alt="حرف يدوية تقليدية">
+              </div>
+              <div class="ica-label">الحرف اليدوية التقليدية</div>
             </div>
           </section>
 
           <!-- ACCREDITATION -->
-          <section class="ica-glass ica-band">
-            <h3>دورات تدريبية أوروبية معتمدة</h3>
-            <p>برامج تدريبية احترافية تعتمد على أفضل الممارسات الدولية لتأهيل المنتج للأسواق العالمية.</p>
+          <section class="ica-glass ica-band ica-reveal">
+            <h3><i class="fas fa-award"></i> دورات تدريبية أوروبية معتمدة</h3>
+            <p>برامج تدريبية احترافية تعتمد على أفضل الممارسات الدولية لتأهيل المنتج للأسواق العالمية. نقدم شهادات معترف بها دولياً تفتح أبواب الفرص أمام خريجينا.</p>
             <div class="ica-logos">
-              <img src="https://via.placeholder.com/80x28/FFFFFF/8B6A2B?text=Partner1" alt="شريك 1">
-              <img src="https://via.placeholder.com/80x28/FFFFFF/8B6A2B?text=Partner2" alt="شريك 2">
-              <img src="https://via.placeholder.com/80x28/FFFFFF/8B6A2B?text=Partner3" alt="شريك 3">
-              <img src="https://via.placeholder.com/80x28/FFFFFF/8B6A2B?text=Partner4" alt="شريك 4">
+              <img src="https://via.placeholder.com/100x36/FFFFFF/8B6A2B?text=EU-Cert" alt="شهادة أوروبية">
+              <img src="https://via.placeholder.com/100x36/FFFFFF/8B6A2B?text=Quality+" alt="شهادة جودة">
+              <img src="https://via.placeholder.com/100x36/FFFFFF/8B6A2B?text=Design+Pro" alt="تصميم محترف">
+              <img src="https://via.placeholder.com/100x36/FFFFFF/8B6A2B?text=Creative+" alt="إبداع معتمد">
             </div>
           </section>
 
           <!-- CTA -->
-          <div class="ica-cta">
-            <a class="ica-btn" href="#register">سجّل الآن</a>
+          <div class="ica-cta ica-reveal">
+            <a class="ica-btn" href="#register" id="registerBtn">
+              <span class="ica-loading" id="loadingIcon" style="display: none;"></span>
+              سجّل الآن <i class="fas fa-arrow-left"></i>
+            </a>
           </div>
 
-          <footer class="ica-footer">© <span id="ica-year"></span> International Creative Academy (ICA)</footer>
+          <footer class="ica-footer">
+            <div class="ica-social">
+              <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+              <a href="#" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>© <span id="ica-year"></span> International Creative Academy (ICA)</p>
+            <p>جميع الحقوق محفوظة | تواصل معنا: info@ica-academy.com | +966 12 345 6789</p>
+          </footer>
         </div>
       </div>
 
     <script>
+      // Set current year
       document.getElementById("ica-year").textContent = new Date().getFullYear();
+      
+      // Scroll reveal animation
+      const revealElements = document.querySelectorAll('.ica-reveal');
+      
+      const revealOnScroll = () => {
+        revealElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (elementTop < windowHeight - 100) {
+            element.classList.add('visible');
+          }
+        });
+      };
+      
+      // Initial check
+      revealOnScroll();
+      
+      // Check on scroll
+      window.addEventListener('scroll', revealOnScroll);
+      
+      // Button interaction
+      const registerBtn = document.getElementById('registerBtn');
+      const loadingIcon = document.getElementById('loadingIcon');
+      
+      registerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Show loading animation
+        loadingIcon.style.display = 'inline-block';
+        registerBtn.innerHTML = '<span class="ica-loading" id="loadingIcon"></span> جاري التوجيه...';
+        registerBtn.style.pointerEvents = 'none';
+        
+        // Simulate form submission
+        setTimeout(() => {
+          alert("شكراً لتسجيل اهتمامك! سيتم توجيهك إلى صفحة التسجيل قريباً.");
+          loadingIcon.style.display = 'none';
+          registerBtn.innerHTML = 'سجّل الآن <i class="fas fa-arrow-left"></i>';
+          registerBtn.style.pointerEvents = 'auto';
+          
+          // In a real scenario, you would redirect to the registration page
+          // window.location.href = "register.html";
+        }, 1500);
+      });
+      
+      // Add smooth hover effect to all interactive elements
+      const interactiveElements = document.querySelectorAll('.ica-feature, .ica-field, .ica-gallery-item, .ica-category, .ica-btn');
+      
+      interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+          this.style.zIndex = '10';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+          this.style.zIndex = '1';
+        });
+      });
     </script>
 </body>
 </html>

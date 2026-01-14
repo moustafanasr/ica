@@ -82,6 +82,155 @@
         box-shadow: var(--shadow-hover);
       }
 
+      /* SLIDER STYLES */
+      .ica-slider {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        border-radius: 24px;
+        overflow: hidden;
+        margin: 0 auto 40px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--stroke);
+      }
+
+      .ica-slides {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .ica-slide {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ica-slide.active {
+        opacity: 1;
+      }
+
+      .ica-slide img {
+        width: 100%;
+        height: 100%;
+        /* object-fit: cover; */
+        object-position: center;
+      }
+
+      .slide-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to left, rgba(43, 35, 32, 0.7), rgba(43, 35, 32, 0.3));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 20px;
+      }
+
+      .slide-title {
+        font-size: 42px;
+        font-weight: 900;
+        margin-bottom: 15px;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+      }
+
+      .slide-subtitle {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        max-width: 700px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+
+      .slider-controls {
+        position: absolute;
+        bottom: 30px;
+        right: 50%;
+        transform: translateX(50%);
+        display: flex;
+        gap: 12px;
+        z-index: 10;
+      }
+
+      .slider-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: var(--transition);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .slider-dot.active {
+        background-color: var(--gold);
+        transform: scale(1.2);
+        border-color: white;
+      }
+
+      .slider-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.85);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        color: var(--gold-dark);
+        font-size: 22px;
+        border: 2px solid rgba(185, 146, 74, 0.3);
+        transition: var(--transition);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .slider-nav:hover {
+        background-color: white;
+        color: var(--gold-dark);
+        transform: translateY(-50%) scale(1.1);
+        border-color: var(--gold);
+      }
+
+      .slider-prev {
+        right: 20px;
+      }
+
+      .slider-next {
+        left: 20px;
+      }
+
+      .slide-counter {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        z-index: 10;
+        backdrop-filter: blur(4px);
+      }
+
       .ica-header {
         padding: 20px 0 10px;
         position: relative;
@@ -555,6 +704,18 @@
       }
 
       @media (max-width: 1024px) {
+        .ica-slider {
+          height: 400px;
+        }
+        
+        .slide-title {
+          font-size: 32px;
+        }
+        
+        .slide-subtitle {
+          font-size: 18px;
+        }
+        
         .ica-features {
           grid-template-columns: repeat(2, 1fr);
         }
@@ -580,6 +741,29 @@
       }
 
       @media (max-width: 768px) {
+        .ica-slider {
+          height: 350px;
+        }
+        
+        .slide-title {
+          font-size: 26px;
+        }
+        
+        .slide-subtitle {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+        
+        .slider-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
+        
+        .slide-overlay {
+          padding: 15px;
+        }
+        
         .ica-features {
           grid-template-columns: 1fr;
         }
@@ -612,6 +796,40 @@
       }
 
       @media (max-width: 480px) {
+        .ica-slider {
+          height: 280px;
+          border-radius: 16px;
+        }
+        
+        .slide-title {
+          font-size: 22px;
+        }
+        
+        .slide-subtitle {
+          font-size: 14px;
+        }
+        
+        .slider-nav {
+          width: 36px;
+          height: 36px;
+          font-size: 16px;
+        }
+        
+        .slider-prev {
+          right: 10px;
+        }
+        
+        .slider-next {
+          left: 10px;
+        }
+        
+        .slide-counter {
+          bottom: 20px;
+          left: 20px;
+          font-size: 12px;
+          padding: 6px 12px;
+        }
+
         .ica-brand-ar {
           font-size: 22px;
         }
@@ -676,7 +894,79 @@
 <body>
     <div class="ica-container">
         <div class="ica-wrap">
-          <!-- HERO -->
+          <!-- SLIDER HERO SECTION -->
+          <div class="ica-slider ica-reveal">
+            <div class="ica-slides">
+              <!-- Slide 1 -->
+              <div class="ica-slide active">
+                <img src="./img/PhotoSlider1.jpeg" alt="الأكاديمية الدولية للإبداع - تدريب إبداعي">
+                <div class="slide-overlay">
+                  <h2 class="slide-title">الأكاديمية الدولية للإبداع</h2>
+                  <p class="slide-subtitle">حيث يلتقي الإبداع بالمعايير العالمية لصناعة منتجات تنافسية</p>
+                </div>
+              </div>
+              
+              <!-- Slide 2 -->
+              <div class="ica-slide">
+                <img src="./img/PhotoSlider2.jpeg" alt="تدريب عملي على الحرف اليدوية">
+                <div class="slide-overlay">
+                  <h2 class="slide-title">تدريب عملي متخصص</h2>
+                  <p class="slide-subtitle">برامج تدريبية تطبيقية تحت إشراف خبراء دوليين</p>
+                </div>
+              </div>
+              
+              <!-- Slide 3 -->
+              <div class="ica-slide">
+                <img src="./img/PhotoSlider3.jpeg" alt="مجوهرات وحلي يدوية الصنع">
+                <div class="slide-overlay">
+                  <h2 class="slide-title">مجوهرات وحلي يدوية الصنع</h2>
+                  <p class="slide-subtitle">تعلم صناعة المجوهرات بأساليب تقليدية وعصرية</p>
+                </div>
+              </div>
+              
+              <!-- Slide 4 -->
+              <div class="ica-slide">
+                <img src="./img/PhotoSlider4.jpeg" alt="منتجات جلدية فاخرة">
+                <div class="slide-overlay">
+                  <h2 class="slide-title">منتجات جلدية فاخرة</h2>
+                  <p class="slide-subtitle">تصميم وإنتاج منتجات جلدية تلبي معايير الجودة العالمية</p>
+                </div>
+              </div>
+              
+              <!-- Slide 5 -->
+              <div class="ica-slide">
+                <img src="./img/PhotoSlider5.jpeg" alt="كليم وسجاد تقليدي">
+                <div class="slide-overlay">
+                  <h2 class="slide-title">كليم وسجاد تقليدي</h2>
+                  <p class="slide-subtitle">إحياء التراث اليدوي بتقنيات عصرية وتصاميم مبتكرة</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div class="slider-nav slider-prev">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="slider-nav slider-next">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            
+            <!-- Dots Navigation -->
+            <div class="slider-controls">
+              <div class="slider-dot active" data-slide="0"></div>
+              <div class="slider-dot" data-slide="1"></div>
+              <div class="slider-dot" data-slide="2"></div>
+              <div class="slider-dot" data-slide="3"></div>
+              <div class="slider-dot" data-slide="4"></div>
+            </div>
+            
+            <!-- Slide Counter -->
+            <div class="slide-counter">
+              <span id="current-slide">1</span> / <span id="total-slides">5</span>
+            </div>
+          </div>
+
+          <!-- HERO HEADER -->
           <header class="ica-header ica-center ica-reveal">
             <img class="ica-logo" src="./img/logo.jpeg" alt="شعار الأكاديمية الدولية للإبداع">
             <div class="ica-brand-en">INTERNATIONAL CREATIVE ACADEMY</div>
@@ -811,6 +1101,118 @@
     <script>
       // Set current year
       document.getElementById("ica-year").textContent = new Date().getFullYear();
+      
+      // SLIDER FUNCTIONALITY
+      class Slider {
+        constructor() {
+          this.slides = document.querySelectorAll('.ica-slide');
+          this.dots = document.querySelectorAll('.slider-dot');
+          this.prevBtn = document.querySelector('.slider-prev');
+          this.nextBtn = document.querySelector('.slider-next');
+          this.currentSlide = 0;
+          this.totalSlides = this.slides.length;
+          this.autoSlideInterval = null;
+          this.autoSlideDelay = 5000; // 5 seconds
+          
+          this.init();
+        }
+        
+        init() {
+          // Update slide counter
+          document.getElementById('total-slides').textContent = this.totalSlides;
+          this.updateSlideCounter();
+          
+          // Add event listeners
+          this.prevBtn.addEventListener('click', () => this.prevSlide());
+          this.nextBtn.addEventListener('click', () => this.nextSlide());
+          
+          // Add dot navigation
+          this.dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+              const slideIndex = parseInt(e.target.getAttribute('data-slide'));
+              this.goToSlide(slideIndex);
+            });
+          });
+          
+          // Start auto slide
+          this.startAutoSlide();
+          
+          // Pause auto slide on hover
+          const slider = document.querySelector('.ica-slider');
+          slider.addEventListener('mouseenter', () => this.stopAutoSlide());
+          slider.addEventListener('mouseleave', () => this.startAutoSlide());
+          
+          // Keyboard navigation
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Right') {
+              this.nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+              this.prevSlide();
+            }
+          });
+        }
+        
+        showSlide(index) {
+          // Hide all slides
+          this.slides.forEach(slide => slide.classList.remove('active'));
+          this.dots.forEach(dot => dot.classList.remove('active'));
+          
+          // Show current slide
+          this.slides[index].classList.add('active');
+          this.dots[index].classList.add('active');
+          
+          // Update current slide index
+          this.currentSlide = index;
+          
+          // Update slide counter
+          this.updateSlideCounter();
+        }
+        
+        nextSlide() {
+          let nextIndex = this.currentSlide + 1;
+          if (nextIndex >= this.totalSlides) {
+            nextIndex = 0;
+          }
+          this.showSlide(nextIndex);
+        }
+        
+        prevSlide() {
+          let prevIndex = this.currentSlide - 1;
+          if (prevIndex < 0) {
+            prevIndex = this.totalSlides - 1;
+          }
+          this.showSlide(prevIndex);
+        }
+        
+        goToSlide(index) {
+          if (index >= 0 && index < this.totalSlides) {
+            this.showSlide(index);
+          }
+        }
+        
+        updateSlideCounter() {
+          document.getElementById('current-slide').textContent = this.currentSlide + 1;
+        }
+        
+        startAutoSlide() {
+          this.stopAutoSlide(); // Clear any existing interval
+          this.autoSlideInterval = setInterval(() => {
+            this.nextSlide();
+          }, this.autoSlideDelay);
+        }
+        
+        stopAutoSlide() {
+          if (this.autoSlideInterval) {
+            clearInterval(this.autoSlideInterval);
+            this.autoSlideInterval = null;
+          }
+        }
+      }
+      
+      // Initialize slider when DOM is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        new Slider();
+      });
       
       // Scroll reveal animation
       const revealElements = document.querySelectorAll('.ica-reveal');

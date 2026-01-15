@@ -1,1975 +1,2030 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="الأكاديمية الدولية للإبداع - منصة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة للمنافسة العالمية">
-  <title>الأكاديمية الدولية للإبداع (ICA) - حيث يلتقي الإبداع بالمعايير العالمية</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <style>
-    :root {
-      --bg: #F3E8DD;
-      --ink: #2B2320;
-      --muted: #6A5B52;
-      --gold: #B9924A;
-      --gold-light: #E7D2A3;
-      --gold-dark: #8B6A2B;
-      --stroke: rgba(120, 90, 60, .25);
-      --card: rgba(255, 255, 255, .85);
-      --shadow: 0 20px 40px rgba(0, 0, 0, .1);
-      --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
-      --radius: 24px;
-      --radius-sm: 16px;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      --max-width: 1400px;
-      --swiper-theme-color: #B9924A;
-      --swiper-navigation-size: 24px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-      color: var(--ink);
-      background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
-      min-height: 100vh;
-      line-height: 1.7;
-    }
-
-    /* ========== TYPOGRAPHY ========== */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 800;
-      line-height: 1.2;
-    }
-
-    .text-gradient {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* ========== NAVIGATION ========== */
-    .navbar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-      padding: 1.25rem 0;
-      transition: var(--transition);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .navbar.scrolled {
-      padding: 0.75rem 0;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .nav-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-    }
-
-    .nav-logo-img {
-      width: 150px;
-      height: 60px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid var(--gold-light);
-      box-shadow: 0 8px 20px rgba(139, 106, 43, 0.15);
-    }
-
-    .nav-logo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .logo-text h2 {
-      font-size: 1.5rem;
-      color: var(--gold-dark);
-      margin-bottom: 0.25rem;
-    }
-
-    .logo-text span {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      position: relative;
-      padding: 0.5rem 0;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-links a i {
-      font-size: 0.875rem;
-      color: var(--gold);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--gold-dark);
-    }
-
-    .nav-cta .btn {
-      padding: 0.75rem 1.75rem;
-      font-size: 0.95rem;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0.5rem;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: var(--gold-dark);
-      margin: 3px 0;
-      transition: var(--transition);
-      border-radius: 2px;
-    }
-
-    /* ========== HERO SECTION ========== */
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding-top: 100px;
-      background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
-                  radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%),
-                  radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.1) 0%, transparent 50%);
-    }
-
-    .hero-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      min-height: calc(100vh - 100px);
-    }
-
-    .hero-text {
-      padding-left: 2rem;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(185, 146, 74, 0.1);
-      color: var(--gold-dark);
-      padding: 0.5rem 1.25rem;
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(185, 146, 74, 0.2);
-    }
-
-    .hero-badge i {
-      color: var(--gold);
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.4;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-visual {
-      position: relative;
-    }
-
-    .hero-card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold-light), var(--gold));
-    }
-
-    .floating-elements {
-      position: relative;
-      height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .floating-element {
-      position: absolute;
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(5px);
-      animation: float 6s ease-in-out infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      text-align: center;
-      max-width: 180px;
-    }
-
-    .floating-element i {
-      font-size: 2rem;
-      color: var(--gold);
-    }
-
-    .floating-element span {
-      font-weight: 700;
-      color: var(--gold-dark);
-      font-size: 0.875rem;
-    }
-
-    .floating-element:nth-child(1) {
-      top: 0;
-      right: 0;
-      animation-delay: 0s;
-    }
-
-    .floating-element:nth-child(2) {
-      bottom: 0;
-      left: 0;
-      animation-delay: 2s;
-    }
-
-    .floating-element:nth-child(3) {
-      top: 50%;
-      left: 20%;
-      transform: translateY(-50%);
-      animation-delay: 4s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(2deg); }
-    }
-
-    /* ========== BUTTONS ========== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2.5rem;
-      border-radius: 12px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      gap: 0.75rem;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
-      border: 1px solid rgba(139, 106, 43, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--gold-dark);
-      border: 2px solid var(--gold-light);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      border-color: var(--gold);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--gold-dark);
-      border: 2px solid var(--gold-light);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(185, 146, 74, 0.1);
-      transform: translateY(-3px);
-    }
-
-    /* ========== SECTIONS ========== */
-    .section {
-      padding: 6rem 0;
-      position: relative;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      position: relative;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--gold-dark);
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      right: 50%;
-      transform: translateX(50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
-      border-radius: 2px;
-    }
-
-    .section-subtitle {
-      font-size: 1.125rem;
-      color: var(--muted);
-      max-width: 700px;
-      margin: 1.5rem auto 0;
-    }
-
-    /* ========== ABOUT SECTION ========== */
-    .about-content {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-text {
-      text-align: right;
-    }
-
-    .about-text h3 {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      color: var(--gold-dark);
-    }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-
-    .about-features {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .about-feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .about-feature i {
-      color: var(--gold);
-      font-size: 1.25rem;
-      margin-top: 0.25rem;
-    }
-
-    /* ========== SWIPER SLIDER ========== */
-    .swiper-slider-container {
-      position: relative;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      height: 500px;
-    }
-
-    .swiper-slider-container .swiper {
-      width: 100%;
-      height: 100%;
-      border-radius: var(--radius);
-    }
-
-    .swiper-slide {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-    }
-
-    .swiper-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .swiper-slide-caption {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background: linear-gradient(to top, rgba(43, 35, 32, 0.85), transparent);
-      padding: 2rem;
-      color: white;
-      z-index: 2;
-    }
-
-    .swiper-slide-caption h4 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    .swiper-slide-caption p {
-      font-size: 1rem;
-      opacity: 0.9;
-      max-width: 600px;
-    }
-
-    /* Swiper Navigation Buttons */
-    .swiper-button-next,
-    .swiper-button-prev {
-      width: 50px;
-      height: 50px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 50%;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--stroke);
-      transition: var(--transition);
-    }
-
-    .swiper-button-next:after,
-    .swiper-button-prev:after {
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: var(--gold-dark);
-    }
-
-    .swiper-button-next:hover,
-    .swiper-button-prev:hover {
-      background: white;
-      transform: scale(1.1);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    .swiper-button-prev {
-      right: 20px;
-      left: auto;
-    }
-
-    .swiper-button-next {
-      left: 20px;
-      right: auto;
-    }
-
-    /* Swiper Pagination */
-    .swiper-pagination-bullet {
-      width: 12px;
-      height: 12px;
-      background: rgba(255, 255, 255, 0.5);
-      opacity: 1;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: var(--transition);
-    }
-
-    .swiper-pagination-bullet-active {
-      background: var(--gold);
-      transform: scale(1.2);
-    }
-
-    /* ========== FEATURES ========== */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .feature-card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-sm);
-      padding: 2.5rem 2rem;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold-light), var(--gold));
-      transition: var(--transition);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .feature-card:hover::before {
-      height: 100%;
-      opacity: 0.05;
-    }
-
-    .feature-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, rgba(231, 210, 163, 0.2), rgba(185, 146, 74, 0.1));
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.75rem;
-      color: var(--gold);
-      border: 1px solid rgba(185, 146, 74, 0.2);
-    }
-
-    .feature-title {
-      font-size: 1.375rem;
-      margin-bottom: 1rem;
-      color: var(--ink);
-    }
-
-    .feature-description {
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    /* ========== PROGRAMS ========== */
-    .programs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .program-card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: var(--transition);
-      position: relative;
-      box-shadow: var(--shadow);
-    }
-
-    .program-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .program-image {
-      height: 280px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .program-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .program-card:hover .program-image img {
-      transform: scale(1.1);
-    }
-
-    .program-overlay {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background: linear-gradient(to top, rgba(43, 35, 32, 0.9), transparent);
-      padding: 2rem;
-    }
-
-    .program-category {
-      display: inline-block;
-      background: var(--gold);
-      color: white;
-      padding: 0.375rem 1.25rem;
-      border-radius: 50px;
-      font-weight: 800;
-      font-size: 0.875rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 5px 15px rgba(185, 146, 74, 0.3);
-    }
-
-    .program-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    .program-content {
-      padding: 2rem;
-    }
-
-    .program-description {
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-
-    /* ========== STATS ========== */
-    .stats-section {
-      background: linear-gradient(135deg, rgba(231, 210, 163, 0.3), rgba(185, 146, 74, 0.15));
-      border-top: 1px solid var(--stroke);
-      border-bottom: 1px solid var(--stroke);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .stat-card {
-      text-align: center;
-      padding: 2rem;
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow);
-    }
-
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--gold-dark);
-      margin-bottom: 0.5rem;
-      line-height: 1;
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 1.125rem;
-      font-weight: 700;
-    }
-
-    /* ========== TESTIMONIALS ========== */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .testimonial-card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius-sm);
-      padding: 2.5rem 2rem;
-      position: relative;
-      box-shadow: var(--shadow);
-    }
-
-    .testimonial-card::before {
-      content: '"';
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 4rem;
-      color: rgba(185, 146, 74, 0.2);
-      font-family: serif;
-      line-height: 1;
-    }
-
-    .testimonial-content {
-      margin-bottom: 2rem;
-      font-style: italic;
-      line-height: 1.8;
-      color: var(--ink);
-      position: relative;
-      z-index: 1;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .author-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      font-size: 1.25rem;
-      box-shadow: 0 5px 15px rgba(185, 146, 74, 0.3);
-    }
-
-    .author-info h4 {
-      font-size: 1.125rem;
-      margin-bottom: 0.25rem;
-      color: var(--ink);
-    }
-
-    .author-info p {
-      color: var(--muted);
-      font-size: 0.875rem;
-    }
-
-    /* ========== ACCREDITATION ========== */
-    .accreditation-section {
-      background: linear-gradient(135deg, rgba(231, 210, 163, 0.2), rgba(255, 255, 255, 0.8));
-      border-radius: var(--radius);
-      margin: 4rem auto;
-      max-width: var(--max-width);
-      padding: 4rem 2rem;
-      text-align: center;
-      border: 1px solid var(--stroke);
-      box-shadow: var(--shadow);
-    }
-
-    .accreditation-logos {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      margin-top: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .accreditation-logo {
-      width: 150px;
-      height: 80px;
-      background: white;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--stroke);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      transition: var(--transition);
-    }
-
-    .accreditation-logo:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    /* ========== CTA ========== */
-    .cta-section {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-      margin: 4rem auto;
-      max-width: var(--max-width);
-      box-shadow: var(--shadow);
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-    }
-
-    .cta-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 5rem 2rem;
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .cta-title {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: white;
-      text-shadow: 0 2px 10px rgba(43, 35, 32, 0.3);
-    }
-
-    .cta-subtitle {
-      font-size: 1.25rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 3rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 0 1px 5px rgba(43, 35, 32, 0.2);
-    }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
-      color: var(--gold-light);
-      padding-top: 4rem;
-      margin-top: 4rem;
-      border-top: 4px solid var(--gold);
-    }
-
-    .footer-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem 2rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-column h3 {
-      font-size: 1.375rem;
-      margin-bottom: 1.5rem;
-      color: white;
-      position: relative;
-      padding-bottom: 0.75rem;
-    }
-
-    .footer-column h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 50px;
-      height: 2px;
-      background: var(--gold);
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.875rem;
-    }
-
-    .footer-links a {
-      color: var(--gold-light);
-      text-decoration: none;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .footer-links a:hover {
-      color: white;
-      transform: translateX(-5px);
-    }
-
-    .footer-links a i {
-      font-size: 0.75rem;
-      color: var(--gold);
-    }
-
-    .footer-contact p {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      color: var(--gold-light);
-    }
-
-    .footer-contact i {
-      color: var(--gold);
-      margin-top: 0.25rem;
-      font-size: 1rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .social-links a {
-      width: 44px;
-      height: 44px;
-      background: rgba(185, 146, 74, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-      text-decoration: none;
-      transition: var(--transition);
-      border: 1px solid rgba(185, 146, 74, 0.3);
-    }
-
-    .social-links a:hover {
-      background: var(--gold);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(185, 146, 74, 0.3);
-    }
-
-    .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      text-align: center;
-      color: rgba(231, 210, 163, 0.7);
-      font-size: 0.875rem;
-    }
-
-    .footer-bottom p {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-legal {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-
-    .footer-legal a {
-      color: rgba(231, 210, 163, 0.7);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .footer-legal a:hover {
-      color: var(--gold-light);
-    }
-
-    /* ========== RESPONSIVE DESIGN ========== */
-    @media (max-width: 1024px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        text-align: center;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="الأكاديمية الدولية للإبداع - منصة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة للمنافسة العالمية">
+    <title>الأكاديمية الدولية للإبداع (ICA) - حيث يلتقي الإبداع بالمعايير العالمية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+      :root {
+        --bg: #F3E8DD;
+        --ink: #2B2320;
+        --muted: #6A5B52;
+        --gold: #B9924A;
+        --gold-light: #E7D2A3;
+        --gold-dark: #8B6A2B;
+        --stroke: rgba(120, 90, 60, .25);
+        --card: rgba(255, 255, 255, .85);
+        --shadow: 0 20px 40px rgba(0, 0, 0, .1);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
+        --radius: 24px;
+        --radius-sm: 16px;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --max-width: 1400px;
+        --swiper-theme-color: #B9924A;
+        --swiper-navigation-size: 24px;
       }
 
-      .hero-text {
-        padding-left: 0;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      .hero-title {
-        font-size: 2.75rem;
+      html {
+        scroll-behavior: smooth;
       }
 
-      .section-title {
-        font-size: 2rem;
+      body {
+        font-family: "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+        color: var(--ink);
+        background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
+        min-height: 100vh;
+        line-height: 1.7;
       }
 
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+      /* ========== TYPOGRAPHY ========== */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 800;
+        line-height: 1.2;
       }
 
-      .about-text {
-        text-align: center;
+      .text-gradient {
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
-      .swiper-slider-container {
-        height: 400px;
+      /* ========== NAVIGATION ========== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--stroke);
+        padding: 1.25rem 0;
+        transition: var(--transition);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
       }
 
-      .swiper-slide-caption {
-        padding: 1.5rem;
+      .navbar.scrolled {
+        padding: 0.75rem 0;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       }
 
-      .swiper-slide-caption h4 {
-        font-size: 1.25rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
+      .nav-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+      }
+
+      .nav-logo-img {
+        width: 150px;
+        height: 60px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid var(--gold-light);
+        box-shadow: 0 8px 20px rgba(139, 106, 43, 0.15);
+      }
+
+      .nav-logo-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .logo-text h2 {
+        font-size: 1.5rem;
+        color: var(--gold-dark);
+        margin-bottom: 0.25rem;
+      }
+
+      .logo-text span {
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-weight: 600;
       }
 
       .nav-menu {
-        position: fixed;
-        top: 80px;
-        right: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 3rem 2rem;
-        transition: var(--transition);
-        border-top: 1px solid var(--stroke);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-menu.active {
-        right: 0;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
       }
 
       .nav-links {
-        flex-direction: column;
-        width: 100%;
-        text-align: right;
-        gap: 0.75rem;
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
       }
 
-      .nav-cta {
+      .nav-links a {
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-links a i {
+        font-size: 0.875rem;
+        color: var(--gold);
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
         width: 100%;
-        margin-top: 2rem;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--gold-dark);
       }
 
       .nav-cta .btn {
-        width: 100%;
+        padding: 0.75rem 1.75rem;
+        font-size: 0.95rem;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--gold-dark);
+        margin: 3px 0;
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+
+      /* ========== HERO SECTION ========== */
+      .hero {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+        background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.1) 0%, transparent 50%);
+      }
+
+      .hero-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        min-height: calc(100vh - 100px);
+      }
+
+      .hero-text {
+        padding-left: 2rem;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(185, 146, 74, 0.1);
+        color: var(--gold-dark);
+        padding: 0.5rem 1.25rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(185, 146, 74, 0.2);
+      }
+
+      .hero-badge i {
+        color: var(--gold);
       }
 
       .hero-title {
-        font-size: 2.25rem;
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.4;
       }
 
-      .section {
-        padding: 4rem 0;
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--muted);
+        margin-bottom: 2.5rem;
+        line-height: 1.8;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .hero-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        padding: 2.5rem;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold-light), var(--gold));
       }
 
       .floating-elements {
-        height: 300px;
+        position: relative;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .floating-element {
-        max-width: 150px;
-        padding: 1rem;
+        position: absolute;
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(5px);
+        animation: float 6s ease-in-out infinite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        text-align: center;
+        max-width: 180px;
       }
 
+      .floating-element i {
+        font-size: 2rem;
+        color: var(--gold);
+      }
+
+      .floating-element span {
+        font-weight: 700;
+        color: var(--gold-dark);
+        font-size: 0.875rem;
+      }
+
+      .floating-element:nth-child(1) {
+        top: 0;
+        right: 0;
+        animation-delay: 0s;
+      }
+
+      .floating-element:nth-child(2) {
+        bottom: 0;
+        left: 0;
+        animation-delay: 2s;
+      }
+
+      .floating-element:nth-child(3) {
+        top: 50%;
+        left: 20%;
+        transform: translateY(-50%);
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+
+        50% {
+          transform: translateY(-20px) rotate(2deg);
+        }
+      }
+
+      /* ========== BUTTONS ========== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        gap: 0.75rem;
+        font-size: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
+        border: 1px solid rgba(139, 106, 43, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--gold-dark);
+        border: 2px solid var(--gold-light);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-secondary:hover {
+        background: white;
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border-color: var(--gold);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--gold-dark);
+        border: 2px solid var(--gold-light);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(185, 146, 74, 0.1);
+        transform: translateY(-3px);
+      }
+
+      /* ========== SECTIONS ========== */
+      .section {
+        padding: 6rem 0;
+        position: relative;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        position: relative;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--gold-dark);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        border-radius: 2px;
+      }
+
+      .section-subtitle {
+        font-size: 1.125rem;
+        color: var(--muted);
+        max-width: 700px;
+        margin: 1.5rem auto 0;
+      }
+
+      /* ========== ABOUT SECTION ========== */
+      .about-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text {
+        text-align: right;
+      }
+
+      .about-text h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        color: var(--gold-dark);
+      }
+
+      .about-text p {
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .about-features {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .about-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .about-feature i {
+        color: var(--gold);
+        font-size: 1.25rem;
+        margin-top: 0.25rem;
+      }
+
+      /* ========== SWIPER SLIDER ========== */
       .swiper-slider-container {
-        height: 350px;
+        position: relative;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        height: 500px;
       }
 
+      .swiper-slider-container .swiper {
+        width: 100%;
+        height: 100%;
+        border-radius: var(--radius);
+      }
+
+      .swiper-slide {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+      }
+
+      .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .swiper-slide-caption {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: linear-gradient(to top, rgba(43, 35, 32, 0.85), transparent);
+        padding: 2rem;
+        color: white;
+        z-index: 2;
+      }
+
+      .swiper-slide-caption h4 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: white;
+      }
+
+      .swiper-slide-caption p {
+        font-size: 1rem;
+        opacity: 0.9;
+        max-width: 600px;
+      }
+
+      /* Swiper Navigation Buttons */
       .swiper-button-next,
       .swiper-button-prev {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--stroke);
+        transition: var(--transition);
       }
 
       .swiper-button-next:after,
       .swiper-button-prev:after {
-        font-size: 1rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--gold-dark);
       }
 
-      .swiper-slide-caption h4 {
-        font-size: 1.125rem;
+      .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        background: white;
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       }
 
-      .swiper-slide-caption p {
-        font-size: 0.875rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-container {
-        padding: 0 1rem;
+      .swiper-button-prev {
+        right: 20px;
+        left: auto;
       }
 
-      .hero-container {
-        padding: 1rem;
+      .swiper-button-next {
+        left: 20px;
+        right: auto;
       }
 
-      .hero-title {
-        font-size: 1.875rem;
+      /* Swiper Pagination */
+      .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: var(--transition);
       }
 
-      .hero-subtitle {
-        font-size: 1rem;
+      .swiper-pagination-bullet-active {
+        background: var(--gold);
+        transform: scale(1.2);
       }
 
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .section-title {
-        font-size: 1.75rem;
-      }
-
-      .features-grid,
-      .programs-grid,
-      .stats-grid,
-      .testimonials-grid {
-        padding: 0 1rem;
-      }
-
-      .accreditation-logos {
-        gap: 1.5rem;
-      }
-
-      .accreditation-logo {
-        width: 120px;
-        height: 60px;
-      }
-
-      .footer-grid {
+      /* ========== FEATURES ========== */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
       }
 
-      .footer-legal {
-        flex-direction: column;
+      .feature-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius-sm);
+        padding: 2.5rem 2rem;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold-light), var(--gold));
+        transition: var(--transition);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .feature-card:hover::before {
+        height: 100%;
+        opacity: 0.05;
+      }
+
+      .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, rgba(231, 210, 163, 0.2), rgba(185, 146, 74, 0.1));
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        color: var(--gold);
+        border: 1px solid rgba(185, 146, 74, 0.2);
+      }
+
+      .feature-title {
+        font-size: 1.375rem;
+        margin-bottom: 1rem;
+        color: var(--ink);
+      }
+
+      .feature-description {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      /* ========== PROGRAMS ========== */
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .program-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: var(--transition);
+        position: relative;
+        box-shadow: var(--shadow);
+      }
+
+      .program-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .program-image {
+        height: 280px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .program-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .program-card:hover .program-image img {
+        transform: scale(1.1);
+      }
+
+      .program-overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: linear-gradient(to top, rgba(43, 35, 32, 0.9), transparent);
+        padding: 2rem;
+      }
+
+      .program-category {
+        display: inline-block;
+        background: var(--gold);
+        color: white;
+        padding: 0.375rem 1.25rem;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 5px 15px rgba(185, 146, 74, 0.3);
+      }
+
+      .program-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: white;
+      }
+
+      .program-content {
+        padding: 2rem;
+      }
+
+      .program-description {
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      /* ========== STATS ========== */
+      .stats-section {
+        background: linear-gradient(135deg, rgba(231, 210, 163, 0.3), rgba(185, 146, 74, 0.15));
+        border-top: 1px solid var(--stroke);
+        border-bottom: 1px solid var(--stroke);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--gold-dark);
+        margin-bottom: 0.5rem;
+        line-height: 1;
+      }
+
+      .stat-label {
+        color: var(--muted);
+        font-size: 1.125rem;
+        font-weight: 700;
+      }
+
+      /* ========== TESTIMONIALS ========== */
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .testimonial-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius-sm);
+        padding: 2.5rem 2rem;
+        position: relative;
+        box-shadow: var(--shadow);
+      }
+
+      .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 4rem;
+        color: rgba(185, 146, 74, 0.2);
+        font-family: serif;
+        line-height: 1;
+      }
+
+      .testimonial-content {
+        margin-bottom: 2rem;
+        font-style: italic;
+        line-height: 1.8;
+        color: var(--ink);
+        position: relative;
+        z-index: 1;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
         gap: 1rem;
       }
 
-      .swiper-slider-container {
-        height: 300px;
+      .author-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 800;
+        font-size: 1.25rem;
+        box-shadow: 0 5px 15px rgba(185, 146, 74, 0.3);
       }
 
-      .swiper-slide-caption {
-        padding: 1rem;
+      .author-info h4 {
+        font-size: 1.125rem;
+        margin-bottom: 0.25rem;
+        color: var(--ink);
       }
 
-      .swiper-button-next,
-      .swiper-button-prev {
-        display: none;
+      .author-info p {
+        color: var(--muted);
+        font-size: 0.875rem;
       }
-    }
 
-    /* ========== UTILITIES ========== */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+      /* ========== ACCREDITATION ========== */
+      .accreditation-section {
+        background: linear-gradient(135deg, rgba(231, 210, 163, 0.2), rgba(255, 255, 255, 0.8));
+        border-radius: var(--radius);
+        margin: 4rem auto;
+        max-width: var(--max-width);
+        padding: 4rem 2rem;
+        text-align: center;
+        border: 1px solid var(--stroke);
+        box-shadow: var(--shadow);
+      }
 
-    .text-center {
-      text-align: center;
-    }
+      .accreditation-logos {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+      }
 
-    .mb-1 { margin-bottom: 1rem; }
-    .mb-2 { margin-bottom: 2rem; }
-    .mb-3 { margin-bottom: 3rem; }
-    .mb-4 { margin-bottom: 4rem; }
+      .accreditation-logo {
+        width: 150px;
+        height: 80px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--stroke);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
 
-    .mt-1 { margin-top: 1rem; }
-    .mt-2 { margin-top: 2rem; }
-    .mt-3 { margin-top: 3rem; }
-    .mt-4 { margin-top: 4rem; }
-  </style>
-</head>
+      .accreditation-logo:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
 
-<body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo">
-        <div class="nav-logo-img">
-          <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع">
+      /* ========== CTA ========== */
+      .cta-section {
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+        margin: 4rem auto;
+        max-width: var(--max-width);
+        box-shadow: var(--shadow);
+      }
+
+      .cta-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+
+      .cta-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 5rem 2rem;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .cta-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        text-shadow: 0 2px 10px rgba(43, 35, 32, 0.3);
+      }
+
+      .cta-subtitle {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 3rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 0 1px 5px rgba(43, 35, 32, 0.2);
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
+        color: var(--gold-light);
+        padding-top: 4rem;
+        margin-top: 4rem;
+        border-top: 4px solid var(--gold);
+      }
+
+      .footer-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem 2rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-column h3 {
+        font-size: 1.375rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        position: relative;
+        padding-bottom: 0.75rem;
+      }
+
+      .footer-column h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--gold);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.875rem;
+      }
+
+      .footer-links a {
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(-5px);
+      }
+
+      .footer-links a i {
+        font-size: 0.75rem;
+        color: var(--gold);
+      }
+
+      .footer-contact p {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        color: var(--gold-light);
+      }
+
+      .footer-contact i {
+        color: var(--gold);
+        margin-top: 0.25rem;
+        font-size: 1rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-links a {
+        width: 44px;
+        height: 44px;
+        background: rgba(185, 146, 74, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: var(--transition);
+        border: 1px solid rgba(185, 146, 74, 0.3);
+      }
+
+      .social-links a:hover {
+        background: var(--gold);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(185, 146, 74, 0.3);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        color: rgba(231, 210, 163, 0.7);
+        font-size: 0.875rem;
+      }
+
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-legal {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .footer-legal a {
+        color: rgba(231, 210, 163, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-legal a:hover {
+        color: var(--gold-light);
+      }
+
+      /* ========== RESPONSIVE DESIGN ========== */
+      @media (max-width: 1024px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          text-align: center;
+        }
+
+        .hero-text {
+          padding-left: 0;
+        }
+
+        .hero-title {
+          font-size: 2.75rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .about-text {
+          text-align: center;
+        }
+
+        .swiper-slider-container {
+          height: 400px;
+        }
+
+        .swiper-slide-caption {
+          padding: 1.5rem;
+        }
+
+        .swiper-slide-caption h4 {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: fixed;
+          top: 130px;
+          right: -100%;
+          width: 100%;
+          height: calc(100vh - 130px);
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          justify-content: flex-start;
+          padding: 3rem 2rem;
+          transition: var(--transition);
+          border-top: 3px solid var(--stroke);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu.active {
+          right: 0;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          width: 100%;
+          text-align: right;
+          gap: 0.75rem;
+        }
+
+        .nav-cta {
+          width: 100%;
+          margin-top: 2rem;
+        }
+
+        .nav-cta .btn {
+          width: 100%;
+        }
+
+        .hero {
+          padding-top: 150px;
+        }
+
+        .hero-title {
+          font-size: 2.25rem;
+        }
+
+        .section {
+          padding: 4rem 0;
+        }
+
+        .floating-elements {
+          height: 300px;
+        }
+
+        .floating-element {
+          max-width: 150px;
+          padding: 1rem;
+        }
+
+        .swiper-slider-container {
+          height: 350px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          width: 40px;
+          height: 40px;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+          font-size: 1rem;
+        }
+
+        .swiper-slide-caption h4 {
+          font-size: 1.125rem;
+        }
+
+        .swiper-slide-caption p {
+          font-size: 0.875rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-container {
+          padding: 0 1rem;
+        }
+
+        .hero-container {
+          padding: 1rem;
+        }
+
+        .hero-title {
+          font-size: 1.875rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .section-title {
+          font-size: 1.75rem;
+        }
+
+        .features-grid,
+        .programs-grid,
+        .stats-grid,
+        .testimonials-grid {
+          padding: 0 1rem;
+        }
+
+        .accreditation-logos {
+          gap: 1.5rem;
+        }
+
+        .accreditation-logo {
+          width: 120px;
+          height: 60px;
+        }
+
+        .about-features .about-feature div {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .footer-grid {
+          gap: 2rem;
+        }
+
+        .footer-legal {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .swiper-slider-container {
+          height: 300px;
+        }
+
+        .swiper-slide-caption {
+          padding: 1rem;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          display: none;
+        }
+      }
+
+      /* ========== UTILITIES ========== */
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .mb-1 {
+        margin-bottom: 1rem;
+      }
+
+      .mb-2 {
+        margin-bottom: 2rem;
+      }
+
+      .mb-3 {
+        margin-bottom: 3rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 4rem;
+      }
+
+      .mt-1 {
+        margin-top: 1rem;
+      }
+
+      .mt-2 {
+        margin-top: 2rem;
+      }
+
+      .mt-3 {
+        margin-top: 3rem;
+      }
+
+      .mt-4 {
+        margin-top: 4rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#home" class="nav-logo">
+          <div class="nav-logo-img">
+            <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع">
+          </div>
+          <div class="logo-text">
+            <h2>الأكاديمية الدولية للإبداع</h2>
+            <span>INTERNATIONAL CREATIVE ACADEMY</span>
+          </div>
+        </a>
+
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+          <ul class="nav-links">
+            <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
+            <li><a href="#features"><i class="fas fa-bullseye"></i> المميزات</a></li>
+            <li><a href="#programs"><i class="fas fa-palette"></i> البرامج</a></li>
+            <li><a href="#testimonials"><i class="fas fa-comment"></i> آراء الخريجين</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a href="#register" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i>
+              سجل الآن
+            </a>
+          </div>
         </div>
-        <div class="logo-text">
-          <h2>الأكاديمية الدولية للإبداع</h2>
-          <span>INTERNATIONAL CREATIVE ACADEMY</span>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-badge">
+              <i class="fas fa-award"></i>
+              شهادة أوروبية معتمدة
+            </div>
+            <h1 class="hero-title">
+              الأكاديمية الدولية للإبداع
+            </h1>
+            <p class="hero-subtitle">
+              منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق
+              العالمية،
+              من خلال التدريب العملي ومتطلبات الجودة والتصدير والشراكات الدولية.
+            </p>
+            <div class="hero-actions">
+              <a href="#programs" class="btn btn-primary">
+                <i class="fas fa-play-circle"></i>
+                استكشف البرامج
+              </a>
+              <a href="#about" class="btn btn-secondary">
+                <i class="fas fa-info-circle"></i>
+                تعرف علينا
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-card">
+              <div class="floating-elements">
+                <div class="floating-element">
+                  <i class="fas fa-gem"></i>
+                  <span>مجوهرات وحلي</span>
+                </div>
+                <div class="floating-element">
+                  <i class="fas fa-palette"></i>
+                  <span>كليم وسجاد</span>
+                </div>
+                <div class="floating-element">
+                  <i class="fas fa-crown"></i>
+                  <span>منتجات جلدية</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </a>
+      </div>
+    </section>
 
-      <button class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <h2 class="section-title">عن الأكاديمية الدولية للإبداع</h2>
+        <p class="section-subtitle">
+          منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق
+          العالمية
+        </p>
+      </div>
 
-      <div class="nav-menu" id="navMenu">
-        <ul class="nav-links">
-          <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
-          <li><a href="#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
-          <li><a href="#features"><i class="fas fa-bullseye"></i> المميزات</a></li>
-          <li><a href="#programs"><i class="fas fa-palette"></i> البرامج</a></li>
-          <li><a href="#testimonials"><i class="fas fa-comment"></i> آراء الخريجين</a></li>
-          <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-        </ul>
-        <div class="nav-cta">
-          <a href="#register" class="btn btn-primary">
+      <div class="about-content">
+        <div class="about-text">
+          <h3>رؤيتنا ورسالتنا</h3>
+          <p>
+            الأكاديمية الدولية للإبداع (ICA) هي منصة تعليمية رائدة تهدف إلى تمكين المبدعين والمصممين العرب من تحويل
+            أفكارهم الإبداعية إلى منتجات عالية الجودة قادرة على المنافسة في الأسواق العالمية. نؤمن بأن الإبداع العربي له
+            قيمة كبيرة ويحتاج فقط إلى الأدوات والمعرفة المناسبة ليتحول إلى إنجازات ملموسة.
+          </p>
+          <p>
+            من خلال برامجنا التدريبية المتخصصة، نوفر للخريجين المهارات التقنية والمعرفة العملية اللازمة لتحويل أفكارهم
+            إلى مشاريع تجارية ناجحة. نحن نعمل على سد الفجوة بين الإبداع التقليدي ومتطلبات السوق الحديثة.
+          </p>
+
+          <div class="about-features">
+            <div class="about-feature">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>تدريب عملي مكثف</strong>
+                <p>برامج تدريبية عملية تحت إشراف خبراء دوليين</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>شهادات معتمدة دولياً</strong>
+                <p>شهادات أوروبية معترف بها عالمياً</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>تأهيل للتصدير</strong>
+                <p>تهيئة المنتجات للأسواق العالمية ومعايير التصدير</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Swiper Slider in About Section -->
+        <div class="swiper-slider-container">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="./img/PhotoSlider1.jpeg" alt="ورش عمل في الأكاديمية">
+                <div class="swiper-slide-caption">
+                  <h4>ورش عمل تفاعلية</h4>
+                  <p>ورش عمل عملية تحت إشراف خبراء دوليين لتطوير المهارات الإبداعية</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="./img/PhotoSlider2.jpeg" alt="تصميم مجوهرات">
+                <div class="swiper-slide-caption">
+                  <h4>تصميم المجوهرات</h4>
+                  <p>برامج متخصصة في تصميم وصناعة المجوهرات والحلي التقليدية والعصرية</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="./img/PhotoSlider3.jpeg" alt="صناعة السجاد">
+                <div class="swiper-slide-caption">
+                  <h4>فنون النسيج والسجاد</h4>
+                  <p>إحياء الفنون التقليدية مع دمج التقنيات الحديثة لصناعة السجاد والكليم</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="./img/PhotoSlider4.jpeg" alt="منتجات جلدية">
+                <div class="swiper-slide-caption">
+                  <h4>المنتجات الجلدية</h4>
+                  <p>تصميم وإنتاج المنتجات الجلدية الفاخرة بمعايير الجودة العالمية</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="./img/PhotoSlider5.jpeg" alt="الفخار والخزف">
+                <div class="swiper-slide-caption">
+                  <h4>الفخار والخزف</h4>
+                  <p>برامج متخصصة في فنون الفخار والخزف بلمسات إبداعية معاصرة</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <img src="./img/PhotoSlider6.png" alt="معرض أعمال الخريجين">
+                <div class="swiper-slide-caption">
+                  <h4>معرض أعمال الخريجين</h4>
+                  <p>عرض إبداعات خريجي الأكاديمية في معارض محلية ودولية</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <h2 class="section-title">ماذا ستتعلم معنا؟</h2>
+        <p class="section-subtitle">نقدم تجربة تعليمية فريدة تجمع بين الإبداع والاحترافية</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3 class="feature-title">معايير عالمية</h3>
+          <p class="feature-description">
+            برامجنا مصممة وفق أحدث المعايير الدولية وتتماشى مع متطلبات السوق العالمي
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h3 class="feature-title">مدربون خبراء</h3>
+          <p class="feature-description">
+            فريق من الخبراء الدوليين المتخصصين في مختلف مجالات الإبداع والتصميم
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3 class="feature-title">تطبيق عملي</h3>
+          <p class="feature-description">
+            منهجية تعليمية تطبيقية تساعدك على تحويل الأفكار إلى مشاريع واقعية
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <h3 class="feature-title">شبكة علاقات</h3>
+          <p class="feature-description">
+            فرصة للتواصل مع مجتمع من المبدعين والمستثمرين والمختصين في المجال
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section" id="programs">
+      <div class="section-header">
+        <h2 class="section-title">برامجنا التدريبية المتخصصة</h2>
+        <p class="section-subtitle">برامج مصممة لتطوير مهاراتك في أهم المجالات الإبداعية</p>
+      </div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-image">
+            <img src="./img/Kilimandcarpet.png" alt="كليم وسجاد">
+            <div class="program-overlay">
+              <span class="program-category">تصميم نسيج</span>
+              <h3 class="program-title">كليم وسجاد تقليدي</h3>
+            </div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              تعلم فنون صناعة الكليم والسجاد التقليدي بأساليب حديثة تجمع بين الأصالة والحداثة
+            </p>
+            <a href="#" class="btn btn-ghost">
+              <i class="fas fa-arrow-left"></i>
+              تعرف أكثر
+            </a>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-image">
+            <img src="./img/leather.png" alt="منتجات جلدية">
+            <div class="program-overlay">
+              <span class="program-category">تصميم جلود</span>
+              <h3 class="program-title">منتجات جلدية فاخرة</h3>
+            </div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              احترف تصميم وإنتاج المنتجات الجلدية الفاخرة والإكسسوارات ذات القيمة العالية
+            </p>
+            <a href="#" class="btn btn-ghost">
+              <i class="fas fa-arrow-left"></i>
+              تعرف أكثر
+            </a>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-image">
+            <img src="./img/jewelry.jpeg" alt="مجوهرات">
+            <div class="program-overlay">
+              <span class="program-category">تصميم مجوهرات</span>
+              <h3 class="program-title">مجوهرات وحلي يدوية</h3>
+            </div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              تخصص في تصميم وصناعة المجوهرات والحلي اليدوية بلمسة إبداعية عصرية
+            </p>
+            <a href="#" class="btn btn-ghost">
+              <i class="fas fa-arrow-left"></i>
+              تعرف أكثر
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats-section">
+      <div class="section-header">
+        <h2 class="section-title">أرقامنا تتحدث عنا</h2>
+        <p class="section-subtitle">إنجازاتنا دليل على تميزنا وثقة عملائنا بنا</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">خريج ناجح</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">برنامج تدريبي</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">خبير دولي</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">رضا العملاء</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+      <div class="section-header">
+        <h2 class="section-title">ماذا يقول خريجونا؟</h2>
+        <p class="section-subtitle">قصص نجاح تلهمنا وتدفعنا للأمام</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-content">
+            "الأكاديمية غيرت مساري المهني تماماً. من خلال البرامج التدريبية المتخصصة، استطعت تحويل هوايتي في صناعة
+            المجوهرات إلى مشروع تجاري ناجح."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">س</div>
+            <div class="author-info">
+              <h4>سارة محمد</h4>
+              <p>مصممة مجوهرات - خريجة 2022</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-content">
+            "الشهادات المعتمدة دولياً التي حصلت عليها من الأكاديمية فتحت لي أبواب التصدير إلى الأسواق الأوروبية. تجربة
+            استثنائية بكل المقاييس."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ع</div>
+            <div class="author-info">
+              <h4>علي حسين</h4>
+              <p>مصمم منتجات جلدية - خريج 2021</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-content">
+            "لم أكن أتوقع أن أحصل على هذا القدر من الدعم والتدريب العملي. فريق المدربين على أعلى مستوى من الخبرة
+            والاحترافية."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ن</div>
+            <div class="author-info">
+              <h4>نورة الكندري</h4>
+              <p>مصممة سجاد تقليدي - خريجة 2023</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accreditation Section -->
+    <section class="accreditation-section">
+      <div class="section-header">
+        <h2 class="section-title">دورات تدريبية أوروبية معتمدة</h2>
+        <p class="section-subtitle">
+          برامج تدريبية احترافية تعتمد على أفضل الممارسات الدولية لتأهيل المنتج للأسواق العالمية.
+          نقدم شهادات معترف بها دولياً تفتح أبواب الفرص أمام خريجينا.
+        </p>
+      </div>
+      <div class="accreditation-logos">
+        <div class="accreditation-logo">
+          <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">EU-Cert</span>
+        </div>
+        <div class="accreditation-logo">
+          <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">Quality+</span>
+        </div>
+        <div class="accreditation-logo">
+          <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">Design Pro</span>
+        </div>
+        <div class="accreditation-logo">
+          <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">Creative+</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="register">
+      <div class="cta-container">
+        <h2 class="cta-title">ابدأ رحلتك الإبداعية اليوم</h2>
+        <p class="cta-subtitle">
+          انضم إلى مجتمع المبدعين واطلق العنان لإمكانياتك. سجل الآن واحصل على خصم 20% على أول برنامج تدريبي
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">
             <i class="fas fa-user-plus"></i>
             سجل الآن
           </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <div class="hero-badge">
-            <i class="fas fa-award"></i>
-            شهادة أوروبية معتمدة
-          </div>
-          <h1 class="hero-title">
-            الأكاديمية الدولية للإبداع
-          </h1>
-          <p class="hero-subtitle">
-منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق العالمية، 
-        من خلال التدريب العملي ومتطلبات الجودة والتصدير والشراكات الدولية.
-          </p>
-          <div class="hero-actions">
-            <a href="#programs" class="btn btn-primary">
-              <i class="fas fa-play-circle"></i>
-              استكشف البرامج
-            </a>
-            <a href="#about" class="btn btn-secondary">
-              <i class="fas fa-info-circle"></i>
-              تعرف علينا
-            </a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-card">
-            <div class="floating-elements">
-              <div class="floating-element">
-                <i class="fas fa-gem"></i>
-                <span>مجوهرات وحلي</span>
-              </div>
-              <div class="floating-element">
-                <i class="fas fa-palette"></i>
-                <span>كليم وسجاد</span>
-              </div>
-              <div class="floating-element">
-                <i class="fas fa-crown"></i>
-                <span>منتجات جلدية</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="section" id="about">
-    <div class="section-header">
-      <h2 class="section-title">عن الأكاديمية الدولية للإبداع</h2>
-      <p class="section-subtitle">
-        منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق العالمية
-      </p>
-    </div>
-
-    <div class="about-content">
-      <div class="about-text">
-        <h3>رؤيتنا ورسالتنا</h3>
-        <p>
-          الأكاديمية الدولية للإبداع (ICA) هي منصة تعليمية رائدة تهدف إلى تمكين المبدعين والمصممين العرب من تحويل أفكارهم الإبداعية إلى منتجات عالية الجودة قادرة على المنافسة في الأسواق العالمية. نؤمن بأن الإبداع العربي له قيمة كبيرة ويحتاج فقط إلى الأدوات والمعرفة المناسبة ليتحول إلى إنجازات ملموسة.
-        </p>
-        <p>
-          من خلال برامجنا التدريبية المتخصصة، نوفر للخريجين المهارات التقنية والمعرفة العملية اللازمة لتحويل أفكارهم إلى مشاريع تجارية ناجحة. نحن نعمل على سد الفجوة بين الإبداع التقليدي ومتطلبات السوق الحديثة.
-        </p>
-        
-        <div class="about-features">
-          <div class="about-feature">
-            <i class="fas fa-check-circle"></i>
-            <div>
-              <strong>تدريب عملي مكثف</strong>
-              <p>برامج تدريبية عملية تحت إشراف خبراء دوليين</p>
-            </div>
-          </div>
-          <div class="about-feature">
-            <i class="fas fa-check-circle"></i>
-            <div>
-              <strong>شهادات معتمدة دولياً</strong>
-              <p>شهادات أوروبية معترف بها عالمياً</p>
-            </div>
-          </div>
-          <div class="about-feature">
-            <i class="fas fa-check-circle"></i>
-            <div>
-              <strong>تأهيل للتصدير</strong>
-              <p>تهيئة المنتجات للأسواق العالمية ومعايير التصدير</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Swiper Slider in About Section -->
-      <div class="swiper-slider-container">
-        <div class="swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./img/PhotoSlider1.jpeg" alt="ورش عمل في الأكاديمية">
-              <div class="swiper-slide-caption">
-                <h4>ورش عمل تفاعلية</h4>
-                <p>ورش عمل عملية تحت إشراف خبراء دوليين لتطوير المهارات الإبداعية</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="./img/PhotoSlider2.jpeg" alt="تصميم مجوهرات">
-              <div class="swiper-slide-caption">
-                <h4>تصميم المجوهرات</h4>
-                <p>برامج متخصصة في تصميم وصناعة المجوهرات والحلي التقليدية والعصرية</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="./img/PhotoSlider3.jpeg" alt="صناعة السجاد">
-              <div class="swiper-slide-caption">
-                <h4>فنون النسيج والسجاد</h4>
-                <p>إحياء الفنون التقليدية مع دمج التقنيات الحديثة لصناعة السجاد والكليم</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="./img/PhotoSlider4.jpeg" alt="منتجات جلدية">
-              <div class="swiper-slide-caption">
-                <h4>المنتجات الجلدية</h4>
-                <p>تصميم وإنتاج المنتجات الجلدية الفاخرة بمعايير الجودة العالمية</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="./img/PhotoSlider5.jpeg" alt="الفخار والخزف">
-              <div class="swiper-slide-caption">
-                <h4>الفخار والخزف</h4>
-                <p>برامج متخصصة في فنون الفخار والخزف بلمسات إبداعية معاصرة</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="./img/PhotoSlider6.png" alt="معرض أعمال الخريجين">
-              <div class="swiper-slide-caption">
-                <h4>معرض أعمال الخريجين</h4>
-                <p>عرض إبداعات خريجي الأكاديمية في معارض محلية ودولية</p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Navigation buttons -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          
-          <!-- Pagination -->
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="section" id="features">
-    <div class="section-header">
-      <h2 class="section-title">ماذا ستتعلم معنا؟</h2>
-      <p class="section-subtitle">نقدم تجربة تعليمية فريدة تجمع بين الإبداع والاحترافية</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-globe"></i>
-        </div>
-        <h3 class="feature-title">معايير عالمية</h3>
-        <p class="feature-description">
-          برامجنا مصممة وفق أحدث المعايير الدولية وتتماشى مع متطلبات السوق العالمي
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-user-tie"></i>
-        </div>
-        <h3 class="feature-title">مدربون خبراء</h3>
-        <p class="feature-description">
-          فريق من الخبراء الدوليين المتخصصين في مختلف مجالات الإبداع والتصميم
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-briefcase"></i>
-        </div>
-        <h3 class="feature-title">تطبيق عملي</h3>
-        <p class="feature-description">
-          منهجية تعليمية تطبيقية تساعدك على تحويل الأفكار إلى مشاريع واقعية
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-network-wired"></i>
-        </div>
-        <h3 class="feature-title">شبكة علاقات</h3>
-        <p class="feature-description">
-          فرصة للتواصل مع مجتمع من المبدعين والمستثمرين والمختصين في المجال
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Programs Section -->
-  <section class="section" id="programs">
-    <div class="section-header">
-      <h2 class="section-title">برامجنا التدريبية المتخصصة</h2>
-      <p class="section-subtitle">برامج مصممة لتطوير مهاراتك في أهم المجالات الإبداعية</p>
-    </div>
-    <div class="programs-grid">
-      <div class="program-card">
-        <div class="program-image">
-          <img src="./img/Kilimandcarpet.png" alt="كليم وسجاد">
-          <div class="program-overlay">
-            <span class="program-category">تصميم نسيج</span>
-            <h3 class="program-title">كليم وسجاد تقليدي</h3>
-          </div>
-        </div>
-        <div class="program-content">
-          <p class="program-description">
-            تعلم فنون صناعة الكليم والسجاد التقليدي بأساليب حديثة تجمع بين الأصالة والحداثة
-          </p>
-          <a href="#" class="btn btn-ghost">
-            <i class="fas fa-arrow-left"></i>
-            تعرف أكثر
+          <a href="#contact" class="btn btn-ghost"
+            style="background: rgba(255, 255, 255, 0.2); color: white; border-color: rgba(255, 255, 255, 0.3);">
+            <i class="fas fa-phone-alt"></i>
+            تواصل معنا
           </a>
         </div>
       </div>
-      <div class="program-card">
-        <div class="program-image">
-          <img src="./img/leather.png" alt="منتجات جلدية">
-          <div class="program-overlay">
-            <span class="program-category">تصميم جلود</span>
-            <h3 class="program-title">منتجات جلدية فاخرة</h3>
-          </div>
-        </div>
-        <div class="program-content">
-          <p class="program-description">
-            احترف تصميم وإنتاج المنتجات الجلدية الفاخرة والإكسسوارات ذات القيمة العالية
-          </p>
-          <a href="#" class="btn btn-ghost">
-            <i class="fas fa-arrow-left"></i>
-            تعرف أكثر
-          </a>
-        </div>
-      </div>
-      <div class="program-card">
-        <div class="program-image">
-          <img src="./img/jewelry.jpeg" alt="مجوهرات">
-          <div class="program-overlay">
-            <span class="program-category">تصميم مجوهرات</span>
-            <h3 class="program-title">مجوهرات وحلي يدوية</h3>
-          </div>
-        </div>
-        <div class="program-content">
-          <p class="program-description">
-            تخصص في تصميم وصناعة المجوهرات والحلي اليدوية بلمسة إبداعية عصرية
-          </p>
-          <a href="#" class="btn btn-ghost">
-            <i class="fas fa-arrow-left"></i>
-            تعرف أكثر
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Stats Section -->
-  <section class="section stats-section">
-    <div class="section-header">
-      <h2 class="section-title">أرقامنا تتحدث عنا</h2>
-      <p class="section-subtitle">إنجازاتنا دليل على تميزنا وثقة عملائنا بنا</p>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">20+</div>
-        <div class="stat-label">خريج ناجح</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">5+</div>
-        <div class="stat-label">برنامج تدريبي</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">30+</div>
-        <div class="stat-label">خبير دولي</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">95%</div>
-        <div class="stat-label">رضا العملاء</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="section" id="testimonials">
-    <div class="section-header">
-      <h2 class="section-title">ماذا يقول خريجونا؟</h2>
-      <p class="section-subtitle">قصص نجاح تلهمنا وتدفعنا للأمام</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-content">
-          "الأكاديمية غيرت مساري المهني تماماً. من خلال البرامج التدريبية المتخصصة، استطعت تحويل هوايتي في صناعة المجوهرات إلى مشروع تجاري ناجح."
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar">س</div>
-          <div class="author-info">
-            <h4>سارة محمد</h4>
-            <p>مصممة مجوهرات - خريجة 2022</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-content">
-          "الشهادات المعتمدة دولياً التي حصلت عليها من الأكاديمية فتحت لي أبواب التصدير إلى الأسواق الأوروبية. تجربة استثنائية بكل المقاييس."
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar">ع</div>
-          <div class="author-info">
-            <h4>علي حسين</h4>
-            <p>مصمم منتجات جلدية - خريج 2021</p>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-content">
-          "لم أكن أتوقع أن أحصل على هذا القدر من الدعم والتدريب العملي. فريق المدربين على أعلى مستوى من الخبرة والاحترافية."
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar">ن</div>
-          <div class="author-info">
-            <h4>نورة الكندري</h4>
-            <p>مصممة سجاد تقليدي - خريجة 2023</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Accreditation Section -->
-  <section class="accreditation-section">
-    <div class="section-header">
-      <h2 class="section-title">دورات تدريبية أوروبية معتمدة</h2>
-      <p class="section-subtitle">
-        برامج تدريبية احترافية تعتمد على أفضل الممارسات الدولية لتأهيل المنتج للأسواق العالمية. 
-        نقدم شهادات معترف بها دولياً تفتح أبواب الفرص أمام خريجينا.
-      </p>
-    </div>
-    <div class="accreditation-logos">
-      <div class="accreditation-logo">
-        <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">EU-Cert</span>
-      </div>
-      <div class="accreditation-logo">
-        <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">Quality+</span>
-      </div>
-      <div class="accreditation-logo">
-        <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">Design Pro</span>
-      </div>
-      <div class="accreditation-logo">
-        <span style="color: var(--gold-dark); font-weight: 800; font-size: 1.25rem;">Creative+</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section" id="register">
-    <div class="cta-container">
-      <h2 class="cta-title">ابدأ رحلتك الإبداعية اليوم</h2>
-      <p class="cta-subtitle">
-        انضم إلى مجتمع المبدعين واطلق العنان لإمكانياتك. سجل الآن واحصل على خصم 20% على أول برنامج تدريبي
-      </p>
-      <div class="hero-actions">
-        <a href="#" class="btn btn-primary">
-          <i class="fas fa-user-plus"></i>
-          سجل الآن
-        </a>
-        <a href="#contact" class="btn btn-ghost" style="background: rgba(255, 255, 255, 0.2); color: white; border-color: rgba(255, 255, 255, 0.3);">
-          <i class="fas fa-phone-alt"></i>
-          تواصل معنا
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-column">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-            <div style="width: 50px; height: 50px; border-radius: 10px; overflow: hidden; border: 2px solid var(--gold);">
-              <img src="./img/logo.jpeg" alt="شعار الأكاديمية" style="width: 100%; height: 100%; object-fit: cover;">
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <div
+                style="width: 50px; height: 50px; border-radius: 10px; overflow: hidden; border: 2px solid var(--gold);">
+                <img src="./img/logo.jpeg" alt="شعار الأكاديمية" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div>
+                <h3 style="margin: 0; color: white; font-size: 1.25rem;">الأكاديمية الدولية للإبداع</h3>
+                <span style="color: var(--gold-light); font-size: 0.75rem;">International Creative Academy</span>
+              </div>
             </div>
-            <div>
-              <h3 style="margin: 0; color: white; font-size: 1.25rem;">الأكاديمية الدولية للإبداع</h3>
-              <span style="color: var(--gold-light); font-size: 0.75rem;">International Creative Academy</span>
+            <p style="color: var(--gold-light); line-height: 1.8; margin-bottom: 1.5rem;">
+              حيث يلتقي الإبداع بالمعايير العالمية - منصة رائدة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة
+              للمنافسة العالمية.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+              <a href="#" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
-          <p style="color: var(--gold-light); line-height: 1.8; margin-bottom: 1.5rem;">
-            حيث يلتقي الإبداع بالمعايير العالمية - منصة رائدة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة للمنافسة العالمية.
+          <div class="footer-column">
+            <h3>روابط سريعة</h3>
+            <ul class="footer-links">
+              <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+              <li><a href="#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
+              <li><a href="#programs"><i class="fas fa-chevron-left"></i> البرامج التدريبية</a></li>
+              <li><a href="#testimonials"><i class="fas fa-chevron-left"></i> آراء الخريجين</a></li>
+              <li><a href="#register"><i class="fas fa-chevron-left"></i> سجل الآن</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>المجالات</h3>
+            <ul class="footer-links">
+              <li><a href="#"><i class="fas fa-chevron-left"></i> كليم وسجاد</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> منتجات جلدية</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> مجوهرات وحلي</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم أزياء</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> فنون تقليدية</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>اتصل بنا</h3>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt"></i>١٤ شارع فؤاد بدواني _ المنطقة الثامنة مدينة نصر _ القاهرة</p>
+              <p><i class="fas fa-phone"></i>‎+20 2 26706606</p>
+              <p><i class="fas fa-envelope"></i> info@ica-academy.com</p>
+              <p><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 4 مساءً</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع (ICA) - جميع الحقوق محفوظة</p>
+          <div class="footer-legal">
+            <a href="#">سياسة الخصوصية</a>
+            <a href="#">الشروط والأحكام</a>
+            <a href="#">خريطة الموقع</a>
+          </div>
+          <p style="margin-top: 1rem; font-size: 0.75rem; color: rgba(231, 210, 163, 0.5);">
+            تصميم وتطوير بكل ❤️ لخدمة المبدعين العرب
           </p>
-          <div class="social-links">
-            <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h3>روابط سريعة</h3>
-          <ul class="footer-links">
-            <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
-            <li><a href="#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
-            <li><a href="#programs"><i class="fas fa-chevron-left"></i> البرامج التدريبية</a></li>
-            <li><a href="#testimonials"><i class="fas fa-chevron-left"></i> آراء الخريجين</a></li>
-            <li><a href="#register"><i class="fas fa-chevron-left"></i> سجل الآن</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>المجالات</h3>
-          <ul class="footer-links">
-            <li><a href="#"><i class="fas fa-chevron-left"></i> كليم وسجاد</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> منتجات جلدية</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> مجوهرات وحلي</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم أزياء</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> فنون تقليدية</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>اتصل بنا</h3>
-          <div class="footer-contact">
-            <p><i class="fas fa-map-marker-alt"></i> المملكة العربية السعودية - الرياض</p>
-            <p><i class="fas fa-phone"></i> +966 12 345 6789</p>
-            <p><i class="fas fa-envelope"></i> info@ica-academy.com</p>
-            <p><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 4 مساءً</p>
-          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع (ICA) - جميع الحقوق محفوظة</p>
-        <div class="footer-legal">
-          <a href="#">سياسة الخصوصية</a>
-          <a href="#">الشروط والأحكام</a>
-          <a href="#">خريطة الموقع</a>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.75rem; color: rgba(231, 210, 163, 0.5);">
-          تصميم وتطوير بكل ❤️ لخدمة المبدعين العرب
-        </p>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <script>
-    // Set current year
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    <script>
+      // Set current year
+      document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+      // Mobile menu toggle
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
       });
-    });
 
-    // Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
+      // Navbar scroll effect
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Active nav link based on scroll position
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (scrollY >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Registration form simulation
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        if (btn.textContent.includes('سجل')) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
+            this.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+              alert('شكراً لتسجيل اهتمامك! سيتم توجيهك إلى صفحة التسجيل الرسمية.');
+              this.innerHTML = originalText;
+              this.style.pointerEvents = 'auto';
+            }, 1500);
           });
         }
       });
-    });
 
-    // Active nav link based on scroll position
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
+      // Add floating animation to feature cards on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (scrollY >= (sectionTop - 150)) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-    });
-
-    // Registration form simulation
-    document.querySelectorAll('.btn-primary').forEach(btn => {
-      if (btn.textContent.includes('سجل')) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const originalText = this.innerHTML;
-          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
-          this.style.pointerEvents = 'none';
-          
-          setTimeout(() => {
-            alert('شكراً لتسجيل اهتمامك! سيتم توجيهك إلى صفحة التسجيل الرسمية.');
-            this.innerHTML = originalText;
-            this.style.pointerEvents = 'auto';
-          }, 1500);
-        });
-      }
-    });
-
-    // Add floating animation to feature cards on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe elements for animation
-    document.querySelectorAll('.feature-card, .program-card, .testimonial-card, .stat-card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
-    });
-
-    // Initialize Swiper slider
-    document.addEventListener('DOMContentLoaded', function() {
-      const swiper = new Swiper('.swiper', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: true,
-        speed: 800,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        },
-        
-        // If we need pagination
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          dynamicBullets: true,
-        },
-        
-        // Navigation arrows
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        
-        // Responsive breakpoints
-        breakpoints: {
-          // when window width is >= 320px
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 0
-          },
-          // when window width is >= 768px
-          768: {
-            slidesPerView: 1,
-            spaceBetween: 0
-          },
-          // when window width is >= 1024px
-          1024: {
-            slidesPerView: 1,
-            spaceBetween: 0
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
           }
-        },
-        
-        // Effect
-        effect: 'slide',
-        fadeEffect: {
-          crossFade: true
-        },
-        
-        // Accessibility
-        a11y: {
-          prevSlideMessage: 'الصورة السابقة',
-          nextSlideMessage: 'الصورة التالية',
-          firstSlideMessage: 'هذه هي الصورة الأولى',
-          lastSlideMessage: 'هذه هي الصورة الأخيرة',
-          paginationBulletMessage: 'انتقل إلى الصورة {{index}}',
-        }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.querySelectorAll('.feature-card, .program-card, .testimonial-card, .stat-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
       });
-      
-      // Add keyboard navigation
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowRight') {
-          swiper.slideNext();
-        } else if (e.key === 'ArrowLeft') {
-          swiper.slidePrev();
-        }
+
+      // Initialize Swiper slider
+      document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.swiper', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: true,
+          speed: 800,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          },
+
+          // If we need pagination
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+          },
+
+          // Navigation arrows
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+
+          // Responsive breakpoints
+          breakpoints: {
+            // when window width is >= 320px
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0
+            },
+            // when window width is >= 768px
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 0
+            },
+            // when window width is >= 1024px
+            1024: {
+              slidesPerView: 1,
+              spaceBetween: 0
+            }
+          },
+
+          // Effect
+          effect: 'slide',
+          fadeEffect: {
+            crossFade: true
+          },
+
+          // Accessibility
+          a11y: {
+            prevSlideMessage: 'الصورة السابقة',
+            nextSlideMessage: 'الصورة التالية',
+            firstSlideMessage: 'هذه هي الصورة الأولى',
+            lastSlideMessage: 'هذه هي الصورة الأخيرة',
+            paginationBulletMessage: 'انتقل إلى الصورة {{index}}',
+          }
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight') {
+            swiper.slideNext();
+          } else if (e.key === 'ArrowLeft') {
+            swiper.slidePrev();
+          }
+        });
       });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-      content="الأكاديمية الدولية للإبداع - منصة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة للمنافسة العالمية">
+      content="الأكاديمية الدولية للإبداع - أكاديمية لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة للمنافسة العالمية">
     <title>الأكاديمية الدولية للإبداع (ICA) - حيث يلتقي الإبداع بالمعايير العالمية</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,10 +220,10 @@
 
       /* ========== HERO SECTION ========== */
       .hero {
-        min-height: 100vh;
+        min-height: calc(70vh - 50px);
         position: relative;
         overflow: hidden;
-        padding-top: 100px;
+        padding-top: 50px;
         background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
           radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%),
           radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.1) 0%, transparent 50%);
@@ -232,7 +232,7 @@
       .hero-container {
         max-width: var(--max-width);
         margin: 0 auto;
-        padding: 2rem;
+        /* padding: 2rem; */
         position: relative;
         z-index: 1;
       }
@@ -242,7 +242,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
         align-items: center;
-        min-height: calc(100vh - 100px);
+        /* min-height: calc(100vh - 100px); */
       }
 
       .hero-text {
@@ -1150,10 +1150,10 @@
 
         .nav-menu {
           position: fixed;
-          top: 130px;
+          top: 100%;
           right: -100%;
           width: 100%;
-          height: calc(100vh - 130px);
+          height: 60vh;
           background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(10px);
           flex-direction: column;
@@ -1184,8 +1184,25 @@
           width: 100%;
         }
 
+        .nav-logo-img [big-logo="true"] {
+          display: none;
+        }
+
+        .nav-logo-img [small-logo="true"] {
+          display: block;
+        }
+
+        .nav-logo-img {
+          width: fit-content;
+          height: 50px;
+        }
+
+        .logo-text h2 {
+          font-size: 1.3rem;
+        }
+
         .hero {
-          padding-top: 150px;
+          padding-top: 50px;
         }
 
         .hero-title {
@@ -1352,13 +1369,14 @@
   <body>
     <!-- Navigation -->
     <div class="imgLogo">
-      <img src="./img/ICALogo12px.svg" alt="logosvg" style="">
+      <img src="./img/ICALogo14px.svg" alt="logosvg" style="">
     </div>
     <nav class="navbar">
       <div class="nav-container">
         <a href="#home" class="nav-logo">
           <div class="nav-logo-img">
-            <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع">
+            <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع" big-logo="true">
+            <img src="./img/logoNav1.svg" alt="شعار الأكاديمية الدولية للإبداع" small-logo="true">
           </div>
           <div class="logo-text">
             <h2>الأكاديمية الدولية للإبداع</h2>
@@ -1404,7 +1422,8 @@
               الأكاديمية الدولية للإبداع
             </h1>
             <p class="hero-subtitle">
-              منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق
+              أكاديمية للتدريب المتقدم تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة
+              للمنافسة في الأسواق
               العالمية،
               من خلال التدريب العملي ومتطلبات الجودة والتصدير والشراكات الدولية.
             </p>
@@ -1446,7 +1465,8 @@
       <div class="section-header">
         <h2 class="section-title">عن الأكاديمية الدولية للإبداع</h2>
         <p class="section-subtitle">
-          منصة رائدة تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في الأسواق
+          أكاديمية للتدريب المتقدم تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في
+          الأسواق
           العالمية
         </p>
       </div>
@@ -1455,7 +1475,7 @@
         <div class="about-text">
           <h3>رؤيتنا ورسالتنا</h3>
           <p>
-            الأكاديمية الدولية للإبداع (ICA) هي منصة تعليمية رائدة تهدف إلى تمكين المبدعين والمصممين العرب من تحويل
+            الأكاديمية الدولية للإبداع (ICA) هي أكاديمية تعليمية رائدة تهدف إلى تمكين المبدعين والمصممين العرب من تحويل
             أفكارهم الإبداعية إلى منتجات عالية الجودة قادرة على المنافسة في الأسواق العالمية. نؤمن بأن الإبداع العربي له
             قيمة كبيرة ويحتاج فقط إلى الأدوات والمعرفة المناسبة ليتحول إلى إنجازات ملموسة.
           </p>
@@ -1606,7 +1626,7 @@
             <img src="./img/Kilimandcarpet.png" alt="كليم وسجاد">
             <div class="program-overlay">
               <span class="program-category">تصميم نسيج</span>
-              <h3 class="program-title">كليم وسجاد تقليدي</h3>
+              <h3 class="program-title">الأزياء و المنسوجات</h3>
             </div>
           </div>
           <div class="program-content">
@@ -1648,6 +1668,24 @@
           <div class="program-content">
             <p class="program-description">
               تخصص في تصميم وصناعة المجوهرات والحلي اليدوية بلمسة إبداعية عصرية
+            </p>
+            <a href="#" class="btn btn-ghost">
+              <i class="fas fa-arrow-left"></i>
+              تعرف أكثر
+            </a>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-image">
+            <img src="./img/jewelry.jpeg" alt="مجوهرات">
+            <div class="program-overlay">
+              <span class="program-category">المنتجات الخشبية</span>
+              <h3 class="program-title">المنتجات الخشبية</h3>
+            </div>
+          </div>
+          <div class="program-content">
+            <p class="program-description">
+              تعلم و تخصص في تصميم وصناعة المنتجات الخشبية
             </p>
             <a href="#" class="btn btn-ghost">
               <i class="fas fa-arrow-left"></i>
@@ -1796,7 +1834,8 @@
               </div>
             </div>
             <p style="color: var(--gold-light); line-height: 1.8; margin-bottom: 1.5rem;">
-              حيث يلتقي الإبداع بالمعايير العالمية - منصة رائدة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة
+              حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات
+              جاهزة
               للمنافسة العالمية.
             </p>
             <div class="social-links">

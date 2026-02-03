@@ -167,6 +167,7 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        text-wrap: nowrap;
       }
 
       .nav-links a i {
@@ -398,6 +399,7 @@
         font-size: 1rem;
         position: relative;
         overflow: hidden;
+        text-wrap: nowrap;
       }
 
       .btn-primary {
@@ -1395,15 +1397,15 @@
           <ul class="nav-links">
             <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
             <li><a href="#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
-            <li><a href="#features"><i class="fas fa-bullseye"></i> المميزات</a></li>
+            <!-- <li><a href="#features"><i class="fas fa-bullseye"></i>المعرض</a></li> -->
             <li><a href="#programs"><i class="fas fa-palette"></i> البرامج</a></li>
-            <li><a href="#testimonials"><i class="fas fa-comment"></i> آراء الخريجين</a></li>
+            <li><a href="#testimonials"><i class="fas fa-comment"></i> الشـركات الدولية</a></li>
             <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
           </ul>
           <div class="nav-cta">
-            <a href="#register" class="btn btn-primary">
+            <a href="./courses.html" class="btn btn-primary">
               <i class="fas fa-user-plus"></i>
-              سجل الآن
+              الدورات التدريبيه
             </a>
           </div>
         </div>
@@ -1477,9 +1479,9 @@
         <div class="about-text">
           <h3>رؤيتنا ورسالتنا</h3>
           <p>
-            الأكاديمية الدولية للإبداع (ICA) هي أكاديمية تعليمية رائدة تهدف إلى تمكين المبدعين والمصممين العرب من تحويل
+            الأكاديمية الدولية للإبداع (ICA) هي أكاديمية تعليمية رائدة تهدف إلى تمكين المبدعين من تحويل
             أفكارهم الإبداعية إلى منتجات عالية الجودة قادرة على المنافسة في الأسواق العالمية. نؤمن بأن الإبداع العربي له
-            قيمة كبيرة ويحتاج فقط إلى الأدوات والمعرفة المناسبة ليتحول إلى إنجازات ملموسة.
+            قيمة كبيرة ويحتاج إلى الأدوات والمعرفة المناسبة ليتحول إلى إنجازات ملموسة.
           </p>
           <p>
             من خلال برامجنا التدريبية المتخصصة، نوفر للخريجين المهارات التقنية والمعرفة العملية اللازمة لتحويل أفكارهم
@@ -1717,7 +1719,7 @@
           <div class="stat-label">خريج ناجح</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">6+</div>
+          <div class="stat-number">20+</div>
           <div class="stat-label">برنامج تدريبي</div>
         </div>
         <div class="stat-card">
@@ -1732,7 +1734,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="section" id="testimonials">
+    <section class="section">
       <div class="section-header">
         <h2 class="section-title">ماذا يقول خريجونا؟</h2>
         <p class="section-subtitle">قصص نجاح تلهمنا وتدفعنا للأمام</p>
@@ -1781,7 +1783,7 @@
     </section>
 
     <!-- Accreditation Section -->
-    <section class="accreditation-section">
+    <section class="accreditation-section" id="testimonials">
       <div class="section-header">
         <h2 class="section-title">دورات تدريبية أوروبية معتمدة</h2>
         <p class="section-subtitle">
@@ -1806,7 +1808,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section" id="register">
+    <section class="cta-section" id="contact">
       <div class="cta-container">
         <h2 class="cta-title">ابدأ رحلتك الإبداعية اليوم</h2>
         <p class="cta-subtitle">
@@ -1827,7 +1829,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer" id="contact">
+    <footer class="footer" id="footer">
       <div class="footer-container">
         <div class="footer-grid">
           <div class="footer-column">

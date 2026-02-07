@@ -1,1540 +1,1552 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="الأكاديمية الدولية للإبداع - دورات تدريبية متخصصة في المجالات الإبداعية مع مدربين خبراء">
-  <title>الدورات التدريبية | الأكاديمية الدولية للإبداع</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --bg: #F3E8DD;
-      --ink: #2B2320;
-      --muted: #6A5B52;
-      --gold: #B9924A;
-      --gold-light: #E7D2A3;
-      --gold-dark: #8B6A2B;
-      --stroke: rgba(120, 90, 60, .25);
-      --card: rgba(255, 255, 255, .85);
-      --shadow: 0 20px 40px rgba(0, 0, 0, .1);
-      --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
-      --radius: 24px;
-      --radius-sm: 16px;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      --max-width: 1400px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-      color: var(--ink);
-      background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
-      min-height: 100vh;
-      line-height: 1.7;
-    }
-
-    /* ========== TYPOGRAPHY ========== */
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-weight: 800;
-      line-height: 1.2;
-    }
-
-    .text-gradient {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* ========== NAVIGATION ========== */
-    .imgLogo {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-      padding: 1.25rem 0;
-      transition: var(--transition);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .navbar.scrolled {
-      padding: 0.75rem 0;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .nav-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-    }
-
-    .nav-logo-img {
-      width: 150px;
-      height: 60px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid var(--gold-light);
-      box-shadow: 0 8px 20px rgba(139, 106, 43, 0.15);
-    }
-
-    .nav-logo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .logo-text h2 {
-      font-size: 1.5rem;
-      color: var(--gold-dark);
-      margin-bottom: 0.25rem;
-    }
-
-    .logo-text span {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      position: relative;
-      padding: 0.5rem 0;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-wrap: nowrap;
-    }
-
-    .nav-links a i {
-      font-size: 0.875rem;
-      color: var(--gold);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--gold-dark);
-    }
-
-    .nav-cta .btn {
-      padding: 0.75rem 1.75rem;
-      font-size: 0.95rem;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0.5rem;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: var(--gold-dark);
-      margin: 3px 0;
-      transition: var(--transition);
-      border-radius: 2px;
-    }
-
-    /* ========== BUTTONS ========== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2.5rem;
-      border-radius: 12px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      gap: 0.75rem;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
-      text-wrap: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
-      border: 1px solid rgba(139, 106, 43, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--gold-dark);
-      border: 2px solid var(--gold-light);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      border-color: var(--gold);
-    }
-
-    /* ========== HERO SECTION ========== */
-    .hero-courses {
-      min-height: 40vh;
-      position: relative;
-      overflow: hidden;
-      padding-top: 100px;
-      background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.1) 0%, transparent 50%);
-      text-align: center;
-    }
-
-    .hero-courses-content {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 3rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-courses-title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-courses-subtitle {
-      font-size: 1.25rem;
-      color: var(--muted);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* ========== FILTERS SECTION ========== */
-    .filters-section {
-      padding: 2rem 0;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-    }
-
-    .filters-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .filters-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .filter-btn {
-      padding: 0.75rem 1.5rem;
-      background: white;
-      border: 2px solid var(--gold-light);
-      border-radius: 50px;
-      font-weight: 700;
-      color: var(--muted);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      border-color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(185, 146, 74, 0.2);
-    }
-
-    .search-box {
-      max-width: 500px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      padding-left: 3.5rem;
-      border: 2px solid var(--gold-light);
-      border-radius: 50px;
-      font-size: 1rem;
-      background: white;
-      transition: var(--transition);
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(185, 146, 74, 0.2);
-    }
-
-    .search-icon {
-      position: absolute;
-      right: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gold);
-    }
-
-    /* ========== COURSES SECTION ========== */
-    .courses-section {
-      padding: 5rem 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      position: relative;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--gold-dark);
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      right: 50%;
-      transform: translateX(50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
-      border-radius: 2px;
-    }
-
-    .section-subtitle {
-      font-size: 1.125rem;
-      color: var(--muted);
-      max-width: 700px;
-      margin: 1.5rem auto 0;
-    }
-
-    /* ========== COURSES GRID UPDATED ========== */
-    .courses-grid {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    /* ========== COURSE CARD UPDATED ========== */
-    .course-card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: var(--transition);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: row;
-      height: auto;
-      min-height: 380px;
-      position: relative;
-    }
-
-    .course-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .course-badge {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-weight: 800;
-      font-size: 0.875rem;
-      z-index: 2;
-      box-shadow: 0 5px 15px rgba(185, 146, 74, 0.3);
-    }
-
-    /* ========== COURSE IMAGE SECTION ========== */
-    .course-image-section {
-      width: 35%;
-      position: relative;
-      overflow: hidden;
-      min-height: 380px;
-    }
-
-    .course-image-section img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .course-card:hover .course-image-section img {
-      transform: scale(1.05);
-    }
-
-    .course-overlay {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background: linear-gradient(to top, rgba(43, 35, 32, 0.9), transparent);
-      padding: 1.5rem;
-      color: white;
-    }
-
-    .course-category {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      backdrop-filter: blur(5px);
-    }
-
-    .course-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    /* ========== COURSE CONTENT SECTION ========== */
-    .course-content-section {
-      width: 65%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ========== INSTRUCTOR SECTION ========== */
-    .instructor-section {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--stroke);
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      background: rgba(231, 210, 163, 0.1);
-    }
-
-    .instructor-avatar {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--gold-light);
-      flex-shrink: 0;
-    }
-
-    .instructor-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .instructor-info {
-      flex-grow: 1;
-    }
-
-    .instructor-info h4 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: var(--gold-dark);
-    }
-
-    .instructor-info p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .instructor-rating {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      margin-top: 0.5rem;
-    }
-
-    .instructor-rating i {
-      color: var(--gold);
-      font-size: 1rem;
-    }
-
-    /* ========== COURSE DETAILS ========== */
-    .course-details {
-      padding: 1.5rem;
-      flex-grow: 1;
-    }
-
-    .course-description {
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-      min-height: 80px;
-    }
-
-    .course-features {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .course-feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-    }
-
-    .course-feature i {
-      color: var(--gold);
-      font-size: 1.1rem;
-      width: 22px;
-      flex-shrink: 0;
-      margin-top: 0.125rem;
-    }
-
-    .course-feature span {
-      color: var(--ink);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      flex-grow: 1;
-    }
-
-    /* ========== COURSE FOOTER ========== */
-    .course-footer {
-      padding: 1.5rem;
-      border-top: 1px solid var(--stroke);
-      background: rgba(231, 210, 163, 0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: auto;
-    }
-
-    .course-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .course-duration,
-    .course-price {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .course-duration i,
-    .course-price i {
-      color: var(--gold);
-      font-size: 1.1rem;
-    }
-
-    .course-price .price {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--gold-dark);
-    }
-
-    .course-price .old-price {
-      font-size: 1.1rem;
-      color: var(--muted);
-      text-decoration: line-through;
-    }
-
-    .enroll-btn {
-      padding: 0.85rem 2rem;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      white-space: nowrap;
-    }
-
-    .enroll-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(185, 146, 74, 0.4);
-    }
-
-    /* ========== EMPTY STATE ========== */
-    .empty-state {
-      text-align: center;
-      padding: 4rem 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .empty-state i {
-      font-size: 4rem;
-      color: var(--gold-light);
-      margin-bottom: 1.5rem;
-    }
-
-    .empty-state h3 {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-      color: var(--gold-dark);
-    }
-
-    .empty-state p {
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
-      color: var(--gold-light);
-      padding-top: 4rem;
-      margin-top: 4rem;
-      border-top: 4px solid var(--gold);
-    }
-
-    .footer-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem 2rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-column h3 {
-      font-size: 1.375rem;
-      margin-bottom: 1.5rem;
-      color: white;
-      position: relative;
-      padding-bottom: 0.75rem;
-    }
-
-    .footer-column h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 50px;
-      height: 2px;
-      background: var(--gold);
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.875rem;
-    }
-
-    .footer-links a {
-      color: var(--gold-light);
-      text-decoration: none;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .footer-links a:hover {
-      color: white;
-      transform: translateX(-5px);
-    }
-
-    .footer-links a i {
-      font-size: 0.75rem;
-      color: var(--gold);
-    }
-
-    .footer-contact p {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      color: var(--gold-light);
-    }
-
-    .footer-contact i {
-      color: var(--gold);
-      margin-top: 0.25rem;
-      font-size: 1rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .social-links a {
-      width: 44px;
-      height: 44px;
-      background: rgba(185, 146, 74, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-      text-decoration: none;
-      transition: var(--transition);
-      border: 1px solid rgba(185, 146, 74, 0.3);
-    }
-
-    .social-links a:hover {
-      background: var(--gold);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(185, 146, 74, 0.3);
-    }
-
-    .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      text-align: center;
-      color: rgba(231, 210, 163, 0.7);
-      font-size: 0.875rem;
-    }
-
-    .footer-bottom p {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-legal {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-
-    .footer-legal a {
-      color: rgba(231, 210, 163, 0.7);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .footer-legal a:hover {
-      color: var(--gold-light);
-    }
-
-    /* ========== RESPONSIVE DESIGN ========== */
-    @media (max-width: 1200px) {
-      .course-card {
-        min-height: 360px;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="الأكاديمية الدولية للإبداع - دورات تدريبية متخصصة في المجالات الإبداعية مع مدربين خبراء">
+    <title>الدورات التدريبية | الأكاديمية الدولية للإبداع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      :root {
+        --bg: #F3E8DD;
+        --ink: #2B2320;
+        --muted: #6A5B52;
+        --gold: #B9924A;
+        --gold-light: #E7D2A3;
+        --gold-dark: #8B6A2B;
+        --stroke: rgba(120, 90, 60, .25);
+        --card: rgba(255, 255, 255, .85);
+        --shadow: 0 20px 40px rgba(0, 0, 0, .1);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
+        --radius: 24px;
+        --radius-sm: 16px;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --max-width: 1400px;
       }
 
-      .course-image-section {
-        min-height: 360px;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .course-card {
-        flex-direction: column;
-        min-height: auto;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      .course-image-section {
-        width: 100%;
-        height: 280px;
-        min-height: auto;
+      html {
+        scroll-behavior: smooth;
       }
 
-      .course-content-section {
-        width: 100%;
+      body {
+        font-family: "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+        color: var(--ink);
+        background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
+        min-height: 100vh;
+        line-height: 1.7;
       }
 
-      .hero-courses-title {
-        font-size: 2.5rem;
+      /* ========== TYPOGRAPHY ========== */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 800;
+        line-height: 1.2;
       }
 
-      .course-features {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+      .text-gradient {
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
-    }
 
-    @media (max-width: 768px) {
-      .hamburger {
+      /* ========== NAVIGATION ========== */
+      .imgLogo {
         display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--stroke);
+        padding: 1.25rem 0;
+        transition: var(--transition);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .navbar.scrolled {
+        padding: 0.75rem 0;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+      }
+
+      .nav-logo-img {
+        width: 75px;
+        height: 75px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid var(--gold-light);
+        box-shadow: 0 8px 20px rgba(139, 106, 43, 0.15);
+      }
+
+      .nav-logo-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .logo-text h2 {
+        font-size: 1.3rem;
+        color: var(--gold-dark);
+        margin-bottom: 0.25rem;
+      }
+
+      .logo-text span {
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-weight: 600;
       }
 
       .nav-menu {
-        position: fixed;
-        top: 100%;
-        right: -100%;
-        width: 100%;
-        height: 60vh;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 3rem 2rem;
-        transition: var(--transition);
-        border-top: 3px solid var(--stroke);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-menu.active {
-        right: 0;
-      }
-
-      .nav-links {
-        flex-direction: column;
-        width: 100%;
-        text-align: right;
-        gap: 0.75rem;
-      }
-
-      .nav-cta {
-        width: 100%;
-        margin-top: 2rem;
-      }
-
-      .nav-cta .btn {
-        width: 100%;
-      }
-
-      .hero-courses {
-        padding-top: 80px;
-      }
-
-      .hero-courses-title {
-        font-size: 2rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .courses-grid {
-        padding: 0 1rem;
-      }
-
-      .course-footer {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-
-      .course-meta {
+        display: flex;
         align-items: center;
-      }
-
-      .enroll-btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .course-features {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-container {
-        padding: 0 1rem;
-      }
-
-      .hero-courses-content {
-        padding: 2rem 1rem;
-      }
-
-      .filters-grid {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .filter-btn {
-        text-align: center;
-      }
-
-      .instructor-section {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-      }
-
-      .instructor-info {
-        text-align: center;
-      }
-
-      .footer-grid {
         gap: 2rem;
       }
 
-      .footer-legal {
-        flex-direction: column;
-        gap: 1rem;
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
       }
-    }
 
-    /* ========== UTILITIES ========== */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+      .nav-links a {
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-wrap: nowrap;
+      }
 
-    .text-center {
-      text-align: center;
-    }
+      .nav-links a i {
+        font-size: 0.875rem;
+        color: var(--gold);
+      }
 
-    .mb-1 {
-      margin-bottom: 1rem;
-    }
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+        transition: var(--transition);
+      }
 
-    .mb-2 {
-      margin-bottom: 2rem;
-    }
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+      }
 
-    .mb-3 {
-      margin-bottom: 3rem;
-    }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--gold-dark);
+      }
 
-    .mb-4 {
-      margin-bottom: 4rem;
-    }
+      .nav-cta .btn {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.95rem;
+      }
 
-    .text-muted {
-      color: var(--muted);
-    }
-  </style>
-</head>
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+      }
 
-<body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <div class="nav-logo-img">
-          <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع" big-logo="true">
-          <img src="./img/logoNav1.svg" alt="شعار الأكاديمية الدولية للإبداع" small-logo="true">
-        </div>
-        <div class="logo-text">
-          <h2>الأكاديمية الدولية للإبداع</h2>
-          <span>INTERNATIONAL CREATIVE ACADEMY</span>
-        </div>
-      </a>
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--gold-dark);
+        margin: 3px 0;
+        transition: var(--transition);
+        border-radius: 2px;
+      }
 
-      <button class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      /* ========== BUTTONS ========== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        gap: 0.75rem;
+        font-size: 1rem;
+        position: relative;
+        overflow: hidden;
+        text-wrap: nowrap;
+      }
 
-      <div class="nav-menu" id="navMenu">
-        <ul class="nav-links">
-          <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
-          <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
-          <!-- <li><a href="index.html#features"><i class="fas fa-bullseye"></i>المعرض</a></li> -->
-          <li><a href="#courses"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
-          <li><a href="index.html#testimonials"><i class="fas fa-comment"></i> الشـركات الدولية</a></li>
-          <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-        </ul>
-        <div class="nav-cta">
-          <a href="#courses" class="btn btn-primary">
-            <i class="fas fa-user-plus"></i>
-            تصفح الدورات
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
+        border: 1px solid rgba(139, 106, 43, 0.3);
+      }
 
-  <!-- Hero Section -->
-  <section class="hero-courses">
-    <div class="hero-courses-content">
-      <h1 class="hero-courses-title">الدورات التدريبية المتخصصة</h1>
-      <p class="hero-courses-subtitle">
-        اكتشف برامجنا التدريبية المتقدمة المصممة لتمكين المبدعين من تحويل أفكارهم إلى منتجات احترافية جاهزة للأسواق العالمية
-      </p>
-    </div>
-  </section>
+      .btn-primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
+      }
 
-  <!-- Filters Section -->
-  <section class="filters-section">
-    <div class="filters-container">
-      <div class="filters-grid">
-        <button class="filter-btn active" data-filter="all">جميع الدورات</button>
-        <button class="filter-btn" data-filter="design">تصميم مجوهرات</button>
-        <button class="filter-btn" data-filter="textile">تصميم نسيج</button>
-        <button class="filter-btn" data-filter="leather">تصميم جلود</button>
-      </div>
-      <div class="search-box">
-        <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن دورة أو مدرب...">
-        <i class="fas fa-search search-icon"></i>
-      </div>
-    </div>
-  </section>
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--gold-dark);
+        border: 2px solid var(--gold-light);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      }
 
-  <!-- Courses Section -->
-  <section class="courses-section" id="courses">
-    <div class="section-header">
-      <h2 class="section-title">برامجنا التدريبية المتقدمة</h2>
-      <p class="section-subtitle">برامج احترافية مع مدربين خبراء لتحويل موهبتك إلى مشروع تجاري ناجح</p>
-    </div>
+      .btn-secondary:hover {
+        background: white;
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border-color: var(--gold);
+      }
 
-    <div class="courses-grid" id="coursesContainer">
-      <!-- Course 1 -->
-      <div class="course-card" data-category="design">
-        <div class="course-badge">جودة دولية</div>
-        <div class="course-image-section">
-          <img src="./img/jewelry.jpeg" alt="دورة نظم الجودة الدولية">
-          <div class="course-overlay">
-            <span class="course-category">تصميم مجوهرات</span>
-            <h3 class="course-title">نظم الجودة الدولية للصناعات التراثية</h3>
+      /* ========== HERO SECTION ========== */
+      .hero-courses {
+        min-height: 40vh;
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+        background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.1) 0%, transparent 50%);
+        text-align: center;
+      }
+
+      .hero-courses-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-courses-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-courses-subtitle {
+        font-size: 1.25rem;
+        color: var(--muted);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* ========== FILTERS SECTION ========== */
+      .filters-section {
+        padding: 2rem 0;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--stroke);
+      }
+
+      .filters-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .filters-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .filter-btn {
+        padding: 0.75rem 1.5rem;
+        background: white;
+        border: 2px solid var(--gold-light);
+        border-radius: 50px;
+        font-weight: 700;
+        color: var(--muted);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        border-color: var(--gold);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(185, 146, 74, 0.2);
+      }
+
+      .search-box {
+        max-width: 500px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        padding-left: 3.5rem;
+        border: 2px solid var(--gold-light);
+        border-radius: 50px;
+        font-size: 1rem;
+        background: white;
+        transition: var(--transition);
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(185, 146, 74, 0.2);
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gold);
+      }
+
+      /* ========== COURSES SECTION ========== */
+      .courses-section {
+        padding: 5rem 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        position: relative;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--gold-dark);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        border-radius: 2px;
+      }
+
+      .section-subtitle {
+        font-size: 1.125rem;
+        color: var(--muted);
+        max-width: 700px;
+        margin: 1.5rem auto 0;
+      }
+
+      /* ========== COURSES GRID UPDATED ========== */
+      .courses-grid {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      /* ========== COURSE CARD UPDATED ========== */
+      .course-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        min-height: 380px;
+        position: relative;
+      }
+
+      .course-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .course-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.875rem;
+        z-index: 2;
+        box-shadow: 0 5px 15px rgba(185, 146, 74, 0.3);
+      }
+
+      /* ========== COURSE IMAGE SECTION ========== */
+      .course-image-section {
+        width: 35%;
+        position: relative;
+        overflow: hidden;
+        min-height: 380px;
+      }
+
+      .course-image-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .course-card:hover .course-image-section img {
+        transform: scale(1.05);
+      }
+
+      .course-overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: linear-gradient(to top, rgba(43, 35, 32, 0.9), transparent);
+        padding: 1.5rem;
+        color: white;
+      }
+
+      .course-category {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .course-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: white;
+      }
+
+      /* ========== COURSE CONTENT SECTION ========== */
+      .course-content-section {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ========== INSTRUCTOR SECTION ========== */
+      .instructor-section {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--stroke);
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        background: rgba(231, 210, 163, 0.1);
+      }
+
+      .instructor-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid var(--gold-light);
+        flex-shrink: 0;
+      }
+
+      .instructor-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .instructor-info {
+        flex-grow: 1;
+      }
+
+      .instructor-info h4 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: var(--gold-dark);
+      }
+
+      .instructor-info p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .instructor-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+      }
+
+      .instructor-rating i {
+        color: var(--gold);
+        font-size: 1rem;
+      }
+
+      /* ========== COURSE DETAILS ========== */
+      .course-details {
+        padding: 1.5rem;
+        flex-grow: 1;
+      }
+
+      .course-description {
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        min-height: 80px;
+      }
+
+      .course-features {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .course-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+      }
+
+      .course-feature i {
+        color: var(--gold);
+        font-size: 1.1rem;
+        width: 22px;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      .course-feature span {
+        color: var(--ink);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        flex-grow: 1;
+      }
+
+      /* ========== COURSE FOOTER ========== */
+      .course-footer {
+        padding: 1.5rem;
+        border-top: 1px solid var(--stroke);
+        background: rgba(231, 210, 163, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: auto;
+      }
+
+      .course-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .course-duration,
+      .course-price {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .course-duration i,
+      .course-price i {
+        color: var(--gold);
+        font-size: 1.1rem;
+      }
+
+      .course-price .price {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--gold-dark);
+      }
+
+      .course-price .old-price {
+        font-size: 1.1rem;
+        color: var(--muted);
+        text-decoration: line-through;
+      }
+
+      .enroll-btn {
+        padding: 0.85rem 2rem;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+      }
+
+      .enroll-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(185, 146, 74, 0.4);
+      }
+
+      /* ========== EMPTY STATE ========== */
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .empty-state i {
+        font-size: 4rem;
+        color: var(--gold-light);
+        margin-bottom: 1.5rem;
+      }
+
+      .empty-state h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--gold-dark);
+      }
+
+      .empty-state p {
+        color: var(--muted);
+        margin-bottom: 2rem;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
+        color: var(--gold-light);
+        padding-top: 4rem;
+        margin-top: 4rem;
+        border-top: 4px solid var(--gold);
+      }
+
+      .footer-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem 2rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-column h3 {
+        font-size: 1.375rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        position: relative;
+        padding-bottom: 0.75rem;
+      }
+
+      .footer-column h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--gold);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.875rem;
+      }
+
+      .footer-links a {
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(-5px);
+      }
+
+      .footer-links a i {
+        font-size: 0.75rem;
+        color: var(--gold);
+      }
+
+      .footer-contact p {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        color: var(--gold-light);
+      }
+
+      .footer-contact i {
+        color: var(--gold);
+        margin-top: 0.25rem;
+        font-size: 1rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-links a {
+        width: 44px;
+        height: 44px;
+        background: rgba(185, 146, 74, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: var(--transition);
+        border: 1px solid rgba(185, 146, 74, 0.3);
+      }
+
+      .social-links a:hover {
+        background: var(--gold);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(185, 146, 74, 0.3);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        color: rgba(231, 210, 163, 0.7);
+        font-size: 0.875rem;
+      }
+
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-legal {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .footer-legal a {
+        color: rgba(231, 210, 163, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-legal a:hover {
+        color: var(--gold-light);
+      }
+
+      /* ========== RESPONSIVE DESIGN ========== */
+      @media (max-width: 1200px) {
+        .course-card {
+          min-height: 360px;
+        }
+
+        .course-image-section {
+          min-height: 360px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .course-card {
+          flex-direction: column;
+          min-height: auto;
+        }
+
+        .course-image-section {
+          width: 100%;
+          height: 280px;
+          min-height: auto;
+        }
+
+        .course-content-section {
+          width: 100%;
+        }
+
+        .hero-courses-title {
+          font-size: 2.5rem;
+        }
+
+        .course-features {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: absolute;
+          top: 100%;
+          right: -100%;
+          width: 100%;
+          height: fit-content;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          justify-content: flex-start;
+          padding: 1rem 2rem;
+          transition: var(--transition);
+          border-top: 3px solid var(--stroke);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu.active {
+          right: 0;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          width: 100%;
+          text-align: right;
+          gap: 0.75rem;
+        }
+
+        .nav-cta {
+          width: 100%;
+          margin-top: 2rem;
+        }
+
+        .nav-cta .btn {
+          width: 100%;
+        }
+
+        .hero-courses {
+          padding-top: 80px;
+        }
+
+        .hero-courses-title {
+          font-size: 2rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .courses-grid {
+          padding: 0 1rem;
+        }
+
+        .course-footer {
+          flex-direction: column;
+          align-items: stretch;
+          text-align: center;
+        }
+
+        .course-meta {
+          align-items: center;
+        }
+
+        .enroll-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .course-features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-logo-img {
+          width: 60px;
+          height: 60px;
+        }
+
+        .nav-container {
+          padding: 0 1rem;
+        }
+
+        .hero-courses-content {
+          padding: 2rem 1rem;
+        }
+
+        .filters-grid {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .filter-btn {
+          text-align: center;
+        }
+
+        .instructor-section {
+          flex-direction: column;
+          text-align: center;
+          align-items: center;
+        }
+
+        .instructor-info {
+          text-align: center;
+        }
+
+        .footer-grid {
+          gap: 2rem;
+        }
+
+        .footer-legal {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      /* ========== UTILITIES ========== */
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .mb-1 {
+        margin-bottom: 1rem;
+      }
+
+      .mb-2 {
+        margin-bottom: 2rem;
+      }
+
+      .mb-3 {
+        margin-bottom: 3rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 4rem;
+      }
+
+      .text-muted {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-img">
+            <!-- <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع" big-logo="true"> -->
+            <img src="./img/logoNav1.svg" alt="شعار الأكاديمية الدولية للإبداع">
           </div>
-        </div>
-
-        <div class="course-content-section">
-          <div class="instructor-section">
-            <div class="instructor-avatar">
-              <img src="./img/DrHany.jpeg" alt="المدرب الدكتور هانى بركات">
-            </div>
-            <div class="instructor-info">
-              <h4>د. هانى بركات</h4>
-              <p>خبير الجودة الدولى - رئيس مجلس إدارة شركة QUALITY EGESCO</p>
-              <div class="instructor-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <span>(4.7)</span>
-              </div>
-            </div>
+          <div class="logo-text">
+            <h2>الأكاديمية الدولية للإبداع</h2>
+            <span>INTERNATIONAL CREATIVE ACADEMY</span>
           </div>
+        </a>
 
-          <div class="course-details">
-            <p class="course-description">
-              دورة متخصصة في تطبيق نظم الجودة الدولية للصناعات التراثية والإبداعية، تهدف إلى تأهيل المنتجات للمواصفات العالمية وفتح أسواق التصدير.
-            </p>
-            <div class="course-features">
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>نظم الجودة الدولية للصناعات التراثية</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>الطريق إلى التصدير والمتطلبات الدولية</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>شهادة معتمدة دولياً من QUALITY EGESCO</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>ورش عمل تطبيقية على منتجات حقيقية</span>
-              </div>
-            </div>
-          </div>
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-          <div class="course-footer">
-            <div class="course-meta">
-              <div class="course-duration">
-                <i class="far fa-clock"></i>
-                <span>6 أسابيع (30 ساعة)</span>
-              </div>
-              <div class="course-price">
-                <i class="fas fa-tag"></i>
-                <span class="price">6,500 ج.م</span>
-                <span class="old-price">8,000 ج.م</span>
-              </div>
-            </div>
-            <button class="enroll-btn" onclick="enrollCourse('نظم الجودة الدولية للصناعات التراثية')">
-              <i class="fas fa-user-plus"></i>
-              سجل الآن
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 2 -->
-      <div class="course-card" data-category="textile">
-        <div class="course-badge">تصميم دولي</div>
-        <div class="course-image-section">
-          <img src="./img/Kilimandcarpet.png" alt="دورة تصميم الأزياء العالمية">
-          <div class="course-overlay">
-            <span class="course-category">تصميم نسيج</span>
-            <h3 class="course-title">من الإسكتش إلى عرض أزياء عالمي</h3>
-          </div>
-        </div>
-
-        <div class="course-content-section">
-          <div class="instructor-section">
-            <div class="instructor-avatar">
-              <img src="./img/instructor2.jpg" alt="المدرب مستر مارتن فيكتور المصرى">
-            </div>
-            <div class="instructor-info">
-              <h4>مستر مارتن فيكتور المصرى</h4>
-              <p>مصمم دولي - خبير تصميم أزياء عالمي بخبرة 15 عاماً في الأسواق الأوروبية</p>
-              <div class="instructor-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <span>(5.0)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="course-details">
-            <p class="course-description">
-              برنامج متكامل لتحويل الأفكار الإبداعية إلى علامة تجارية عالمية، بدءاً من الرسم الأولي وصولاً إلى العرض النهائي في منصات الأزياء الدولية.
-            </p>
-            <div class="course-features">
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>الرحلة الكاملة من الفكرة إلى البراند التجاري العالمي</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>تطوير التصميم واختيار الخامات الاحترافية</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>ضبط الجودة وبناء الهوية البصرية</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>إعداد المنتج النهائي للعرض في الأسواق الدولية</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="course-footer">
-            <div class="course-meta">
-              <div class="course-duration">
-                <i class="far fa-clock"></i>
-                <span>10 أسابيع (50 ساعة)</span>
-              </div>
-              <div class="course-price">
-                <i class="fas fa-tag"></i>
-                <span class="price">8,500 ج.م</span>
-                <span class="old-price">10,500 ج.م</span>
-              </div>
-            </div>
-            <button class="enroll-btn" onclick="enrollCourse('من الإسكتش إلى عرض أزياء عالمي')">
-              <i class="fas fa-user-plus"></i>
-              سجل الآن
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Course 3 -->
-      <div class="course-card" data-category="leather">
-        <div class="course-badge">خبرة 20 سنة</div>
-        <div class="course-image-section">
-          <img src="./img/leather.png" alt="دورة تصميم وإنتاج الأزياء">
-          <div class="course-overlay">
-            <span class="course-category">تصميم جلود</span>
-            <h3 class="course-title">تصميم وإنتاج الأزياء بمعايير احترافية</h3>
-          </div>
-        </div>
-
-        <div class="course-content-section">
-          <div class="instructor-section">
-            <div class="instructor-avatar">
-              <img src="./img/instructor3.jpg" alt="المدربة الدكتورة إلهام زايد">
-            </div>
-            <div class="instructor-info">
-              <h4>د. إلهام زايد</h4>
-              <p>دكتورة في تصميم الأزياء - خبرة 20 سنة في تدريس التصميم والباترون والتنفيذ</p>
-              <div class="instructor-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-                <span>(4.3)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="course-details">
-            <p class="course-description">
-              دورة متقدمة تغطي الرحلة الكاملة لتصميم وإنتاج الأزياء، من الفكرة الأولية إلى النموذج الأولي، مع التركيز على الجودة الاحترافية والمعايير الدولية.
-            </p>
-            <div class="course-features">
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>رحلة الأزياء الكاملة من الفكرة إلى النموذج الأولي</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>تخصصات: أزياء سيدات - رجالي - أطفال</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>تطبيقات عملية وتدريب مكثف على المعدات الحديثة</span>
-              </div>
-              <div class="course-feature">
-                <i class="fas fa-check-circle"></i>
-                <span>دورات أولية ومتقدمة ودورات متخصصة</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="course-footer">
-            <div class="course-meta">
-              <div class="course-duration">
-                <i class="far fa-clock"></i>
-                <span>8 أسابيع (40 ساعة)</span>
-              </div>
-              <div class="course-price">
-                <i class="fas fa-tag"></i>
-                <span class="price">7,200 ج.م</span>
-                <span class="old-price">9,000 ج.م</span>
-              </div>
-            </div>
-            <button class="enroll-btn" onclick="enrollCourse('تصميم وإنتاج الأزياء بمعايير احترافية')">
-              <i class="fas fa-user-plus"></i>
-              سجل الآن
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-column">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-            <div style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; border: 2px solid var(--gold);">
-              <img src="./img/logoNav1.svg" alt="شعار الأكاديمية" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div>
-              <h3 style="margin: 0; color: white; font-size: 1.25rem;">الأكاديمية الدولية للإبداع</h3>
-              <span style="color: var(--gold-light); font-size: 0.75rem;">International Creative Academy</span>
-            </div>
-          </div>
-          <p style="color: var(--gold-light); line-height: 1.8; margin-bottom: 1.5rem;">
-            حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات جاهزة
-            للمنافسة العالمية.
-          </p>
-          <div class="social-links">
-            <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h3>روابط سريعة</h3>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
-            <li><a href="index.html#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
-            <li><a href="#courses"><i class="fas fa-chevron-left"></i> الدورات التدريبية</a></li>
-            <li><a href="index.html#testimonials"><i class="fas fa-chevron-left"></i> الشـركات الدولية</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+        <div class="nav-menu" id="navMenu">
+          <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
+            <!-- <li><a href="index.html#features"><i class="fas fa-bullseye"></i>المعرض</a></li> -->
+            <li><a href="#courses"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-comment"></i> الشـركات الدولية</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
           </ul>
-        </div>
-        <div class="footer-column">
-          <h3>مجالات التدريب</h3>
-          <ul class="footer-links">
-            <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم مجوهرات</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> فنون النسيج والسجاد</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم الأزياء</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> الجودة والتصدير</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> التكنولوجيا والإبداع</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>اتصل بنا</h3>
-          <div class="footer-contact">
-            <p><i class="fas fa-map-marker-alt"></i>١٤ شارع فؤاد بدواني _ المنطقة الثامنة مدينة نصر _ القاهرة</p>
-            <p><i class="fas fa-phone"></i>‎+20 2 26706606</p>
-            <p><i class="fas fa-envelope"></i> info@ica-academy.com</p>
-            <p><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 4 مساءً</p>
+          <div class="nav-cta">
+            <a href="#courses" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i>
+              تصفح الدورات
+            </a>
           </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع (ICA) - جميع الحقوق محفوظة</p>
-        <div class="footer-legal">
-          <a href="#">سياسة الخصوصية</a>
-          <a href="#">الشروط والأحكام</a>
-          <a href="#">خريطة الموقع</a>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.75rem; color: rgba(231, 210, 163, 0.5);">
-          تصميم وتطوير بكل ❤️ لخدمة المبدعين العرب
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-courses">
+      <div class="hero-courses-content">
+        <h1 class="hero-courses-title">الدورات التدريبية المتخصصة</h1>
+        <p class="hero-courses-subtitle">
+          اكتشف برامجنا التدريبية المتقدمة المصممة لتمكين المبدعين من تحويل أفكارهم إلى منتجات احترافية جاهزة للأسواق
+          العالمية
         </p>
       </div>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    // Set current year
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    <!-- Filters Section -->
+    <section class="filters-section">
+      <div class="filters-container">
+        <div class="filters-grid">
+          <button class="filter-btn active" data-filter="all">جميع الدورات</button>
+          <button class="filter-btn" data-filter="design">تصميم مجوهرات</button>
+          <button class="filter-btn" data-filter="textile">تصميم نسيج</button>
+          <button class="filter-btn" data-filter="leather">تصميم جلود</button>
+        </div>
+        <div class="search-box">
+          <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن دورة أو مدرب...">
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </div>
+    </section>
 
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+    <!-- Courses Section -->
+    <section class="courses-section" id="courses">
+      <div class="section-header">
+        <h2 class="section-title">برامجنا التدريبية المتقدمة</h2>
+        <p class="section-subtitle">برامج احترافية مع مدربين خبراء لتحويل موهبتك إلى مشروع تجاري ناجح</p>
+      </div>
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
+      <div class="courses-grid" id="coursesContainer">
+        <!-- Course 1 -->
+        <div class="course-card" data-category="design">
+          <div class="course-badge">جودة دولية</div>
+          <div class="course-image-section">
+            <img src="./img/jewelry.jpeg" alt="دورة نظم الجودة الدولية">
+            <div class="course-overlay">
+              <span class="course-category">تصميم مجوهرات</span>
+              <h3 class="course-title">نظم الجودة الدولية للصناعات التراثية</h3>
+            </div>
+          </div>
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+          <div class="course-content-section">
+            <div class="instructor-section">
+              <div class="instructor-avatar">
+                <img src="./img/DrHany.jpeg" alt="المدرب الدكتور هانى بركات">
+              </div>
+              <div class="instructor-info">
+                <h4>د. هانى بركات</h4>
+                <p>خبير الجودة الدولى - رئيس مجلس إدارة شركة QUALITY EGESCO</p>
+                <div class="instructor-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>(4.7)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-details">
+              <p class="course-description">
+                دورة متخصصة في تطبيق نظم الجودة الدولية للصناعات التراثية والإبداعية، تهدف إلى تأهيل المنتجات للمواصفات
+                العالمية وفتح أسواق التصدير.
+              </p>
+              <div class="course-features">
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>نظم الجودة الدولية للصناعات التراثية</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>الطريق إلى التصدير والمتطلبات الدولية</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>شهادة معتمدة دولياً من QUALITY EGESCO</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>ورش عمل تطبيقية على منتجات حقيقية</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-footer">
+              <div class="course-meta">
+                <div class="course-duration">
+                  <i class="far fa-clock"></i>
+                  <span>6 أسابيع (30 ساعة)</span>
+                </div>
+                <div class="course-price">
+                  <i class="fas fa-tag"></i>
+                  <span class="price">6,500 ج.م</span>
+                  <span class="old-price">8,000 ج.م</span>
+                </div>
+              </div>
+              <button class="enroll-btn" onclick="enrollCourse('نظم الجودة الدولية للصناعات التراثية')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="course-card" data-category="textile">
+          <div class="course-badge">تصميم دولي</div>
+          <div class="course-image-section">
+            <img src="./img/Kilimandcarpet.png" alt="دورة تصميم الأزياء العالمية">
+            <div class="course-overlay">
+              <span class="course-category">تصميم نسيج</span>
+              <h3 class="course-title">من الإسكتش إلى عرض أزياء عالمي</h3>
+            </div>
+          </div>
+
+          <div class="course-content-section">
+            <div class="instructor-section">
+              <div class="instructor-avatar">
+                <img src="./img/instructor2.jpg" alt="المدرب مستر مارتن فيكتور المصرى">
+              </div>
+              <div class="instructor-info">
+                <h4>مستر مارتن فيكتور المصرى</h4>
+                <p>مصمم دولي - خبير تصميم أزياء عالمي بخبرة 15 عاماً في الأسواق الأوروبية</p>
+                <div class="instructor-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(5.0)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-details">
+              <p class="course-description">
+                برنامج متكامل لتحويل الأفكار الإبداعية إلى علامة تجارية عالمية، بدءاً من الرسم الأولي وصولاً إلى العرض
+                النهائي في منصات الأزياء الدولية.
+              </p>
+              <div class="course-features">
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>الرحلة الكاملة من الفكرة إلى البراند التجاري العالمي</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>تطوير التصميم واختيار الخامات الاحترافية</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>ضبط الجودة وبناء الهوية البصرية</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>إعداد المنتج النهائي للعرض في الأسواق الدولية</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-footer">
+              <div class="course-meta">
+                <div class="course-duration">
+                  <i class="far fa-clock"></i>
+                  <span>10 أسابيع (50 ساعة)</span>
+                </div>
+                <div class="course-price">
+                  <i class="fas fa-tag"></i>
+                  <span class="price">8,500 ج.م</span>
+                  <span class="old-price">10,500 ج.م</span>
+                </div>
+              </div>
+              <button class="enroll-btn" onclick="enrollCourse('من الإسكتش إلى عرض أزياء عالمي')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="course-card" data-category="leather">
+          <div class="course-badge">خبرة 20 سنة</div>
+          <div class="course-image-section">
+            <img src="./img/leather.png" alt="دورة تصميم وإنتاج الأزياء">
+            <div class="course-overlay">
+              <span class="course-category">تصميم جلود</span>
+              <h3 class="course-title">تصميم وإنتاج الأزياء بمعايير احترافية</h3>
+            </div>
+          </div>
+
+          <div class="course-content-section">
+            <div class="instructor-section">
+              <div class="instructor-avatar">
+                <img src="./img/instructor3.jpg" alt="المدربة الدكتورة إلهام زايد">
+              </div>
+              <div class="instructor-info">
+                <h4>د. إلهام زايد</h4>
+                <p>دكتورة في تصميم الأزياء - خبرة 20 سنة في تدريس التصميم والباترون والتنفيذ</p>
+                <div class="instructor-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span>(4.3)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-details">
+              <p class="course-description">
+                دورة متقدمة تغطي الرحلة الكاملة لتصميم وإنتاج الأزياء، من الفكرة الأولية إلى النموذج الأولي، مع التركيز
+                على الجودة الاحترافية والمعايير الدولية.
+              </p>
+              <div class="course-features">
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>رحلة الأزياء الكاملة من الفكرة إلى النموذج الأولي</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>تخصصات: أزياء سيدات - رجالي - أطفال</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>تطبيقات عملية وتدريب مكثف على المعدات الحديثة</span>
+                </div>
+                <div class="course-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>دورات أولية ومتقدمة ودورات متخصصة</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-footer">
+              <div class="course-meta">
+                <div class="course-duration">
+                  <i class="far fa-clock"></i>
+                  <span>8 أسابيع (40 ساعة)</span>
+                </div>
+                <div class="course-price">
+                  <i class="fas fa-tag"></i>
+                  <span class="price">7,200 ج.م</span>
+                  <span class="old-price">9,000 ج.م</span>
+                </div>
+              </div>
+              <button class="enroll-btn" onclick="enrollCourse('تصميم وإنتاج الأزياء بمعايير احترافية')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <div
+                style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; border: 2px solid var(--gold);">
+                <img src="./img/logoNav1.svg" alt="شعار الأكاديمية"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div>
+                <h3 style="margin: 0; color: white; font-size: 1.25rem;">الأكاديمية الدولية للإبداع</h3>
+                <span style="color: var(--gold-light); font-size: 0.75rem;">International Creative Academy</span>
+              </div>
+            </div>
+            <p style="color: var(--gold-light); line-height: 1.8; margin-bottom: 1.5rem;">
+              حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين وتحويل أفكارهم إلى منتجات
+              جاهزة
+              للمنافسة العالمية.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+              <a href="#" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>روابط سريعة</h3>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+              <li><a href="index.html#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
+              <li><a href="#courses"><i class="fas fa-chevron-left"></i> الدورات التدريبية</a></li>
+              <li><a href="index.html#testimonials"><i class="fas fa-chevron-left"></i> الشـركات الدولية</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>مجالات التدريب</h3>
+            <ul class="footer-links">
+              <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم مجوهرات</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> فنون النسيج والسجاد</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم الأزياء</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> الجودة والتصدير</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> التكنولوجيا والإبداع</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>اتصل بنا</h3>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt"></i>١٤ شارع فؤاد بدواني _ المنطقة الثامنة مدينة نصر _ القاهرة</p>
+              <p><i class="fas fa-phone"></i>‎+20 2 26706606</p>
+              <p><i class="fas fa-envelope"></i> info@ica-academy.com</p>
+              <p><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 4 مساءً</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع (ICA) - جميع الحقوق محفوظة</p>
+          <div class="footer-legal">
+            <a href="#">سياسة الخصوصية</a>
+            <a href="#">الشروط والأحكام</a>
+            <a href="#">خريطة الموقع</a>
+          </div>
+          <p style="margin-top: 1rem; font-size: 0.75rem; color: rgba(231, 210, 163, 0.5);">
+            تصميم وتطوير بكل ❤️ لخدمة المبدعين العرب
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Set current year
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      // Mobile menu toggle
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
       });
-    });
 
-    // Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
 
-    // Course filtering functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const courseCards = document.querySelectorAll('.course-card');
-    const searchInput = document.getElementById('searchInput');
-    const coursesContainer = document.getElementById('coursesContainer');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Add active class to clicked button
-        button.classList.add('active');
-
-        const filterValue = button.getAttribute('data-filter');
-
-        // Show all courses if filter is 'all'
-        if (filterValue === 'all') {
-          courseCards.forEach(card => {
-            card.style.display = 'flex';
-          });
+      // Navbar scroll effect
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
         } else {
-          // Hide all courses first
-          courseCards.forEach(card => {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Course filtering functionality
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const courseCards = document.querySelectorAll('.course-card');
+      const searchInput = document.getElementById('searchInput');
+      const coursesContainer = document.getElementById('coursesContainer');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          button.classList.add('active');
+
+          const filterValue = button.getAttribute('data-filter');
+
+          // Show all courses if filter is 'all'
+          if (filterValue === 'all') {
+            courseCards.forEach(card => {
+              card.style.display = 'flex';
+            });
+          } else {
+            // Hide all courses first
+            courseCards.forEach(card => {
+              card.style.display = 'none';
+            });
+
+            // Show only courses with matching category
+            document.querySelectorAll(`.course-card[data-category="${filterValue}"]`).forEach(card => {
+              card.style.display = 'flex';
+            });
+          }
+        });
+      });
+
+      // Search functionality
+      searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        courseCards.forEach(card => {
+          const title = card.querySelector('.course-title').textContent.toLowerCase();
+          const description = card.querySelector('.course-description').textContent.toLowerCase();
+          const instructor = card.querySelector('.instructor-info h4').textContent.toLowerCase();
+          const category = card.querySelector('.course-category').textContent.toLowerCase();
+
+          if (title.includes(searchTerm) || description.includes(searchTerm) ||
+            instructor.includes(searchTerm) || category.includes(searchTerm)) {
+            card.style.display = 'flex';
+          } else {
             card.style.display = 'none';
-          });
-
-          // Show only courses with matching category
-          document.querySelectorAll(`.course-card[data-category="${filterValue}"]`).forEach(card => {
-            card.style.display = 'flex';
-          });
-        }
+          }
+        });
       });
-    });
 
-    // Search functionality
-    searchInput.addEventListener('input', () => {
-      const searchTerm = searchInput.value.toLowerCase();
+      // Enrollment function - Redirects to enroll-course.html
+      function enrollCourse(courseName) {
+        // Store course name in sessionStorage for the enrollment page
+        sessionStorage.setItem('selectedCourse', courseName);
 
-      courseCards.forEach(card => {
-        const title = card.querySelector('.course-title').textContent.toLowerCase();
-        const description = card.querySelector('.course-description').textContent.toLowerCase();
-        const instructor = card.querySelector('.instructor-info h4').textContent.toLowerCase();
-        const category = card.querySelector('.course-category').textContent.toLowerCase();
+        // Show loading animation
+        const button = event.target;
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
+        button.disabled = true;
 
-        if (title.includes(searchTerm) || description.includes(searchTerm) ||
-          instructor.includes(searchTerm) || category.includes(searchTerm)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+        // Redirect to enrollment page after short delay
+        setTimeout(() => {
+          window.location.href = 'enroll-course.html';
+        }, 600);
+      }
+
+      // Add animation to course cards on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe course cards for animation
+      document.querySelectorAll('.course-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
       });
-    });
 
-    // Enrollment function - Redirects to enroll-course.html
-function enrollCourse(courseName) {
-  // Store course name in sessionStorage for the enrollment page
-  sessionStorage.setItem('selectedCourse', courseName);
-  
-  // Show loading animation
-  const button = event.target;
-  const originalHTML = button.innerHTML;
-  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
-  button.disabled = true;
-  
-  // Redirect to enrollment page after short delay
-  setTimeout(() => {
-    window.location.href = 'enroll-course.html';
-  }, 600);
-}
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
 
-    // Add animation to course cards on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
       });
-    }, observerOptions);
 
-    // Observe course cards for animation
-    document.querySelectorAll('.course-card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
-    });
+      // Add instructor images placeholder handler
+      document.querySelectorAll('.instructor-avatar img').forEach(img => {
+        img.addEventListener('error', function () {
+          // Replace broken image with initial letter avatar
+          const parent = this.parentElement;
+          const name = parent.parentElement.querySelector('h4').textContent;
+          const initial = name.split(' ')[0].charAt(0);
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
+          parent.innerHTML = `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">${initial}</div>`;
+        });
       });
-    });
-
-    // Add instructor images placeholder handler
-    document.querySelectorAll('.instructor-avatar img').forEach(img => {
-      img.addEventListener('error', function() {
-        // Replace broken image with initial letter avatar
-        const parent = this.parentElement;
-        const name = parent.parentElement.querySelector('h4').textContent;
-        const initial = name.split(' ')[0].charAt(0);
-        
-        parent.innerHTML = `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">${initial}</div>`;
-      });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 
 </html>

@@ -1,257 +1,338 @@
-// Force Light Mode Always - Remove All Dark Mode Effects
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Force light mode on body
-    document.body.classList.remove('dark-mode');
-    document.body.classList.add('light-mode');
+// Force Light Mode Always - Extreme Version
+(function() {
+    'use strict';
     
-    // 2. Set meta tags to force light mode
-    function forceLightModeMetaTags() {
-        // Remove any existing theme-color meta
-        const existingThemeColor = document.querySelector('meta[name="theme-color"]');
-        if (existingThemeColor) {
-            existingThemeColor.remove();
+    // Create and inject CSS immediately
+    const lightModeCSS = `
+        /* FORCE LIGHT MODE - NO DARK MODE ALLOWED */
+        html {
+            color-scheme: light only !important;
+            forced-color-adjust: none !important;
         }
         
-        // Remove any color-scheme meta
-        const existingColorScheme = document.querySelector('meta[name="color-scheme"]');
-        if (existingColorScheme) {
-            existingColorScheme.remove();
+        body {
+            color-scheme: light only !important;
+            background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
+            color: #2B2320 !important;
         }
         
-        // Remove supported-color-schemes meta
-        const existingSupportedColors = document.querySelector('meta[name="supported-color-schemes"]');
-        if (existingSupportedColors) {
-            existingSupportedColors.remove();
-        }
-        
-        // Add meta to force light mode
-        const metaThemeColor = document.createElement('meta');
-        metaThemeColor.name = 'theme-color';
-        metaThemeColor.content = '#F3E8DD'; // Your light background color
-        document.head.appendChild(metaThemeColor);
-        
-        // Force color-scheme to light only
-        const metaColorScheme = document.createElement('meta');
-        metaColorScheme.name = 'color-scheme';
-        metaColorScheme.content = 'light only';
-        document.head.appendChild(metaColorScheme);
-        
-        // Add meta to specify light mode only
-        const metaSupportedColors = document.createElement('meta');
-        metaSupportedColors.name = 'supported-color-schemes';
-        metaSupportedColors.content = 'light';
-        document.head.appendChild(metaSupportedColors);
-    }
-    
-    // 3. Apply CSS to force light mode
-    function forceLightModeCSS() {
-        // Remove any dark mode styles
-        const darkModeStyles = document.getElementById('dark-mode-styles');
-        if (darkModeStyles) {
-            darkModeStyles.remove();
-        }
-        
-        // Add light mode enforcing styles
-        const lightModeStyles = document.createElement('style');
-        lightModeStyles.id = 'force-light-mode-styles';
-        lightModeStyles.textContent = `
-            /* Force light mode on all elements */
-            :root, body, html, * {
-                color-scheme: light !important;
-                forced-color-adjust: none !important;
-            }
-            
-            /* Override any system dark mode */
-            @media (prefers-color-scheme: dark) {
-                :root, body, html, * {
-                    color-scheme: light !important;
-                }
-                
-                /* Force light colors */
-                body {
-                    background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
-                    color: var(--ink) !important;
-                }
-                
-                /* Ensure all text is visible */
-                h1, h2, h3, h4, h5, h6, p, span, a, div, li {
-                    color: var(--ink) !important;
-                }
-                
-                /* Force card backgrounds */
-                .hero-card, .feature-card, .program-card, .testimonial-card,
-                .stat-card, .swiper-slider-container, .accreditation-section {
-                    background: var(--card) !important;
-                    border: 1px solid var(--stroke) !important;
-                }
-                
-                /* Force navbar light */
-                .navbar {
-                    background: rgba(255, 255, 255, 0.98) !important;
-                }
-                
-                /* Force footer light */
-                .footer {
-                    background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%) !important;
-                }
-            }
-            
-            /* Remove any dark mode classes */
-            .dark-mode, [data-theme="dark"], .theme-dark, .dark {
-                display: none !important;
-            }
-            
-            /* Force specific elements that might get dark from browser */
-            input, textarea, select {
-                background-color: white !important;
-                color: #2B2320 !important;
-                border-color: #E0E0E0 !important;
-            }
-            
-            /* Remove any dark mode transitions */
-            * {
+        /* Override ALL dark mode system preferences */
+        @media (prefers-color-scheme: dark) {
+            html {
                 color-scheme: light only !important;
             }
-        `;
-        document.head.appendChild(lightModeStyles);
-    }
-    
-    // 4. Remove any dark mode toggle buttons
-    function removeDarkModeToggles() {
-        // Remove dark mode toggle button
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        if (darkModeToggle) {
-            darkModeToggle.remove();
+            
+            body {
+                background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
+                color: #2B2320 !important;
+            }
+            
+            * {
+                background-color: transparent !important;
+                color: inherit !important;
+            }
+            
+            .navbar {
+                background: rgba(255, 255, 255, 0.98) !important;
+                backdrop-filter: blur(10px) !important;
+            }
+            
+            .hero-card, .feature-card, .program-card, 
+            .testimonial-card, .stat-card, 
+            .accreditation-section, .swiper-slider-container {
+                background: rgba(255, 255, 255, 0.85) !important;
+                border: 1px solid rgba(120, 90, 60, .25) !important;
+            }
+            
+            .footer {
+                background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%) !important;
+            }
         }
         
-        // Remove any elements with dark mode classes
-        document.querySelectorAll('.dark-mode-toggle, .theme-switcher, .mode-switch').forEach(el => {
-            el.remove();
+        /* Direct style overrides for elements */
+        h1, h2, h3, h4, h5, h6 {
+            color: #2B2320 !important;
+        }
+        
+        p, span, a, li, div {
+            color: #2B2320 !important;
+        }
+        
+        /* Remove any dark mode visual effects */
+        .dark-mode, [data-theme="dark"], .theme-dark, .dark,
+        [class*="dark"], [class*="night"], [class*="black"] {
+            background-color: transparent !important;
+            color: inherit !important;
+        }
+        
+        /* Force specific element colors */
+        input, textarea, select, button {
+            background-color: white !important;
+            color: #2B2320 !important;
+            border-color: #E0E0E0 !important;
+        }
+    `;
+    
+    // Inject CSS immediately
+    const style = document.createElement('style');
+    style.id = 'force-light-mode-forever';
+    style.textContent = lightModeCSS;
+    document.head.appendChild(style);
+    
+    // Set meta tags immediately
+    function setMetaTags() {
+        // Remove existing meta tags
+        document.querySelectorAll('meta[name="theme-color"], meta[name="color-scheme"], meta[name="supported-color-schemes"]').forEach(meta => meta.remove());
+        
+        // Create new meta tags
+        const themeColor = document.createElement('meta');
+        themeColor.name = 'theme-color';
+        themeColor.content = '#F3E8DD';
+        document.head.appendChild(themeColor);
+        
+        const colorScheme = document.createElement('meta');
+        colorScheme.name = 'color-scheme';
+        colorScheme.content = 'light';
+        document.head.appendChild(colorScheme);
+        
+        const supportedColors = document.createElement('meta');
+        supportedColors.name = 'supported-color-schemes';
+        supportedColors.content = 'light';
+        document.head.appendChild(supportedColors);
+    }
+    
+    // Set HTML attributes
+    function setHTMLAttributes() {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('color-scheme', 'light');
+        document.documentElement.removeAttribute('data-darkreader-scheme');
+        document.documentElement.removeAttribute('data-darkreader-mode');
+    }
+    
+    // Override CSS variables
+    function overrideCSSVariables() {
+        const root = document.documentElement;
+        
+        // Force original light mode variables
+        const lightVars = {
+            '--bg': '#F3E8DD',
+            '--ink': '#2B2320',
+            '--muted': '#6A5B52',
+            '--gold': '#B9924A',
+            '--gold-light': '#E7D2A3',
+            '--gold-dark': '#8B6A2B',
+            '--stroke': 'rgba(120, 90, 60, .25)',
+            '--card': 'rgba(255, 255, 255, .85)',
+            '--shadow': '0 20px 40px rgba(0, 0, 0, .1)',
+            '--shadow-hover': '0 30px 60px rgba(0, 0, 0, .15)'
+        };
+        
+        Object.entries(lightVars).forEach(([key, value]) => {
+            root.style.setProperty(key, value, 'important');
         });
     }
     
-    // 5. Set CSS custom properties to light mode values
-    function forceLightCustomProperties() {
-        const root = document.documentElement;
+    // Remove dark mode classes
+    function removeDarkClasses() {
+        // From document elements
+        document.documentElement.classList.remove('dark', 'dark-mode', 'theme-dark');
+        document.body.classList.remove('dark', 'dark-mode', 'theme-dark');
         
-        // Force light mode CSS variables
-        root.style.setProperty('--bg', '#F3E8DD', 'important');
-        root.style.setProperty('--ink', '#2B2320', 'important');
-        root.style.setProperty('--muted', '#6A5B52', 'important');
-        root.style.setProperty('--gold', '#B9924A', 'important');
-        root.style.setProperty('--gold-light', '#E7D2A3', 'important');
-        root.style.setProperty('--gold-dark', '#8B6A2B', 'important');
-        root.style.setProperty('--stroke', 'rgba(120, 90, 60, .25)', 'important');
-        root.style.setProperty('--card', 'rgba(255, 255, 255, .85)', 'important');
-        root.style.setProperty('--shadow', '0 20px 40px rgba(0, 0, 0, .1)', 'important');
-        root.style.setProperty('--shadow-hover', '0 30px 60px rgba(0, 0, 0, .15)', 'important');
-    }
-    
-    // 6. Monitor for any attempts to change to dark mode
-    function monitorDarkModeAttempts() {
-        // Override matchMedia to always return light
-        const originalMatchMedia = window.matchMedia;
-        window.matchMedia = function(media) {
-            if (media.includes('prefers-color-scheme')) {
-                // Always return light mode
-                const fakeMedia = {
-                    matches: media.includes('light') ? true : false,
-                    media: media,
-                    addListener: () => {},
-                    removeListener: () => {},
-                    addEventListener: () => {},
-                    removeEventListener: () => {},
-                    dispatchEvent: () => true
-                };
-                return fakeMedia;
+        // From all elements
+        document.querySelectorAll('*').forEach(el => {
+            if (el.classList.contains('dark') || 
+                el.classList.contains('dark-mode') || 
+                el.classList.contains('theme-dark')) {
+                el.classList.remove('dark', 'dark-mode', 'theme-dark');
+                el.classList.add('light-mode');
             }
-            return originalMatchMedia.call(window, media);
-        };
+        });
     }
     
-    // 7. Remove dark mode from localStorage
-    function clearDarkModeStorage() {
-        localStorage.removeItem('darkMode');
-        localStorage.removeItem('theme');
-        localStorage.removeItem('color-theme');
-        sessionStorage.removeItem('darkMode');
-        sessionStorage.removeItem('theme');
+    // Initialize everything immediately
+    function initForceLightMode() {
+        setMetaTags();
+        setHTMLAttributes();
+        overrideCSSVariables();
+        removeDarkClasses();
+        
+        // Force background colors
+        document.body.style.backgroundColor = '#F3E8DD';
+        document.body.style.color = '#2B2320';
+        
+        // Remove any dark reader attributes
+        document.querySelectorAll('[data-darkreader-inline-bgcolor], [data-darkreader-inline-color]').forEach(el => {
+            el.removeAttribute('data-darkreader-inline-bgcolor');
+            el.removeAttribute('data-darkreader-inline-color');
+            el.removeAttribute('data-darkreader-inline-border');
+            el.removeAttribute('data-darkreader-inline-outline');
+        });
+        
+        console.log('Light mode forced - No dark mode allowed');
     }
     
-    // 8. Execute all functions
-    forceLightModeMetaTags();
-    forceLightModeCSS();
-    removeDarkModeToggles();
-    forceLightCustomProperties();
-    monitorDarkModeAttempts();
-    clearDarkModeStorage();
+    // Run immediately
+    initForceLightMode();
     
-    // 9. Add a mutation observer to catch any dynamic changes
+    // Run on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', initForceLightMode);
+    
+    // Run on load
+    window.addEventListener('load', initForceLightMode);
+    
+    // Run after a short delay to catch late changes
+    setTimeout(initForceLightMode, 100);
+    setTimeout(initForceLightMode, 500);
+    setTimeout(initForceLightMode, 1000);
+    setTimeout(initForceLightMode, 3000);
+    
+    // Continuous monitoring
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                // Remove dark mode classes if added
-                if (mutation.target.classList.contains('dark-mode') || 
-                    mutation.target.classList.contains('dark') ||
-                    mutation.target.classList.contains('theme-dark')) {
-                    mutation.target.classList.remove('dark-mode', 'dark', 'theme-dark');
-                    mutation.target.classList.add('light-mode');
+            // Check for attribute changes
+            if (mutation.type === 'attributes') {
+                const target = mutation.target;
+                if (target.hasAttribute('data-theme') && target.getAttribute('data-theme') === 'dark') {
+                    target.setAttribute('data-theme', 'light');
+                }
+                if (target.hasAttribute('class') && 
+                    (target.classList.contains('dark') || 
+                     target.classList.contains('dark-mode') || 
+                     target.classList.contains('theme-dark'))) {
+                    target.classList.remove('dark', 'dark-mode', 'theme-dark');
+                    target.classList.add('light-mode');
                 }
             }
             
-            // Check for any dark mode style elements
-            document.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => {
-                if (el.textContent.includes('dark-mode') || 
-                    el.textContent.includes('@media (prefers-color-scheme: dark)') ||
-                    el.href && el.href.includes('dark')) {
-                    console.log('Removing dark mode styles');
-                    el.remove();
-                }
-            });
+            // Check for added nodes with dark classes
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) { // Element node
+                        if (node.classList && 
+                            (node.classList.contains('dark') || 
+                             node.classList.contains('dark-mode') || 
+                             node.classList.contains('theme-dark'))) {
+                            node.classList.remove('dark', 'dark-mode', 'theme-dark');
+                            node.classList.add('light-mode');
+                        }
+                        
+                        // Check children
+                        node.querySelectorAll('.dark, .dark-mode, .theme-dark').forEach(child => {
+                            child.classList.remove('dark', 'dark-mode', 'theme-dark');
+                            child.classList.add('light-mode');
+                        });
+                    }
+                });
+            }
         });
+        
+        // Re-apply forced light mode
+        initForceLightMode();
     });
     
     // Start observing
     observer.observe(document.documentElement, {
         attributes: true,
-        attributeFilter: ['class'],
+        attributeFilter: ['class', 'data-theme', 'style', 'data-darkreader-*'],
         childList: true,
         subtree: true
     });
     
-    // 10. Periodic check to ensure light mode
-    setInterval(() => {
-        // Check and remove dark mode classes
-        document.body.classList.remove('dark-mode', 'dark', 'theme-dark');
-        document.body.classList.add('light-mode');
-        
-        // Ensure meta tags are correct
-        forceLightModeMetaTags();
-        
-        // Force CSS variables
-        forceLightCustomProperties();
-    }, 5000); // Check every 5 seconds
+    // Periodic enforcement
+    setInterval(initForceLightMode, 10000);
     
-    console.log('Website forced to always use light mode. Dark mode has been disabled.');
-});
-
-// Additional script to run on window load
-window.addEventListener('load', function() {
-    // Double-check everything is light mode
-    document.body.classList.remove('dark-mode');
-    document.body.classList.add('light-mode');
-    
-    // Set HTML attribute for light mode
-    document.documentElement.setAttribute('data-theme', 'light');
-    document.documentElement.setAttribute('color-scheme', 'light');
-    
-    // Force light scrollbars
-    document.documentElement.style.scrollbarColor = '#B9924A #F3E8DD';
-    
-    // Remove any dark mode stylesheets
-    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-        if (link.href.includes('dark') || link.href.includes('night')) {
-            link.remove();
+    // Intercept and block dark mode extensions
+    Object.defineProperty(document.documentElement, 'style', {
+        get: function() {
+            return this._style || CSSStyleDeclaration.prototype;
+        },
+        set: function(value) {
+            // Prevent dark mode styles
+            if (value && typeof value === 'string' && value.includes('dark')) {
+                return;
+            }
+            this._style = value;
         }
     });
+    
+    // Block dark reader extension
+    if (window.DarkReader) {
+        window.DarkReader.disable();
+    }
+    
+    // Add global function to disable any dark mode
+    window.forceLightMode = initForceLightMode;
+    
+})();
+
+// Add this to your existing CSS to reinforce light mode
+const additionalCSS = `
+/* Add this to your existing style tag or CSS file */
+html:not([data-theme="light"]) {
+    data-theme: light !important;
+}
+
+body:not([style*="background-color: #F3E8DD"]) {
+    background-color: #F3E8DD !important;
+    background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
+}
+
+/* Direct element targeting for common dark mode issues */
+[style*="background-color: rgb(18, 18, 18)"],
+[style*="background-color: #121212"],
+[style*="background-color: rgba(18, 18, 18"],
+[style*="color: rgb(224, 224, 224)"],
+[style*="color: #E0E0E0"] {
+    background-color: #F3E8DD !important;
+    color: #2B2320 !important;
+}
+
+/* Override browser's auto dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-bg: #F3E8DD !important;
+        --light-text: #2B2320 !important;
+    }
+    
+    body, div, section, article, header, footer, nav, main, aside {
+        background-color: var(--light-bg) !important;
+        color: var(--light-text) !important;
+    }
+    
+    /* Force all text colors */
+    h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, caption {
+        color: var(--light-text) !important;
+    }
+    
+    /* Force all backgrounds */
+    .container, .card, .box, .panel, .modal, .dialog, .popup {
+        background-color: white !important;
+    }
+}
+
+/* Kill dark mode transitions */
+* {
+    transition: none !important;
+}
+`;
+
+// Add the CSS to the document
+document.addEventListener('DOMContentLoaded', function() {
+    const extraStyle = document.createElement('style');
+    extraStyle.id = 'kill-dark-mode-css';
+    extraStyle.textContent = additionalCSS;
+    document.head.appendChild(extraStyle);
 });
+
+// Run immediately and multiple times to ensure it works
+(function runImmediately() {
+    // Force immediate execution
+    document.documentElement.style.colorScheme = 'light';
+    document.body.style.colorScheme = 'light';
+    document.body.classList.remove('dark-mode', 'dark');
+    document.body.classList.add('light-mode');
+    
+    // Repeat to ensure execution
+    setTimeout(runImmediately, 50);
+    setTimeout(runImmediately, 200);
+})();

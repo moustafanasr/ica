@@ -1,40 +1,55 @@
-// Force Light Mode Always - Extreme Version
+// Anti-Dark Mode Extension - Optimized to prevent page reloads
 (function() {
     'use strict';
     
-    // Create and inject CSS immediately
-    const lightModeCSS = `
-        /* FORCE LIGHT MODE - NO DARK MODE ALLOWED */
-        html {
-            color-scheme: light only !important;
-            forced-color-adjust: none !important;
-        }
-        
-        body {
-            color-scheme: light only !important;
-            background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
-            color: #2B2320 !important;
-        }
-        
-        /* Override ALL dark mode system preferences */
-        @media (prefers-color-scheme: dark) {
-            html {
+    // Track if we're currently processing to prevent loops
+    let isProcessing = false;
+    
+    // =============================================
+    // PART 1: LIGHT MODE ENFORCING CSS
+    // =============================================
+    
+    // Inject CSS once - don't re-inject
+    if (!document.getElementById('force-light-mode-css')) {
+        const lightModeCSS = `
+            /* BLOCK ALL DARK MODE EXTENSIONS - ONE TIME INJECTION */
+            html, body, :root {
                 color-scheme: light only !important;
+                forced-color-adjust: none !important;
             }
             
+            /* Remove dark reader effects */
+            [data-darkreader-inline-bgcolor] { background-color: revert !important; }
+            [data-darkreader-inline-bgimage] { background-image: revert !important; }
+            [data-darkreader-inline-border] { border-color: revert !important; }
+            [data-darkreader-inline-color] { color: revert !important; }
+            [data-darkreader-inline-fill] { fill: revert !important; }
+            [data-darkreader-inline-stroke] { stroke: revert !important; }
+            [data-darkreader-inline-outline] { outline-color: revert !important; }
+            [data-darkreader-inline-boxshadow] { box-shadow: revert !important; }
+            [data-darkreader-inline-invert] { filter: none !important; }
+            
+            /* Hide dark reader style elements */
+            .darkreader,
+            .darkreader--inline,
+            .darkreader--override,
+            .darkreader--sync,
+            .darkreader--text,
+            .darkreader--user-agent,
+            .darkreader--fallback {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+            
+            /* Force your original colors */
             body {
                 background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
                 color: #2B2320 !important;
             }
             
-            * {
-                background-color: transparent !important;
-                color: inherit !important;
-            }
-            
             .navbar {
                 background: rgba(255, 255, 255, 0.98) !important;
-                backdrop-filter: blur(10px) !important;
             }
             
             .hero-card, .feature-card, .program-card, 
@@ -44,295 +59,230 @@
                 border: 1px solid rgba(120, 90, 60, .25) !important;
             }
             
-            .footer {
-                background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%) !important;
+            /* Ensure text colors stay light */
+            h1, h2, h3, h4, h5, h6,
+            p, span, a, li, div, section, article {
+                color: #2B2320 !important;
             }
-        }
+        `;
         
-        /* Direct style overrides for elements */
-        h1, h2, h3, h4, h5, h6 {
-            color: #2B2320 !important;
-        }
-        
-        p, span, a, li, div {
-            color: #2B2320 !important;
-        }
-        
-        /* Remove any dark mode visual effects */
-        .dark-mode, [data-theme="dark"], .theme-dark, .dark,
-        [class*="dark"], [class*="night"], [class*="black"] {
-            background-color: transparent !important;
-            color: inherit !important;
-        }
-        
-        /* Force specific element colors */
-        input, textarea, select, button {
-            background-color: white !important;
-            color: #2B2320 !important;
-            border-color: #E0E0E0 !important;
-        }
-    `;
-    
-    // Inject CSS immediately
-    const style = document.createElement('style');
-    style.id = 'force-light-mode-forever';
-    style.textContent = lightModeCSS;
-    document.head.appendChild(style);
-    
-    // Set meta tags immediately
-    function setMetaTags() {
-        // Remove existing meta tags
-        document.querySelectorAll('meta[name="theme-color"], meta[name="color-scheme"], meta[name="supported-color-schemes"]').forEach(meta => meta.remove());
-        
-        // Create new meta tags
-        const themeColor = document.createElement('meta');
-        themeColor.name = 'theme-color';
-        themeColor.content = '#F3E8DD';
-        document.head.appendChild(themeColor);
-        
-        const colorScheme = document.createElement('meta');
-        colorScheme.name = 'color-scheme';
-        colorScheme.content = 'light';
-        document.head.appendChild(colorScheme);
-        
-        const supportedColors = document.createElement('meta');
-        supportedColors.name = 'supported-color-schemes';
-        supportedColors.content = 'light';
-        document.head.appendChild(supportedColors);
+        const style = document.createElement('style');
+        style.id = 'force-light-mode-css';
+        style.textContent = lightModeCSS;
+        document.head.appendChild(style);
     }
     
-    // Set HTML attributes
-    function setHTMLAttributes() {
-        document.documentElement.setAttribute('data-theme', 'light');
-        document.documentElement.setAttribute('color-scheme', 'light');
-        document.documentElement.removeAttribute('data-darkreader-scheme');
-        document.documentElement.removeAttribute('data-darkreader-mode');
-    }
+    // =============================================
+    // PART 2: SAFE ATTRIBUTE REMOVAL
+    // =============================================
     
-    // Override CSS variables
-    function overrideCSSVariables() {
-        const root = document.documentElement;
+    function safeRemoveDarkAttributes() {
+        if (isProcessing) return;
+        isProcessing = true;
         
-        // Force original light mode variables
-        const lightVars = {
-            '--bg': '#F3E8DD',
-            '--ink': '#2B2320',
-            '--muted': '#6A5B52',
-            '--gold': '#B9924A',
-            '--gold-light': '#E7D2A3',
-            '--gold-dark': '#8B6A2B',
-            '--stroke': 'rgba(120, 90, 60, .25)',
-            '--card': 'rgba(255, 255, 255, .85)',
-            '--shadow': '0 20px 40px rgba(0, 0, 0, .1)',
-            '--shadow-hover': '0 30px 60px rgba(0, 0, 0, .15)'
-        };
-        
-        Object.entries(lightVars).forEach(([key, value]) => {
-            root.style.setProperty(key, value, 'important');
-        });
-    }
-    
-    // Remove dark mode classes
-    function removeDarkClasses() {
-        // From document elements
-        document.documentElement.classList.remove('dark', 'dark-mode', 'theme-dark');
-        document.body.classList.remove('dark', 'dark-mode', 'theme-dark');
-        
-        // From all elements
-        document.querySelectorAll('*').forEach(el => {
-            if (el.classList.contains('dark') || 
-                el.classList.contains('dark-mode') || 
-                el.classList.contains('theme-dark')) {
-                el.classList.remove('dark', 'dark-mode', 'theme-dark');
-                el.classList.add('light-mode');
-            }
-        });
-    }
-    
-    // Initialize everything immediately
-    function initForceLightMode() {
-        setMetaTags();
-        setHTMLAttributes();
-        overrideCSSVariables();
-        removeDarkClasses();
-        
-        // Force background colors
-        document.body.style.backgroundColor = '#F3E8DD';
-        document.body.style.color = '#2B2320';
-        
-        // Remove any dark reader attributes
-        document.querySelectorAll('[data-darkreader-inline-bgcolor], [data-darkreader-inline-color]').forEach(el => {
-            el.removeAttribute('data-darkreader-inline-bgcolor');
-            el.removeAttribute('data-darkreader-inline-color');
-            el.removeAttribute('data-darkreader-inline-border');
-            el.removeAttribute('data-darkreader-inline-outline');
-        });
-        
-        console.log('Light mode forced - No dark mode allowed');
-    }
-    
-    // Run immediately
-    initForceLightMode();
-    
-    // Run on DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', initForceLightMode);
-    
-    // Run on load
-    window.addEventListener('load', initForceLightMode);
-    
-    // Run after a short delay to catch late changes
-    setTimeout(initForceLightMode, 100);
-    setTimeout(initForceLightMode, 500);
-    setTimeout(initForceLightMode, 1000);
-    setTimeout(initForceLightMode, 3000);
-    
-    // Continuous monitoring
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            // Check for attribute changes
-            if (mutation.type === 'attributes') {
-                const target = mutation.target;
-                if (target.hasAttribute('data-theme') && target.getAttribute('data-theme') === 'dark') {
-                    target.setAttribute('data-theme', 'light');
-                }
-                if (target.hasAttribute('class') && 
-                    (target.classList.contains('dark') || 
-                     target.classList.contains('dark-mode') || 
-                     target.classList.contains('theme-dark'))) {
-                    target.classList.remove('dark', 'dark-mode', 'theme-dark');
-                    target.classList.add('light-mode');
-                }
-            }
+        try {
+            // Remove dark attributes from HTML
+            const html = document.documentElement;
+            const attrsToRemove = [
+                'data-darkreader-scheme',
+                'data-darkreader-mode', 
+                'data-darkreader-proxy-injected',
+                'data-theme'
+            ];
             
-            // Check for added nodes with dark classes
-            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === 1) { // Element node
-                        if (node.classList && 
-                            (node.classList.contains('dark') || 
-                             node.classList.contains('dark-mode') || 
-                             node.classList.contains('theme-dark'))) {
-                            node.classList.remove('dark', 'dark-mode', 'theme-dark');
-                            node.classList.add('light-mode');
+            attrsToRemove.forEach(attr => {
+                if (html.hasAttribute(attr)) {
+                    html.removeAttribute(attr);
+                }
+            });
+            
+            // Set light theme
+            html.setAttribute('data-theme', 'light');
+            html.setAttribute('color-scheme', 'light');
+            
+            // Remove dark classes from body
+            document.body.classList.remove('dark', 'dark-mode', 'theme-dark');
+            
+            // Remove darkreader inline attributes (limited scope for performance)
+            const elementsToClean = document.querySelectorAll(`
+                [data-darkreader-inline-bgcolor],
+                [data-darkreader-inline-color],
+                [data-darkreader-inline-border],
+                .darkreader
+            `);
+            
+            // Process in small batches to prevent hangs
+            const batchSize = 50;
+            for (let i = 0; i < elementsToClean.length; i += batchSize) {
+                const batch = Array.from(elementsToClean).slice(i, i + batchSize);
+                batch.forEach(el => {
+                    // Remove darkreader attributes
+                    Array.from(el.attributes).forEach(attr => {
+                        if (attr.name.includes('darkreader')) {
+                            el.removeAttribute(attr.name);
                         }
-                        
-                        // Check children
-                        node.querySelectorAll('.dark, .dark-mode, .theme-dark').forEach(child => {
-                            child.classList.remove('dark', 'dark-mode', 'theme-dark');
-                            child.classList.add('light-mode');
-                        });
+                    });
+                    
+                    // Remove darkreader classes
+                    if (el.classList) {
+                        el.classList.remove('darkreader', 'darkreader--inline', 
+                                          'darkreader--override', 'darkreader--sync');
                     }
                 });
             }
-        });
-        
-        // Re-apply forced light mode
-        initForceLightMode();
-    });
-    
-    // Start observing
-    observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class', 'data-theme', 'style', 'data-darkreader-*'],
-        childList: true,
-        subtree: true
-    });
-    
-    // Periodic enforcement
-    setInterval(initForceLightMode, 10000);
-    
-    // Intercept and block dark mode extensions
-    Object.defineProperty(document.documentElement, 'style', {
-        get: function() {
-            return this._style || CSSStyleDeclaration.prototype;
-        },
-        set: function(value) {
-            // Prevent dark mode styles
-            if (value && typeof value === 'string' && value.includes('dark')) {
-                return;
-            }
-            this._style = value;
+            
+            // Remove darkreader style elements
+            document.querySelectorAll('style.darkreader, link[rel="stylesheet"].darkreader').forEach(el => {
+                try { el.remove(); } catch(e) {}
+            });
+            
+        } catch (error) {
+            console.error('Error in dark mode cleanup:', error);
+        } finally {
+            isProcessing = false;
         }
-    });
-    
-    // Block dark reader extension
-    if (window.DarkReader) {
-        window.DarkReader.disable();
     }
     
-    // Add global function to disable any dark mode
-    window.forceLightMode = initForceLightMode;
+    // =============================================
+    // PART 3: SAFE MUTATION OBSERVER
+    // =============================================
+    
+    let observer;
+    let observerTimeout;
+    
+    function initSafeObserver() {
+        if (observer) observer.disconnect();
+        
+        observer = new MutationObserver(function(mutations) {
+            // Debounce observer calls
+            clearTimeout(observerTimeout);
+            observerTimeout = setTimeout(() => {
+                let needsCleanup = false;
+                
+                // Quick check if darkreader elements were added
+                for (let mutation of mutations) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        for (let node of mutation.addedNodes) {
+                            if (node.nodeType === 1) {
+                                if (node.classList && node.classList.contains('darkreader') ||
+                                    node.tagName === 'STYLE' && node.textContent.includes('darkreader') ||
+                                    node.hasAttribute && node.hasAttribute('data-darkreader-inline-')) {
+                                    needsCleanup = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (mutation.type === 'attributes') {
+                        const attrName = mutation.attributeName;
+                        if (attrName && attrName.includes('darkreader')) {
+                            needsCleanup = true;
+                        }
+                    }
+                    
+                    if (needsCleanup) break;
+                }
+                
+                if (needsCleanup && !isProcessing) {
+                    safeRemoveDarkAttributes();
+                }
+            }, 100); // 100ms debounce
+        });
+        
+        // Observe only specific parts to reduce performance impact
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class', 'data-theme', 'data-darkreader-*'],
+            childList: true,
+            subtree: false // Don't observe entire subtree
+        });
+        
+        observer.observe(document.head, {
+            childList: true,
+            subtree: false
+        });
+    }
+    
+    // =============================================
+    // PART 4: INITIALIZATION WITH DEBOUNCE
+    // =============================================
+    
+    function initializeLightMode() {
+        // Run once immediately
+        safeRemoveDarkAttributes();
+        
+        // Initialize observer after a delay
+        setTimeout(initSafeObserver, 1000);
+        
+        // Periodic cleanup with longer intervals
+        setInterval(() => {
+            if (!isProcessing) {
+                safeRemoveDarkAttributes();
+            }
+        }, 5000); // Every 5 seconds
+        
+        console.log('Light mode enforcer initialized');
+    }
+    
+    // =============================================
+    // PART 5: SAFE EVENT HANDLERS
+    // =============================================
+    
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initializeLightMode, 100);
+        });
+    } else {
+        setTimeout(initializeLightMode, 100);
+    }
+    
+    // Also run on window load
+    window.addEventListener('load', () => {
+        setTimeout(safeRemoveDarkAttributes, 500);
+    });
     
 })();
 
-// Add this to your existing CSS to reinforce light mode
-const additionalCSS = `
-/* Add this to your existing style tag or CSS file */
-html:not([data-theme="light"]) {
-    data-theme: light !important;
-}
-
-body:not([style*="background-color: #F3E8DD"]) {
-    background-color: #F3E8DD !important;
-    background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
-}
-
-/* Direct element targeting for common dark mode issues */
-[style*="background-color: rgb(18, 18, 18)"],
-[style*="background-color: #121212"],
-[style*="background-color: rgba(18, 18, 18"],
-[style*="color: rgb(224, 224, 224)"],
-[style*="color: #E0E0E0"] {
-    background-color: #F3E8DD !important;
-    color: #2B2320 !important;
-}
-
-/* Override browser's auto dark mode */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --light-bg: #F3E8DD !important;
-        --light-text: #2B2320 !important;
+// Minimal additional protection without causing reloads
+(function minimalProtection() {
+    'use strict';
+    
+    // Just set meta tags and basic attributes once
+    function setLightMetaTags() {
+        // Set theme color to light
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (metaThemeColor) {
+            metaThemeColor.content = '#F3E8DD';
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'theme-color';
+            meta.content = '#F3E8DD';
+            document.head.appendChild(meta);
+        }
+        
+        // Set color scheme
+        const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+        if (metaColorScheme) {
+            metaColorScheme.content = 'light';
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'color-scheme';
+            meta.content = 'light';
+            document.head.appendChild(meta);
+        }
+        
+        // Set HTML attributes
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('color-scheme', 'light');
     }
     
-    body, div, section, article, header, footer, nav, main, aside {
-        background-color: var(--light-bg) !important;
-        color: var(--light-text) !important;
-    }
+    // Run once with delay
+    setTimeout(setLightMetaTags, 50);
     
-    /* Force all text colors */
-    h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, caption {
-        color: var(--light-text) !important;
+    // Also run on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setLightMetaTags);
     }
-    
-    /* Force all backgrounds */
-    .container, .card, .box, .panel, .modal, .dialog, .popup {
-        background-color: white !important;
-    }
-}
-
-/* Kill dark mode transitions */
-* {
-    transition: none !important;
-}
-`;
-
-// Add the CSS to the document
-document.addEventListener('DOMContentLoaded', function() {
-    const extraStyle = document.createElement('style');
-    extraStyle.id = 'kill-dark-mode-css';
-    extraStyle.textContent = additionalCSS;
-    document.head.appendChild(extraStyle);
-});
-
-// Run immediately and multiple times to ensure it works
-(function runImmediately() {
-    // Force immediate execution
-    document.documentElement.style.colorScheme = 'light';
-    document.body.style.colorScheme = 'light';
-    document.body.classList.remove('dark-mode', 'dark');
-    document.body.classList.add('light-mode');
-    
-    // Repeat to ensure execution
-    setTimeout(runImmediately, 50);
-    setTimeout(runImmediately, 200);
 })();

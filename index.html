@@ -2490,7 +2490,6 @@
       transition: var(--transition);
       z-index: 1000;
       box-shadow: var(--shadow);
-      display:none;
     }
     
     .dark-mode-btn:hover {
@@ -2561,7 +2560,7 @@
         if (document.body.classList.contains('dark-mode')) {
           disableDarkMode();
         } else {
-          disableDarkMode();
+          enableDarkMode();
         }
       });
 
@@ -2572,7 +2571,7 @@
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
           if (e.matches) {
-            disableDarkMode();
+            enableDarkMode();
           } else {
             disableDarkMode();
           }

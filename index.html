@@ -15,6 +15,354 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
+      /* ========== DARK MODE VARIABLES ========== */
+      :root[data-theme="dark"],
+      html.dark-mode {
+        --bg: #0f0e0c;
+        --ink: #E8E6E3;
+        --muted: #A8A095;
+        --gold: #D4AF37;
+        --gold-light: #F4E4A6;
+        --gold-dark: #B8942A;
+        --stroke: rgba(255, 255, 255, 0.08);
+        --card: rgba(30, 30, 28, 0.85);
+        --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ========== DARK MODE BODY ========== */
+      body.dark-mode,
+      html[data-theme="dark"] body {
+        background: linear-gradient(135deg, #0a0907 0%, #0f0e0c 50%, #141310 100%);
+        color: var(--ink);
+      }
+
+      /* ========== DARK MODE NAVBAR ========== */
+      body.dark-mode .navbar,
+      html[data-theme="dark"] .navbar {
+        background: rgba(20, 20, 18, 0.95);
+        border-bottom: 1px solid var(--stroke);
+      }
+
+      body.dark-mode .navbar.scrolled,
+      html[data-theme="dark"] .navbar.scrolled {
+        background: rgba(25, 25, 23, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      body.dark-mode .nav-links a,
+      html[data-theme="dark"] .nav-links a {
+        color: var(--ink);
+      }
+
+      body.dark-mode .nav-links a:hover,
+      body.dark-mode .nav-links a.active,
+      html[data-theme="dark"] .nav-links a:hover,
+      html[data-theme="dark"] .nav-links a.active {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .logo-text h2,
+      html[data-theme="dark"] .logo-text h2 {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .logo-text span,
+      html[data-theme="dark"] .logo-text span {
+        color: var(--muted);
+      }
+
+      body.dark-mode .hamburger span,
+      html[data-theme="dark"] .hamburger span {
+        background: var(--gold);
+      }
+
+      /* ========== DARK MODE HERO ========== */
+      body.dark-mode .hero,
+      html[data-theme="dark"] .hero {
+        background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.05) 0%, transparent 50%),
+          radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.05) 0%, transparent 50%);
+      }
+
+      body.dark-mode .hero-badge,
+      html[data-theme="dark"] .hero-badge {
+        background: rgba(185, 146, 74, 0.15);
+        color: var(--gold-light);
+        border: 1px solid rgba(185, 146, 74, 0.3);
+      }
+
+      body.dark-mode .hero-title,
+      html[data-theme="dark"] .hero-title {
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      body.dark-mode .hero-subtitle,
+      html[data-theme="dark"] .hero-subtitle {
+        color: var(--muted);
+      }
+
+      body.dark-mode .hero-card,
+      html[data-theme="dark"] .hero-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+      }
+
+      /* ========== DARK MODE SECTIONS ========== */
+      body.dark-mode .section-title,
+      html[data-theme="dark"] .section-title {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .section-subtitle,
+      html[data-theme="dark"] .section-subtitle {
+        color: var(--muted);
+      }
+
+      /* ========== DARK MODE ABOUT ========== */
+      body.dark-mode .about-text h3,
+      html[data-theme="dark"] .about-text h3 {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .about-text p,
+      html[data-theme="dark"] .about-text p {
+        color: var(--muted);
+      }
+
+      body.dark-mode .about-feature i,
+      html[data-theme="dark"] .about-feature i {
+        color: var(--gold);
+      }
+
+      /* ========== DARK MODE CARDS ========== */
+      body.dark-mode .feature-card,
+      body.dark-mode .program-card,
+      body.dark-mode .testimonial-card,
+      body.dark-mode .stat-card,
+      body.dark-mode .accreditation-section,
+      html[data-theme="dark"] .feature-card,
+      html[data-theme="dark"] .program-card,
+      html[data-theme="dark"] .testimonial-card,
+      html[data-theme="dark"] .stat-card,
+      html[data-theme="dark"] .accreditation-section {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+      }
+
+      body.dark-mode .feature-title,
+      html[data-theme="dark"] .feature-title {
+        color: var(--ink);
+      }
+
+      body.dark-mode .feature-description,
+      html[data-theme="dark"] .feature-description {
+        color: var(--muted);
+      }
+
+      body.dark-mode .feature-icon,
+      html[data-theme="dark"] .feature-icon {
+        background: linear-gradient(135deg, rgba(231, 210, 163, 0.1), rgba(185, 146, 74, 0.05));
+        border: 1px solid rgba(185, 146, 74, 0.2);
+      }
+
+      /* ========== DARK MODE PROGRAMS ========== */
+      body.dark-mode .program-description,
+      html[data-theme="dark"] .program-description {
+        color: var(--muted);
+      }
+
+      body.dark-mode .program-overlay,
+      html[data-theme="dark"] .program-overlay {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      }
+
+      /* ========== DARK MODE STATS ========== */
+      body.dark-mode .stats-section,
+      html[data-theme="dark"] .stats-section {
+        background: linear-gradient(135deg, rgba(231, 210, 163, 0.15), rgba(185, 146, 74, 0.08));
+        border-top: 1px solid var(--stroke);
+        border-bottom: 1px solid var(--stroke);
+      }
+
+      body.dark-mode .stat-number,
+      html[data-theme="dark"] .stat-number {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .stat-label,
+      html[data-theme="dark"] .stat-label {
+        color: var(--muted);
+      }
+
+      /* ========== DARK MODE TESTIMONIALS ========== */
+      body.dark-mode .testimonial-content,
+      html[data-theme="dark"] .testimonial-content {
+        color: var(--ink);
+      }
+
+      body.dark-mode .author-info h4,
+      html[data-theme="dark"] .author-info h4 {
+        color: var(--ink);
+      }
+
+      body.dark-mode .author-info p,
+      html[data-theme="dark"] .author-info p {
+        color: var(--muted);
+      }
+
+      /* ========== DARK MODE ACCREDITATION ========== */
+      body.dark-mode .accreditation-section,
+      html[data-theme="dark"] .accreditation-section {
+        background: linear-gradient(135deg, rgba(231, 210, 163, 0.1), rgba(30, 30, 28, 0.8));
+      }
+
+      body.dark-mode .accreditation-logo,
+      html[data-theme="dark"] .accreditation-logo {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+      }
+
+      body.dark-mode .accreditation-logo span,
+      html[data-theme="dark"] .accreditation-logo span {
+        color: var(--gold-light) !important;
+      }
+
+      /* ========== DARK MODE CTA ========== */
+      body.dark-mode .cta-section,
+      html[data-theme="dark"] .cta-section {
+        background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      }
+
+      body.dark-mode .btn-secondary,
+      html[data-theme="dark"] .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--gold-light);
+        border: 2px solid var(--gold);
+      }
+
+      body.dark-mode .btn-secondary:hover,
+      html[data-theme="dark"] .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      body.dark-mode .btn-ghost,
+      html[data-theme="dark"] .btn-ghost {
+        background: transparent;
+        color: var(--gold-light);
+        border: 2px solid var(--gold);
+      }
+
+      body.dark-mode .btn-ghost:hover,
+      html[data-theme="dark"] .btn-ghost:hover {
+        background: rgba(185, 146, 74, 0.1);
+      }
+
+      /* ========== DARK MODE FOOTER ========== */
+      body.dark-mode .footer,
+      html[data-theme="dark"] .footer {
+        background: linear-gradient(135deg, #0a0907 0%, #141310 100%);
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .footer-column h3,
+      html[data-theme="dark"] .footer-column h3 {
+        color: white;
+      }
+
+      body.dark-mode .footer-links a,
+      html[data-theme="dark"] .footer-links a {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .footer-links a:hover,
+      html[data-theme="dark"] .footer-links a:hover {
+        color: white;
+      }
+
+      body.dark-mode .footer-contact p,
+      html[data-theme="dark"] .footer-contact p {
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .social-links a,
+      html[data-theme="dark"] .social-links a {
+        background: rgba(185, 146, 74, 0.2);
+        border: 1px solid rgba(185, 146, 74, 0.3);
+        color: var(--gold-light);
+      }
+
+      body.dark-mode .social-links a:hover,
+      html[data-theme="dark"] .social-links a:hover {
+        background: var(--gold);
+        color: white;
+      }
+
+      body.dark-mode .footer-bottom,
+      html[data-theme="dark"] .footer-bottom {
+        color: rgba(231, 210, 163, 0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      body.dark-mode .footer-legal a,
+      html[data-theme="dark"] .footer-legal a {
+        color: rgba(231, 210, 163, 0.5);
+      }
+
+      body.dark-mode .footer-legal a:hover,
+      html[data-theme="dark"] .footer-legal a:hover {
+        color: var(--gold-light);
+      }
+
+      /* ========== DARK MODE SWIPER ========== */
+      body.dark-mode .swiper-slider-container,
+      html[data-theme="dark"] .swiper-slider-container {
+        border: 1px solid var(--stroke);
+      }
+
+      body.dark-mode .swiper-slide-caption,
+      html[data-theme="dark"] .swiper-slide-caption {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+      }
+
+      body.dark-mode .swiper-button-next,
+      body.dark-mode .swiper-button-prev,
+      html[data-theme="dark"] .swiper-button-next,
+      html[data-theme="dark"] .swiper-button-prev {
+        background: rgba(30, 30, 28, 0.9);
+        border: 1px solid var(--stroke);
+      }
+
+      body.dark-mode .swiper-pagination-bullet,
+      html[data-theme="dark"] .swiper-pagination-bullet {
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      body.dark-mode .swiper-pagination-bullet-active,
+      html[data-theme="dark"] .swiper-pagination-bullet-active {
+        background: var(--gold);
+      }
+
+      /* ========== DARK MODE RESPONSIVE ========== */
+      @media (max-width: 1024px) {
+
+        body.dark-mode .nav-menu,
+        html[data-theme="dark"] .nav-menu {
+          background: rgba(25, 25, 23, 0.98);
+        }
+      }
+
+      /* ========== DARK MODE UTILITIES ========== */
+      body.dark-mode .text-gradient,
+      html[data-theme="dark"] .text-gradient {
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
       :root {
         --bg: #F3E8DD;
         --ink: #2B2320;
@@ -2111,6 +2459,123 @@
             swiper.slidePrev();
           }
         });
+      });
+    </script>
+    <!-- Dark Mode Toggle Button and Logic -->
+    <script>
+      // Create dark mode toggle button
+      const darkModeToggle = document.createElement('button');
+      darkModeToggle.id = 'dark-mode-toggle';
+      darkModeToggle.className = 'dark-mode-btn';
+      darkModeToggle.setAttribute('aria-label', 'تبديل الوضع الليلي');
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+
+      // Add CSS for the toggle button
+      const toggleButtonCSS = `
+    .dark-mode-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: var(--transition);
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    
+    .dark-mode-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(185, 146, 74, 0.4);
+    }
+    
+    body.dark-mode .dark-mode-btn,
+    html[data-theme="dark"] .dark-mode-btn {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    }
+    
+    body.dark-mode .dark-mode-btn i,
+    html[data-theme="dark"] .dark-mode-btn i {
+      transform: rotate(180deg);
+    }
+    
+    @media (max-width: 768px) {
+      .dark-mode-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+        bottom: 20px;
+        left: 20px;
+      }
+    }
+  `;
+
+      // Add CSS to document
+      const style = document.createElement('style');
+      style.textContent = toggleButtonCSS;
+      document.head.appendChild(style);
+
+      // Insert toggle button
+      document.body.appendChild(darkModeToggle);
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      // Initialize theme
+      function initTheme() {
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          enableDarkMode();
+        } else {
+          disableDarkMode();
+        }
+      }
+
+      // Enable dark mode
+      function enableDarkMode() {
+        document.body.classList.add('dark-mode');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('theme', 'dark');
+      }
+
+      // Disable dark mode
+      function disableDarkMode() {
+        document.body.classList.remove('dark-mode');
+        document.documentElement.removeAttribute('data-theme');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', 'light');
+      }
+
+      // Toggle dark mode
+      darkModeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+          disableDarkMode();
+        } else {
+          enableDarkMode();
+        }
+      });
+
+      // Initialize on load
+      document.addEventListener('DOMContentLoaded', initTheme);
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            enableDarkMode();
+          } else {
+            disableDarkMode();
+          }
+        }
       });
     </script>
     <!-- <script src="./js/lightMode.js"></script> -->

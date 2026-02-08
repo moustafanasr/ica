@@ -2464,17 +2464,18 @@
 
 
 
-    <!-- كود للكشف التلقائي عن وضع الألوان -->
-    <script>
-      // إنشاء زر تبديل وضع الألوان
-      const colorModeToggle = document.createElement('button');
-      colorModeToggle.id = 'color-mode-toggle';
-      colorModeToggle.className = 'color-mode-btn';
-      colorModeToggle.setAttribute('aria-label', 'تبديل وضع الألوان');
-      colorModeToggle.innerHTML = '<i class="fas fa-adjust"></i>';
+    <!-- كود تبديل وضع الألوان مع تعديلات الألوان -->
+<script>
+  // إنشاء زر تبديل وضع الألوان
+  const colorModeToggle = document.createElement('button');
+  colorModeToggle.id = 'color-mode-toggle';
+  colorModeToggle.className = 'color-mode-btn';
+  colorModeToggle.setAttribute('aria-label', 'تبديل وضع الألوان');
+  colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  colorModeToggle.title = 'التبديل إلى الوضع الداكن';
 
-      // إضافة CSS لزر التبديل
-      const toggleButtonCSS = `
+  // إضافة CSS لزر التبديل
+  const toggleButtonCSS = `
     .color-mode-btn {
       position: fixed;
       bottom: 30px;
@@ -2482,7 +2483,7 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      background: linear-gradient(135deg, #FFD700, #FFA500);
       color: white;
       border: none;
       cursor: pointer;
@@ -2490,18 +2491,50 @@
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
-      transition: var(--transition);
-      z-index: 1000;
-      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1001;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+      animation: sunPulse 2s infinite;
     }
     
     .color-mode-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(185, 146, 74, 0.4);
+      transform: scale(1.15);
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+      animation: none;
     }
     
-    body.dark-mode .color-mode-btn {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    .color-mode-btn.dark-mode {
+      background: linear-gradient(135deg, #4A90E2, #2C3E50);
+      animation: moonGlow 2s infinite;
+    }
+    
+    .color-mode-btn.dark-mode:hover {
+      background: linear-gradient(135deg, #5D9CEC, #34495E);
+      box-shadow: 0 15px 40px rgba(74, 144, 226, 0.6);
+    }
+    
+    @keyframes sunPulse {
+      0% {
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+      }
+      50% {
+        box-shadow: 0 10px 40px rgba(255, 215, 0, 0.8);
+      }
+      100% {
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+      }
+    }
+    
+    @keyframes moonGlow {
+      0% {
+        box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+      }
+      50% {
+        box-shadow: 0 10px 40px rgba(74, 144, 226, 0.8);
+      }
+      100% {
+        box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+      }
     }
     
     @media (max-width: 768px) {
@@ -2513,209 +2546,298 @@
         left: 20px;
       }
     }
+    
+    /* رسالة تأكيد التبديل */
+    .mode-confirmation {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #4A90E2, #2C3E50);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      z-index: 1002;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    .mode-confirmation.light-mode {
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+    }
+    
+    @keyframes slideIn {
+      from {
+        top: -100px;
+        opacity: 0;
+      }
+      to {
+        top: 20px;
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
   `;
 
-      // إضافة CSS للصفحة
-      const style = document.createElement('style');
-      style.textContent = toggleButtonCSS;
-      document.head.appendChild(style);
+  // إضافة CSS للصفحة
+  const style = document.createElement('style');
+  style.textContent = toggleButtonCSS;
+  document.head.appendChild(style);
 
-      // إضافة زر التبديل للصفحة
-      document.body.appendChild(colorModeToggle);
+  // إضافة زر التبديل للصفحة
+  document.body.appendChild(colorModeToggle);
 
-      // دالة للكشف إذا الصفحة في الوضع الداكن
-      function detectCurrentColorMode() {
-        // 1. التحقق من امتدادات المتصفح (مثل Dark Reader)
-        if (document.querySelector('.darkreader, [data-darkreader-inline-bgcolor]')) {
-          console.log('تم الكشف: امتداد داكن (مثل Dark Reader)');
-          return 'dark';
-        }
+  // متغير لتتبع الوضع الحالي
+  let isDarkMode = false;
 
-        // 2. التحقق من السمات الداكنة على HTML
-        if (document.documentElement.hasAttribute('data-darkreader-scheme') ||
-          document.documentElement.hasAttribute('data-darkreader-mode') ||
-          document.documentElement.getAttribute('data-theme') === 'dark') {
-          console.log('تم الكشف: سمة داكنة على HTML');
-          return 'dark';
-        }
-
-        // 3. التحقق من الكلاسات الداكنة على body
-        if (document.body.classList.contains('dark-mode') ||
-          document.body.classList.contains('dark') ||
-          document.body.classList.contains('theme-dark')) {
-          console.log('تم الكشف: كلاسات داكنة على body');
-          return 'dark';
-        }
-
-        // 4. التحقق من لون الخلفية
-        const bodyStyle = window.getComputedStyle(document.body);
-        const bgColor = bodyStyle.backgroundColor;
-
-        if (bgColor) {
-          const rgb = bgColor.match(/\d+/g);
-          if (rgb) {
-            const r = parseInt(rgb[0]);
-            const g = parseInt(rgb[1]);
-            const b = parseInt(rgb[2]);
-
-            // حساب درجة السطوع
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-            // إذا كانت الخلفية داكنة
-            if (brightness < 150) {
-              console.log('تم الكشف: لون خلفية داكن (سطوع: ' + brightness + ')');
-              return 'dark';
-            }
-          }
-        }
-
-        // 5. التحقق من لون النص
-        const textColor = bodyStyle.color;
-        if (textColor) {
-          const rgb = textColor.match(/\d+/g);
-          if (rgb) {
-            const r = parseInt(rgb[0]);
-            const g = parseInt(rgb[1]);
-            const b = parseInt(rgb[2]);
-
-            // حساب درجة السطوع للنص
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-            // إذا كان النص فاتح (داكن على فاتح)
-            if (brightness > 200) {
-              console.log('تم الكشف: لون نص فاتح (سطوع: ' + brightness + ')');
-              return 'light';
-            }
-          }
-        }
-
-        // 6. تفضيل النظام كحل أخير
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (prefersDark) {
-          console.log('تم الكشف: تفضيل النظام للوضع الداكن');
-          return 'dark';
-        }
-
-        // 7. الوضع الافتراضي: فاتح
-        console.log('تم الكشف: الوضع الافتراضي (فاتح)');
-        return 'light';
+  // دالة للتأكد من تعرف CSS على متغيرات الألوان
+  function ensureColorVariables() {
+    const lightModeCSS = `
+      /* متغيرات الوضع الفاتح */
+      :root[data-theme="light"],
+      html.light-mode {
+        --bg: #F3E8DD;
+        --ink: #2B2320;
+        --muted: #6A5B52;
+        --gold: #B9924A;
+        --gold-light: #E7D2A3;
+        --gold-dark: #8B6A2B;
+        --stroke: rgba(120, 90, 60, .25);
+        --card: rgba(255, 255, 255, .85);
+        --shadow: 0 20px 40px rgba(0, 0, 0, .1);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
       }
-
-      // دالة لتطبيق الألوان الداكنة
-      function applyDarkColors() {
-        // إزالة أي كلاسات أو سمات للوضع الفاتح
-        document.body.classList.remove('light-mode');
-        document.documentElement.removeAttribute('data-theme');
-
-        // إضافة كلاسات وسمات للوضع الداكن
-        document.body.classList.add('dark-mode');
-        document.documentElement.setAttribute('data-theme', 'dark');
-
-        // تحديث زر التبديل
-        colorModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        colorModeToggle.title = 'التبديل إلى الوضع الفاتح';
-
-        console.log('تم تطبيق الألوان الداكنة');
+      
+      /* خلفية body للوضع الفاتح */
+      body.light-mode {
+        background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
+        color: var(--ink) !important;
+        transition: background 0.5s ease, color 0.5s ease;
       }
-
-      // دالة لتطبيق الألوان الفاتحة
-      function applyLightColors() {
-        // إزالة أي كلاسات أو سمات للوضع الداكن
-        document.body.classList.remove('dark-mode');
-        document.documentElement.removeAttribute('data-theme');
-
-        // إضافة كلاسات وسمات للوضع الفاتح
-        document.body.classList.add('light-mode');
-        document.documentElement.setAttribute('data-theme', 'light');
-
-        // تحديث زر التبديل
-        colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        colorModeToggle.title = 'التبديل إلى الوضع الداكن';
-
-        console.log('تم تطبيق الألوان الفاتحة');
+      
+      /* تعديلات إضافية للوضع الفاتح */
+      body.light-mode .navbar {
+        background: rgba(255, 255, 255, 0.95) !important;
       }
-
-      // دالة لإزالة امتدادات تغيير الألوان
-      function removeColorExtensions() {
-        // إزالة سمات Dark Reader
-        document.querySelectorAll('[data-darkreader-inline-]').forEach(el => {
-          Array.from(el.attributes).forEach(attr => {
-            if (attr.name.includes('darkreader')) {
-              el.removeAttribute(attr.name);
-            }
-          });
-        });
-
-        // إزالة أنماط Dark Reader
-        document.querySelectorAll('.darkreader, .darkreader--inline, .darkreader--override').forEach(el => {
-          try { el.remove(); } catch (e) { }
-        });
-
-        // إزالة السمات الداكنة
-        document.documentElement.removeAttribute('data-darkreader-scheme');
-        document.documentElement.removeAttribute('data-darkreader-mode');
-        document.documentElement.removeAttribute('data-darkreader-proxy-injected');
+      
+      body.light-mode .nav-links a {
+        color: var(--ink) !important;
       }
+      
+      body.light-mode .nav-links a:hover,
+      body.light-mode .nav-links a.active {
+        color: var(--gold-dark) !important;
+      }
+    `;
 
-      // دالة للتحقق وتطبيق الألوان المناسبة
-      function checkAndApplyColors() {
-        const currentMode = detectCurrentColorMode();
+    const darkModeCSS = `
+      /* متغيرات الوضع الداكن */
+      :root[data-theme="dark"],
+      html.dark-mode {
+        --bg: #0f0e0c;
+        --ink: #E8E6E3;
+        --muted: #A8A095;
+        --gold: #D4AF37;
+        --gold-light: #F4E4A6;
+        --gold-dark: #B8942A;
+        --stroke: rgba(255, 255, 255, 0.08);
+        --card: rgba(30, 30, 28, 0.85);
+        --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.4);
+      }
+      
+      /* خلفية body للوضع الداكن */
+      body.dark-mode {
+        background: linear-gradient(135deg, #0a0907 0%, #0f0e0c 50%, #141310 100%) !important;
+        color: var(--ink) !important;
+        transition: background 0.5s ease, color 0.5s ease;
+      }
+      
+      /* تعديلات إضافية للوضع الداكن */
+      body.dark-mode .navbar {
+        background: rgba(20, 20, 18, 0.95) !important;
+      }
+      
+      body.dark-mode .nav-links a {
+        color: var(--ink) !important;
+      }
+      
+      body.dark-mode .nav-links a:hover,
+      body.dark-mode .nav-links a.active {
+        color: var(--gold-light) !important;
+      }
+    `;
 
-        if (currentMode === 'dark') {
-          applyDarkColors();
-        } else {
-          applyLightColors();
+    // إضافة الأنماط ديناميكيًا
+    const colorStyles = document.createElement('style');
+    colorStyles.id = 'dynamic-color-styles';
+    colorStyles.textContent = lightModeCSS + darkModeCSS;
+    document.head.appendChild(colorStyles);
+  }
+
+  // دالة لتطبيق الوضع الداكن
+  function applyDarkMode() {
+    isDarkMode = true;
+    
+    // تحديث زر التبديل
+    colorModeToggle.classList.add('dark-mode');
+    colorModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    colorModeToggle.title = 'التبديل إلى الوضع الفاتح';
+    
+    // تطبيق الكلاسات
+    document.body.classList.remove('light-mode');
+    document.body.classList.add('dark-mode');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    
+    // حفظ التفضيل
+    localStorage.setItem('preferred-color-mode', 'dark');
+    
+    // إزالة تأثيرات الامتدادات
+    removeDarkReaderEffects();
+    
+    console.log('تم تطبيق الوضع الداكن');
+  }
+
+  // دالة لتطبيق الوضع الفاتح
+  function applyLightMode() {
+    isDarkMode = false;
+    
+    // تحديث زر التبديل
+    colorModeToggle.classList.remove('dark-mode');
+    colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    colorModeToggle.title = 'التبديل إلى الوضع الداكن';
+    
+    // تطبيق الكلاسات
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+    document.documentElement.setAttribute('data-theme', 'light');
+    
+    // حفظ التفضيل
+    localStorage.setItem('preferred-color-mode', 'light');
+    
+    console.log('تم تطبيق الوضع الفاتح');
+  }
+
+  // دالة لإزالة تأثيرات Dark Reader
+  function removeDarkReaderEffects() {
+    document.querySelectorAll('[data-darkreader-inline-]').forEach(el => {
+      Array.from(el.attributes).forEach(attr => {
+        if (attr.name.includes('darkreader')) {
+          el.removeAttribute(attr.name);
         }
-
-        // إزالة امتدادات تغيير الألوان
-        removeColorExtensions();
-      }
-
-      // دالة للتبديل بين الوضعين
-      function toggleColorMode() {
-        if (document.body.classList.contains('dark-mode')) {
-          applyLightColors();
-        } else {
-          applyDarkColors();
-        }
-        removeColorExtensions();
-      }
-
-      // إضافة حدث النقر على زر التبديل
-      colorModeToggle.addEventListener('click', toggleColorMode);
-
-      // التهيئة عند تحميل الصفحة
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(checkAndApplyColors, 100);
       });
+    });
+    
+    document.documentElement.removeAttribute('data-darkreader-scheme');
+    document.documentElement.removeAttribute('data-darkreader-mode');
+    document.documentElement.removeAttribute('data-darkreader-proxy-injected');
+  }
 
-      // الاستماع لتغيرات النظام
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        checkAndApplyColors();
-      });
+  // دالة لعرض رسالة التأكيد
+  function showModeConfirmation() {
+    const confirmation = document.createElement('div');
+    confirmation.className = `mode-confirmation ${isDarkMode ? 'dark-mode' : 'light-mode'}`;
+    confirmation.innerHTML = `
+      <i class="fas ${isDarkMode ? 'fa-moon' : 'fa-sun'}"></i>
+      ${isDarkMode ? 'تم تفعيل الوضع الداكن' : 'تم تفعيل الوضع الفاتح'}
+    `;
+    
+    document.body.appendChild(confirmation);
+    
+    // إزالة الرسالة بعد 3 ثواني
+    setTimeout(() => {
+      confirmation.style.animation = 'fadeOut 0.5s ease-out';
+      setTimeout(() => {
+        confirmation.remove();
+      }, 500);
+    }, 3000);
+  }
 
-      // التحقق الدوري (كل 3 ثوانٍ)
-      setInterval(() => {
-        const currentMode = detectCurrentColorMode();
-        const hasDarkClass = document.body.classList.contains('dark-mode');
+  // دالة لتبديل الوضع
+  function toggleColorMode() {
+    if (isDarkMode) {
+      applyLightMode();
+    } else {
+      applyDarkMode();
+    }
+    
+    showModeConfirmation();
+  }
 
-        // إذا كانت الصفحة داكنة ولكن الكلاس غير مضاف
-        if (currentMode === 'dark' && !hasDarkClass) {
-          applyDarkColors();
+  // دالة للتهيئة الأولية
+  function initializeColorMode() {
+    // التأكد من وجود متغيرات الألوان
+    ensureColorVariables();
+    
+    // التحقق من التفضيل المحفوظ
+    const savedMode = localStorage.getItem('preferred-color-mode');
+    
+    // التحقق من تفضيلات النظام
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedMode) {
+      // استخدام التفضيل المحفوظ
+      if (savedMode === 'dark') {
+        applyDarkMode();
+      } else {
+        applyLightMode();
+      }
+    } else {
+      // استخدام وضع النظام
+      if (systemPrefersDark) {
+        applyDarkMode();
+      } else {
+        applyLightMode();
+      }
+    }
+  }
+
+  // إضافة حدث النقر على زر التبديل
+  colorModeToggle.addEventListener('click', toggleColorMode);
+
+  // الاستماع لتغيرات وضع النظام
+  if (window.matchMedia) {
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    colorSchemeQuery.addEventListener('change', (e) => {
+      // تحديث فقط إذا لم يكن هناك تفضيل محفوظ
+      if (!localStorage.getItem('preferred-color-mode')) {
+        if (e.matches) {
+          applyDarkMode();
+        } else {
+          applyLightMode();
         }
-        // إذا كانت الصفحة فاتحة ولكن الكلاس الداكن موجود
-        else if (currentMode === 'light' && hasDarkClass) {
-          applyLightColors();
-        }
+        showModeConfirmation();
+      }
+    });
+  }
 
-        removeColorExtensions();
-      }, 3000);
+  // التهيئة عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initializeColorMode, 100);
+    
+    // التحقق من امتدادات تغيير الألوان بعد فترة
+    setTimeout(removeDarkReaderEffects, 500);
+  });
 
-      // التحقق عند تحميل الصفحة بالكامل
-      window.addEventListener('load', checkAndApplyColors);
+  // التحقق الدوري من امتدادات تغيير الألوان
+  setInterval(() => {
+    removeDarkReaderEffects();
+  }, 5000);
 
-      // إضافة CSS إضافي للتأكد من التطبيق
-      const additionalCSS = `
+  // CSS إضافي للتأكد من التطبيق
+  const additionalCSS = `
     /* تأكيد على الألوان الفاتحة */
     body.light-mode {
       background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
@@ -2728,22 +2850,52 @@
       color: #E8E6E3 !important;
     }
     
+    /* تأكيد على عناصر محددة */
+    body.light-mode .hero {
+      background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.1) 0%, transparent 50%) !important;
+    }
+    
+    body.dark-mode .hero {
+      background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.05) 0%, transparent 50%),
+                  radial-gradient(ellipse at 40% 80%, rgba(139, 106, 43, 0.05) 0%, transparent 50%) !important;
+    }
+    
     /* إزالة تأثيرات امتدادات الألوان */
-    body.light-mode [data-darkreader-inline-color],
-    body.dark-mode [data-darkreader-inline-color] {
+    [data-darkreader-inline-color] {
       color: inherit !important;
     }
     
-    body.light-mode [data-darkreader-inline-bgcolor],
-    body.dark-mode [data-darkreader-inline-bgcolor] {
+    [data-darkreader-inline-bgcolor] {
       background-color: inherit !important;
     }
+    
+    [data-darkreader-inline-border] {
+      border-color: inherit !important;
+    }
+    
+    /* تأكيد على الانتقالات */
+    body,
+    .navbar,
+    .nav-links a,
+    .hero,
+    .feature-card,
+    .program-card,
+    .testimonial-card,
+    .stat-card {
+      transition: background-color 0.5s ease, 
+                  color 0.5s ease, 
+                  border-color 0.5s ease,
+                  box-shadow 0.5s ease !important;
+    }
   `;
-
-      const additionalStyle = document.createElement('style');
-      additionalStyle.textContent = additionalCSS;
-      document.head.appendChild(additionalStyle);
-    </script>
+  
+  const additionalStyle = document.createElement('style');
+  additionalStyle.textContent = additionalCSS;
+  document.head.appendChild(additionalStyle);
+</script>
     <!-- <script src="./js/lightMode.js"></script> -->
   </body>
 

@@ -198,6 +198,94 @@
       box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
     }
 
+    /* ========== WHY CHOOSE SECTION ========== */
+    .why-choose-section {
+      max-width: var(--max-width);
+      margin: 4rem auto;
+      padding: 3rem;
+      background: linear-gradient(135deg, rgba(231, 210, 163, 0.2), rgba(255, 255, 255, 0.8));
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+    }
+
+    .why-choose-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--gold-dark);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .why-choose-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      border-radius: 2px;
+    }
+
+    .why-choose-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .why-choose-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gold-light);
+      transition: var(--transition);
+    }
+
+    .why-choose-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--gold);
+    }
+
+    .why-choose-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .why-choose-text h4 {
+      color: var(--gold-dark);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-choose-text p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .cidco-highlight {
+      color: var(--gold-dark);
+      font-weight: 800;
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.1), rgba(231, 210, 163, 0.2));
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
     /* ========== MAIN CONTENT ========== */
     .main-content {
       flex: 1;
@@ -950,6 +1038,10 @@
         grid-template-columns: 1fr;
         gap: 2rem;
       }
+      
+      .why-choose-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1012,6 +1104,16 @@
 
       .countdown-display {
         flex-wrap: wrap;
+      }
+
+      .why-choose-section {
+        padding: 2rem;
+        margin: 2rem 1rem;
+      }
+
+      .why-choose-item {
+        flex-direction: column;
+        text-align: center;
       }
 
       .footer-grid {
@@ -1287,6 +1389,62 @@
       </div>
     </div>
   </div>
+
+  <!-- Why Choose ICA Section -->
+  <section class="why-choose-section">
+    <h2 class="why-choose-title">لماذا تختار ICA؟</h2>
+    <div class="why-choose-grid">
+      <div class="why-choose-item">
+        <div class="why-choose-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <div class="why-choose-text">
+          <h4>برامج مرتبطة باحتياجات السوق</h4>
+          <p>تصميم البرامج بناءً على متطلبات السوق الفعلية لضمان فرص عمل متميزة</p>
+        </div>
+      </div>
+
+      <div class="why-choose-item">
+        <div class="why-choose-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="why-choose-text">
+          <h4>دمج المعايير الدولية</h4>
+          <p>نتبع أحدث المعايير العالمية في التدريب والتقييم لضمان جودة المخرجات</p>
+        </div>
+      </div>
+
+      <div class="why-choose-item">
+        <div class="why-choose-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="why-choose-text">
+          <h4>استخدام أدوات الذكاء الاصطناعي</h4>
+          <p>ندمج أحدث تقنيات الذكاء الاصطناعي في العملية التعليمية لمواكبة العصر</p>
+        </div>
+      </div>
+
+      <div class="why-choose-item">
+        <div class="why-choose-icon">
+          <i class="fas fa-ship"></i>
+        </div>
+        <div class="why-choose-text">
+          <h4>تأهيل للتصدير والأسواق العالمية</h4>
+          <p>نعدك لتصدير منتجاتك الإبداعية للأسواق العربية والأوروبية والعالمية</p>
+        </div>
+      </div>
+
+      <div class="why-choose-item">
+        <div class="why-choose-icon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <div class="why-choose-text">
+          <h4>ارتباط مباشر بمنظومة <span class="cidco-highlight">CIDCO</span></h4>
+          <p>شراكة استراتيجية مع CIDCO للتطوير والتصدير لفتح آفاق جديدة أمام خريجينا</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Success Modal -->
   <div class="modal-overlay" id="successModal">

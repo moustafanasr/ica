@@ -455,7 +455,7 @@
         padding: 0 2rem;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
       }
 
       .nav-logo {
@@ -1558,6 +1558,14 @@
       }
 
       @media (max-width: 768px) {
+        .hamburger {
+          /* display: flex; */
+        }
+
+        .nav-container {
+          justify-content: space-between;
+        }
+
         .nav-logo-img {
           width: fit-content;
           height: 50px;
@@ -1742,17 +1750,17 @@
 
   <body>
     <!-- Navigation -->
-    <!-- <div class="imgLogo">
+    <div class="imgLogo">
       <img src="./img/ICALogo15px.svg" alt="logosvg" style="">
-      <img src="./img/WhatsApp Image 2026-01-18 at 9.32.46 AM.jpeg" alt="logosvg" style="">
-    </div> -->
+      <!-- <img src="./img/WhatsApp Image 2026-01-18 at 9.32.46 AM.jpeg" alt="logosvg" style=""> -->
+    </div>
     <nav class="navbar">
       <div class="nav-container">
         <a href="#home" class="nav-logo">
-          <div class="nav-logo-img">
-            <!-- <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع" big-logo="true"> -->
-            <!-- <img src="./img/logoNav1.svg" alt="شعار الأكاديمية الدولية للإبداع"> -->
-          </div>
+          <!-- <div class="nav-logo-img">
+            <img src="./img/logoNav.svg" alt="شعار الأكاديمية الدولية للإبداع" big-logo="true">
+            <img src="./img/logoNav1.svg" alt="شعار الأكاديمية الدولية للإبداع">
+          </div> -->
           <div class="logo-text">
             <h2>الأكاديمية الدولية للإبداع</h2>
             <span>INTERNATIONAL CREATIVE ACADEMY</span>
@@ -1797,10 +1805,9 @@
               الأكاديمية الدولية للإبداع
             </h1>
             <p class="hero-subtitle">
-              أكاديمية للتدريب المتقدم تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة
-              للمنافسة في الأسواق
-              العالمية،
-              من خلال التدريب العملي ومتطلبات الجودة والتصدير والشراكات الدولية.
+              منصة متكاملة لصقل المواهب الإبداعية وتحويل الأفكار المبتكرة إلى مشاريع ريادية قادرة على المنافسة في
+              الأسواق العالمية. نقدم منهجيات تدريبية متطورة تجمع بين الحرفية التقليدية وأحدث تقنيات الإنتاج لضمان جودة
+              تنافسية.
             </p>
             <div class="hero-actions">
               <a href="#programs" class="btn btn-primary">
@@ -1816,19 +1823,19 @@
           <div class="hero-visual">
             <div class="hero-card">
               <!-- <div class="floating-elements">
-                <div class="floating-element">
-                  <i class="fas fa-gem"></i>
-                  <span>مجوهرات وحلي</span>
-                </div>
-                <div class="floating-element">
-                  <i class="fas fa-palette"></i>
-                  <span>كليم وسجاد</span>
-                </div>
-                <div class="floating-element">
-                  <i class="fas fa-crown"></i>
-                  <span>منتجات جلدية</span>
-                </div>
-              </div> -->
+            <div class="floating-element">
+              <i class="fas fa-gem"></i>
+              <span>مجوهرات وحلي</span>
+            </div>
+            <div class="floating-element">
+              <i class="fas fa-palette"></i>
+              <span>كليم وسجاد</span>
+            </div>
+            <div class="floating-element">
+              <i class="fas fa-crown"></i>
+              <span>منتجات جلدية</span>
+            </div>
+          </div> -->
               <img src="./img/DrHany.jpeg" alt="DR/ Hany Barakat" style="width: 100%;">
             </div>
           </div>
@@ -1839,11 +1846,9 @@
     <!-- About Section -->
     <section class="section" id="about">
       <div class="section-header">
-        <h2 class="section-title">عن الأكاديمية الدولية للإبداع</h2>
+        <h2 class="section-title">من نحن في الأكاديمية الدولية للإبداع</h2>
         <p class="section-subtitle">
-          أكاديمية للتدريب المتقدم تهدف إلى تمكين المبدعين من تطوير مهاراتهم وتحويل أفكارهم إلى منتجات جاهزة للمنافسة في
-          الأسواق
-          العالمية
+          وجهتك الأولى لتطوير المهارات الإبداعية وتحويل الشغف إلى مهنة احترافية بمعايير عالمية
         </p>
       </div>
 
@@ -1851,13 +1856,16 @@
         <div class="about-text">
           <h3>رؤيتنا ورسالتنا</h3>
           <p>
-            الأكاديمية الدولية للإبداع (ICA) هي أكاديمية تعليمية رائدة تهدف إلى تمكين المبدعين من تحويل
-            أفكارهم الإبداعية إلى منتجات عالية الجودة قادرة على المنافسة في الأسواق العالمية. نؤمن بأن الإبداع له
-            قيمة كبيرة ويحتاج إلى الأدوات والمعرفة المناسبة ليتحول إلى إنجازات ملموسة.
+            في الأكاديمية الدولية للإبداع (ICA)، نؤمن بأن كل مبدع يحمل في داخله فكرة قادرة على تغيير العالم. لذلك أنشأنا
+            هذه الاكاديمية التعليمية المتخصصة لتمكين الموهوبين من تحويل شغفهم الإبداعي إلى مشاريع اقتصادية واعدة. نقدم
+            بيئة
+            تعليمية محفزة تجمع بين الخبرات الأكاديمية والتطبيق العملي، لضمان اكتساب مهارات متكاملة تواكب متطلبات العصر.
           </p>
           <p>
-            من خلال برامجنا التدريبية المتخصصة، نوفر للخريجين المهارات التقنية والمعرفة العملية اللازمة لتحويل أفكارهم
-            إلى مشاريع تجارية ناجحة. نحن نعمل على سد الفجوة بين الإبداع التقليدي ومتطلبات السوق الحديثة.
+            تركز استراتيجيتنا التعليمية على سد الفجوة بين المهارات الحرفية التقليدية ومتطلبات الأسواق المعاصرة، من خلال
+            برامج تدريبية مبتكرة تشمل أحدث تقنيات التصميم والإنتاج، بالإضافة إلى تأهيل المنتجين لخوض غمار التصدير
+            والمنافسة الدولية. نسعى لبناء جيل جديد من المبدعين القادرين على صناعة منتجات تحمل هوية عربية أصيلة بجودة
+            عالمية.
           </p>
 
           <div class="about-features">
@@ -2465,17 +2473,17 @@
 
 
     <!-- كود تبديل وضع الألوان مع تعديلات الألوان -->
-<script>
-  // إنشاء زر تبديل وضع الألوان
-  const colorModeToggle = document.createElement('button');
-  colorModeToggle.id = 'color-mode-toggle';
-  colorModeToggle.className = 'color-mode-btn';
-  colorModeToggle.setAttribute('aria-label', 'تبديل وضع الألوان');
-  colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-  colorModeToggle.title = 'التبديل إلى الوضع الداكن';
+    <script>
+      // إنشاء زر تبديل وضع الألوان
+      const colorModeToggle = document.createElement('button');
+      colorModeToggle.id = 'color-mode-toggle';
+      colorModeToggle.className = 'color-mode-btn';
+      colorModeToggle.setAttribute('aria-label', 'تبديل وضع الألوان');
+      colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      colorModeToggle.title = 'التبديل إلى الوضع الداكن';
 
-  // إضافة CSS لزر التبديل
-  const toggleButtonCSS = `
+      // إضافة CSS لزر التبديل
+      const toggleButtonCSS = `
     .color-mode-btn {
       position: fixed;
       bottom: 30px;
@@ -2591,20 +2599,20 @@
     }
   `;
 
-  // إضافة CSS للصفحة
-  const style = document.createElement('style');
-  style.textContent = toggleButtonCSS;
-  document.head.appendChild(style);
+      // إضافة CSS للصفحة
+      const style = document.createElement('style');
+      style.textContent = toggleButtonCSS;
+      document.head.appendChild(style);
 
-  // إضافة زر التبديل للصفحة
-  document.body.appendChild(colorModeToggle);
+      // إضافة زر التبديل للصفحة
+      document.body.appendChild(colorModeToggle);
 
-  // متغير لتتبع الوضع الحالي
-  let isDarkMode = false;
+      // متغير لتتبع الوضع الحالي
+      let isDarkMode = false;
 
-  // دالة للتأكد من تعرف CSS على متغيرات الألوان
-  function ensureColorVariables() {
-    const lightModeCSS = `
+      // دالة للتأكد من تعرف CSS على متغيرات الألوان
+      function ensureColorVariables() {
+        const lightModeCSS = `
       /* متغيرات الوضع الفاتح */
       :root[data-theme="light"],
       html.light-mode {
@@ -2642,7 +2650,7 @@
       }
     `;
 
-    const darkModeCSS = `
+        const darkModeCSS = `
       /* متغيرات الوضع الداكن */
       :root[data-theme="dark"],
       html.dark-mode {
@@ -2680,164 +2688,164 @@
       }
     `;
 
-    // إضافة الأنماط ديناميكيًا
-    const colorStyles = document.createElement('style');
-    colorStyles.id = 'dynamic-color-styles';
-    colorStyles.textContent = lightModeCSS + darkModeCSS;
-    document.head.appendChild(colorStyles);
-  }
+        // إضافة الأنماط ديناميكيًا
+        const colorStyles = document.createElement('style');
+        colorStyles.id = 'dynamic-color-styles';
+        colorStyles.textContent = lightModeCSS + darkModeCSS;
+        document.head.appendChild(colorStyles);
+      }
 
-  // دالة لتطبيق الوضع الداكن
-  function applyDarkMode() {
-    isDarkMode = true;
-    
-    // تحديث زر التبديل
-    colorModeToggle.classList.add('dark-mode');
-    colorModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    colorModeToggle.title = 'التبديل إلى الوضع الفاتح';
-    
-    // تطبيق الكلاسات
-    document.body.classList.remove('light-mode');
-    document.body.classList.add('dark-mode');
-    document.documentElement.setAttribute('data-theme', 'dark');
-    
-    // حفظ التفضيل
-    localStorage.setItem('preferred-color-mode', 'dark');
-    
-    // إزالة تأثيرات الامتدادات
-    removeDarkReaderEffects();
-    
-    console.log('تم تطبيق الوضع الداكن');
-  }
+      // دالة لتطبيق الوضع الداكن
+      function applyDarkMode() {
+        isDarkMode = true;
 
-  // دالة لتطبيق الوضع الفاتح
-  function applyLightMode() {
-    isDarkMode = false;
-    
-    // تحديث زر التبديل
-    colorModeToggle.classList.remove('dark-mode');
-    colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    colorModeToggle.title = 'التبديل إلى الوضع الداكن';
-    
-    // تطبيق الكلاسات
-    document.body.classList.remove('dark-mode');
-    document.body.classList.add('light-mode');
-    document.documentElement.setAttribute('data-theme', 'light');
-    
-    // حفظ التفضيل
-    localStorage.setItem('preferred-color-mode', 'light');
-    
-    console.log('تم تطبيق الوضع الفاتح');
-  }
+        // تحديث زر التبديل
+        colorModeToggle.classList.add('dark-mode');
+        colorModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        colorModeToggle.title = 'التبديل إلى الوضع الفاتح';
 
-  // دالة لإزالة تأثيرات Dark Reader
-  function removeDarkReaderEffects() {
-    document.querySelectorAll('[data-darkreader-inline-]').forEach(el => {
-      Array.from(el.attributes).forEach(attr => {
-        if (attr.name.includes('darkreader')) {
-          el.removeAttribute(attr.name);
-        }
-      });
-    });
-    
-    document.documentElement.removeAttribute('data-darkreader-scheme');
-    document.documentElement.removeAttribute('data-darkreader-mode');
-    document.documentElement.removeAttribute('data-darkreader-proxy-injected');
-  }
+        // تطبيق الكلاسات
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        document.documentElement.setAttribute('data-theme', 'dark');
 
-  // دالة لعرض رسالة التأكيد
-  function showModeConfirmation() {
-    const confirmation = document.createElement('div');
-    confirmation.className = `mode-confirmation ${isDarkMode ? 'dark-mode' : 'light-mode'}`;
-    confirmation.innerHTML = `
+        // حفظ التفضيل
+        localStorage.setItem('preferred-color-mode', 'dark');
+
+        // إزالة تأثيرات الامتدادات
+        removeDarkReaderEffects();
+
+        console.log('تم تطبيق الوضع الداكن');
+      }
+
+      // دالة لتطبيق الوضع الفاتح
+      function applyLightMode() {
+        isDarkMode = false;
+
+        // تحديث زر التبديل
+        colorModeToggle.classList.remove('dark-mode');
+        colorModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        colorModeToggle.title = 'التبديل إلى الوضع الداكن';
+
+        // تطبيق الكلاسات
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        document.documentElement.setAttribute('data-theme', 'light');
+
+        // حفظ التفضيل
+        localStorage.setItem('preferred-color-mode', 'light');
+
+        console.log('تم تطبيق الوضع الفاتح');
+      }
+
+      // دالة لإزالة تأثيرات Dark Reader
+      function removeDarkReaderEffects() {
+        document.querySelectorAll('[data-darkreader-inline-]').forEach(el => {
+          Array.from(el.attributes).forEach(attr => {
+            if (attr.name.includes('darkreader')) {
+              el.removeAttribute(attr.name);
+            }
+          });
+        });
+
+        document.documentElement.removeAttribute('data-darkreader-scheme');
+        document.documentElement.removeAttribute('data-darkreader-mode');
+        document.documentElement.removeAttribute('data-darkreader-proxy-injected');
+      }
+
+      // دالة لعرض رسالة التأكيد
+      function showModeConfirmation() {
+        const confirmation = document.createElement('div');
+        confirmation.className = `mode-confirmation ${isDarkMode ? 'dark-mode' : 'light-mode'}`;
+        confirmation.innerHTML = `
       <i class="fas ${isDarkMode ? 'fa-moon' : 'fa-sun'}"></i>
       ${isDarkMode ? 'تم تفعيل الوضع الداكن' : 'تم تفعيل الوضع الفاتح'}
     `;
-    
-    document.body.appendChild(confirmation);
-    
-    // إزالة الرسالة بعد 3 ثواني
-    setTimeout(() => {
-      confirmation.style.animation = 'fadeOut 0.5s ease-out';
-      setTimeout(() => {
-        confirmation.remove();
-      }, 500);
-    }, 3000);
-  }
 
-  // دالة لتبديل الوضع
-  function toggleColorMode() {
-    if (isDarkMode) {
-      applyLightMode();
-    } else {
-      applyDarkMode();
-    }
-    
-    showModeConfirmation();
-  }
+        document.body.appendChild(confirmation);
 
-  // دالة للتهيئة الأولية
-  function initializeColorMode() {
-    // التأكد من وجود متغيرات الألوان
-    ensureColorVariables();
-    
-    // التحقق من التفضيل المحفوظ
-    const savedMode = localStorage.getItem('preferred-color-mode');
-    
-    // التحقق من تفضيلات النظام
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedMode) {
-      // استخدام التفضيل المحفوظ
-      if (savedMode === 'dark') {
-        applyDarkMode();
-      } else {
-        applyLightMode();
+        // إزالة الرسالة بعد 3 ثواني
+        setTimeout(() => {
+          confirmation.style.animation = 'fadeOut 0.5s ease-out';
+          setTimeout(() => {
+            confirmation.remove();
+          }, 500);
+        }, 3000);
       }
-    } else {
-      // استخدام وضع النظام
-      if (systemPrefersDark) {
-        applyDarkMode();
-      } else {
-        applyLightMode();
-      }
-    }
-  }
 
-  // إضافة حدث النقر على زر التبديل
-  colorModeToggle.addEventListener('click', toggleColorMode);
-
-  // الاستماع لتغيرات وضع النظام
-  if (window.matchMedia) {
-    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    colorSchemeQuery.addEventListener('change', (e) => {
-      // تحديث فقط إذا لم يكن هناك تفضيل محفوظ
-      if (!localStorage.getItem('preferred-color-mode')) {
-        if (e.matches) {
-          applyDarkMode();
-        } else {
+      // دالة لتبديل الوضع
+      function toggleColorMode() {
+        if (isDarkMode) {
           applyLightMode();
+        } else {
+          applyDarkMode();
         }
+
         showModeConfirmation();
       }
-    });
-  }
 
-  // التهيئة عند تحميل الصفحة
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initializeColorMode, 100);
-    
-    // التحقق من امتدادات تغيير الألوان بعد فترة
-    setTimeout(removeDarkReaderEffects, 500);
-  });
+      // دالة للتهيئة الأولية
+      function initializeColorMode() {
+        // التأكد من وجود متغيرات الألوان
+        ensureColorVariables();
 
-  // التحقق الدوري من امتدادات تغيير الألوان
-  setInterval(() => {
-    removeDarkReaderEffects();
-  }, 5000);
+        // التحقق من التفضيل المحفوظ
+        const savedMode = localStorage.getItem('preferred-color-mode');
 
-  // CSS إضافي للتأكد من التطبيق
-  const additionalCSS = `
+        // التحقق من تفضيلات النظام
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedMode) {
+          // استخدام التفضيل المحفوظ
+          if (savedMode === 'dark') {
+            applyDarkMode();
+          } else {
+            applyLightMode();
+          }
+        } else {
+          // استخدام وضع النظام
+          if (systemPrefersDark) {
+            applyDarkMode();
+          } else {
+            applyLightMode();
+          }
+        }
+      }
+
+      // إضافة حدث النقر على زر التبديل
+      colorModeToggle.addEventListener('click', toggleColorMode);
+
+      // الاستماع لتغيرات وضع النظام
+      if (window.matchMedia) {
+        const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        colorSchemeQuery.addEventListener('change', (e) => {
+          // تحديث فقط إذا لم يكن هناك تفضيل محفوظ
+          if (!localStorage.getItem('preferred-color-mode')) {
+            if (e.matches) {
+              applyDarkMode();
+            } else {
+              applyLightMode();
+            }
+            showModeConfirmation();
+          }
+        });
+      }
+
+      // التهيئة عند تحميل الصفحة
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initializeColorMode, 100);
+
+        // التحقق من امتدادات تغيير الألوان بعد فترة
+        setTimeout(removeDarkReaderEffects, 500);
+      });
+
+      // التحقق الدوري من امتدادات تغيير الألوان
+      setInterval(() => {
+        removeDarkReaderEffects();
+      }, 5000);
+
+      // CSS إضافي للتأكد من التطبيق
+      const additionalCSS = `
     /* تأكيد على الألوان الفاتحة */
     body.light-mode {
       background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%) !important;
@@ -2891,11 +2899,11 @@
                   box-shadow 0.5s ease !important;
     }
   `;
-  
-  const additionalStyle = document.createElement('style');
-  additionalStyle.textContent = additionalCSS;
-  document.head.appendChild(additionalStyle);
-</script>
+
+      const additionalStyle = document.createElement('style');
+      additionalStyle.textContent = additionalCSS;
+      document.head.appendChild(additionalStyle);
+    </script>
     <!-- <script src="./js/lightMode.js"></script> -->
   </body>
 

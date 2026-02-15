@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="الأكاديمية الدولية للإبداع - سجل في دوراتنا التدريبية المتخصصة">
-  <title>نظام التسجيل | الأكاديمية الدولية للإبداع</title>
+  <title>تسجيل الدورة | الأكاديمية الدولية للإبداع</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
@@ -1085,8 +1085,8 @@
         <ul class="nav-links">
           <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
           <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
-          <li><a href="courses.html"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
-          <li><a href="index.html#testimonials"><i class="fas fa-comment"></i> الشـركات الدولية</a></li>
+          <li><a href="courses.html" class="active"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
+          <li><a href="#"><i class="fas fa-comment"></i> الشركاء</a></li>
           <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
         </ul>
       </div>
@@ -1104,8 +1104,8 @@
   <div class="main-content">
     <div class="demo-container">
       <div class="demo-header">
-        <h1>نظام التسجيل في الدورات التدريبية</h1>
-        <p>سجل الآن في دوراتنا المتخصصة واحصل على شهادة معتمدة دولياً</p>
+        <h1>تسجيل الدورة التدريبية</h1>
+        <p>أكمل بياناتك للتسجيل في الدورة والحصول على شهادة معتمدة دولياً</p>
       </div>
 
       <div class="demo-content">
@@ -1249,11 +1249,11 @@
             <label class="form-label">المجال المهني</label>
             <select class="form-select" id="profession">
               <option value="">اختر مجالك المهني</option>
-              <option value="design">تصميم مجوهرات</option>
-              <option value="textile">تصميم نسيج وسجاد</option>
-              <option value="leather">تصميم منتجات جلدية</option>
+              <option value="design">تصميم أزياء</option>
+              <option value="pattern">باترون وتصميم</option>
+              <option value="styling">تنسيق أزياء</option>
               <option value="quality">جودة وتصدير</option>
-              <option value="other">مجال آخر</option>
+              <option value="business">ريادة أعمال</option>
             </select>
           </div>
 
@@ -1303,7 +1303,7 @@
         </div>
         <h4 class="modal-title">مبروك! لقد تم تسجيلك</h4>
         <p class="modal-message" id="successMessage">
-          تم تسجيلك بنجاح في دورة "نظم الجودة الدولية". سيتم التواصل معك في غضون 24 ساعة لتأكيد الحجز.
+          تم تسجيلك بنجاح في الدورة. سيتم التواصل معك في غضون 24 ساعة لتأكيد الحجز.
         </p>
         <div class="modal-actions">
           <button class="modal-btn primary" id="okSuccessBtn">
@@ -1411,7 +1411,7 @@
           <div class="footer-contact">
             <p><i class="fas fa-map-marker-alt"></i> ١٤ شارع فؤاد بدواني - مدينة نصر - القاهرة</p>
             <p><i class="fas fa-phone"></i> +20 2 26706606</p>
-            <p><i class="fas fa-envelope"></i> info@ica-academy.com</p>
+            <p><i class="fas fa-envelope"></i> info@icacademy.tech</p>
             <p><i class="fas fa-clock"></i> الأحد - الخميس: ٨ صباحاً - ٤ مساءً</p>
           </div>
         </div>
@@ -1460,18 +1460,27 @@
     // تحميل بيانات الدورة من localStorage
     document.addEventListener('DOMContentLoaded', function() {
       const selectedCourse = localStorage.getItem('selectedCourse');
+      const selectedInstructor = localStorage.getItem('selectedInstructor');
+      
       if (selectedCourse) {
         document.getElementById('courseTitle').textContent = selectedCourse;
         document.getElementById('courseNameInput').value = selectedCourse;
-        localStorage.removeItem('selectedCourse');
       }
+      
+      if (selectedInstructor) {
+        document.getElementById('instructorNameInput').value = selectedInstructor;
+      }
+      
+      // مسح البيانات بعد الاستخدام
+      localStorage.removeItem('selectedCourse');
+      localStorage.removeItem('selectedInstructor');
     });
 
     // Timer
     function initializeCountdown() {
       const targetDate = new Date();
       targetDate.setDate(targetDate.getDate() + 3);
-      targetDate.setHours(12, 45, 30, 0);
+      targetDate.setHours(23, 59, 59, 0);
 
       function updateCountdown() {
         const now = new Date();

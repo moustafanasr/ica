@@ -248,7 +248,7 @@
       border: 1px solid var(--gold-light);
     }
 
-    /* ========== قسم الفلتر ========== */
+    /* ========== قسم الفلتر والبحث ========== */
     .filters-section {
       padding: 2rem 0;
       background: rgba(255, 255, 255, 0.7);
@@ -388,9 +388,9 @@
     /* صورة الكورس */
     .course-image {
       width: 100%;
-      height: 250px;
-      position: relative;
+      height: 200px;
       overflow: hidden;
+      position: relative;
     }
 
     .course-image img {
@@ -404,17 +404,38 @@
       transform: scale(1.05);
     }
 
-    .course-category {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
+    /* رأس البطاقة مع الترقيم */
+    .course-header {
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.1), rgba(231, 210, 163, 0.2));
+      padding: 1.5rem;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .course-number {
+      display: inline-block;
       background: var(--gold);
       color: white;
-      padding: 0.4rem 1rem;
+      padding: 0.25rem 1rem;
       border-radius: 50px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-bottom: 1rem;
+    }
+
+    .course-title-arabic {
+      color: var(--gold-dark);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+      font-weight: 800;
+    }
+
+    .course-title-english {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
     }
 
     /* محتوى الكورس */
@@ -425,62 +446,51 @@
       flex: 1;
     }
 
-    .course-title {
-      font-size: 1.3rem;
-      color: var(--gold-dark);
-      margin-bottom: 1rem;
-      line-height: 1.4;
-      font-weight: 800;
-    }
-
     .course-description {
-      color: var(--muted);
+      color: var(--ink);
       margin-bottom: 1.5rem;
       line-height: 1.7;
-      font-size: 0.95rem;
+      font-size: 1rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--stroke);
     }
 
+    .course-description small {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     /* قسم المدرب */
-    .instructor {
+    .instructor-box {
+      background: rgba(231, 210, 163, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gold-light);
+    }
+
+    .instructor-box h4 {
+      color: var(--gold-dark);
+      font-size: 1rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      background: rgba(231, 210, 163, 0.1);
-      padding: 1rem;
-      border-radius: var(--radius-sm);
+      gap: 0.5rem;
+    }
+
+    .instructor-box h4 i {
+      color: var(--gold);
+    }
+
+    .instructor-item {
       margin-bottom: 1rem;
     }
 
-    .instructor-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--gold-light);
-      flex-shrink: 0;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      font-size: 1.2rem;
-    }
-
-    .instructor-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .instructor-info {
-      flex: 1;
+    .instructor-item:last-child {
+      margin-bottom: 0;
     }
 
     .instructor-name {
-      font-size: 1.1rem;
       font-weight: 800;
       color: var(--gold-dark);
       margin-bottom: 0.25rem;
@@ -488,12 +498,18 @@
 
     .instructor-title {
       color: var(--muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
-    /* زر التسجيل */
-    .enroll-btn {
+    .instructor-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+      margin: 1rem 0;
+    }
+
+    /* زر التفاصيل */
+    .details-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -512,12 +528,12 @@
       margin-top: 0.5rem;
     }
 
-    .enroll-btn:hover {
+    .details-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(185, 146, 74, 0.4);
     }
 
-    .enroll-btn i {
+    .details-btn i {
       font-size: 1.1rem;
     }
 
@@ -731,16 +747,7 @@
       }
 
       .course-image {
-        height: 220px;
-      }
-
-      .instructor {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .instructor-img {
-        margin-bottom: 0.5rem;
+        height: 180px;
       }
 
       .footer-grid {
@@ -776,7 +783,15 @@
       }
 
       .course-image {
-        height: 200px;
+        height: 160px;
+      }
+
+      .course-header {
+        padding: 1rem;
+      }
+
+      .course-title-arabic {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -803,7 +818,7 @@
         <ul class="nav-links">
           <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
           <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
-          <li><a href="index.html#programs"><i class="fas fa-palette"></i> البرامج</a></li>
+          <li><a href="#" class="active"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
           <li><a href="#"><i class="fas fa-comment"></i> الشركاء</a></li>
           <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
         </ul>
@@ -821,8 +836,8 @@
   <!-- قسم الهيدر -->
   <section class="hero-courses">
     <div class="hero-courses-content">
-      <h1 class="hero-courses-title">الأكاديمية الدولية للإبداع</h1>
-      <p class="hero-courses-subtitle">قائمة الدورات التدريبية</p>
+      <h1 class="hero-courses-title">الدورات التدريبية المتخصصة</h1>
+      <p class="hero-courses-subtitle">Professional Training Courses</p>
       <div class="hero-courses-semester">الفصل الدراسي - أبريل 2026</div>
       <div class="hero-quote">
         "ليست مجرد تعليم .. إنها منظومة متكاملة من الإبداع إلى السوق"
@@ -857,162 +872,164 @@
     </div>
 
     <div class="courses-grid" id="coursesContainer">
-      <!-- الكورس 1: تصميم الأزياء بالذكاء الاصطناعي -->
+      <!-- I. Fashion Design with AI -->
       <div class="course-card" data-category="design">
         <div class="course-image">
           <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600" alt="تصميم أزياء">
-          <span class="course-category">تصميم أزياء</span>
+        </div>
+        <div class="course-header">
+          <span class="course-number">I</span>
+          <h3 class="course-title-arabic">تصميم الأزياء: من الإلهام إلى العالم الرقمي</h3>
+          <div class="course-title-english">Fashion Design: From Fundamentals to Advanced AI Image Generation</div>
         </div>
         
         <div class="course-content">
-          <h3 class="course-title">تصميم الأزياء: من الإلهام إلى العالم الرقمي</h3>
-          
           <p class="course-description">
-            <strong>الدمج بين الإبداع الفني وأدوات الذكاء الاصطناعي</strong><br>
-            تعلم كيفية تحويل أفكارك الإبداعية إلى تصاميم عصرية باستخدام أحدث تقنيات الذكاء الاصطناعي
+            الدمج بين الإبداع الفني وأدوات الذكاء الاصطناعي لصناعة رؤية تصميمية عالمية
           </p>
 
-          <div class="instructor">
-            <div class="instructor-img">
-              <span>ت.م</span>
+          <div class="instructor-box">
+            <h4><i class="fas fa-chalkboard-teacher"></i> المدربون</h4>
+            <div class="instructor-item">
+              <div class="instructor-name">المصممة تقى محمد</div>
+              <div class="instructor-title">مصممة أزياء متخصصة في الدمج بين الإبداع والتكنولوجيا</div>
             </div>
-            <div class="instructor-info">
-              <div class="instructor-name">تقي محمد - توما زيدان</div>
-              <div class="instructor-title">مصممتا أزياء متخصصتان في الدمج بين الإبداع والتكنولوجيا</div>
+            <div class="instructor-divider"></div>
+            <div class="instructor-item">
+              <div class="instructor-name">المصممة توما زيدان</div>
+              <div class="instructor-title">مصممة أزياء وخبيرة في تقنيات الذكاء الاصطناعي</div>
             </div>
           </div>
 
-          <a href="enroll-course.html" class="enroll-btn" onclick="setCourseName('تصميم الأزياء: من الإلهام إلى العالم الرقمي')">
-            <i class="fas fa-user-plus"></i>
-            سجل في الدورة
+          <a href="enroll-course.html" class="details-btn" onclick="localStorage.setItem('selectedCourse', 'تصميم الأزياء: من الإلهام إلى العالم الرقمي')">
+            <i class="fas fa-info-circle"></i>
+            تفاصيل الدورة
           </a>
         </div>
       </div>
 
-      <!-- الكورس 2: الباترون والتصميم -->
+      <!-- II. Pattern Making & Draping -->
       <div class="course-card" data-category="pattern">
         <div class="course-image">
           <img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt="باترون وتصميم">
-          <span class="course-category">باترون</span>
+        </div>
+        <div class="course-header">
+          <span class="course-number">II</span>
+          <h3 class="course-title-arabic">باترون وتصميم الأزياء</h3>
+          <div class="course-title-english">Pattern Making & Draping</div>
         </div>
         
         <div class="course-content">
-          <h3 class="course-title">باترون وتصميم الأزياء</h3>
-          
           <p class="course-description">
-            <strong>رحلة الأزياء الكاملة من التصميم إلى البروتوتايب</strong><br>
-            تعلم أساسيات الباترون المسطح والتفصيل بمعايير احترافية
+            رحلة الأزياء الكاملة من التصميم إلى الباترون ثم البروتوتايب ... بمعايير إحترافية
           </p>
 
-          <div class="instructor">
-            <div class="instructor-img">
-              <span>د.إ</span>
-            </div>
-            <div class="instructor-info">
+          <div class="instructor-box">
+            <h4><i class="fas fa-chalkboard-teacher"></i> المدرب</h4>
+            <div class="instructor-item">
               <div class="instructor-name">د. إلهام زايد</div>
-              <div class="instructor-title">خبرة 20 سنة في تدريس التصميم والباترون</div>
+              <div class="instructor-title">خبرة 20 سنة في تدريس التصميم والباترون والتنفيذ</div>
             </div>
           </div>
 
-          <a href="enroll-course.html" class="enroll-btn" onclick="setCourseName('باترون وتصميم الأزياء')">
-            <i class="fas fa-user-plus"></i>
-            سجل في الدورة
+          <a href="enroll-course.html" class="details-btn" onclick="localStorage.setItem('selectedCourse', 'باترون وتصميم الأزياء')">
+            <i class="fas fa-info-circle"></i>
+            تفاصيل الدورة
           </a>
         </div>
       </div>
 
-      <!-- الكورس 3: تنسيق الأزياء -->
+      <!-- III. Fashion Styling & Image Building -->
       <div class="course-card" data-category="styling">
         <div class="course-image">
           <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600" alt="تنسيق أزياء">
-          <span class="course-category">تنسيق أزياء</span>
+        </div>
+        <div class="course-header">
+          <span class="course-number">III</span>
+          <h3 class="course-title-arabic">تنسيق الأزياء وبناء الصورة</h3>
+          <div class="course-title-english">Fashion Styling & Image Building</div>
         </div>
         
         <div class="course-content">
-          <h3 class="course-title">تنسيق الأزياء وبناء الصورة</h3>
-          
           <p class="course-description">
-            <strong>فن تقديم إطلالة متناسقة تحكي قصة</strong><br>
-            تعلم كيفية اختيار وتنسيق الملابس والإكسسوارات لبناء هوية بصرية مميزة
+            فن تقديم إطلالة متناسقة تحكي قصة وتخدم علامة تجارية أو شخصية أو مناسبة<br>
+            <small>The art of selecting and coordinating clothing, accessories, colours, and overall looks to create a specific image, message, or identity.</small>
           </p>
 
-          <div class="instructor">
-            <div class="instructor-img">
-              <span>ت.م</span>
-            </div>
-            <div class="instructor-info">
-              <div class="instructor-name">توما محمد</div>
+          <div class="instructor-box">
+            <h4><i class="fas fa-chalkboard-teacher"></i> المدربة</h4>
+            <div class="instructor-item">
+              <div class="instructor-name">المصممة توما محمد</div>
               <div class="instructor-title">خبيرة تنسيق أزياء وبناء الصورة</div>
             </div>
           </div>
 
-          <a href="enroll-course.html" class="enroll-btn" onclick="setCourseName('تنسيق الأزياء وبناء الصورة')">
-            <i class="fas fa-user-plus"></i>
-            سجل في الدورة
+          <a href="enroll-course.html" class="details-btn" onclick="localStorage.setItem('selectedCourse', 'تنسيق الأزياء وبناء الصورة')">
+            <i class="fas fa-info-circle"></i>
+            تفاصيل الدورة
           </a>
         </div>
       </div>
 
-      <!-- الكورس 4: الجودة والتصدير -->
+      <!-- IV. International Quality & Export Readiness -->
       <div class="course-card" data-category="quality">
         <div class="course-image">
           <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600" alt="جودة وتصدير">
-          <span class="course-category">جودة وتصدير</span>
+        </div>
+        <div class="course-header">
+          <span class="course-number">IV</span>
+          <h3 class="course-title-arabic">نظم الجودة الدولية ومتطلبات التصدير</h3>
+          <div class="course-title-english">International Quality & Export Readiness</div>
         </div>
         
         <div class="course-content">
-          <h3 class="course-title">نظم الجودة الدولية ومتطلبات التصدير</h3>
-          
           <p class="course-description">
-            <strong>تأهيل المنتجات للأسواق العالمية</strong><br>
-            الملابس - المنسوجات - المنتجات الجلدية - الحلي
+            نظم الجودة الدولية و متطلبات التصدير للصناعات الإبداعية<br>
+            الملابس – المنسوجات – المنتجات الجلدية – الحلي
           </p>
 
-          <div class="instructor">
-            <div class="instructor-img">
-              <span>د.ه</span>
-            </div>
-            <div class="instructor-info">
+          <div class="instructor-box">
+            <h4><i class="fas fa-chalkboard-teacher"></i> المدرب</h4>
+            <div class="instructor-item">
               <div class="instructor-name">د. هاني بركات</div>
               <div class="instructor-title">رئيس هيئة المواصفات سابقاً - خبير الجودة الدولي</div>
             </div>
           </div>
 
-          <a href="enroll-course.html" class="enroll-btn" onclick="setCourseName('نظم الجودة الدولية ومتطلبات التصدير')">
-            <i class="fas fa-user-plus"></i>
-            سجل في الدورة
+          <a href="enroll-course.html" class="details-btn" onclick="localStorage.setItem('selectedCourse', 'نظم الجودة الدولية ومتطلبات التصدير')">
+            <i class="fas fa-info-circle"></i>
+            تفاصيل الدورة
           </a>
         </div>
       </div>
 
-      <!-- الكورس 5: من الأزياء إلى الأعمال -->
+      <!-- V. Fashion to Business -->
       <div class="course-card" data-category="business">
         <div class="course-image">
           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600" alt="ريادة أعمال">
-          <span class="course-category">ريادة أعمال</span>
+        </div>
+        <div class="course-header">
+          <span class="course-number">V</span>
+          <h3 class="course-title-arabic">من الأزياء إلى الأعمال: نحو براند عالمي</h3>
+          <div class="course-title-english">Fashion to Business: From Fashion Concept to Global Brand</div>
         </div>
         
         <div class="course-content">
-          <h3 class="course-title">من الأزياء إلى الأعمال: نحو براند عالمي</h3>
-          
           <p class="course-description">
-            <strong>من الاسكتش إلى عرض الأزياء</strong><br>
-            تحويل أفكارك الإبداعية إلى علامة تجارية عالمية
+            من الاسكتش الي عرض الأزياء - نحو تحويل أفكارك الابداعية الي براند تجاري عالمي
           </p>
 
-          <div class="instructor">
-            <div class="instructor-img">
-              <span>م.ف</span>
-            </div>
-            <div class="instructor-info">
-              <div class="instructor-name">مارتن فيكتور المصري</div>
-              <div class="instructor-title">مصمم أزياء عالمي - خبير بناء العلامات التجارية</div>
+          <div class="instructor-box">
+            <h4><i class="fas fa-chalkboard-teacher"></i> المدرب</h4>
+            <div class="instructor-item">
+              <div class="instructor-name">المصمم الدولي مارتن فيكتور المصري</div>
+              <div class="instructor-title">مصمم أزياء عالمي - خبير في تحويل الأفكار الإبداعية إلى علامات تجارية</div>
             </div>
           </div>
 
-          <a href="enroll-course.html" class="enroll-btn" onclick="setCourseName('من الأزياء إلى الأعمال: نحو براند عالمي')">
-            <i class="fas fa-user-plus"></i>
-            سجل في الدورة
+          <a href="enroll-course.html" class="details-btn" onclick="localStorage.setItem('selectedCourse', 'من الأزياء إلى الأعمال: نحو براند عالمي')">
+            <i class="fas fa-info-circle"></i>
+            تفاصيل الدورة
           </a>
         </div>
       </div>
@@ -1098,11 +1115,6 @@
     const filterButtons = document.querySelectorAll('.filter-btn');
     const searchInput = document.getElementById('searchInput');
 
-    // ========== حفظ اسم الدورة في localStorage عند النقر ==========
-    function setCourseName(courseName) {
-      localStorage.setItem('selectedCourse', courseName);
-    }
-
     // ========== قائمة الهاتف المحمول ==========
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
@@ -1180,11 +1192,12 @@
       const term = searchTerm.toLowerCase().trim();
       
       courses.forEach(course => {
-        const title = course.querySelector('.course-title')?.textContent.toLowerCase() || '';
+        const title = course.querySelector('.course-title-arabic')?.textContent.toLowerCase() || '';
+        const englishTitle = course.querySelector('.course-title-english')?.textContent.toLowerCase() || '';
         const description = course.querySelector('.course-description')?.textContent.toLowerCase() || '';
         const instructor = course.querySelector('.instructor-name')?.textContent.toLowerCase() || '';
         
-        if (term === '' || title.includes(term) || description.includes(term) || instructor.includes(term)) {
+        if (term === '' || title.includes(term) || englishTitle.includes(term) || description.includes(term) || instructor.includes(term)) {
           course.style.display = 'flex';
         } else {
           course.style.display = 'none';
@@ -1235,7 +1248,7 @@
       observer.observe(card);
     });
 
-    // ========== إدارة الصور البديلة ==========
+    // ========== معالجة الصور البديلة ==========
     document.querySelectorAll('.course-image img').forEach(img => {
       img.addEventListener('error', function() {
         this.style.display = 'none';
@@ -1243,7 +1256,7 @@
         this.parentElement.style.display = 'flex';
         this.parentElement.style.alignItems = 'center';
         this.parentElement.style.justifyContent = 'center';
-        this.parentElement.innerHTML += '<span style="color: white; font-size: 2rem;">ICA</span>';
+        this.parentElement.innerHTML = '<span style="color: white; font-size: 2rem; font-weight: 800;">ICA</span>';
       });
     });
 

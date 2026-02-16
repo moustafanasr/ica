@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="الأكاديمية الدولية للإبداع - تفاصيل الدورات التدريبية المتخصصة">
+  <title>تفاصيل الدورة | الأكاديمية الدولية للإبداع</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ========== المتغيرات الأساسية ========== */
+    :root {
+      --bg: #F3E8DD;
+      --ink: #2B2320;
+      --muted: #6A5B52;
+      --gold: #B9924A;
+      --gold-light: #E7D2A3;
+      --gold-dark: #8B6A2B;
+      --stroke: rgba(120, 90, 60, .25);
+      --card: rgba(255, 255, 255, .85);
+      --success: #28a745;
+      --error: #dc3545;
+      --warning: #ffc107;
+      --radius: 24px;
+      --radius-sm: 16px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --max-width: 1400px;
+      --shadow: 0 20px 40px rgba(0, 0, 0, .1);
+      --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
+    }
+
+    /* الألوان الخاصة بالمستويات */
+    .level-beginner { background: linear-gradient(135deg, #28a745, #20c997); }
+    .level-intermediate { background: linear-gradient(135deg, #ffc107, #fd7e14); }
+    .level-advanced { background: linear-gradient(135deg, #dc3545, #c82333); }
+    .level-expert { background: linear-gradient(135deg, #6f42c1, #6610f2); }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Cairo", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* ========== شريط التنقل ========== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--stroke);
+      padding: 1.25rem 0;
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      padding: 0.75rem 0;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+    }
+
+    .logo-text h2 {
+      font-size: 1.3rem;
+      color: var(--gold-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo-text span {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links a i {
+      font-size: 0.875rem;
+      color: var(--gold);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-dark);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--gold-dark);
+      margin: 3px 0;
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    /* ========== الأزرار ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      gap: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: white;
+      box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold-dark);
+      border: 2px solid var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: var(--gold-dark);
+      border: 2px solid var(--gold-light);
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      margin-bottom: 1rem;
+    }
+
+    .btn-back:hover {
+      background: var(--gold-light);
+      transform: translateX(5px);
+    }
+
+    /* ========== الهيدر ========== */
+    .page-header {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      max-width: var(--max-width);
+      margin: 1rem auto 0;
+      padding: 0 2rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========== المحتوى الرئيسي ========== */
+    .main-content {
+      max-width: var(--max-width);
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    /* ========== زر العودة ========== */
+    .back-link {
+      margin-bottom: 2rem;
+    }
+
+    /* ========== تبويبات التنقل بين الدورات ========== */
+    .course-tabs {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--stroke);
+    }
+
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 2px solid var(--gold-light);
+      border-radius: 50px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: white;
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    /* ========== بطاقة الدورة الرئيسية ========== */
+    .course-main-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--stroke);
+      margin-bottom: 2rem;
+    }
+
+    .course-header {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .course-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .course-header-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 2rem;
+    }
+
+    .course-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: var(--gold);
+      border-radius: 50px;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .course-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .course-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.05), rgba(231, 210, 163, 0.1));
+    }
+
+    .info-item {
+      text-align: center;
+    }
+
+    .info-item i {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-item .label {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .info-item .value {
+      color: var(--gold-dark);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    /* ========== رسالة الترحيب ========== */
+    .welcome-message {
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.1), rgba(231, 210, 163, 0.2));
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      border: 2px dashed var(--gold);
+    }
+
+    .welcome-message h3 {
+      color: var(--gold-dark);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .welcome-message p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ========== شبكة المستويات ========== */
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .level-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--stroke);
+      transition: var(--transition);
+    }
+
+    .level-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .level-header {
+      padding: 2rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .level-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
+    .level-header > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .level-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .level-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .level-subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .level-content {
+      padding: 2rem;
+    }
+
+    .level-details {
+      margin-bottom: 1.5rem;
+    }
+
+    .level-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .level-detail-item i {
+      color: var(--gold);
+      width: 20px;
+    }
+
+    .level-price {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold-dark);
+      margin: 1rem 0;
+    }
+
+    .level-price small {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: normal;
+    }
+
+    .learning-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .learning-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+
+    .learning-list li i {
+      color: var(--gold);
+    }
+
+    /* ========== الدورات القصيرة (PS) ========== */
+    .short-courses-section {
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.05), rgba(231, 210, 163, 0.1));
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .short-courses-title {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--gold-dark);
+      margin-bottom: 2rem;
+    }
+
+    .short-courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .short-course-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      border: 1px solid var(--gold-light);
+      transition: var(--transition);
+    }
+
+    .short-course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--gold);
+    }
+
+    .short-course-code {
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      background: var(--gold-light);
+      border-radius: 50px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-bottom: 1rem;
+    }
+
+    .short-course-title {
+      font-size: 1.2rem;
+      color: var(--gold-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .short-course-duration {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .short-course-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+    }
+
+    /* ========== قسم التسجيل ========== */
+    .enrollment-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin: 3rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--stroke);
+      text-align: center;
+    }
+
+    .enrollment-title {
+      font-size: 2rem;
+      color: var(--gold-dark);
+      margin-bottom: 1rem;
+    }
+
+    .enrollment-subtitle {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .enrollment-highlight {
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.1), rgba(231, 210, 163, 0.2));
+      border-radius: var(--radius-sm);
+      padding: 2rem;
+      margin: 2rem 0;
+      border: 2px dashed var(--gold);
+    }
+
+    .enrollment-highlight i {
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .enrollment-highlight .email {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+      direction: ltr;
+    }
+
+    .max-participants {
+      display: inline-block;
+      padding: 0.5rem 2rem;
+      background: var(--error);
+      color: white;
+      border-radius: 50px;
+      font-weight: 800;
+      margin: 1rem 0;
+    }
+
+    /* ========== الفوتر ========== */
+    .footer {
+      background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
+      color: var(--gold-light);
+      padding-top: 4rem;
+      margin-top: 4rem;
+      border-top: 4px solid var(--gold);
+    }
+
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: white;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.875rem;
+    }
+
+    .footer-links a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-links a:hover {
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.75rem;
+      color: var(--gold);
+    }
+
+    .footer-contact p {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      color: var(--gold-light);
+    }
+
+    .footer-contact i {
+      color: var(--gold);
+      margin-top: 0.25rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      width: 44px;
+      height: 44px;
+      background: rgba(185, 146, 74, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid rgba(185, 146, 74, 0.3);
+    }
+
+    .social-links a:hover {
+      background: var(--gold);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: rgba(231, 210, 163, 0.7);
+    }
+
+    /* ========== إشعار ========== */
+    .notification {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transform: translateX(-150%);
+      transition: transform 0.4s ease;
+      z-index: 1000;
+      border-right: 4px solid var(--gold);
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* ========== مؤشر التحميل ========== */
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--gold-light);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========== التجاوب ========== */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 1.5rem;
+        transition: var(--transition);
+        border-top: 3px solid var(--stroke);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .course-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .levels-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .enrollment-section {
+        padding: 2rem 1rem;
+      }
+
+      .enrollment-highlight .email {
+        font-size: 1.2rem;
+      }
+
+      .btn-back {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- شريط التنقل -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-text">
+          <h2>الأكاديمية الدولية للإبداع</h2>
+          <span>INTERNATIONAL CREATIVE ACADEMY</span>
+        </div>
+      </a>
+
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+          <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
+          <li><a href="courses.html" class="active"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
+          <li><a href="#"><i class="fas fa-comment"></i> الشركاء</a></li>
+          <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- مسار التنقل -->
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="index.html">الرئيسية</a> / <a href="courses.html">الدورات التدريبية</a> / <span id="currentCategory">...</span>
+    </div>
+    <h1 id="mainCourseTitle">جاري تحميل البيانات...</h1>
+    <p id="mainCourseSubtitle">...</p>
+  </div>
+
+  <div class="main-content">
+    <!-- زر العودة إلى الدورات -->
+    <div class="back-link">
+      <a href="courses.html" class="btn-back">
+        <i class="fas fa-arrow-right"></i>
+        العودة إلى قائمة الدورات
+      </a>
+    </div>
+
+    <!-- مؤشر التحميل (يظهر أثناء تحميل البيانات) -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="mainContent">
+      <!-- تبويبات التنقل بين المجالات الرئيسية -->
+      <div class="course-tabs">
+        <div class="tabs-container" id="categoryTabs">
+          <button class="tab-btn" data-category="fashion-design">تصميم الأزياء</button>
+          <button class="tab-btn" data-category="pattern-making">باترون وتصميم</button>
+          <button class="tab-btn" data-category="fashion-styling">تنسيق أزياء</button>
+          <button class="tab-btn" data-category="quality">جودة وتصدير</button>
+          <button class="tab-btn" data-category="fashion-business">ريادة أعمال</button>
+        </div>
+      </div>
+
+      <!-- رسالة ترحيب ديناميكية -->
+      <div class="welcome-message" id="welcomeMessage">
+        <h3 id="welcomeTitle">مرحباً بك في قسم تصميم الأزياء</h3>
+        <p id="welcomeText">اختر المستوى المناسب لمهاراتك وابدأ رحلتك الإبداعية مع نخبة من المدربين الخبراء</p>
+      </div>
+
+      <!-- قسم تصميم الأزياء (Fashion Design) -->
+      <div id="fashion-design" class="category-section">
+        <!-- بطاقة الدورة الرئيسية -->
+        <div class="course-main-card">
+          <div class="course-header">
+            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200" alt="تصميم أزياء">
+            <div class="course-header-overlay">
+              <span class="course-badge">4 مستويات متكاملة</span>
+              <h2>تصميم الأزياء: من الإلهام إلى العالم الرقمي</h2>
+              <p>الدمج بين الإبداع الفني وأدوات الذكاء الاصطناعي لصناعة رؤية تصميمية عالمية</p>
+            </div>
+          </div>
+          <div class="course-info-grid">
+            <div class="info-item">
+              <i class="fas fa-calendar-alt"></i>
+              <div class="label">بداية الدورة</div>
+              <div class="value">أبريل 2026</div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-users"></i>
+              <div class="label">عدد المقاعد</div>
+              <div class="value">10 كحد أقصى</div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-layer-group"></i>
+              <div class="label">المستويات</div>
+              <div class="value">4 مستويات</div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <div class="label">إجمالي الساعات</div>
+              <div class="value">80 ساعة</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- شبكة المستويات -->
+        <div class="levels-grid">
+          <!-- Level 1A -->
+          <div class="level-card">
+            <div class="level-header level-beginner">
+              <div class="level-icon">
+                <i class="fas fa-pencil-ruler"></i>
+              </div>
+              <div class="level-title">LEVEL 1A – Fashion Drawing Basics</div>
+              <div class="level-subtitle">Foundation of Fashion Art</div>
+            </div>
+            <div class="level-content">
+              <p style="color: var(--gold-dark); font-weight: 700; margin-bottom: 1rem;">ابدأ من الصفر وابنِ مهارات رسم قوية</p>
+              
+              <div class="level-details">
+                <div class="level-detail-item">
+                  <i class="far fa-clock"></i>
+                  <span>المدة: 4 أسابيع (8 جلسات - جلستان أسبوعياً)</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-hourglass-half"></i>
+                  <span>مدة الجلسة: ساعتان</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span>إجمالي الساعات: 16 ساعة</span>
+                </div>
+              </div>
+
+              <h4 style="color: var(--gold-dark); margin: 1rem 0;">ستتعلم:</h4>
+              <ul class="learning-list">
+                <li><i class="fas fa-check-circle"></i> التحكم في الخط (Line control)</li>
+                <li><i class="fas fa-check-circle"></i> نسب جسم الموضة (Fashion body proportions)</li>
+                <li><i class="fas fa-check-circle"></i> رسم الكروكي (Croquis drawing)</li>
+                <li><i class="fas fa-check-circle"></i> رسم الرأس واليدين والقدمين</li>
+                <li><i class="fas fa-check-circle"></i> الأوضاع الأساسية (Basic poses)</li>
+              </ul>
+
+              <div class="level-price">
+                ٢٬٥٠٠ ج.م
+                <small>شامل المواد</small>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('LEVEL 1A – Fashion Drawing Basics', '٢٬٥٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل في المستوى
+              </button>
+            </div>
+          </div>
+
+          <!-- Level 1B -->
+          <div class="level-card">
+            <div class="level-header level-beginner">
+              <div class="level-icon">
+                <i class="fas fa-draw-polygon"></i>
+              </div>
+              <div class="level-title">LEVEL 1B – Freehand Fashion Sketching</div>
+              <div class="level-subtitle">Think & Draw Like a Designer</div>
+            </div>
+            <div class="level-content">
+              <p style="color: var(--gold-dark); font-weight: 700; margin-bottom: 1rem;">حوّل الرسم الأساسي إلى اسكتشات أزياء حقيقية</p>
+              
+              <div class="level-details">
+                <div class="level-detail-item">
+                  <i class="far fa-clock"></i>
+                  <span>المدة: 4 أسابيع (8 جلسات)</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-hourglass-half"></i>
+                  <span>مدة الجلسة: ساعتان</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span>إجمالي الساعات: 16 ساعة</span>
+                </div>
+              </div>
+
+              <h4 style="color: var(--gold-dark); margin: 1rem 0;">ستتعلم:</h4>
+              <ul class="learning-list">
+                <li><i class="fas fa-check-circle"></i> الأوضاع الديناميكية (Dynamic poses)</li>
+                <li><i class="fas fa-check-circle"></i> رسم الملابس على الجسم</li>
+                <li><i class="fas fa-check-circle"></i> فساتين، جاكيتات، بناطيل، تنانير</li>
+                <li><i class="fas fa-check-circle"></i> الثنيات والحركة (Folds & movement)</li>
+                <li><i class="fas fa-check-circle"></i> اسكتشات احترافية نظيفة</li>
+              </ul>
+
+              <div class="level-price">
+                ٣٬٠٠٠ ج.م
+                <small>شامل المواد</small>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('LEVEL 1B – Freehand Fashion Sketching', '٣٬٠٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل في المستوى
+              </button>
+            </div>
+          </div>
+
+          <!-- Level 2 -->
+          <div class="level-card">
+            <div class="level-header level-intermediate">
+              <div class="level-icon">
+                <i class="fas fa-tablet-alt"></i>
+              </div>
+              <div class="level-title">LEVEL 2 – Digital Fashion Illustration</div>
+              <div class="level-subtitle">Design on Laptop & iPad</div>
+            </div>
+            <div class="level-content">
+              <p style="color: var(--gold-dark); font-weight: 700; margin-bottom: 1rem;">اصنع أعمال أزياء رقمية احترافية</p>
+              
+              <div class="level-details">
+                <div class="level-detail-item">
+                  <i class="far fa-clock"></i>
+                  <span>المدة: 6 أسابيع (12 جلسة)</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-hourglass-half"></i>
+                  <span>مدة الجلسة: ساعتان</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span>إجمالي الساعات: 24 ساعة</span>
+                </div>
+              </div>
+
+              <h4 style="color: var(--gold-dark); margin: 1rem 0;">ستتعلم:</h4>
+              <ul class="learning-list">
+                <li><i class="fas fa-check-circle"></i> Photoshop / Illustrator / Procreate</li>
+                <li><i class="fas fa-check-circle"></i> رسم الموديلات الرقمية</li>
+                <li><i class="fas fa-check-circle"></i> تلوين الأقمشة (Fabric coloring)</li>
+                <li><i class="fas fa-check-circle"></i> Layers & brushes</li>
+                <li><i class="fas fa-check-circle"></i> رسم flats (Fashion flat drawing)</li>
+              </ul>
+
+              <div class="level-price">
+                ٤٬٥٠٠ ج.م
+                <small>شامل المواد</small>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('LEVEL 2 – Digital Fashion Illustration', '٤٬٥٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل في المستوى
+              </button>
+            </div>
+          </div>
+
+          <!-- Level 3 -->
+          <div class="level-card">
+            <div class="level-header level-advanced">
+              <div class="level-icon">
+                <i class="fas fa-cube"></i>
+              </div>
+              <div class="level-title">LEVEL 3 – 3D Fashion Design (CLO 3D)</div>
+              <div class="level-subtitle">Turn Designs into Real 3D Clothes</div>
+            </div>
+            <div class="level-content">
+              <p style="color: var(--gold-dark); font-weight: 700; margin-bottom: 1rem;">حوّل تصاميمك إلى ملابس ثلاثية الأبعاد</p>
+              
+              <div class="level-details">
+                <div class="level-detail-item">
+                  <i class="far fa-clock"></i>
+                  <span>المدة: 6 أسابيع (12 جلسة)</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-hourglass-half"></i>
+                  <span>مدة الجلسة: ساعتان</span>
+                </div>
+                <div class="level-detail-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span>إجمالي الساعات: 24 ساعة</span>
+                </div>
+              </div>
+
+              <h4 style="color: var(--gold-dark); margin: 1rem 0;">ستتعلم:</h4>
+              <ul class="learning-list">
+                <li><i class="fas fa-check-circle"></i> برنامج CLO 3D</li>
+                <li><i class="fas fa-check-circle"></i> إلباس المانيكان (Dressing the mannequin)</li>
+                <li><i class="fas fa-check-circle"></i> حركة الأقمشة (Fabric movement)</li>
+                <li><i class="fas fa-check-circle"></i> المقاسات والتناسب (Sizing & fitting)</li>
+                <li><i class="fas fa-check-circle"></i> محاكاة واقعية (Realistic simulation)</li>
+              </ul>
+
+              <div class="level-price">
+                ٦٬٠٠٠ ج.م
+                <small>شامل المواد</small>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('LEVEL 3 – 3D Fashion Design (CLO 3D)', '٦٬٠٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل في المستوى
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- قسم الباترون وتصميم الأزياء (Pattern Making) -->
+      <div id="pattern-making" class="category-section" style="display: none;">
+        <div class="course-main-card">
+          <div class="course-header">
+            <img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=1200" alt="باترون وتصميم">
+            <div class="course-header-overlay">
+              <span class="course-badge">5 دورات + 8 دورات قصيرة</span>
+              <h2>باترون وتصميم الأزياء</h2>
+              <p>رحلة الأزياء الكاملة من التصميم إلى الباترون ثم البروتوتايب ... بمعايير إحترافية</p>
+            </div>
+          </div>
+          <div class="course-info-grid">
+            <div class="info-item">
+              <i class="fas fa-calendar-alt"></i>
+              <div class="label">بداية الدورة</div>
+              <div class="value">أبريل 2026</div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-users"></i>
+              <div class="label">عدد المقاعد</div>
+              <div class="value">10 كحد أقصى</div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-layer-group"></i>
+              <div class="label">الدورات</div>
+              <div class="value">5 دورات أساسية</div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <div class="label">إجمالي الساعات</div>
+              <div class="value">٣٠٠+ ساعة</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الدورات الأساسية -->
+        <h2 style="color: var(--gold-dark); margin: 3rem 0 1.5rem;">الدورات الأساسية</h2>
+        <div class="levels-grid">
+          <!-- P.1 Women Pattern Making Basics -->
+          <div class="level-card">
+            <div class="level-header level-beginner">
+              <div class="level-icon">
+                <i class="fas fa-female"></i>
+              </div>
+              <div class="level-title">P.1 Women Pattern Making (Basics)</div>
+            </div>
+            <div class="level-content">
+              <p>تعلّم القصات المختلفة وإنتاج تصاميمك باستخدام أقمشة حقيقية</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٦٠ ساعة تدريبية</span>
+              </div>
+              <div class="level-price">٦٬٠٠٠ ج.م</div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="selectLevel('P.1 Women Pattern Making (Basics)', '٦٬٠٠٠ ج.م')">
+                <i class="fas fa-info-circle"></i>
+                عرض التفاصيل
+              </button>
+            </div>
+          </div>
+
+          <!-- P.2 Women Pattern Making Advanced -->
+          <div class="level-card">
+            <div class="level-header level-intermediate">
+              <div class="level-icon">
+                <i class="fas fa-female"></i>
+              </div>
+              <div class="level-title">P.2 Women Pattern Making Advanced</div>
+            </div>
+            <div class="level-content">
+              <p>للمصممين العاملين في مجال الباترون لتطوير مهاراتهم</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٦٠ ساعة تدريبية</span>
+              </div>
+              <div class="level-price">٦٬٥٠٠ ج.م</div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="selectLevel('P.2 Women Pattern Making Advanced', '٦٬٥٠٠ ج.م')">
+                <i class="fas fa-info-circle"></i>
+                عرض التفاصيل
+              </button>
+            </div>
+          </div>
+
+          <!-- P.3 Men Pattern Making -->
+          <div class="level-card">
+            <div class="level-header level-intermediate">
+              <div class="level-icon">
+                <i class="fas fa-male"></i>
+              </div>
+              <div class="level-title">P.3 Men Pattern Making</div>
+            </div>
+            <div class="level-content">
+              <p>باترون رجالي - قمصان، بناطيل، جاكيتات، ملابس رياضية</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٦٠ ساعة تدريبية</span>
+              </div>
+              <div class="level-price">٦٬٠٠٠ ج.م</div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="selectLevel('P.3 Men Pattern Making', '٦٬٠٠٠ ج.م')">
+                <i class="fas fa-info-circle"></i>
+                عرض التفاصيل
+              </button>
+            </div>
+          </div>
+
+          <!-- P.4 Kids Pattern Making -->
+          <div class="level-card">
+            <div class="level-header level-beginner">
+              <div class="level-icon">
+                <i class="fas fa-child"></i>
+              </div>
+              <div class="level-title">P.4 Kids Pattern Making</div>
+            </div>
+            <div class="level-content">
+              <p>باترون أطفال - رومبر، أوفرول، توب، بناطيل، جاكيتات</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٦٠ ساعة تدريبية</span>
+              </div>
+              <div class="level-price">٦٬٠٠٠ ج.م</div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="selectLevel('P.4 Kids Pattern Making', '٦٬٠٠٠ ج.م')">
+                <i class="fas fa-info-circle"></i>
+                عرض التفاصيل
+              </button>
+            </div>
+          </div>
+
+          <!-- P.5 3D Draping -->
+          <div class="level-card">
+            <div class="level-header level-advanced">
+              <div class="level-icon">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <div class="level-title">P.5 3D Draping on The Stand</div>
+            </div>
+            <div class="level-content">
+              <p>تشكيل الأقمشة ثلاثي الأبعاد على المانيكان</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٦٠ ساعة تدريبية</span>
+              </div>
+              <div class="level-price">٧٬٠٠٠ ج.م</div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="selectLevel('P.5 3D Draping on The Stand', '٧٬٠٠٠ ج.م')">
+                <i class="fas fa-info-circle"></i>
+                عرض التفاصيل
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- الدورات القصيرة PS -->
+        <div class="short-courses-section">
+          <h3 class="short-courses-title">الدورات القصيرة (PS) - ٢٠ ساعة لكل دورة</h3>
+          <div class="short-courses-grid">
+            <div class="short-course-card">
+              <span class="short-course-code">PS1</span>
+              <h4 class="short-course-title">Women: Skirt, Pants</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٣٬٠٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS2</span>
+              <h4 class="short-course-title">Women: Blouse, Dress</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٣٬٠٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS3</span>
+              <h4 class="short-course-title">Women: Sportswear</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٤٬٠٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS4</span>
+              <h4 class="short-course-title">Women: Tailored Jacket</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٣٬٥٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS5</span>
+              <h4 class="short-course-title">Women: Bridalwear</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٣٬٠٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS6</span>
+              <h4 class="short-course-title">Men: Shirt, Pants</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٣٬٠٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS7</span>
+              <h4 class="short-course-title">Men: Sportswear</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٣٬٠٠٠ ج.م</div>
+            </div>
+            <div class="short-course-card">
+              <span class="short-course-code">PS8</span>
+              <h4 class="short-course-title">Men: Tailored Jacket</h4>
+              <div class="short-course-duration">
+                <i class="far fa-clock"></i> 20 ساعة
+              </div>
+              <div class="short-course-price">٤٬٠٠٠ ج.م</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- قسم تنسيق الأزياء (Fashion Styling) -->
+      <div id="fashion-styling" class="category-section" style="display: none;">
+        <div class="course-main-card">
+          <div class="course-header">
+            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200" alt="تنسيق أزياء">
+            <div class="course-header-overlay">
+              <span class="course-badge">دورتان متكاملتان</span>
+              <h2>تنسيق الأزياء وبناء الصورة</h2>
+              <p>فن تقديم إطلالة متناسقة تحكي قصة وتخدم علامة تجارية أو شخصية أو مناسبة</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="levels-grid">
+          <!-- Fashion Styling & Fabric Selection -->
+          <div class="level-card">
+            <div class="level-header level-beginner">
+              <div class="level-icon">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <div class="level-title">Fashion Styling & Fabric Selection</div>
+            </div>
+            <div class="level-content">
+              <p>اختيار الأقمشة وتنسيق الألوان والإكسسوارات</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٤ أسابيع - ١٦ ساعة</span>
+              </div>
+              <div class="level-price">٣٬٠٠٠ ج.م</div>
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('Fashion Styling & Fabric Selection', '٣٬٠٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+
+          <!-- Fashion Modelling & Runway -->
+          <div class="level-card">
+            <div class="level-header level-intermediate">
+              <div class="level-icon">
+                <i class="fas fa-walking"></i>
+              </div>
+              <div class="level-title">Fashion Modelling & Runway Performance</div>
+            </div>
+            <div class="level-content">
+              <p>Walk. Pose. Own the Runway.</p>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٤ أسابيع - ١٦ ساعة</span>
+              </div>
+              <div class="level-price">٣٬٠٠٠ ج.م</div>
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('Fashion Modelling & Runway Performance', '٣٬٠٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- قسم الجودة والتصدير (Quality) -->
+      <div id="quality" class="category-section" style="display: none;">
+        <div class="course-main-card">
+          <div class="course-header">
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200" alt="جودة وتصدير">
+            <div class="course-header-overlay">
+              <span class="course-badge">دورة متخصصة</span>
+              <h2>نظم الجودة الدولية ومتطلبات التصدير</h2>
+              <p>الملابس – المنسوجات – المنتجات الجلدية – الحلي</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="level-card" style="max-width: 600px; margin: 2rem auto;">
+          <div class="level-header level-advanced">
+            <div class="level-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="level-title">International Quality & Export Readiness</div>
+          </div>
+          <div class="level-content">
+            <ul class="learning-list">
+              <li><i class="fas fa-check-circle"></i> المعايير الدولية (International Standards)</li>
+              <li><i class="fas fa-check-circle"></i> متطلبات القطاعات: أزياء، منسوجات، منتجات جلدية، حلي</li>
+              <li><i class="fas fa-check-circle"></i> متطلبات الامتثال للقطاعات المختلفة</li>
+              <li><i class="fas fa-check-circle"></i> كيفية تجهيز منتجاتك وعلامتك التجارية</li>
+              <li><i class="fas fa-check-circle"></i> كيفية التصدير للأسواق العالمية</li>
+              <li><i class="fas fa-check-circle"></i> كيفية الحصول على الشهادات</li>
+            </ul>
+            <div class="level-detail-item">
+              <i class="fas fa-clock"></i>
+              <span>المدة: ٤٠ ساعة (شهران)</span>
+            </div>
+            <div class="level-price">٨٬٠٠٠ ج.م</div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('International Quality & Export Readiness', '٨٬٠٠٠ ج.م')">
+              <i class="fas fa-user-plus"></i>
+              سجل الآن
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- قسم ريادة الأعمال (Fashion Business) -->
+      <div id="fashion-business" class="category-section" style="display: none;">
+        <div class="course-main-card">
+          <div class="course-header">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200" alt="ريادة أعمال">
+            <div class="course-header-overlay">
+              <span class="course-badge">دورتان استراتيجيتان</span>
+              <h2>من الأزياء إلى الأعمال: نحو براند عالمي</h2>
+              <p>من الاسكتش إلى عرض الأزياء - نحو تحويل أفكارك الإبداعية إلى براند تجاري عالمي</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="levels-grid">
+          <!-- Course 1: Advanced Brand Development -->
+          <div class="level-card">
+            <div class="level-header level-advanced">
+              <div class="level-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="level-title">Advanced Brand Development</div>
+            </div>
+            <div class="level-content">
+              <p>الانتقال من مصمم إلى مدير علامة تجارية استراتيجي</p>
+              <ul class="learning-list">
+                <li><i class="fas fa-check-circle"></i> The HOV Genesis: تحديد موقع فريد في السوق</li>
+                <li><i class="fas fa-check-circle"></i> Wearer-Centric Development</li>
+                <li><i class="fas fa-check-circle"></i> Digital-First Resilience</li>
+                <li><i class="fas fa-check-circle"></i> Atelier Management</li>
+                <li><i class="fas fa-check-circle"></i> The Collection Pitch</li>
+              </ul>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٣٠ ساعة</span>
+              </div>
+              <div class="level-price">٨٬٠٠٠ ج.م</div>
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('Advanced Brand Development', '٨٬٠٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+
+          <!-- Course 2: Strategic Event Conceptualization -->
+          <div class="level-card">
+            <div class="level-header level-advanced">
+              <div class="level-icon">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <div class="level-title">Strategic Event Conceptualization</div>
+            </div>
+            <div class="level-content">
+              <p>إتقان الحدث كمنصة اتصال تولد قيمة إعلامية وفرص تواصل B2B</p>
+              <ul class="learning-list">
+                <li><i class="fas fa-check-circle"></i> Content-First Design</li>
+                <li><i class="fas fa-check-circle"></i> Atmospheric Scenography</li>
+                <li><i class="fas fa-check-circle"></i> Living Ambassadors</li>
+                <li><i class="fas fa-check-circle"></i> The Strategic Guest List</li>
+                <li><i class="fas fa-check-circle"></i> The Execution</li>
+              </ul>
+              <div class="level-detail-item">
+                <i class="fas fa-clock"></i>
+                <span>٣٠ ساعة</span>
+              </div>
+              <div class="level-price">٧٬٠٠٠ ج.م</div>
+              <button class="btn btn-primary" style="width: 100%;" onclick="selectLevel('Strategic Event Conceptualization', '٧٬٠٠٠ ج.م')">
+                <i class="fas fa-user-plus"></i>
+                سجل الآن
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم التسجيل الموحد -->
+    <div class="enrollment-section">
+      <h2 class="enrollment-title">احجز مقعدك الآن</h2>
+      <p class="enrollment-subtitle">المقاعد محدودة (10 مشاركين كحد أقصى لكل دورة) - سارع بالحجز</p>
+      
+      <div class="enrollment-highlight">
+        <i class="fas fa-envelope-open-text"></i>
+        <div class="email">info@icacademy.tech</div>
+        <p style="margin-top: 1rem; color: var(--muted);">أرسل بريدك الإلكتروني مع اسم الدورة المطلوبة</p>
+      </div>
+
+      <div class="max-participants">
+        <i class="fas fa-users"></i> 10 مقاعد فقط لكل دورة
+      </div>
+
+      <button class="btn btn-primary" style="margin-top: 2rem;" onclick="openEnrollmentForm()">
+        <i class="fas fa-edit"></i>
+        نموذج التسجيل المباشر
+      </button>
+    </div>
+  </div>
+
+  <!-- الفوتر -->
+  <footer class="footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="width: 60px; height: 60px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem;">
+              ICA
+            </div>
+            <div>
+              <h3 style="margin: 0; color: white;">الأكاديمية الدولية للإبداع</h3>
+              <span style="color: var(--gold-light);">INTERNATIONAL CREATIVE ACADEMY</span>
+            </div>
+          </div>
+          <p style="color: var(--gold-light); margin-bottom: 1.5rem;">
+            حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+            <li><a href="index.html#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
+            <li><a href="courses.html"><i class="fas fa-chevron-left"></i> الدورات التدريبية</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> الشركاء</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>مجالات التدريب</h3>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم الأزياء</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> الباترون والتفصيل</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> تنسيق الأزياء</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> الجودة والتصدير</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>اتصل بنا</h3>
+          <div class="footer-contact">
+            <p><i class="fas fa-map-marker-alt"></i> ١٤ شارع فؤاد بدواني - مدينة نصر - القاهرة</p>
+            <p><i class="fas fa-phone"></i> +20 2 26706606</p>
+            <p><i class="fas fa-envelope"></i> info@icacademy.tech</p>
+            <p><i class="fas fa-clock"></i> الأحد - الخميس: ٨ صباحاً - ٤ مساءً</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع - جميع الحقوق محفوظة</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- الإشعار -->
+  <div class="notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-bell"></i>
+    </div>
+    <div class="notification-content">
+      <h4 id="notificationTitle">إشعار</h4>
+      <p id="notificationMessage">يتم تحميل المحتوى...</p>
+    </div>
+  </div>
+
+  <script>
+    // تحديث السنة
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // قائمة متغيرات
+    let isMenuOpen = false;
+
+    // بيانات الترحيب لكل قسم
+    const welcomeMessages = {
+      'fashion-design': {
+        title: 'مرحباً بك في قسم تصميم الأزياء',
+        text: 'اختر المستوى المناسب لمهاراتك وابدأ رحلتك الإبداعية مع نخبة من المدربين الخبراء'
+      },
+      'pattern-making': {
+        title: 'مرحباً بك في قسم الباترون وتصميم الأزياء',
+        text: 'تعلم فنون الباترون والتفصيل بمعايير احترافية مع دورات متكاملة من الأساسيات إلى المتقدم'
+      },
+      'fashion-styling': {
+        title: 'مرحباً بك في قسم تنسيق الأزياء',
+        text: 'أتقن فن تقديم إطلالة متناسقة تحكي قصة وتخدم علامتك التجارية أو شخصيتك'
+      },
+      'quality': {
+        title: 'مرحباً بك في قسم الجودة والتصدير',
+        text: 'تأهيلك لتصدير منتجاتك الإبداعية للأسواق العربية والأوروبية والعالمية'
+      },
+      'fashion-business': {
+        title: 'مرحباً بك في قسم ريادة الأعمال',
+        text: 'حوّل أفكارك الإبداعية إلى براند تجاري عالمي من خلال استراتيجيات متقدمة'
+      }
+    };
+
+    // ========== قائمة الهاتف المحمول ==========
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const navbar = document.getElementById('navbar');
+
+    if (hamburger) {
+      hamburger.addEventListener('click', function() {
+        isMenuOpen = !isMenuOpen;
+        navMenu.classList.toggle('active', isMenuOpen);
+        hamburger.classList.toggle('active', isMenuOpen);
+      });
+    }
+
+    // إغلاق القائمة عند النقر على الروابط
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+          hamburger.classList.remove('active');
+          isMenuOpen = false;
+        }
+      });
+    });
+
+    // تأثير التمرير على شريط التنقل
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // ========== نظام التبويبات ==========
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const categorySections = {
+      'fashion-design': document.getElementById('fashion-design'),
+      'pattern-making': document.getElementById('pattern-making'),
+      'fashion-styling': document.getElementById('fashion-styling'),
+      'quality': document.getElementById('quality'),
+      'fashion-business': document.getElementById('fashion-business')
+    };
+
+    const categoryTitles = {
+      'fashion-design': {
+        title: 'تصميم الأزياء: من الإلهام إلى العالم الرقمي',
+        subtitle: 'Fashion Design: From Fundamentals to Advanced AI Image Generation',
+        category: 'تصميم الأزياء'
+      },
+      'pattern-making': {
+        title: 'باترون وتصميم الأزياء',
+        subtitle: 'Pattern Making & Draping',
+        category: 'باترون وتصميم'
+      },
+      'fashion-styling': {
+        title: 'تنسيق الأزياء وبناء الصورة',
+        subtitle: 'Fashion Styling & Image Building',
+        category: 'تنسيق أزياء'
+      },
+      'quality': {
+        title: 'نظم الجودة الدولية ومتطلبات التصدير',
+        subtitle: 'International Quality & Export Readiness',
+        category: 'جودة وتصدير'
+      },
+      'fashion-business': {
+        title: 'من الأزياء إلى الأعمال: نحو براند عالمي',
+        subtitle: 'Fashion to Business: From Fashion Concept to Global Brand',
+        category: 'ريادة أعمال'
+      }
+    };
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // تحديث الأزرار
+        tabBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        // إخفاء جميع الأقسام
+        Object.values(categorySections).forEach(section => {
+          if (section) section.style.display = 'none';
+        });
+
+        // إظهار القسم المحدد
+        const category = this.dataset.category;
+        if (categorySections[category]) {
+          categorySections[category].style.display = 'block';
+        }
+
+        // تحديث عنوان الصفحة
+        if (categoryTitles[category]) {
+          document.getElementById('mainCourseTitle').textContent = categoryTitles[category].title;
+          document.getElementById('mainCourseSubtitle').textContent = categoryTitles[category].subtitle;
+          document.getElementById('currentCategory').textContent = categoryTitles[category].category;
+        }
+
+        // تحديث رسالة الترحيب
+        if (welcomeMessages[category]) {
+          document.getElementById('welcomeTitle').textContent = welcomeMessages[category].title;
+          document.getElementById('welcomeText').textContent = welcomeMessages[category].text;
+        }
+
+        // تخزين التبويب النشط
+        localStorage.setItem('activeCategory', category);
+
+        // تمرير سلس لأعلى الصفحة
+        window.scrollTo({ top: 300, behavior: 'smooth' });
+      });
+    });
+
+    // ========== نظام الإشعارات ==========
+    function showNotification(title, message) {
+      const notification = document.getElementById('notification');
+      document.getElementById('notificationTitle').textContent = title;
+      document.getElementById('notificationMessage').textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 4000);
+    }
+
+    // ========== اختيار المستوى ==========
+    function selectLevel(levelName, price) {
+      // تخزين البيانات في localStorage
+      localStorage.setItem('selectedCourse', levelName);
+      localStorage.setItem('selectedPrice', price);
+      
+      showNotification('تم اختيار الدورة', `لقد اخترت: ${levelName}`);
+      
+      // التوجيه إلى صفحة التسجيل بعد تأخير بسيط
+      setTimeout(() => {
+        window.location.href = 'enroll-course.html';
+      }, 1500);
+    }
+
+    // ========== فتح نموذج التسجيل ==========
+    function openEnrollmentForm() {
+      window.location.href = 'enroll-course.html';
+    }
+
+    // ========== تحميل البيانات عند فتح الصفحة ==========
+    document.addEventListener('DOMContentLoaded', function() {
+      // إظهار مؤشر التحميل
+      // document.getElementById('loadingSpinner').style.display = 'flex';
+      
+      setTimeout(() => {
+        // إخفاء مؤشر التحميل
+        // document.getElementById('loadingSpinner').style.display = 'none';
+        
+        // التحقق من وجود دورة محددة من الصفحة السابقة
+        const selectedCourse = localStorage.getItem('selectedCourse');
+        const selectedCategory = localStorage.getItem('selectedCategory');
+        
+        if (selectedCourse) {
+          showNotification('مرحباً', `تم تحميل تفاصيل: ${selectedCourse}`);
+          
+          // عرض رسالة في خانة العنوان
+          document.getElementById('mainCourseTitle').textContent = selectedCourse;
+          
+          // مسح البيانات بعد الاستخدام (اختياري)
+          // localStorage.removeItem('selectedCourse');
+        }
+        
+        // تفعيل التبويب المناسب
+        if (selectedCategory) {
+          const targetTab = document.querySelector(`[data-category="${selectedCategory}"]`);
+          if (targetTab) {
+            targetTab.click();
+          }
+          localStorage.removeItem('selectedCategory');
+        } else {
+          // تفعيل أول تبويب افتراضياً
+          const firstTab = document.querySelector('.tab-btn');
+          if (firstTab) {
+            firstTab.click();
+          }
+        }
+      }, 500); // تأخير بسيط لمحاكاة التحميل
+
+      // تحميل الصور البديلة
+      document.querySelectorAll('.course-header img').forEach(img => {
+        img.addEventListener('error', function() {
+          this.style.display = 'none';
+          this.parentElement.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-dark))';
+          this.parentElement.style.display = 'flex';
+          this.parentElement.style.alignItems = 'center';
+          this.parentElement.style.justifyContent = 'center';
+          this.parentElement.innerHTML = '<span style="color: white; font-size: 3rem; font-weight: 800;">ICA</span>';
+        });
+      });
+    });
+
+    // إغلاق القائمة عند تغيير حجم الشاشة
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768 && isMenuOpen) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        isMenuOpen = false;
+      }
+    });
+  </script>
+</body>
+
+</html>

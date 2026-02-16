@@ -23,6 +23,7 @@
       --card: rgba(255, 255, 255, .85);
       --success: #28a745;
       --error: #dc3545;
+      --warning: #ffc107;
       --radius: 24px;
       --radius-sm: 16px;
       --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,6 +31,12 @@
       --shadow: 0 20px 40px rgba(0, 0, 0, .1);
       --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
     }
+
+    /* ألوان المستويات */
+    .level-beginner { background: linear-gradient(135deg, #28a745, #20c997); }
+    .level-intermediate { background: linear-gradient(135deg, #ffc107, #fd7e14); }
+    .level-advanced { background: linear-gradient(135deg, #dc3545, #c82333); }
+    .level-expert { background: linear-gradient(135deg, #6f42c1, #6610f2); }
 
     * {
       margin: 0;
@@ -198,6 +205,35 @@
       box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
     }
 
+    .btn-outline {
+      background: transparent;
+      color: var(--gold-dark);
+      border: 2px solid var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+    }
+
+    /* ========== BREADCRUMB ========== */
+    .breadcrumb {
+      max-width: var(--max-width);
+      margin: 1rem auto 0;
+      padding: 0 2rem;
+      color: var(--muted);
+    }
+
+    .breadcrumb a {
+      color: var(--gold-dark);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
     /* ========== WHY CHOOSE SECTION ========== */
     .why-choose-section {
       max-width: var(--max-width);
@@ -345,6 +381,15 @@
       box-shadow: var(--shadow-hover);
     }
 
+    .course-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      color: white;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
     .course-title {
       color: var(--gold-dark);
       font-size: 1.75rem;
@@ -437,13 +482,6 @@
       margin-bottom: 1.5rem;
     }
 
-    .price-box .old-price {
-      color: var(--muted);
-      text-decoration: line-through;
-      font-size: 1.2rem;
-      margin-left: 1rem;
-    }
-
     .price-box .current-price {
       color: var(--gold-dark);
       font-size: 2.5rem;
@@ -475,6 +513,15 @@
       font-size: 1.5rem;
       font-weight: 900;
       color: var(--gold-dark);
+    }
+
+    .seats-info.warning {
+      background: rgba(220, 53, 69, 0.1);
+      border: 2px solid var(--error);
+    }
+
+    .seats-info.warning .seats-number {
+      color: var(--error);
     }
 
     /* Course Content List */
@@ -636,7 +683,15 @@
       font-weight: 700;
     }
 
-    .form-input {
+    .required::after {
+      content: '*';
+      color: var(--error);
+      margin-right: 0.25rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
       width: 100%;
       padding: 1rem;
       border: 2px solid var(--gold-light);
@@ -647,27 +702,53 @@
       transition: var(--transition);
     }
 
-    .form-input:focus {
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
       outline: none;
       border-color: var(--gold);
       box-shadow: 0 0 0 3px rgba(185, 146, 74, 0.2);
     }
 
-    .form-select {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid var(--gold-light);
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: "Cairo", sans-serif;
-      background: white;
+    .form-input.error,
+    .form-select.error,
+    .form-textarea.error {
+      border-color: var(--error);
+    }
+
+    .form-input.valid,
+    .form-select.valid,
+    .form-textarea.valid {
+      border-color: var(--success);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
       cursor: pointer;
     }
 
-    .form-select:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(185, 146, 74, 0.2);
+    .checkbox-group label {
+      color: var(--muted);
+      cursor: pointer;
     }
 
     .form-actions {
@@ -696,6 +777,21 @@
     .submit-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(185, 146, 74, 0.4);
+    }
+
+    .submit-btn.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .submit-btn.loading::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 3px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
     }
 
     .cancel-btn {
@@ -897,6 +993,45 @@
       font-size: 0.9rem;
     }
 
+    /* Summary Box */
+    .summary-box {
+      background: linear-gradient(135deg, rgba(185, 146, 74, 0.05), rgba(231, 210, 163, 0.1));
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--gold-light);
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--gold-light);
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .summary-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .summary-value {
+      color: var(--gold-dark);
+      font-weight: 800;
+    }
+
+    .total-price {
+      font-size: 1.5rem;
+      color: var(--gold-dark);
+      font-weight: 900;
+    }
+
     /* ========== FOOTER ========== */
     .footer {
       background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
@@ -1081,6 +1216,10 @@
         width: 100%;
       }
 
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
       .demo-header h1 {
         font-size: 2rem;
       }
@@ -1202,6 +1341,11 @@
     </div>
   </nav>
 
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="index.html">الرئيسية</a> / <a href="courses.html">الدورات التدريبية</a> / <a href="course-details.html">تفاصيل الدورة</a> / <span id="currentBreadcrumb">تسجيل</span>
+  </div>
+
   <!-- Main Content -->
   <div class="main-content">
     <div class="demo-container">
@@ -1213,37 +1357,36 @@
       <div class="demo-content">
         <!-- Course Details Section -->
         <div class="course-details-card">
-          <h2 class="course-title" id="courseTitle">نظم الجودة الدولية</h2>
+          <div id="levelBadge" class="course-badge level-intermediate" style="display: none;"></div>
+          <h2 class="course-title" id="courseTitle">جاري تحميل البيانات...</h2>
 
-          <!-- Instructor Box -->
-          <div class="instructor-box">
+          <!-- Instructor Box - سيتم تحديثه ديناميكياً -->
+          <div class="instructor-box" id="instructorBox">
             <div class="instructor-img">
-              <span>د.ه</span>
+              <i class="fas fa-user-tie"></i>
             </div>
             <div class="instructor-info">
-              <h3>د. هاني بركات</h3>
-              <p><i class="fas fa-star"></i> خبير الجودة الدولي</p>
-              <p><i class="fas fa-certificate"></i> رئيس هيئة المواصفات سابقاً</p>
-              <p><i class="fas fa-globe"></i> 20+ سنة خبرة في نظم الجودة</p>
+              <h3 id="instructorName">مدرب الأكاديمية</h3>
+              <p id="instructorTitle"><i class="fas fa-star"></i> خبير معتمد</p>
             </div>
           </div>
 
           <!-- Details Grid -->
-          <div class="details-grid">
+          <div class="details-grid" id="detailsGrid">
             <div class="detail-item">
               <i class="far fa-clock"></i>
               <div class="label">المدة</div>
-              <div class="value">6 أسابيع</div>
+              <div class="value" id="courseDuration">-</div>
             </div>
             <div class="detail-item">
               <i class="fas fa-video"></i>
               <div class="label">الساعات</div>
-              <div class="value">30 ساعة</div>
+              <div class="value" id="courseHours">-</div>
             </div>
             <div class="detail-item">
-              <i class="fas fa-users"></i>
+              <i class="fas fa-signal"></i>
               <div class="label">المستوى</div>
-              <div class="value">متقدم</div>
+              <div class="value" id="courseLevel">-</div>
             </div>
             <div class="detail-item">
               <i class="fas fa-certificate"></i>
@@ -1254,31 +1397,23 @@
 
           <!-- Price Box -->
           <div class="price-box">
-            <span class="old-price">٨,٠٠٠ ج.م</span>
-            <span class="current-price">٦,٥٠٠ ج.م</span>
-            <div class="price-label">شامل جميع المواد والشهادة</div>
+            <span class="current-price" id="coursePrice">-</span>
+            <div class="price-label" id="priceLabel">شامل جميع المواد والشهادة</div>
           </div>
 
           <!-- Seats Info -->
-          <div class="seats-info">
+          <div class="seats-info" id="seatsContainer">
             <i class="fas fa-chair"></i>
             <span>المقاعد المتبقية:</span>
-            <span class="seats-number" id="seatsCount">١٥</span>
+            <span class="seats-number" id="seatsCount">١٠</span>
             <span>مقعد</span>
           </div>
 
           <!-- Course Content -->
-          <div class="course-content-list">
+          <div class="course-content-list" id="courseContent">
             <h4><i class="fas fa-list"></i> محتويات الدورة:</h4>
-            <ul>
-              <li><i class="fas fa-check-circle"></i> مقدمة في نظم الجودة الدولية ISO</li>
-              <li><i class="fas fa-check-circle"></i> متطلبات الجودة للصناعات الإبداعية</li>
-              <li><i class="fas fa-check-circle"></i> إجراءات التفتيش والفحص</li>
-              <li><i class="fas fa-check-circle"></i> توثيق العمليات والإجراءات</li>
-              <li><i class="fas fa-check-circle"></i> إعداد المنتج للتصدير</li>
-              <li><i class="fas fa-check-circle"></i> متطلبات الأسواق الأوروبية</li>
-              <li><i class="fas fa-check-circle"></i> ورش عمل تطبيقية</li>
-              <li><i class="fas fa-check-circle"></i> دراسات حالة واقعية</li>
+            <ul id="contentList">
+              <li><i class="fas fa-check-circle"></i> جاري تحميل المحتوى...</li>
             </ul>
           </div>
 
@@ -1305,15 +1440,27 @@
             </div>
           </div>
 
+          <!-- Summary Box -->
+          <div class="summary-box" id="summaryBox">
+            <div class="summary-item">
+              <span class="summary-label">الدورة المختارة:</span>
+              <span class="summary-value" id="summaryCourse">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">السعر:</span>
+              <span class="summary-value total-price" id="summaryPrice">-</span>
+            </div>
+          </div>
+
           <!-- Button Container -->
           <div class="button-container">
-            <button class="enroll-btn" id="enrollButton">
-              <i class="fas fa-user-plus"></i>
-              سجل الآن
+            <button class="enroll-btn" id="scrollToFormBtn">
+              <i class="fas fa-arrow-down"></i>
+              اذهب إلى نموذج التسجيل
             </button>
-            <button class="enroll-btn" id="infoButton" style="background: linear-gradient(135deg, #6c757d, #495057);">
-              <i class="fas fa-info-circle"></i>
-              معلومات إضافية
+            <button class="enroll-btn" id="backToDetailsBtn" style="background: linear-gradient(135deg, #6c757d, #495057);">
+              <i class="fas fa-arrow-right"></i>
+              العودة للتفاصيل
             </button>
           </div>
         </div>
@@ -1323,56 +1470,93 @@
           <h3 class="form-title">استمارة التسجيل</h3>
 
           <div class="form-group">
-            <label class="form-label">اسم الدورة</label>
-            <input type="text" class="form-input" id="courseNameInput" value="نظم الجودة الدولية" readonly>
+            <label class="form-label required">اسم الدورة</label>
+            <input type="text" class="form-input" id="courseNameInput" readonly>
           </div>
 
           <div class="form-group">
-            <label class="form-label">المدرب</label>
-            <input type="text" class="form-input" id="instructorNameInput" value="د. هاني بركات" readonly>
+            <label class="form-label required">المستوى / الكود</label>
+            <input type="text" class="form-input" id="courseCodeInput" readonly>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">الاسم الأول</label>
+              <input type="text" class="form-input" id="firstName" placeholder="الاسم الأول" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">الاسم الأخير</label>
+              <input type="text" class="form-input" id="lastName" placeholder="الاسم الأخير" required>
+            </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">الاسم الكامل</label>
-            <input type="text" class="form-input" id="fullName" placeholder="أدخل اسمك الكامل" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">البريد الإلكتروني</label>
+            <label class="form-label required">البريد الإلكتروني</label>
             <input type="email" class="form-input" id="email" placeholder="example@email.com" required>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">رقم الهاتف</label>
-            <input type="tel" class="form-input" id="phone" placeholder="01XXXXXXXXX" required>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">رقم الهاتف</label>
+              <input type="tel" class="form-input" id="phone" placeholder="01XXXXXXXXX" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">تاريخ الميلاد</label>
+              <input type="date" class="form-input" id="birthDate">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">المجال المهني</label>
+              <select class="form-select" id="profession" required>
+                <option value="">اختر مجالك المهني</option>
+                <option value="design">تصميم أزياء</option>
+                <option value="pattern">باترون وتصميم</option>
+                <option value="styling">تنسيق أزياء</option>
+                <option value="quality">جودة وتصدير</option>
+                <option value="business">ريادة أعمال</option>
+                <option value="student">طالب</option>
+                <option value="other">أخرى</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">مستوى الخبرة</label>
+              <select class="form-select" id="experience" required>
+                <option value="">اختر مستوى خبرتك</option>
+                <option value="beginner">مبتدئ (لا توجد خبرة)</option>
+                <option value="intermediate">متوسط (1-3 سنوات)</option>
+                <option value="advanced">متقدم (3-7 سنوات)</option>
+                <option value="expert">خبير (7+ سنوات)</option>
+              </select>
+            </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">المجال المهني</label>
-            <select class="form-select" id="profession">
-              <option value="">اختر مجالك المهني</option>
-              <option value="design">تصميم أزياء</option>
-              <option value="pattern">باترون وتصميم</option>
-              <option value="styling">تنسيق أزياء</option>
-              <option value="quality">جودة وتصدير</option>
-              <option value="business">ريادة أعمال</option>
+            <label class="form-label">كيف عرفت عنا؟</label>
+            <select class="form-select" id="referral">
+              <option value="">اختر...</option>
+              <option value="social">وسائل التواصل الاجتماعي</option>
+              <option value="friend">صديق/زميل</option>
+              <option value="google">بحث جوجل</option>
+              <option value="ad">إعلان</option>
+              <option value="other">أخرى</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">مستوى الخبرة</label>
-            <select class="form-select" id="experience">
-              <option value="">اختر مستوى خبرتك</option>
-              <option value="beginner">مبتدئ</option>
-              <option value="intermediate">متوسط</option>
-              <option value="advanced">متقدم</option>
-              <option value="expert">خبير</option>
-            </select>
+            <label class="form-label">ملاحظات إضافية</label>
+            <textarea class="form-textarea" id="notes" rows="3" placeholder="أي استفسارات أو ملاحظات..."></textarea>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">ملاحظات إضافية (اختياري)</label>
-            <textarea class="form-input" id="notes" rows="3" placeholder="أي استفسارات..."></textarea>
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" checked>
+            <label for="terms">أوافق على <a href="#" style="color: var(--gold-dark);">الشروط والأحكام</a> وسياسة الخصوصية</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="newsletter">
+            <label for="newsletter">أرغب في استلام النشرة البريدية والعروض الحصرية</label>
           </div>
 
           <div class="form-actions">
@@ -1586,15 +1770,301 @@
   </footer>
 
   <script>
+    // ========== البيانات الأساسية للدورات ==========
+    const coursesData = {
+      // تصميم أزياء
+      'LEVEL 1A – Fashion Drawing Basics': {
+        instructor: 'المصممة تقى محمد',
+        instructorTitle: 'مصممة أزياء متخصصة في الرسم اليدوي',
+        duration: '٤ أسابيع',
+        hours: '١٦ ساعة',
+        level: 'مبتدئ',
+        levelClass: 'level-beginner',
+        price: '٢٬٥٠٠ ج.م',
+        code: 'FD-1A',
+        content: [
+          'التحكم في الخط (Line control)',
+          'نسب جسم الموضة (Fashion body proportions)',
+          'رسم الكروكي (Croquis drawing)',
+          'رسم الرأس واليدين والقدمين',
+          'الأوضاع الأساسية (Basic poses)'
+        ]
+      },
+      'LEVEL 1B – Freehand Fashion Sketching': {
+        instructor: 'المصممة توما زيدان',
+        instructorTitle: 'خبيرة اسكتشات الأزياء',
+        duration: '٤ أسابيع',
+        hours: '١٦ ساعة',
+        level: 'مبتدئ',
+        levelClass: 'level-beginner',
+        price: '٣٬٠٠٠ ج.م',
+        code: 'FD-1B',
+        content: [
+          'الأوضاع الديناميكية (Dynamic poses)',
+          'رسم الملابس على الجسم',
+          'فساتين، جاكيتات، بناطيل، تنانير',
+          'الثنيات والحركة (Folds & movement)',
+          'اسكتشات احترافية نظيفة'
+        ]
+      },
+      'LEVEL 2 – Digital Fashion Illustration': {
+        instructor: 'المصممة تقى محمد',
+        instructorTitle: 'خبيرة التصميم الرقمي',
+        duration: '٦ أسابيع',
+        hours: '٢٤ ساعة',
+        level: 'متوسط',
+        levelClass: 'level-intermediate',
+        price: '٤٬٥٠٠ ج.م',
+        code: 'FD-2',
+        content: [
+          'Adobe Photoshop للموضة',
+          'Adobe Illustrator للموضة',
+          'Procreate على iPad',
+          'رسم الموديلات الرقمية',
+          'تلوين الأقمشة (Fabric coloring)',
+          'Layers & brushes المتقدمة',
+          'رسم flats (Fashion flat drawing)'
+        ]
+      },
+      'LEVEL 3 – 3D Fashion Design (CLO 3D)': {
+        instructor: 'د. إلهام زايد',
+        instructorTitle: 'خبيرة التصميم ثلاثي الأبعاد',
+        duration: '٦ أسابيع',
+        hours: '٢٤ ساعة',
+        level: 'متقدم',
+        levelClass: 'level-advanced',
+        price: '٦٬٠٠٠ ج.م',
+        code: 'FD-3D',
+        content: [
+          'برنامج CLO 3D من الصفر',
+          'إلباس المانيكان (Dressing the mannequin)',
+          'حركة الأقمشة (Fabric movement)',
+          'المقاسات والتناسب (Sizing & fitting)',
+          'محاكاة واقعية (Realistic simulation)',
+          'تصدير وعرض التصاميم'
+        ]
+      },
+
+      // باترون
+      'P.1 Women Pattern Making (Basics)': {
+        instructor: 'د. إلهام زايد',
+        instructorTitle: 'خبيرة الباترون والتفصيل',
+        duration: '١٠ أسابيع',
+        hours: '٦٠ ساعة',
+        level: 'مبتدئ',
+        levelClass: 'level-beginner',
+        price: '٦٬٠٠٠ ج.م',
+        code: 'PM-WB',
+        content: [
+          'أخذ المقاسات العملية',
+          'الباترون الأساسي بدون بنس',
+          'الباترون الأساسي بالبنس',
+          'أنواع البنس: وسط، جانبي، رقبة',
+          'أنواع الياقات',
+          'الأكمام: أساسي و٣ نماذج',
+          'التنانير: أساسي و٣ نماذج',
+          'البنطلون الأساسي و٣ نماذج',
+          'مشروع تطبيقي'
+        ]
+      },
+      'P.2 Women Pattern Making Advanced': {
+        instructor: 'د. إلهام زايد',
+        instructorTitle: 'خبيرة الباترون المتقدم',
+        duration: '١٠ أسابيع',
+        hours: '٦٠ ساعة',
+        level: 'متقدم',
+        levelClass: 'level-advanced',
+        price: '٦٬٥٠٠ ج.م',
+        code: 'PM-WA',
+        content: [
+          'مراجعة أساسيات الباترون',
+          '٣ نماذج بلوزات',
+          '٣ نماذج تنانير',
+          'جاكيت كلاسيكي مبطن',
+          'جينز وجامبسوت',
+          'فساتين سهرة مع بطانة',
+          'مشروع تطبيقي'
+        ]
+      },
+      'P.3 Men Pattern Making': {
+        instructor: 'د. هاني بركات',
+        instructorTitle: 'خبير باترون رجالي',
+        duration: '١٠ أسابيع',
+        hours: '٦٠ ساعة',
+        level: 'متوسط',
+        levelClass: 'level-intermediate',
+        price: '٦٬٠٠٠ ج.م',
+        code: 'PM-M',
+        content: [
+          'أخذ المقاسات للرجال',
+          'باترون القميص الأساسي',
+          '٢ نموذج قمصان',
+          'باترون البنطلون الأساسي',
+          '٢ نموذج بناطيل',
+          'باترون الجاكيت الأساسي',
+          '٢ نموذج جاكيت',
+          'باترون الملابس الرياضية',
+          '٢ نموذج ملابس رياضية'
+        ]
+      },
+      'P.4 Kids Pattern Making': {
+        instructor: 'المصممة توما محمد',
+        instructorTitle: 'خبيرة باترون الأطفال',
+        duration: '١٠ أسابيع',
+        hours: '٦٠ ساعة',
+        level: 'مبتدئ',
+        levelClass: 'level-beginner',
+        price: '٦٬٠٠٠ ج.م',
+        code: 'PM-K',
+        content: [
+          'أخذ مقاسات الأطفال',
+          'باترون الرومبر الأساسي',
+          'باترون الأوفرول الأساسي',
+          'توب الأطفال (تيشيرت، بلوزة، قميص)',
+          'سويت شيرت، هودي، جاكيت، فستان',
+          'بناطيل أطفال، جينز، جمبسوت، تنورة',
+          'ملابس رياضية (٢ نموذج)'
+        ]
+      },
+      'P.5 3D Draping on The Stand': {
+        instructor: 'د. إلهام زايد',
+        instructorTitle: 'خبيرة التشكيل على المانيكان',
+        duration: '١٠ أسابيع',
+        hours: '٦٠ ساعة',
+        level: 'متقدم',
+        levelClass: 'level-advanced',
+        price: '٧٬٠٠٠ ج.م',
+        code: 'PM-3D',
+        content: [
+          'مقدمة في التشكيل (Draping)',
+          'مراجعة أساسيات الباترون',
+          'الأدوات والمواد المستخدمة',
+          'اختيار الأقمشة للتشكيل',
+          'تقنيات التشكيل الأساسية',
+          'تشكيل الكورسيه',
+          'تثبيت القماش على المانيكان',
+          'تطبيق نماذج مختلفة',
+          'التعديلات والضبط',
+          'مشروعين تطبيقيين'
+        ]
+      },
+
+      // تنسيق أزياء
+      'Fashion Styling & Fabric Selection': {
+        instructor: 'المصممة توما محمد',
+        instructorTitle: 'خبيرة تنسيق الأزياء',
+        duration: '٤ أسابيع',
+        hours: '١٦ ساعة',
+        level: 'مبتدئ',
+        levelClass: 'level-beginner',
+        price: '٣٬٠٠٠ ج.م',
+        code: 'FS-1',
+        content: [
+          'كيفية اختيار الأقمشة',
+          'أنواع الأقمشة (حرير، قطن، شيفون، دنيم، جلد)',
+          'تنسيق الألوان',
+          'اختيار الإكسسوارات والأحذية',
+          'التنسيق لعلامة تجارية',
+          'تحويل التصميم إلى إطلالة متكاملة'
+        ]
+      },
+      'Fashion Modelling & Runway Performance': {
+        instructor: 'المصممة توما زيدان',
+        instructorTitle: 'مدربة عروض أزياء',
+        duration: '٤ أسابيع',
+        hours: '١٦ ساعة',
+        level: 'متوسط',
+        levelClass: 'level-intermediate',
+        price: '٣٬٠٠٠ ج.م',
+        code: 'FS-2',
+        content: [
+          'وقفة الموديل',
+          'المشي على منصة العرض',
+          'الالتفافات والتوقفات',
+          'الوقفات (Posing)',
+          'تعبيرات الوجه',
+          'ارتداء وعرض تصاميمك الخاصة'
+        ]
+      },
+
+      // جودة وتصدير
+      'International Quality & Export Readiness': {
+        instructor: 'د. هاني بركات',
+        instructorTitle: 'رئيس هيئة المواصفات سابقاً - خبير الجودة الدولي',
+        duration: '٨ أسابيع',
+        hours: '٤٠ ساعة',
+        level: 'متقدم',
+        levelClass: 'level-advanced',
+        price: '٨٬٠٠٠ ج.م',
+        code: 'QU-1',
+        content: [
+          'المعايير الدولية (International Standards)',
+          'معايير قطاع الأزياء',
+          'معايير قطاع المنسوجات',
+          'معايير المنتجات الجلدية',
+          'معايير الحلي والإكسسوارات',
+          'متطلبات الامتثال للقطاعات',
+          'تجهيز المنتجات للتصدير',
+          'التصدير للأسواق العالمية',
+          'الحصول على الشهادات الدولية',
+          'عرض المنتجات المطابقة للمعايير'
+        ]
+      },
+
+      // ريادة أعمال
+      'Advanced Brand Development': {
+        instructor: 'المصمم الدولي مارتن فيكتور المصري',
+        instructorTitle: 'مصمم أزياء عالمي - خبير بناء العلامات التجارية',
+        duration: '٥ أسابيع',
+        hours: '٣٠ ساعة',
+        level: 'متقدم',
+        levelClass: 'level-advanced',
+        price: '٨٬٠٠٠ ج.م',
+        code: 'FB-1',
+        content: [
+          'The HOV Genesis: تحديد موقع فريد في السوق',
+          'تحليل سوق الأزياء في دبي والمنطقة',
+          'Wearer-Centric Development',
+          'Digital-First Resilience',
+          'إدارة الأتيليه (Atelier Management)',
+          'مراقبة الجودة للتصدير',
+          'تقنيات التشطيب الفاخر',
+          'The Collection Pitch: تنظيم عرض الأزياء',
+          'تقديم مشروع: Hero Piece + هوية العلامة'
+        ]
+      },
+      'Strategic Event Conceptualization': {
+        instructor: 'المصمم الدولي مارتن فيكتور المصري',
+        instructorTitle: 'خبير تنظيم الفعاليات',
+        duration: '٥ أسابيع',
+        hours: '٣٠ ساعة',
+        level: 'متقدم',
+        levelClass: 'level-advanced',
+        price: '٧٬٠٠٠ ج.م',
+        code: 'FB-2',
+        content: [
+          'Content-First Design: هندسة لحظات قابلة للمشاركة',
+          'إعداد كيت صحفي احترافي',
+          'Atmospheric Scenography',
+          'Living Ambassadors: اختيار الموديلات',
+          'The Strategic Guest List: قائمة المدعوين',
+          'إنشاء مناطق لتسهيل التواصل B2B',
+          'The Execution: إدارة اللوجستيات',
+          'خطط الطوارئ'
+        ]
+      }
+    };
+
+    // ========== متغيرات عامة ==========
+    let remainingSeats = 10;
+    let countdownInterval;
+    let isSubmitting = false;
+    let currentCourse = null;
+
     // تحديث السنة
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // متغيرات عامة
-    let remainingSeats = 15;
-    let countdownInterval;
-    let isSubmitting = false;
-
-    // Navigation
+    // ========== الملاحة ==========
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     const navbar = document.getElementById('navbar');
@@ -1615,26 +2085,79 @@
       navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // تحميل بيانات الدورة من localStorage
-    document.addEventListener('DOMContentLoaded', function() {
+    // ========== تحميل بيانات الدورة ==========
+    function loadCourseData() {
       const selectedCourse = localStorage.getItem('selectedCourse');
-      const selectedInstructor = localStorage.getItem('selectedInstructor');
+      const selectedPrice = localStorage.getItem('selectedPrice');
       
-      if (selectedCourse) {
+      if (selectedCourse && coursesData[selectedCourse]) {
+        currentCourse = selectedCourse;
+        const data = coursesData[selectedCourse];
+        
+        // تحديث العنوان
         document.getElementById('courseTitle').textContent = selectedCourse;
         document.getElementById('courseNameInput').value = selectedCourse;
+        document.getElementById('courseCodeInput').value = data.code || '-';
+        document.getElementById('currentBreadcrumb').textContent = selectedCourse;
+        
+        // تحديث الملخص
+        document.getElementById('summaryCourse').textContent = selectedCourse;
+        document.getElementById('summaryPrice').textContent = data.price;
+        
+        // تحديث شارة المستوى
+        const badge = document.getElementById('levelBadge');
+        badge.textContent = data.level;
+        badge.className = `course-badge ${data.levelClass}`;
+        badge.style.display = 'inline-block';
+        
+        // تحديث المدرب
+        document.getElementById('instructorName').textContent = data.instructor;
+        document.getElementById('instructorTitle').innerHTML = `<i class="fas fa-star"></i> ${data.instructorTitle}`;
+        
+        // تحديث التفاصيل
+        document.getElementById('courseDuration').textContent = data.duration;
+        document.getElementById('courseHours').textContent = data.hours;
+        document.getElementById('courseLevel').textContent = data.level;
+        
+        // تحديث السعر
+        document.getElementById('coursePrice').textContent = data.price;
+        
+        // تحديث المحتوى
+        const contentList = document.getElementById('contentList');
+        contentList.innerHTML = '';
+        data.content.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `<i class="fas fa-check-circle"></i> ${item}`;
+          contentList.appendChild(li);
+        });
+        
+      } else if (selectedCourse) {
+        // إذا كانت الدورة غير موجودة في قاعدة البيانات
+        document.getElementById('courseTitle').textContent = selectedCourse;
+        document.getElementById('courseNameInput').value = selectedCourse;
+        document.getElementById('summaryCourse').textContent = selectedCourse;
+        
+        if (selectedPrice) {
+          document.getElementById('coursePrice').textContent = selectedPrice;
+          document.getElementById('summaryPrice').textContent = selectedPrice;
+        }
+        
+        showNotification('تم التحميل', 'تم تحميل بيانات الدورة');
+      } else {
+        // لا توجد دورة محددة
+        document.getElementById('courseTitle').textContent = 'الرجاء اختيار دورة من القائمة';
+        showNotification('تنبيه', 'لم يتم اختيار دورة. سيتم توجيهك لصفحة الدورات', 3000);
+        setTimeout(() => {
+          window.location.href = 'courses.html';
+        }, 3000);
       }
       
-      if (selectedInstructor) {
-        document.getElementById('instructorNameInput').value = selectedInstructor;
-      }
-      
-      // مسح البيانات بعد الاستخدام
-      localStorage.removeItem('selectedCourse');
-      localStorage.removeItem('selectedInstructor');
-    });
+      // مسح البيانات بعد الاستخدام (اختياري)
+      // localStorage.removeItem('selectedCourse');
+      // localStorage.removeItem('selectedPrice');
+    }
 
-    // Timer
+    // ========== عداد التنازلي ==========
     function initializeCountdown() {
       const targetDate = new Date();
       targetDate.setDate(targetDate.getDate() + 3);
@@ -1665,30 +2188,66 @@
       countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    // التحقق من صحة النموذج
+    // ========== التحقق من صحة النموذج ==========
     function validateForm() {
-      const fields = ['fullName', 'email', 'phone', 'profession', 'experience'];
-      return fields.every(id => document.getElementById(id).value.trim());
+      const fields = ['firstName', 'lastName', 'email', 'phone', 'profession', 'experience'];
+      const terms = document.getElementById('terms').checked;
+      
+      const allFilled = fields.every(id => {
+        const value = document.getElementById(id).value.trim();
+        if (!value) {
+          document.getElementById(id).classList.add('error');
+        } else {
+          document.getElementById(id).classList.remove('error');
+          document.getElementById(id).classList.add('valid');
+        }
+        return value;
+      });
+      
+      // التحقق من البريد الإلكتروني
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email && !emailRegex.test(email)) {
+        document.getElementById('email').classList.add('error');
+        showNotification('بريد إلكتروني غير صحيح', 'الرجاء إدخال بريد إلكتروني صحيح');
+        return false;
+      }
+      
+      // التحقق من رقم الهاتف (مصري)
+      const phone = document.getElementById('phone').value.trim();
+      const phoneRegex = /^01[0-9]{9}$/;
+      if (phone && !phoneRegex.test(phone)) {
+        document.getElementById('phone').classList.add('error');
+        showNotification('رقم هاتف غير صحيح', 'الرجاء إدخال رقم هاتف مصري صحيح (11 رقم)');
+        return false;
+      }
+      
+      if (!terms) {
+        showNotification('الموافة على الشروط', 'يجب الموافقة على الشروط والأحكام');
+        return false;
+      }
+      
+      return allFilled;
     }
 
     // إظهار الحقول الفارغة
     function highlightEmptyFields() {
-      ['fullName', 'email', 'phone', 'profession', 'experience'].forEach(id => {
+      ['firstName', 'lastName', 'email', 'phone', 'profession', 'experience'].forEach(id => {
         const field = document.getElementById(id);
         if (!field.value.trim()) {
-          field.style.borderColor = 'var(--error)';
-          setTimeout(() => field.style.borderColor = '', 3000);
+          field.classList.add('error');
+          setTimeout(() => field.classList.remove('error'), 3000);
         }
       });
     }
 
     // إشعار
-    function showNotification(title, message) {
+    function showNotification(title, message, duration = 5000) {
       const notification = document.getElementById('notification');
       document.getElementById('notificationTitle').textContent = title;
       document.getElementById('notificationMessage').textContent = message;
       notification.classList.add('show');
-      setTimeout(() => notification.classList.remove('show'), 5000);
+      setTimeout(() => notification.classList.remove('show'), duration);
     }
 
     // فتح/غلق المودال
@@ -1702,50 +2261,37 @@
       document.body.style.overflow = 'auto';
     }
 
-    // تسجيل الدورة
-    function enrollCourse() {
-      if (isSubmitting || remainingSeats <= 0) return;
-
-      const btn = document.getElementById('enrollButton');
+    // تحديث المقاعد
+    function updateSeats() {
       const seatsSpan = document.getElementById('seatsCount');
-
-      if (remainingSeats <= 0) {
-        showNotification('لا توجد مقاعد', 'عذراً، جميع المقاعد محجوزة');
-        btn.classList.add('disabled');
-        btn.innerHTML = '<i class="fas fa-times-circle"></i> غير متاح';
-        return;
+      const seatsContainer = document.getElementById('seatsContainer');
+      
+      seatsSpan.textContent = remainingSeats;
+      
+      if (remainingSeats <= 3) {
+        seatsContainer.classList.add('warning');
+      } else {
+        seatsContainer.classList.remove('warning');
       }
-
-      btn.classList.add('loading');
-      btn.innerHTML = 'جارٍ التحقق...';
-
-      setTimeout(() => {
-        btn.classList.remove('loading');
-        btn.innerHTML = '<i class="fas fa-user-plus"></i> سجل الآن';
-
-        if (validateForm()) {
-          remainingSeats--;
-          seatsSpan.textContent = remainingSeats;
-
-          if (remainingSeats <= 0) {
-            btn.classList.add('disabled');
-            btn.innerHTML = '<i class="fas fa-times-circle"></i> غير متاح';
-          }
-
-          openModal('successModal');
-          showNotification('تم التسجيل!', `بقي ${remainingSeats} مقعد فقط`);
-        } else {
-          showNotification('أكمل البيانات', 'يرجى إكمال جميع الحقول');
-          highlightEmptyFields();
-          document.querySelector('.registration-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 1500);
+      
+      if (remainingSeats <= 0) {
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').classList.add('disabled');
+        showNotification('نفاد المقاعد', 'عذراً، جميع المقاعد محجوزة لهذه الدورة');
+      }
     }
 
     // إرسال النموذج
     function submitRegistration() {
-      if (isSubmitting || !validateForm()) {
-        showNotification('بيانات ناقصة', 'يرجى إكمال جميع الحقول');
+      if (isSubmitting) return;
+      
+      if (remainingSeats <= 0) {
+        showNotification('لا توجد مقاعد', 'عذراً، هذه الدورة ممتلئة');
+        return;
+      }
+
+      if (!validateForm()) {
+        showNotification('بيانات ناقصة', 'يرجى إكمال جميع الحقول المطلوبة');
         highlightEmptyFields();
         return;
       }
@@ -1755,52 +2301,144 @@
       btn.classList.add('loading');
       btn.innerHTML = 'جارٍ التسجيل...';
 
+      // محاكاة إرسال البيانات
       setTimeout(() => {
         isSubmitting = false;
         btn.classList.remove('loading');
         btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التسجيل';
 
+        // تقليل المقاعد
         remainingSeats--;
-        document.getElementById('seatsCount').textContent = remainingSeats;
+        updateSeats();
 
-        if (remainingSeats <= 0) {
-          document.getElementById('enrollButton').classList.add('disabled');
-          document.getElementById('enrollButton').innerHTML = '<i class="fas fa-times-circle"></i> غير متاح';
-        }
+        // تجميع بيانات التسجيل
+        const registrationData = {
+          course: document.getElementById('courseNameInput').value,
+          code: document.getElementById('courseCodeInput').value,
+          firstName: document.getElementById('firstName').value,
+          lastName: document.getElementById('lastName').value,
+          fullName: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          birthDate: document.getElementById('birthDate').value,
+          profession: document.getElementById('profession').value,
+          experience: document.getElementById('experience').value,
+          referral: document.getElementById('referral').value,
+          notes: document.getElementById('notes').value,
+          newsletter: document.getElementById('newsletter').checked,
+          timestamp: new Date().toISOString()
+        };
+
+        // تخزين في localStorage (محاكاة)
+        localStorage.setItem('lastRegistration', JSON.stringify(registrationData));
+        
+        // تحديث رسالة النجاح
+        document.getElementById('successMessage').innerHTML = `
+          تم تسجيلك بنجاح في دورة <strong>${registrationData.course}</strong><br>
+          سيتم التواصل معك على <strong>${registrationData.email}</strong> خلال ٢٤ ساعة
+        `;
 
         openModal('successModal');
-        showNotification('تم التسجيل بنجاح!', 'سيتم التواصل معك قريباً');
-        resetForm();
+        showNotification('تم التسجيل بنجاح!', `بقي ${remainingSeats} مقعد فقط`);
+        
+        // إعادة تعيين النموذج بعد النجاح
+        if (remainingSeats <= 0) {
+          resetForm();
+        }
       }, 2000);
     }
 
     // إعادة تعيين النموذج
     function resetForm() {
-      ['fullName', 'email', 'phone', 'notes'].forEach(id => document.getElementById(id).value = '');
-      ['profession', 'experience'].forEach(id => document.getElementById(id).value = '');
+      ['firstName', 'lastName', 'email', 'phone', 'birthDate', 'notes'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      ['profession', 'experience', 'referral'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('terms').checked = true;
+      document.getElementById('newsletter').checked = false;
+      
+      // إزالة كلاسات validation
+      document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => {
+        el.classList.remove('valid', 'error');
+      });
+      
       showNotification('تم إعادة التعيين', 'يمكنك البدء من جديد');
     }
 
-    // Event Listeners
-    document.getElementById('enrollButton').addEventListener('click', enrollCourse);
-    document.getElementById('infoButton').addEventListener('click', () => {
-      showNotification('معلومات الدورة', 'سيتم فتح التفاصيل قريباً');
+    // ========== Event Listeners ==========
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCourseData();
+      initializeCountdown();
+      updateSeats();
     });
+
+    // التمرير إلى النموذج
+    document.getElementById('scrollToFormBtn').addEventListener('click', () => {
+      document.querySelector('.registration-form').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+    });
+
+    // العودة للتفاصيل
+    document.getElementById('backToDetailsBtn').addEventListener('click', () => {
+      window.location.href = 'course-details.html';
+    });
+
+    // إرسال النموذج
     document.getElementById('submitBtn').addEventListener('click', submitRegistration);
+
+    // إعادة تعيين
     document.getElementById('resetBtn').addEventListener('click', resetForm);
+
+    // التحقق الفوري من الحقول
+    document.querySelectorAll('.form-input, .form-select').forEach(input => {
+      input.addEventListener('input', function() {
+        if (this.value.trim()) {
+          this.classList.remove('error');
+          this.classList.add('valid');
+        } else {
+          this.classList.remove('valid');
+        }
+      });
+    });
 
     // Modal Close Buttons
     document.getElementById('closeSuccessModal').addEventListener('click', () => closeModal('successModal'));
     document.getElementById('okSuccessBtn').addEventListener('click', () => closeModal('successModal'));
     document.getElementById('downloadBtn').addEventListener('click', () => {
-      showNotification('جاري التحميل', 'سيبدأ التحميل قريباً');
+      showNotification('جاري التحميل', 'سيبدأ تحميل تأكيد التسجيل');
+      
+      // إنشاء ملف نصي بمعلومات التسجيل (محاكاة)
+      const lastReg = localStorage.getItem('lastRegistration');
+      if (lastReg) {
+        const data = JSON.parse(lastReg);
+        const content = `تأكيد تسجيل - الأكاديمية الدولية للإبداع
+----------------------------------------
+الدورة: ${data.course}
+الاسم: ${data.fullName}
+البريد الإلكتروني: ${data.email}
+تاريخ التسجيل: ${new Date(data.timestamp).toLocaleString('ar-EG')}
+----------------------------------------
+سيتم التواصل معكم قريباً`;
+        
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `تأكيد-تسجيل-${data.fullName}.txt`;
+        a.click();
+      }
+      
       closeModal('successModal');
     });
 
     document.getElementById('closeErrorModal').addEventListener('click', () => closeModal('errorModal'));
     document.getElementById('retryBtn').addEventListener('click', () => closeModal('errorModal'));
     document.getElementById('supportBtn').addEventListener('click', () => {
-      showNotification('جاري التوجيه', 'سيتم التواصل مع الدعم');
+      showNotification('جاري التوجيه', 'سيتم فتح محادثة الدعم');
       closeModal('errorModal');
     });
 
@@ -1810,16 +2448,6 @@
         if (e.target === this) closeModal(this.id);
       });
     });
-
-    // Remove highlight on input
-    document.querySelectorAll('.form-input, .form-select').forEach(input => {
-      input.addEventListener('input', function() {
-        this.style.borderColor = '';
-      });
-    });
-
-    // Initialize
-    initializeCountdown();
   </script>
 </body>
 

@@ -1,1415 +1,1439 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="الأكاديمية الدولية للإبداع - دورات تدريبية متخصصة في المجالات الإبداعية مع مدربين خبراء">
-  <title>الدورات التدريبية | الأكاديمية الدولية للإبداع</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* ========== المتغيرات الأساسية ========== */
-    :root {
-      --bg: #F3E8DD;
-      --ink: #2B2320;
-      --muted: #6A5B52;
-      --gold: #B9924A;
-      --gold-light: #E7D2A3;
-      --gold-dark: #8B6A2B;
-      --stroke: rgba(120, 90, 60, .25);
-      --card: rgba(255, 255, 255, .85);
-      --shadow: 0 20px 40px rgba(0, 0, 0, .1);
-      --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
-      --radius: 24px;
-      --radius-sm: 16px;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      --max-width: 1400px;
-    }
-
-    /* ألوان المستويات */
-    .level-badge {
-      display: inline-block;
-      padding: 0.25rem 1rem;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: white;
-      margin-right: 0.5rem;
-    }
-    .level-beginner { background: linear-gradient(135deg, #28a745, #20c997); }
-    .level-intermediate { background: linear-gradient(135deg, #ffc107, #fd7e14); }
-    .level-advanced { background: linear-gradient(135deg, #dc3545, #c82333); }
-    .level-expert { background: linear-gradient(135deg, #6f42c1, #6610f2); }
-
-    /* ========== إعادة التعيين ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Cairo", system-ui, -apple-system, sans-serif;
-      color: var(--ink);
-      background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
-      min-height: 100vh;
-      line-height: 1.7;
-    }
-
-    /* ========== شريط التنقل ========== */
-    .navbar {
-      position: sticky;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-      padding: 1.25rem 0;
-      transition: var(--transition);
-    }
-
-    .navbar.scrolled {
-      padding: 0.75rem 0;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .nav-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-    }
-
-    .logo-text h2 {
-      font-size: 1.3rem;
-      color: var(--gold-dark);
-      margin-bottom: 0.25rem;
-    }
-
-    .logo-text span {
-      font-size: 0.7rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      color: var(--ink);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      position: relative;
-      padding: 0.5rem 0;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-links a i {
-      font-size: 0.875rem;
-      color: var(--gold);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold-dark);
-    }
-
-    .nav-cta .btn {
-      padding: 0.75rem 1.75rem;
-      font-size: 0.95rem;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0.5rem;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: var(--gold-dark);
-      margin: 3px 0;
-      transition: var(--transition);
-      border-radius: 2px;
-    }
-
-    /* ========== الأزرار ========== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2.5rem;
-      border-radius: 12px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      gap: 0.75rem;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
-      border: 1px solid rgba(139, 106, 43, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--gold-dark);
-      border: 2px solid var(--gold);
-    }
-
-    .btn-outline:hover {
-      background: var(--gold-light);
-      transform: translateY(-3px);
-    }
-
-    /* ========== قسم الهيدر ========== */
-    .hero-courses {
-      min-height: 40vh;
-      position: relative;
-      overflow: hidden;
-      padding-top: 100px;
-      background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
-                  radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%);
-      text-align: center;
-    }
-
-    .hero-courses-content {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-courses-title {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      color: var(--gold-dark);
-    }
-
-    .hero-courses-subtitle {
-      font-size: 1.5rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-courses-semester {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .hero-quote {
-      font-size: 1.2rem;
-      font-style: italic;
-      color: var(--ink);
-      max-width: 700px;
-      margin: 1.5rem auto 0;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50px;
-      border: 1px solid var(--gold-light);
-    }
-
-    /* ========== قسم الفلتر والبحث ========== */
-    .filters-section {
-      padding: 2rem 0;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-    }
-
-    .filters-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .filters-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .filter-btn {
-      padding: 0.75rem 1.5rem;
-      background: white;
-      border: 2px solid var(--gold-light);
-      border-radius: 50px;
-      font-weight: 700;
-      color: var(--muted);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      border-color: var(--gold);
-      transform: translateY(-3px);
-    }
-
-    .search-box {
-      max-width: 500px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      padding-right: 3.5rem;
-      border: 2px solid var(--gold-light);
-      border-radius: 50px;
-      font-size: 1rem;
-      background: white;
-      transition: var(--transition);
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(185, 146, 74, 0.2);
-    }
-
-    .search-icon {
-      position: absolute;
-      right: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gold);
-    }
-
-    /* ========== قسم الكورسات ========== */
-    .courses-section {
-      padding: 4rem 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--gold-dark);
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      right: 50%;
-      transform: translateX(50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold-light), var(--gold));
-      border-radius: 2px;
-    }
-
-    .section-subtitle {
-      font-size: 1.125rem;
-      color: var(--muted);
-      max-width: 700px;
-      margin: 1rem auto 0;
-    }
-
-    /* ========== شبكة الكورسات ========== */
-    .courses-grid {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    /* ========== بطاقة الكورس ========== */
-    .course-card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: var(--transition);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .course-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* صورة الكورس */
-    .course-image {
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .course-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .course-card:hover .course-image img {
-      transform: scale(1.05);
-    }
-
-    /* رأس البطاقة مع الترقيم */
-    .course-header {
-      background: linear-gradient(135deg, rgba(185, 146, 74, 0.1), rgba(231, 210, 163, 0.2));
-      padding: 1.5rem;
-      border-bottom: 3px solid var(--gold);
-    }
-
-    .course-number {
-      display: inline-block;
-      background: var(--gold);
-      color: white;
-      padding: 0.25rem 1rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .course-title-arabic {
-      color: var(--gold-dark);
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-      font-weight: 800;
-    }
-
-    .course-title-english {
-      color: var(--gold-dark);
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
-    }
-
-    /* معلومات سريعة */
-    .course-quick-info {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .quick-info-item {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .quick-info-item i {
-      color: var(--gold);
-    }
-
-    /* محتوى الكورس */
-    .course-content {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .course-description {
-      color: var(--ink);
-      margin-bottom: 1.5rem;
-      line-height: 1.7;
-      font-size: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--stroke);
-    }
-
-    .course-description small {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    /* قسم المدرب */
-    .instructor-box {
-      background: rgba(231, 210, 163, 0.1);
-      border-radius: var(--radius-sm);
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--gold-light);
-    }
-
-    .instructor-box h4 {
-      color: var(--gold-dark);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .instructor-box h4 i {
-      color: var(--gold);
-    }
-
-    .instructor-item {
-      margin-bottom: 1rem;
-    }
-
-    .instructor-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .instructor-name {
-      font-weight: 800;
-      color: var(--gold-dark);
-      margin-bottom: 0.25rem;
-    }
-
-    .instructor-title {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    .instructor-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-      margin: 1rem 0;
-    }
-
-    /* شارات إضافية */
-    .course-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1rem 0;
-    }
-
-    .course-tag {
-      padding: 0.25rem 0.75rem;
-      background: rgba(185, 146, 74, 0.1);
-      border: 1px solid var(--gold-light);
-      border-radius: 50px;
-      font-size: 0.8rem;
-      color: var(--gold-dark);
-    }
-
-    /* زر التفاصيل */
-    .details-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
-      margin-top: 0.5rem;
-    }
-
-    .details-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(185, 146, 74, 0.4);
-    }
-
-    .details-btn i {
-      font-size: 1.1rem;
-    }
-
-    /* ========== التذييل ========== */
-    .footer {
-      background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
-      color: var(--gold-light);
-      padding-top: 4rem;
-      margin-top: 4rem;
-      border-top: 4px solid var(--gold);
-    }
-
-    .footer-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem 2rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-col h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
-      color: white;
-      position: relative;
-      padding-bottom: 0.75rem;
-    }
-
-    .footer-col h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 50px;
-      height: 2px;
-      background: var(--gold);
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.875rem;
-    }
-
-    .footer-links a {
-      color: var(--gold-light);
-      text-decoration: none;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .footer-links a:hover {
-      color: white;
-      transform: translateX(-5px);
-    }
-
-    .footer-links a i {
-      font-size: 0.75rem;
-      color: var(--gold);
-    }
-
-    .footer-contact p {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      color: var(--gold-light);
-    }
-
-    .footer-contact i {
-      color: var(--gold);
-      margin-top: 0.25rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .social-links a {
-      width: 44px;
-      height: 44px;
-      background: rgba(185, 146, 74, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-      text-decoration: none;
-      transition: var(--transition);
-      border: 1px solid rgba(185, 146, 74, 0.3);
-    }
-
-    .social-links a:hover {
-      background: var(--gold);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      text-align: center;
-      color: rgba(231, 210, 163, 0.7);
-      font-size: 0.875rem;
-    }
-
-    .footer-bottom p {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-legal {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-
-    .footer-legal a {
-      color: rgba(231, 210, 163, 0.7);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .footer-legal a:hover {
-      color: var(--gold-light);
-    }
-
-    /* ========== التجاوب مع الشاشات ========== */
-    @media (max-width: 1024px) {
-      .courses-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .hero-courses-title {
-        font-size: 2.5rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="الأكاديمية الدولية للإبداع - دورات تدريبية متخصصة في المجالات الإبداعية مع مدربين خبراء">
+    <title>الدورات التدريبية | الأكاديمية الدولية للإبداع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      /* ========== المتغيرات الأساسية ========== */
+      :root {
+        --bg: #F3E8DD;
+        --ink: #2B2320;
+        --muted: #6A5B52;
+        --gold: #B9924A;
+        --gold-light: #E7D2A3;
+        --gold-dark: #8B6A2B;
+        --stroke: rgba(120, 90, 60, .25);
+        --card: rgba(255, 255, 255, .85);
+        --shadow: 0 20px 40px rgba(0, 0, 0, .1);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, .15);
+        --radius: 24px;
+        --radius-sm: 16px;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --max-width: 1400px;
       }
 
-      .nav-menu {
-        position: absolute;
-        top: 100%;
-        right: -100%;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        padding: 1.5rem;
-        transition: var(--transition);
-        border-top: 3px solid var(--stroke);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      /* ألوان المستويات */
+      .level-badge {
+        display: inline-block;
+        padding: 0.25rem 1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: white;
+        margin-right: 0.5rem;
       }
 
-      .nav-menu.active {
+      .level-beginner {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+
+      .level-intermediate {
+        background: linear-gradient(135deg, #ffc107, #fd7e14);
+      }
+
+      .level-advanced {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+      }
+
+      .level-expert {
+        background: linear-gradient(135deg, #6f42c1, #6610f2);
+      }
+
+      /* ========== إعادة التعيين ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Cairo", system-ui, -apple-system, sans-serif;
+        color: var(--ink);
+        background: linear-gradient(135deg, #F8F2E9 0%, #F3E8DD 50%, #EFE0D2 100%);
+        min-height: 100vh;
+        line-height: 1.7;
+      }
+
+      /* ========== شريط التنقل ========== */
+      .navbar {
+        position: sticky;
+        top: 0;
         right: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--stroke);
+        padding: 1.25rem 0;
+        transition: var(--transition);
       }
 
-      .nav-links {
-        flex-direction: column;
-        width: 100%;
-        text-align: right;
-        gap: 1rem;
+      .navbar.scrolled {
+        padding: 0.75rem 0;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       }
 
-      .nav-cta {
-        width: 100%;
-        margin-top: 1rem;
-      }
-
-      .nav-cta .btn {
-        width: 100%;
-      }
-
-      .hero-courses {
-        padding-top: 80px;
-      }
-
-      .hero-courses-title {
-        font-size: 2rem;
-      }
-
-      .hero-courses-subtitle {
-        font-size: 1.2rem;
-      }
-
-      .hero-courses-semester {
-        font-size: 1.4rem;
-      }
-
-      .hero-quote {
-        font-size: 1rem;
-        padding: 1rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .course-image {
-        height: 180px;
-      }
-
-      .footer-grid {
-        gap: 2rem;
-      }
-
-      .footer-legal {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
       .nav-container {
-        padding: 0 1rem;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
       }
 
       .logo-text h2 {
-        font-size: 1rem;
+        font-size: 1.3rem;
+        color: var(--gold-dark);
+        margin-bottom: 0.25rem;
       }
 
       .logo-text span {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-weight: 600;
       }
 
-      .filters-grid {
-        flex-direction: column;
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
       }
 
-      .filter-btn {
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-links a i {
+        font-size: 0.875rem;
+        color: var(--gold);
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after {
         width: 100%;
+      }
+
+      .nav-links a:hover {
+        color: var(--gold-dark);
+      }
+
+      .nav-cta .btn {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.95rem;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--gold-dark);
+        margin: 3px 0;
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+
+      /* ========== الأزرار ========== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        gap: 0.75rem;
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        box-shadow: 0 15px 35px rgba(185, 146, 74, 0.25);
+        border: 1px solid rgba(139, 106, 43, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(185, 146, 74, 0.35);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--gold-dark);
+        border: 2px solid var(--gold);
+      }
+
+      .btn-outline:hover {
+        background: var(--gold-light);
+        transform: translateY(-3px);
+      }
+
+      /* ========== قسم الهيدر ========== */
+      .hero-courses {
+        min-height: 40vh;
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+        background: radial-gradient(ellipse at 20% 50%, rgba(185, 146, 74, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(231, 210, 163, 0.1) 0%, transparent 50%);
         text-align: center;
       }
 
-      .course-image {
-        height: 160px;
+      .hero-courses-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2rem 2rem;
+        position: relative;
+        z-index: 1;
       }
 
+      .hero-courses-title {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: var(--gold-dark);
+      }
+
+      .hero-courses-subtitle {
+        font-size: 1.5rem;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+
+      .hero-courses-semester {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+
+      .hero-quote {
+        font-size: 1.2rem;
+        font-style: italic;
+        color: var(--ink);
+        max-width: 700px;
+        margin: 1.5rem auto 0;
+        padding: 1rem 2rem;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        border: 1px solid var(--gold-light);
+      }
+
+      /* ========== قسم الفلتر والبحث ========== */
+      .filters-section {
+        padding: 2rem 0;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--stroke);
+      }
+
+      .filters-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .filters-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .filter-btn {
+        padding: 0.75rem 1.5rem;
+        background: white;
+        border: 2px solid var(--gold-light);
+        border-radius: 50px;
+        font-weight: 700;
+        color: var(--muted);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        border-color: var(--gold);
+        transform: translateY(-3px);
+      }
+
+      .search-box {
+        max-width: 500px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        padding-right: 3.5rem;
+        border: 2px solid var(--gold-light);
+        border-radius: 50px;
+        font-size: 1rem;
+        background: white;
+        transition: var(--transition);
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(185, 146, 74, 0.2);
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gold);
+      }
+
+      /* ========== قسم الكورسات ========== */
+      .courses-section {
+        padding: 4rem 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--gold-dark);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold-light), var(--gold));
+        border-radius: 2px;
+      }
+
+      .section-subtitle {
+        font-size: 1.125rem;
+        color: var(--muted);
+        max-width: 700px;
+        margin: 1rem auto 0;
+      }
+
+      /* ========== شبكة الكورسات ========== */
+      .courses-grid {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      /* ========== بطاقة الكورس ========== */
+      .course-card {
+        background: var(--card);
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .course-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      /* صورة الكورس */
+      .course-image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .course-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .course-card:hover .course-image img {
+        transform: scale(1.05);
+      }
+
+      /* رأس البطاقة مع الترقيم */
       .course-header {
-        padding: 1rem;
+        background: linear-gradient(135deg, rgba(185, 146, 74, 0.1), rgba(231, 210, 163, 0.2));
+        padding: 1.5rem;
+        border-bottom: 3px solid var(--gold);
+      }
+
+      .course-number {
+        display: inline-block;
+        background: var(--gold);
+        color: white;
+        padding: 0.25rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
       }
 
       .course-title-arabic {
-        font-size: 1.2rem;
+        color: var(--gold-dark);
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+        font-weight: 800;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- شريط التنقل -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <div class="logo-text">
-          <h2>الأكاديمية الدولية للإبداع</h2>
-          <span>INTERNATIONAL CREATIVE ACADEMY</span>
-        </div>
-      </a>
+      .course-title-english {
+        color: var(--gold-dark);
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
 
-      <button class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      /* معلومات سريعة */
+      .course-quick-info {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+      }
 
-      <div class="nav-menu" id="navMenu">
-        <ul class="nav-links">
-          <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
-          <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
-          <li><a href="#" class="active"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
-          <li><a href="#"><i class="fas fa-comment"></i> الشركاء</a></li>
-          <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-cta">
-        <a href="#contact" class="btn btn-primary">
-          <i class="fas fa-user-plus"></i>
-          تواصل معنا
-        </a>
-      </div>
-    </div>
-  </nav>
+      .quick-info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
 
-  <!-- قسم الهيدر -->
-  <section class="hero-courses">
-    <div class="hero-courses-content">
-      <h1 class="hero-courses-title">الدورات التدريبية المتخصصة</h1>
-      <p class="hero-courses-subtitle">Professional Training Courses</p>
-      <div class="hero-courses-semester">الفصل الدراسي - أبريل 2026</div>
-      <div class="hero-quote">
-        "ليست مجرد تعليم .. إنها منظومة متكاملة من الإبداع إلى السوق"
-      </div>
-    </div>
-  </section>
+      .quick-info-item i {
+        color: var(--gold);
+      }
 
-  <!-- قسم الفلتر والبحث -->
-  <section class="filters-section">
-    <div class="filters-container">
-      <div class="filters-grid">
-        <button class="filter-btn active" data-filter="all">جميع الدورات</button>
-        <button class="filter-btn" data-filter="design">تصميم أزياء</button>
-        <button class="filter-btn" data-filter="pattern">باترون</button>
-        <button class="filter-btn" data-filter="styling">تنسيق أزياء</button>
-        <button class="filter-btn" data-filter="quality">جودة وتصدير</button>
-        <button class="filter-btn" data-filter="business">ريادة أعمال</button>
-      </div>
-      
-      <div class="search-box">
-        <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن دورة أو مدرب...">
-        <i class="fas fa-search search-icon"></i>
-      </div>
-    </div>
-  </section>
+      /* محتوى الكورس */
+      .course-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
 
-  <!-- قسم الكورسات -->
-  <section class="courses-section">
-    <div class="section-header">
-      <h2 class="section-title">برامجنا التدريبية المتقدمة</h2>
-      <p class="section-subtitle">برامج احترافية مع مدربين خبراء لتحويل موهبتك إلى مشروع ناجح</p>
-    </div>
+      .course-description {
+        color: var(--ink);
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+        font-size: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--stroke);
+      }
 
-    <div class="courses-grid" id="coursesContainer">
-      <!-- I. Fashion Design with AI -->
-      <div class="course-card" data-category="design">
-        <div class="course-image">
-          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600" alt="تصميم أزياء">
-        </div>
-        <div class="course-header">
-          <span class="course-number">I</span>
-          <h3 class="course-title-arabic">تصميم الأزياء: من الإلهام إلى العالم الرقمي</h3>
-          <div class="course-title-english">Fashion Design: From Fundamentals to Advanced AI Image Generation</div>
-          <div class="course-quick-info">
-            <span class="quick-info-item"><i class="fas fa-layer-group"></i> 4 مستويات</span>
-            
-          </div>
-        </div>
-        
-        <div class="course-content">
-          <p class="course-description">
-            الدمج بين الإبداع الفني وأدوات الذكاء الاصطناعي لصناعة رؤية تصميمية عالمية
-          </p>
+      .course-description small {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
 
-          
+      /* قسم المدرب */
+      .instructor-box {
+        background: rgba(231, 210, 163, 0.1);
+        border-radius: var(--radius-sm);
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--gold-light);
+      }
 
-          <div class="course-tags">
-            <span class="course-tag"><i class="fas fa-circle level-beginner"></i> مبتدئ</span>
-            <span class="course-tag"><i class="fas fa-circle level-intermediate"></i> متوسط</span>
-            <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
-          </div>
+      .instructor-box h4 {
+        color: var(--gold-dark);
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-          <a href="course-details.html" class="details-btn" onclick="navigateToDetails('Fashion Drawing', 'fashion-design')">
-            <i class="fas fa-info-circle"></i>
-            عرض التفاصيل والمستويات
-          </a>
-        </div>
-      </div>
+      .instructor-box h4 i {
+        color: var(--gold);
+      }
 
-      <!-- II. Pattern Making & Draping -->
-      <div class="course-card" data-category="pattern">
-        <div class="course-image">
-          <img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt="باترون وتصميم">
-        </div>
-        <div class="course-header">
-          <span class="course-number">II</span>
-          <h3 class="course-title-arabic">باترون وتصميم الأزياء</h3>
-          <div class="course-title-english">Pattern Making & Draping</div>
-          <div class="course-quick-info">
-            <span class="quick-info-item"><i class="fas fa-layer-group"></i> 5 دورات + 8 PS</span>
-            
-          </div>
-        </div>
-        
-        <div class="course-content">
-          <p class="course-description">
-            رحلة الأزياء الكاملة من التصميم إلى الباترون ثم البروتوتايب ... بمعايير إحترافية
-          </p>
+      .instructor-item {
+        margin-bottom: 1rem;
+      }
 
-          
+      .instructor-item:last-child {
+        margin-bottom: 0;
+      }
 
-          <div class="course-tags">
-            <span class="course-tag"><i class="fas fa-circle level-beginner"></i> مبتدئ</span>
-            <span class="course-tag"><i class="fas fa-circle level-intermediate"></i> متوسط</span>
-            <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
-          </div>
+      .instructor-name {
+        font-weight: 800;
+        color: var(--gold-dark);
+        margin-bottom: 0.25rem;
+      }
 
-          <a href="course-details.html" class="details-btn" onclick="navigateToDetails('Pattern Making', 'pattern-making')">
-            <i class="fas fa-info-circle"></i>
-            عرض التفاصيل والمستويات
-          </a>
-        </div>
-      </div>
+      .instructor-title {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
 
-      <!-- III. Fashion Styling & Image Building -->
-      <div class="course-card" data-category="styling">
-        <div class="course-image">
-          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600" alt="تنسيق أزياء">
-        </div>
-        <div class="course-header">
-          <span class="course-number">III</span>
-          <h3 class="course-title-arabic">تنسيق الأزياء وبناء الصورة</h3>
-          <div class="course-title-english">Fashion Styling & Image Building</div>
-          <div class="course-quick-info">
-            <span class="quick-info-item"><i class="fas fa-layer-group"></i> دورتان</span>
-            
-          </div>
-        </div>
-        
-        <div class="course-content">
-          <p class="course-description">
-            فن تقديم إطلالة متناسقة تحكي قصة وتخدم علامة تجارية أو شخصية أو مناسبة
-          </p>
+      .instructor-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+        margin: 1rem 0;
+      }
 
-          
-          <div class="course-tags">
-            <span class="course-tag"><i class="fas fa-circle level-beginner"></i> مبتدئ</span>
-            <span class="course-tag"><i class="fas fa-circle level-intermediate"></i> متوسط</span>
-          </div>
+      /* شارات إضافية */
+      .course-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
 
-          <a href="course-details.html" class="details-btn" onclick="navigateToDetails('Fashion Styling & Image Building', 'fashion-styling')">
-            <i class="fas fa-info-circle"></i>
-            عرض التفاصيل والمستويات
-          </a>
-        </div>
-      </div>
+      .course-tag {
+        padding: 0.25rem 0.75rem;
+        background: rgba(185, 146, 74, 0.1);
+        border: 1px solid var(--gold-light);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        color: var(--gold-dark);
+      }
 
-      <!-- IV. International Quality & Export Readiness -->
-      <div class="course-card" data-category="quality">
-        <div class="course-image">
-          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600" alt="جودة وتصدير">
-        </div>
-        <div class="course-header">
-          <span class="course-number">IV</span>
-          <h3 class="course-title-arabic">نظم الجودة الدولية ومتطلبات التصدير</h3>
-          <div class="course-title-english">International Quality & Export Readiness</div>
-          <div class="course-quick-info">
-            <span class="quick-info-item"><i class="fas fa-layer-group"></i> دورة واحدة</span>
-          </div>
-        </div>
-        
-        <div class="course-content">
-          <p class="course-description">
-            نظم الجودة الدولية و متطلبات التصدير للصناعات الإبداعية<br>
-            الملابس – المنسوجات – المنتجات الجلدية – الحلي
-          </p>
+      /* زر التفاصيل */
+      .details-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        margin-top: 0.5rem;
+      }
 
-          
+      .details-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(185, 146, 74, 0.4);
+      }
 
-          <div class="course-tags">
-            <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
-            <span class="course-tag"><i class="fas fa-certificate"></i> شهادة دولية</span>
-          </div>
+      .details-btn i {
+        font-size: 1.1rem;
+      }
 
-          <a href="course-details.html" class="details-btn" onclick="navigateToDetails('International Quality & Export Readiness', 'quality')">
-            <i class="fas fa-info-circle"></i>
-            عرض التفاصيل والمستويات
-          </a>
-        </div>
-      </div>
+      /* ========== التذييل ========== */
+      .footer {
+        background: linear-gradient(135deg, #2B2320 0%, #3A302C 100%);
+        color: var(--gold-light);
+        padding-top: 4rem;
+        margin-top: 4rem;
+        border-top: 4px solid var(--gold);
+      }
 
-      <!-- V. Fashion to Business -->
-      <div class="course-card" data-category="business">
-        <div class="course-image">
-          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600" alt="ريادة أعمال">
-        </div>
-        <div class="course-header">
-          <span class="course-number">V</span>
-          <h3 class="course-title-arabic">من الأزياء إلى الأعمال: نحو براند عالمي</h3>
-          <div class="course-title-english">Fashion to Business: From Fashion Concept to Global Brand</div>
-          <div class="course-quick-info">
-            <span class="quick-info-item"><i class="fas fa-layer-group"></i> دورتان</span>
-          </div>
-        </div>
-        
-        <div class="course-content">
-          <p class="course-description">
-            من الاسكتش الي عرض الأزياء - نحو تحويل أفكارك الابداعية الي براند تجاري عالمي
-          </p>
+      .footer-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 2rem 2rem;
+      }
 
-          <div class="course-tags">
-            <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
-            <span class="course-tag"><i class="fas fa-chart-line"></i> استراتيجي</span>
-          </div>
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
 
-          <a href="course-details.html" class="details-btn" onclick="navigateToDetails('Fashion to Business', 'fashion-business')">
-            <i class="fas fa-info-circle"></i>
-            عرض التفاصيل والمستويات
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+      .footer-col h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        position: relative;
+        padding-bottom: 0.75rem;
+      }
 
-  <!-- التذييل -->
-  <footer class="footer" id="contact">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-            <div style="width: 60px; height: 60px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.5rem;">
-              ICA
-            </div>
-            <div>
-              <h3 style="margin: 0; color: white;">الأكاديمية الدولية للإبداع</h3>
-              <span style="color: var(--gold-light);">INTERNATIONAL CREATIVE ACADEMY</span>
-            </div>
-          </div>
-          <p style="color: var(--gold-light); margin-bottom: 1.5rem;">
-            حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين
-          </p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
+      .footer-col h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--gold);
+      }
 
-        <div class="footer-col">
-          <h3>روابط سريعة</h3>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
-            <li><a href="index.html#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> الدورات التدريبية</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> الشركاء</a></li>
-          </ul>
-        </div>
+      .footer-links {
+        list-style: none;
+      }
 
-        <div class="footer-col">
-          <h3>مجالات التدريب</h3>
-          <ul class="footer-links">
-            <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم الأزياء</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> الباترون والتفصيل</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> تنسيق الأزياء</a></li>
-            <li><a href="#"><i class="fas fa-chevron-left"></i> الجودة والتصدير</a></li>
-          </ul>
-        </div>
+      .footer-links li {
+        margin-bottom: 0.875rem;
+      }
 
-        <div class="footer-col">
-          <h3>اتصل بنا</h3>
-          <div class="footer-contact">
-            <p><i class="fas fa-map-marker-alt"></i> ١٤ شارع فؤاد بدواني - مدينة نصر - القاهرة</p>
-            <p><i class="fas fa-phone"></i> +20 2 26706606</p>
-            <p><i class="fas fa-envelope"></i> info@icacademy.tech</p>
-            <!-- <p><i class="fas fa-clock"></i> الأحد - الخميس: ٨ صباحاً - ٤ مساءً</p> -->
-          </div>
-        </div>
-      </div>
+      .footer-links a {
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
 
-      <div class="footer-bottom">
-        <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع - جميع الحقوق محفوظة</p>
-        <div class="footer-legal">
-          <a href="#">سياسة الخصوصية</a>
-          <a href="#">الشروط والأحكام</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(-5px);
+      }
 
-  <!-- إشعار مؤقت -->
-  <div class="notification" id="notification" style="position: fixed; bottom: 20px; left: 20px; background: white; border-radius: 12px; padding: 1rem; box-shadow: var(--shadow); display: none; align-items: center; gap: 1rem; z-index: 9999; border-right: 4px solid var(--gold);">
-    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-      <i class="fas fa-info"></i>
-    </div>
-    <div>
-      <h4 style="color: var(--gold-dark); margin-bottom: 0.25rem;" id="notificationTitle">جاري التوجيه</h4>
-      <p style="color: var(--muted); font-size: 0.9rem;" id="notificationMessage">يتم تحميل صفحة التفاصيل...</p>
-    </div>
-  </div>
+      .footer-links a i {
+        font-size: 0.75rem;
+        color: var(--gold);
+      }
 
-  <script>
-    // تحديث السنة في التذييل
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+      .footer-contact p {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        color: var(--gold-light);
+      }
 
-    // قائمة متغيرات للتحكم في الأداء
-    let isMenuOpen = false;
-    let searchTimeout = null;
+      .footer-contact i {
+        color: var(--gold);
+        margin-top: 0.25rem;
+      }
 
-    // قائمة الكورسات (مصفوفة للتعامل معها)
-    const courses = document.querySelectorAll('.course-card');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const searchInput = document.getElementById('searchInput');
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
 
-    // ========== نظام الإشعارات ==========
-    function showNotification(title, message, duration = 2000) {
-      const notification = document.getElementById('notification');
-      document.getElementById('notificationTitle').textContent = title;
-      document.getElementById('notificationMessage').textContent = message;
-      notification.style.display = 'flex';
-      
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, duration);
-    }
+      .social-links a {
+        width: 44px;
+        height: 44px;
+        background: rgba(185, 146, 74, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: var(--transition);
+        border: 1px solid rgba(185, 146, 74, 0.3);
+      }
 
-    // ========== دالة التنقل إلى صفحة التفاصيل ==========
-    function navigateToDetails(courseName, category) {
-      // منع السلوك الافتراضي للرابط
-      event.preventDefault();
-      
-      // تخزين اسم الدورة في localStorage
-      localStorage.setItem('selectedCourse', courseName);
-      localStorage.setItem('selectedCategory', category);
-      
-      // إظهار إشعار
-      showNotification('جاري التوجيه', `جاري تحميل تفاصيل: ${courseName}`);
-      
-      // التوجيه إلى صفحة التفاصيل بعد تأخير بسيط
-      setTimeout(() => {
-        window.location.href = 'course-details.html';
-      }, 500);
-    }
+      .social-links a:hover {
+        background: var(--gold);
+        color: white;
+        transform: translateY(-3px);
+      }
 
-    // ========== قائمة الهاتف المحمول ==========
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        color: rgba(231, 210, 163, 0.7);
+        font-size: 0.875rem;
+      }
 
-    if (hamburger) {
-      hamburger.addEventListener('click', function(e) {
-        e.preventDefault();
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-          navMenu.classList.add('active');
-          hamburger.classList.add('active');
-        } else {
-          navMenu.classList.remove('active');
-          hamburger.classList.remove('active');
+      .footer-bottom p {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-legal {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .footer-legal a {
+        color: rgba(231, 210, 163, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-legal a:hover {
+        color: var(--gold-light);
+      }
+
+      /* ========== التجاوب مع الشاشات ========== */
+      @media (max-width: 1024px) {
+        .courses-grid {
+          grid-template-columns: 1fr;
         }
-      });
-    }
 
-    // إغلاق القائمة عند النقر على رابط
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', function() {
-        if (window.innerWidth <= 768) {
+        .hero-courses-title {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: absolute;
+          top: 100%;
+          right: -100%;
+          width: 100%;
+          background: white;
+          flex-direction: column;
+          padding: 1.5rem;
+          transition: var(--transition);
+          border-top: 3px solid var(--stroke);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu.active {
+          right: 0;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          width: 100%;
+          text-align: right;
+          gap: 1rem;
+        }
+
+        .nav-cta {
+          width: 100%;
+          margin-top: 1rem;
+        }
+
+        .nav-cta .btn {
+          width: 100%;
+        }
+
+        .hero-courses {
+          padding-top: 80px;
+        }
+
+        .hero-courses-title {
+          font-size: 2rem;
+        }
+
+        .hero-courses-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .hero-courses-semester {
+          font-size: 1.4rem;
+        }
+
+        .hero-quote {
+          font-size: 1rem;
+          padding: 1rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .course-image {
+          height: 180px;
+        }
+
+        .footer-grid {
+          gap: 2rem;
+        }
+
+        .footer-legal {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-container {
+          padding: 0 1rem;
+        }
+
+        .logo-text h2 {
+          font-size: 1rem;
+        }
+
+        .logo-text span {
+          font-size: 0.6rem;
+        }
+
+        .filters-grid {
+          flex-direction: column;
+        }
+
+        .filter-btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .course-image {
+          height: 160px;
+        }
+
+        .course-header {
+          padding: 1rem;
+        }
+
+        .course-title-arabic {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- شريط التنقل -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-text">
+            <h2>الأكاديمية الدولية للإبداع</h2>
+            <span>INTERNATIONAL CREATIVE ACADEMY</span>
+          </div>
+        </a>
+
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+          <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="index.html#about"><i class="fas fa-graduation-cap"></i> عن الأكاديمية</a></li>
+            <li><a href="#" class="active"><i class="fas fa-palette"></i> الدورات التدريبية</a></li>
+            <li><a href="#"><i class="fas fa-comment"></i> الشركاء</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i>
+              تواصل معنا
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+    </nav>
+
+    <!-- قسم الهيدر -->
+    <section class="hero-courses">
+      <div class="hero-courses-content">
+        <h1 class="hero-courses-title">الدورات التدريبية المتخصصة</h1>
+        <p class="hero-courses-subtitle">Professional Training Courses</p>
+        <div class="hero-courses-semester">الفصل الدراسي - أبريل 2026</div>
+        <div class="hero-quote">
+          "ليست مجرد تعليم .. إنها منظومة متكاملة من الإبداع إلى السوق"
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم الفلتر والبحث -->
+    <section class="filters-section">
+      <div class="filters-container">
+        <div class="filters-grid">
+          <button class="filter-btn active" data-filter="all">جميع الدورات</button>
+          <button class="filter-btn" data-filter="design">تصميم أزياء</button>
+          <button class="filter-btn" data-filter="pattern">باترون</button>
+          <button class="filter-btn" data-filter="styling">تنسيق أزياء</button>
+          <button class="filter-btn" data-filter="quality">جودة وتصدير</button>
+          <button class="filter-btn" data-filter="business">ريادة أعمال</button>
+        </div>
+
+        <div class="search-box">
+          <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن دورة أو مدرب...">
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم الكورسات -->
+    <section class="courses-section">
+      <div class="section-header">
+        <h2 class="section-title">برامجنا التدريبية المتقدمة</h2>
+        <p class="section-subtitle">برامج احترافية مع مدربين خبراء لتحويل موهبتك إلى مشروع ناجح</p>
+      </div>
+
+      <div class="courses-grid" id="coursesContainer">
+        <!-- I. Fashion Design with AI -->
+        <div class="course-card" data-category="design">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600" alt="تصميم أزياء">
+          </div>
+          <div class="course-header">
+            <span class="course-number">I</span>
+            <h3 class="course-title-arabic">تصميم الأزياء: من الإلهام إلى العالم الرقمي</h3>
+            <div class="course-title-english">Fashion Design: From Fundamentals to Advanced AI Image Generation</div>
+            <div class="course-quick-info">
+              <span class="quick-info-item"><i class="fas fa-layer-group"></i> 4 مستويات</span>
+
+            </div>
+          </div>
+
+          <div class="course-content">
+            <p class="course-description">
+              الدمج بين الإبداع الفني وأدوات الذكاء الاصطناعي لصناعة رؤية تصميمية عالمية
+            </p>
+
+
+
+            <div class="course-tags">
+              <span class="course-tag"><i class="fas fa-circle level-beginner"></i> مبتدئ</span>
+              <span class="course-tag"><i class="fas fa-circle level-intermediate"></i> متوسط</span>
+              <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
+            </div>
+
+            <a href="course-details.html" class="details-btn"
+              onclick="navigateToDetails('Fashion Drawing', 'fashion-design')">
+              <i class="fas fa-info-circle"></i>
+              عرض التفاصيل والمستويات
+            </a>
+          </div>
+        </div>
+
+        <!-- II. Pattern Making & Draping -->
+        <div class="course-card" data-category="pattern">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt="باترون وتصميم">
+          </div>
+          <div class="course-header">
+            <span class="course-number">II</span>
+            <h3 class="course-title-arabic">باترون وتصميم الأزياء</h3>
+            <div class="course-title-english">Pattern Making & Draping</div>
+            <div class="course-quick-info">
+              <span class="quick-info-item"><i class="fas fa-layer-group"></i> 5 دورات + 8 PS</span>
+
+            </div>
+          </div>
+
+          <div class="course-content">
+            <p class="course-description">
+              رحلة الأزياء الكاملة من التصميم إلى الباترون ثم البروتوتايب ... بمعايير إحترافية
+            </p>
+
+
+
+            <div class="course-tags">
+              <span class="course-tag"><i class="fas fa-circle level-beginner"></i> مبتدئ</span>
+              <span class="course-tag"><i class="fas fa-circle level-intermediate"></i> متوسط</span>
+              <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
+            </div>
+
+            <a href="course-details.html" class="details-btn"
+              onclick="navigateToDetails('Pattern Making', 'pattern-making')">
+              <i class="fas fa-info-circle"></i>
+              عرض التفاصيل والمستويات
+            </a>
+          </div>
+        </div>
+
+        <!-- III. Fashion Styling & Image Building -->
+        <div class="course-card" data-category="styling">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600" alt="تنسيق أزياء">
+          </div>
+          <div class="course-header">
+            <span class="course-number">III</span>
+            <h3 class="course-title-arabic">تنسيق الأزياء وبناء الصورة</h3>
+            <div class="course-title-english">Fashion Styling & Image Building</div>
+            <div class="course-quick-info">
+              <span class="quick-info-item"><i class="fas fa-layer-group"></i> دورتان</span>
+
+            </div>
+          </div>
+
+          <div class="course-content">
+            <p class="course-description">
+              فن تقديم إطلالة متناسقة تحكي قصة وتخدم علامة تجارية أو شخصية أو مناسبة
+            </p>
+
+
+            <div class="course-tags">
+              <span class="course-tag"><i class="fas fa-circle level-beginner"></i> مبتدئ</span>
+              <span class="course-tag"><i class="fas fa-circle level-intermediate"></i> متوسط</span>
+            </div>
+
+            <a href="course-details.html" class="details-btn"
+              onclick="navigateToDetails('Fashion Styling & Image Building', 'fashion-styling')">
+              <i class="fas fa-info-circle"></i>
+              عرض التفاصيل والمستويات
+            </a>
+          </div>
+        </div>
+
+        <!-- IV. International Quality & Export Readiness -->
+        <div class="course-card" data-category="quality">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600" alt="جودة وتصدير">
+          </div>
+          <div class="course-header">
+            <span class="course-number">IV</span>
+            <h3 class="course-title-arabic">نظم الجودة الدولية ومتطلبات التصدير</h3>
+            <div class="course-title-english">International Quality & Export Readiness</div>
+            <div class="course-quick-info">
+              <span class="quick-info-item"><i class="fas fa-layer-group"></i> دورة واحدة</span>
+            </div>
+          </div>
+
+          <div class="course-content">
+            <p class="course-description">
+              نظم الجودة الدولية و متطلبات التصدير للصناعات الإبداعية<br>
+              الملابس – المنسوجات – المنتجات الجلدية – الحلي
+            </p>
+
+
+
+            <div class="course-tags">
+              <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
+              <span class="course-tag"><i class="fas fa-certificate"></i> شهادة دولية</span>
+            </div>
+
+            <a href="course-details.html" class="details-btn"
+              onclick="navigateToDetails('International Quality & Export Readiness', 'quality')">
+              <i class="fas fa-info-circle"></i>
+              عرض التفاصيل والمستويات
+            </a>
+          </div>
+        </div>
+
+        <!-- V. Fashion to Business -->
+        <div class="course-card" data-category="business">
+          <div class="course-image">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600" alt="ريادة أعمال">
+          </div>
+          <div class="course-header">
+            <span class="course-number">V</span>
+            <h3 class="course-title-arabic">من الأزياء إلى الأعمال: نحو براند عالمي</h3>
+            <div class="course-title-english">Fashion to Business: From Fashion Concept to Global Brand</div>
+            <div class="course-quick-info">
+              <span class="quick-info-item"><i class="fas fa-layer-group"></i> دورتان</span>
+            </div>
+          </div>
+
+          <div class="course-content">
+            <p class="course-description">
+              من الاسكتش الي عرض الأزياء - نحو تحويل أفكارك الابداعية الي براند تجاري عالمي
+            </p>
+
+            <div class="course-tags">
+              <span class="course-tag"><i class="fas fa-circle level-advanced"></i> متقدم</span>
+              <span class="course-tag"><i class="fas fa-chart-line"></i> استراتيجي</span>
+            </div>
+
+            <a href="course-details.html" class="details-btn"
+              onclick="navigateToDetails('Fashion to Business', 'fashion-business')">
+              <i class="fas fa-info-circle"></i>
+              عرض التفاصيل والمستويات
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <div
+                style="width: 75px; height: 60px; border-radius: 10px; overflow: hidden; border: 2px solid var(--gold);">
+                <img src="./img/logoNav1.svg" alt="شعار الأكاديمية"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div>
+                <h3 style="margin: 0; color: white;">الأكاديمية الدولية للإبداع</h3>
+                <span style="color: var(--gold-light);">INTERNATIONAL CREATIVE ACADEMY</span>
+              </div>
+            </div>
+            <p style="color: var(--gold-light); margin-bottom: 1.5rem;">
+              حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين
+            </p>
+            <div class="social-links">
+              <a href="https://www.facebook.com/share/1CMhVXoKuk/" aria-label="فيسبوك"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/rhino.72363985?igsh=MWZyOWhzd3l1NTlvbQ==" aria-label="إنستغرام"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/international-creative-academy-ica%D8%A7%D9%84%D8%A3%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A%D8%A9-%D9%84%D9%84%D8%A5%D8%A8%D8%AF%D8%A7%D8%B9/?viewAsMember=true"
+                aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3>روابط سريعة</h3>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+              <li><a href="index.html#about"><i class="fas fa-chevron-left"></i> عن الأكاديمية</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> الدورات التدريبية</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> الشركاء</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>مجالات التدريب</h3>
+            <ul class="footer-links">
+              <li><a href="#"><i class="fas fa-chevron-left"></i> تصميم الأزياء</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> الباترون والتفصيل</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> تنسيق الأزياء</a></li>
+              <li><a href="#"><i class="fas fa-chevron-left"></i> الجودة والتصدير</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>اتصل بنا</h3>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt"></i> ١٤ شارع فؤاد بدواني - مدينة نصر - القاهرة</p>
+              <p><i class="fas fa-phone"></i> +20 1505035495</p>
+              <p><i class="fas fa-envelope"></i> info@icacademy.tech</p>
+              <!-- <p><i class="fas fa-clock"></i> الأحد - الخميس: ٨ صباحاً - ٤ مساءً</p> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© <span id="current-year"></span> الأكاديمية الدولية للإبداع - جميع الحقوق محفوظة</p>
+          <div class="footer-legal">
+            <a href="#">سياسة الخصوصية</a>
+            <a href="#">الشروط والأحكام</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- إشعار مؤقت -->
+    <div class="notification" id="notification"
+      style="position: fixed; bottom: 20px; left: 20px; background: white; border-radius: 12px; padding: 1rem; box-shadow: var(--shadow); display: none; align-items: center; gap: 1rem; z-index: 9999; border-right: 4px solid var(--gold);">
+      <div
+        style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+        <i class="fas fa-info"></i>
+      </div>
+      <div>
+        <h4 style="color: var(--gold-dark); margin-bottom: 0.25rem;" id="notificationTitle">جاري التوجيه</h4>
+        <p style="color: var(--muted); font-size: 0.9rem;" id="notificationMessage">يتم تحميل صفحة التفاصيل...</p>
+      </div>
+    </div>
+
+    <script>
+      // تحديث السنة في التذييل
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      // قائمة متغيرات للتحكم في الأداء
+      let isMenuOpen = false;
+      let searchTimeout = null;
+
+      // قائمة الكورسات (مصفوفة للتعامل معها)
+      const courses = document.querySelectorAll('.course-card');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const searchInput = document.getElementById('searchInput');
+
+      // ========== نظام الإشعارات ==========
+      function showNotification(title, message, duration = 2000) {
+        const notification = document.getElementById('notification');
+        document.getElementById('notificationTitle').textContent = title;
+        document.getElementById('notificationMessage').textContent = message;
+        notification.style.display = 'flex';
+
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, duration);
+      }
+
+      // ========== دالة التنقل إلى صفحة التفاصيل ==========
+      function navigateToDetails(courseName, category) {
+        // منع السلوك الافتراضي للرابط
+        event.preventDefault();
+
+        // تخزين اسم الدورة في localStorage
+        localStorage.setItem('selectedCourse', courseName);
+        localStorage.setItem('selectedCategory', category);
+
+        // إظهار إشعار
+        showNotification('جاري التوجيه', `جاري تحميل تفاصيل: ${courseName}`);
+
+        // التوجيه إلى صفحة التفاصيل بعد تأخير بسيط
+        setTimeout(() => {
+          window.location.href = 'course-details.html';
+        }, 500);
+      }
+
+      // ========== قائمة الهاتف المحمول ==========
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+
+      if (hamburger) {
+        hamburger.addEventListener('click', function (e) {
+          e.preventDefault();
+          isMenuOpen = !isMenuOpen;
+
+          if (isMenuOpen) {
+            navMenu.classList.add('active');
+            hamburger.classList.add('active');
+          } else {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+          }
+        });
+      }
+
+      // إغلاق القائمة عند النقر على رابط
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function () {
+          if (window.innerWidth <= 768) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            isMenuOpen = false;
+          }
+        });
+      });
+
+      // ========== تأثير التمرير على شريط التنقل ==========
+      const navbar = document.getElementById('navbar');
+
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // ========== فلترة الكورسات ==========
+      function filterCourses(filterValue) {
+        courses.forEach(course => {
+          if (filterValue === 'all' || course.dataset.category === filterValue) {
+            course.style.display = 'flex';
+          } else {
+            course.style.display = 'none';
+          }
+        });
+      }
+
+      // أحداث أزرار الفلتر
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          // إزالة الكلاس النشط من جميع الأزرار
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+
+          // إضافة الكلاس النشط للزر الحالي
+          this.classList.add('active');
+
+          // تطبيق الفلتر
+          const filterValue = this.getAttribute('data-filter');
+          filterCourses(filterValue);
+
+          // إعادة تعيين البحث
+          if (searchInput) {
+            searchInput.value = '';
+          }
+
+          // إظهار إشعار بعدد الدورات الظاهرة
+          const visibleCount = Array.from(courses).filter(c => c.style.display !== 'none').length;
+          showNotification('تم التصفية', `ظهرت ${visibleCount} دورة`, 1500);
+        });
+      });
+
+      // ========== البحث المتقدم (مع debounce) ==========
+      function searchCourses(searchTerm) {
+        const term = searchTerm.toLowerCase().trim();
+        let visibleCount = 0;
+
+        courses.forEach(course => {
+          const title = course.querySelector('.course-title-arabic')?.textContent.toLowerCase() || '';
+          const englishTitle = course.querySelector('.course-title-english')?.textContent.toLowerCase() || '';
+          const description = course.querySelector('.course-description')?.textContent.toLowerCase() || '';
+          const instructor = course.querySelectorAll('.instructor-name');
+          let instructorText = '';
+          instructor.forEach(inst => {
+            instructorText += inst.textContent.toLowerCase() + ' ';
+          });
+
+          if (term === '' || title.includes(term) || englishTitle.includes(term) || description.includes(term) || instructorText.includes(term)) {
+            course.style.display = 'flex';
+            visibleCount++;
+          } else {
+            course.style.display = 'none';
+          }
+        });
+
+        if (term !== '') {
+          showNotification('نتائج البحث', `تم العثور على ${visibleCount} دورة`, 1500);
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          // تأخير البحث لتحسين الأداء
+          if (searchTimeout) {
+            clearTimeout(searchTimeout);
+          }
+
+          searchTimeout = setTimeout(() => {
+            const searchTerm = this.value;
+
+            // إلغاء تنشيط أزرار الفلتر
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-filter="all"]')?.classList.add('active');
+
+            // تطبيق البحث
+            searchCourses(searchTerm);
+          }, 300);
+        });
+      }
+
+      // ========== تأثير ظهور الكروت عند التمرير ==========
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -20px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // تطبيق التأثير على الكروت
+      courses.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+      });
+
+      // ========== معالجة الصور البديلة ==========
+      document.querySelectorAll('.course-image img').forEach(img => {
+        img.addEventListener('error', function () {
+          this.style.display = 'none';
+          this.parentElement.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-dark))';
+          this.parentElement.style.display = 'flex';
+          this.parentElement.style.alignItems = 'center';
+          this.parentElement.style.justifyContent = 'center';
+          this.parentElement.innerHTML = '<span style="color: white; font-size: 2rem; font-weight: 800;">ICA</span>';
+        });
+      });
+
+      // ========== إغلاق القائمة عند تغيير حجم الشاشة ==========
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768 && isMenuOpen) {
           navMenu.classList.remove('active');
           hamburger.classList.remove('active');
           isMenuOpen = false;
         }
-      });
-    });
+      }, { passive: true });
 
-    // ========== تأثير التمرير على شريط التنقل ==========
-    const navbar = document.getElementById('navbar');
-
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    }, { passive: true });
-
-    // ========== فلترة الكورسات ==========
-    function filterCourses(filterValue) {
-      courses.forEach(course => {
-        if (filterValue === 'all' || course.dataset.category === filterValue) {
-          course.style.display = 'flex';
-        } else {
-          course.style.display = 'none';
-        }
-      });
-    }
-
-    // أحداث أزرار الفلتر
-    filterButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        // إزالة الكلاس النشط من جميع الأزرار
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // إضافة الكلاس النشط للزر الحالي
-        this.classList.add('active');
-        
-        // تطبيق الفلتر
-        const filterValue = this.getAttribute('data-filter');
-        filterCourses(filterValue);
-        
-        // إعادة تعيين البحث
-        if (searchInput) {
-          searchInput.value = '';
-        }
-
-        // إظهار إشعار بعدد الدورات الظاهرة
-        const visibleCount = Array.from(courses).filter(c => c.style.display !== 'none').length;
-        showNotification('تم التصفية', `ظهرت ${visibleCount} دورة`, 1500);
-      });
-    });
-
-    // ========== البحث المتقدم (مع debounce) ==========
-    function searchCourses(searchTerm) {
-      const term = searchTerm.toLowerCase().trim();
-      let visibleCount = 0;
-      
-      courses.forEach(course => {
-        const title = course.querySelector('.course-title-arabic')?.textContent.toLowerCase() || '';
-        const englishTitle = course.querySelector('.course-title-english')?.textContent.toLowerCase() || '';
-        const description = course.querySelector('.course-description')?.textContent.toLowerCase() || '';
-        const instructor = course.querySelectorAll('.instructor-name');
-        let instructorText = '';
-        instructor.forEach(inst => {
-          instructorText += inst.textContent.toLowerCase() + ' ';
+      // منع إعادة التحميل عند النقر على الروابط
+      document.querySelectorAll('a[href="#"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
         });
-        
-        if (term === '' || title.includes(term) || englishTitle.includes(term) || description.includes(term) || instructorText.includes(term)) {
-          course.style.display = 'flex';
-          visibleCount++;
-        } else {
-          course.style.display = 'none';
-        }
       });
-      
-      if (term !== '') {
-        showNotification('نتائج البحث', `تم العثور على ${visibleCount} دورة`, 1500);
-      }
-    }
 
-    if (searchInput) {
-      searchInput.addEventListener('input', function() {
-        // تأخير البحث لتحسين الأداء
-        if (searchTimeout) {
-          clearTimeout(searchTimeout);
-        }
-        
-        searchTimeout = setTimeout(() => {
-          const searchTerm = this.value;
-          
-          // إلغاء تنشيط أزرار الفلتر
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          document.querySelector('[data-filter="all"]')?.classList.add('active');
-          
-          // تطبيق البحث
-          searchCourses(searchTerm);
-        }, 300);
-      });
-    }
-
-    // ========== تأثير ظهور الكروت عند التمرير ==========
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -20px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // تطبيق التأثير على الكروت
-    courses.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(card);
-    });
-
-    // ========== معالجة الصور البديلة ==========
-    document.querySelectorAll('.course-image img').forEach(img => {
-      img.addEventListener('error', function() {
-        this.style.display = 'none';
-        this.parentElement.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-dark))';
-        this.parentElement.style.display = 'flex';
-        this.parentElement.style.alignItems = 'center';
-        this.parentElement.style.justifyContent = 'center';
-        this.parentElement.innerHTML = '<span style="color: white; font-size: 2rem; font-weight: 800;">ICA</span>';
-      });
-    });
-
-    // ========== إغلاق القائمة عند تغيير حجم الشاشة ==========
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768 && isMenuOpen) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        isMenuOpen = false;
-      }
-    }, { passive: true });
-
-    // منع إعادة التحميل عند النقر على الروابط
-    document.querySelectorAll('a[href="#"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-      });
-    });
-
-    // إضافة نقاط الألوان للمستويات في CSS
-    const style = document.createElement('style');
-    style.textContent = `
+      // إضافة نقاط الألوان للمستويات في CSS
+      const style = document.createElement('style');
+      style.textContent = `
       .fa-circle.level-beginner { color: #28a745; }
       .fa-circle.level-intermediate { color: #ffc107; }
       .fa-circle.level-advanced { color: #dc3545; }
       .fa-circle.level-expert { color: #6f42c1; }
     `;
-    document.head.appendChild(style);
-  </script>
-</body>
+      document.head.appendChild(style);
+    </script>
+  </body>
 
 </html>

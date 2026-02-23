@@ -433,7 +433,8 @@
       /* ========== شبكة المستويات ========== */
       .levels-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* This creates exactly 2 equal columns */
+        grid-template-columns: repeat(2, 1fr);
+        /* This creates exactly 2 equal columns */
         gap: 2rem;
         margin: 2rem 0;
       }
@@ -1815,6 +1816,17 @@
           <p style="margin-top: 1rem; color: var(--muted);">أرسل بريدك الإلكتروني مع اسم الدورة المطلوبة</p>
         </div>
 
+        <!-- زر إرسال رسالة واتساب -->
+        <div class="whatsapp-contact" style="margin-top: 1.5rem;">
+          <a href="https://wa.me/201505035495?text=مرحباً،%20أرغب%20في%20الاستفسار%20عن%20الدورات%20المتاحة"
+            target="_blank"
+            style="display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #fff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+
+            <i class="fab fa-whatsapp"></i>
+            إرسال رسالة عبر واتساب
+          </a>
+        </div>
+
       </div>
     </div>
 
@@ -1838,9 +1850,12 @@
               حيث يلتقي الإبداع بالمعايير العالمية - أكاديمية رائدة لتطوير مهارات المبدعين
             </p>
             <div class="social-links">
-              <a href="https://www.facebook.com/share/1CMhVXoKuk/" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/rhino.72363985?igsh=MWZyOWhzd3l1NTlvbQ==" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/company/international-creative-academy-ica%D8%A7%D9%84%D8%A3%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A%D8%A9-%D9%84%D9%84%D8%A5%D8%A8%D8%AF%D8%A7%D8%B9/?viewAsMember=true" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.facebook.com/share/1CMhVXoKuk/" aria-label="فيسبوك"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/rhino.72363985?igsh=MWZyOWhzd3l1NTlvbQ==" aria-label="إنستغرام"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/international-creative-academy-ica%D8%A7%D9%84%D8%A3%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A%D8%A9-%D9%84%D9%84%D8%A5%D8%A8%D8%AF%D8%A7%D8%B9/?viewAsMember=true"
+                aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
 
@@ -1868,7 +1883,7 @@
             <h3>اتصل بنا</h3>
             <div class="footer-contact">
               <p><i class="fas fa-map-marker-alt"></i> ١٤ شارع فؤاد بدواني - مدينة نصر - القاهرة</p>
-              <p><i class="fas fa-phone"></i>01505035495</p>
+              <p><i class="fas fa-phone"></i>&<i class="fab fa-whatsapp"></i>01505035495</p>
               <p><i class="fas fa-envelope"></i> info@icacademy.tech</p>
               <p><i class="fas fa-clock"></i> الأحد - الخميس: ٨ صباحاً - ٤ مساءً</p>
             </div>
